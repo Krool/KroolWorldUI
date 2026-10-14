@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.2
+
+- Weight bar has a steady size and position: about two hotbar slots wide at 300 max weight, growing with your carry capacity (Megingjord makes it 50% longer), anchored to the first hotbar slot. It no longer stretches or shifts with the items and gear you have.
+
 ## 0.2.1
 
 - Fixed the food reminder text showing rotated 90 degrees.
