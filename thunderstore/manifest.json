@@ -2,7 +2,7 @@
   "name": "Krool_World_UI",
   "version_number": "0.1.0",
   "website_url": "https://github.com/Krool/KroolWorldUI",
-  "description": "Client-side HUD additions with a toggle for each. First feature: skill XP bars that appear while you earn XP and show how much each action adds.",
+  "description": "Client-side HUD additions, each with its own toggle in an F7 settings window: skill XP bars that show what each action earns, and a carry weight bar above the hotbar.",
   "dependencies": [
     "denikson-BepInExPack_Valheim-5.4.2351"
   ]
