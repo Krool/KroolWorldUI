@@ -216,58 +216,93 @@ namespace KroolWorldUI.Features
 
         internal void OnXpGained(Skills skills, Skills.Skill skill, SkillXpBars.Snapshot before)
         {
-            var type = skill.m_info.m_skill;
-            var bar = _bars.Find(b => b.Type == type);
+            var bar = GetOrAddBar(skill.m_info.m_skill);
             if (bar == null)
-            {
-                if (_bars.Count >= SkillXpBars.MaxBars.Value)
-                {
-                    // Reuse the bar that has gone longest without XP, as a fresh session.
-                    bar = _bars[0];
-                    foreach (var b in _bars)
-                        if (b.LastGain < bar.LastGain)
-                            bar = b;
-                    bar.Type = type;
-                    bar.SessionStarted = false;
-                }
-                else
-                {
-                    bar = CreateBar(type);
-                    if (bar == null)
-                        return;
-                    _bars.Add(bar);
-                    bar.Rect.anchoredPosition = new Vector2(0f, TargetY(_bars.Count - 1));
-                }
-            }
-
+                return;
             if (!bar.SessionStarted)
             {
                 // Start from the progress before this XP tick, so the very first gain shows too.
-                bar.SessionStarted = true;
-                bar.StartLevel = before.Exists ? before.Level : skill.m_level;
-                bar.StartPercent = before.Exists ? PercentOf(skill, before) : 0f;
-                if (bar.Fill != null)
-                {
-                    bar.Fill.ShownBase = bar.StartPercent;
-                    bar.Fill.ShownGain = 0f;
-                }
+                if (before.Exists)
+                    StartSession(bar, before.Level, PercentBefore(skill, before));
+                else
+                    StartSession(bar, skill.m_level, 0f);
             }
+            Touch(bar, skills, skill);
+        }
 
+        /// <summary>
+        /// Settings-window preview: keeps a bar up for each of the player's top skills, with a
+        /// made-up gain, so position and size can be tuned live.
+        /// </summary>
+        internal void Preview(Skills skills)
+        {
+            var list = new List<Skills.Skill>(skills.GetSkillList());
+            list.RemoveAll(s => s?.m_info == null);
+            list.Sort((a, b) => b.m_level.CompareTo(a.m_level));
+            int count = Mathf.Min(SkillXpBars.MaxBars.Value, list.Count);
+            for (int i = 0; i < count; i++)
+            {
+                var skill = list[i];
+                var bar = GetOrAddBar(skill.m_info.m_skill);
+                if (bar == null)
+                    return;
+                if (!bar.SessionStarted)
+                    StartSession(bar, skill.m_level, Mathf.Max(0f, skill.GetLevelPercentage() - 0.2f));
+                Touch(bar, skills, skill);
+            }
+        }
+
+        private Bar GetOrAddBar(Skills.SkillType type)
+        {
+            var bar = _bars.Find(b => b.Type == type);
+            if (bar != null)
+                return bar;
+            if (_bars.Count >= SkillXpBars.MaxBars.Value)
+            {
+                // Reuse the bar that has gone longest without XP, as a fresh session.
+                bar = _bars[0];
+                foreach (var b in _bars)
+                    if (b.LastGain < bar.LastGain)
+                        bar = b;
+                bar.Type = type;
+                bar.SessionStarted = false;
+                return bar;
+            }
+            bar = CreateBar(type);
+            if (bar == null)
+                return null;
+            _bars.Add(bar);
+            bar.Rect.anchoredPosition = new Vector2(0f, TargetY(_bars.Count - 1));
+            return bar;
+        }
+
+        private static void StartSession(Bar bar, float level, float percent)
+        {
+            bar.SessionStarted = true;
+            bar.StartLevel = level;
+            bar.StartPercent = percent;
+            if (bar.Fill != null)
+            {
+                bar.Fill.ShownBase = percent;
+                bar.Fill.ShownGain = 0f;
+            }
+        }
+
+        private void Touch(Bar bar, Skills skills, Skills.Skill skill)
+        {
             UpdateContents(bar, skills, skill);
             bar.LastGain = Time.time;
             bar.Group.alpha = 1f;
         }
 
-        // Progress percent for a snapshot taken before the raise. Requirement depends only on level.
-        private static float PercentOf(Skills.Skill skill, SkillXpBars.Snapshot s)
+        // Progress percent before this raise, using the game's requirement curve
+        // (Skills.Skill.GetNextLevelRequirement is private): floor(level + 1)^1.5 * 0.5 + 0.5.
+        private static float PercentBefore(Skills.Skill skill, SkillXpBars.Snapshot s)
         {
-            float level = skill.m_level, acc = skill.m_accumulator;
-            skill.m_level = s.Level;
-            skill.m_accumulator = s.Accumulator;
-            float pct = skill.GetLevelPercentage();
-            skill.m_level = level;
-            skill.m_accumulator = acc;
-            return pct;
+            if (s.Level >= 100f)
+                return 0f;
+            float req = Mathf.Pow(Mathf.Floor(s.Level + 1f), 1.5f) * 0.5f + 0.5f;
+            return req > 0f ? Mathf.Clamp01(s.Accumulator / req) : 0f;
         }
 
         private void Update()

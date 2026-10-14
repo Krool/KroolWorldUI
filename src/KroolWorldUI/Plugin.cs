@@ -22,9 +22,11 @@ namespace KroolWorldUI
             Instance = this;
             Log = Logger;
 
-            // Each feature binds its own config section. Every feature has an Enabled toggle,
-            // which shows as a checkbox in ConfigurationManager (F1) if that mod is installed.
+            // Each feature binds its own config section with an Enabled toggle. The built-in
+            // settings window (F7) lists every entry automatically.
+            SettingsWindow.BindConfig(Config);
             SkillXpBars.BindConfig(Config);
+            gameObject.AddComponent<SettingsWindow>();
 
             _harmony = new Harmony(Guid);
             _harmony.PatchAll(typeof(Plugin).Assembly);

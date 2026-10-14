@@ -18,6 +18,9 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
 ## Layout
 
 - `src/KroolWorldUI/Plugin.cs` - entry point; each feature exposes `BindConfig` and Harmony patches.
+- `src/KroolWorldUI/SettingsWindow.cs` - built-in F7 settings window (IMGUI). It renders every
+  config entry generically, so a new feature only needs `config.Bind` with an `AcceptableValueRange`
+  for numbers to get a slider. No dependency on ConfigurationManager (Azumatt's is deprecated).
 - `src/KroolWorldUI/Features/` - one file per feature.
 - `thunderstore/` - manifest.json and icon.png (256x256). Package = these + DLL + README + CHANGELOG.
 
