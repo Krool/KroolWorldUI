@@ -38,7 +38,12 @@ New-Item -ItemType Directory -Force $stage | Out-Null
 Copy-Item $dll $stage
 Copy-Item $manifestPath $stage
 Copy-Item (Join-Path $root "thunderstore\icon.png") $stage
-Copy-Item (Join-Path $root "README.md") $stage
+# The package README is the Thunderstore mod page: players only. Everything from
+# "## Building from source" on is for developers and stays on GitHub.
+$readme = [IO.File]::ReadAllText((Join-Path $root "README.md"))
+$cut = $readme.IndexOf("## Building from source")
+if ($cut -gt 0) { $readme = $readme.Substring(0, $cut).TrimEnd() + "`n" }
+[IO.File]::WriteAllText((Join-Path $stage "README.md"), $readme, (New-Object System.Text.UTF8Encoding $false))
 Copy-Item (Join-Path $root "CHANGELOG.md") $stage
 
 $zip = Join-Path $dist "Krool-$($manifest.name)-$version.zip"
