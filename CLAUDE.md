@@ -21,6 +21,10 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
   from build.ps1), requires a `## x.y.z` CHANGELOG section, builds, uploads with tcli, then
   commits, tags `vx.y.z` (annotated) and pushes. Write the changelog entry before running it.
   r2modman only offers updates for a strictly higher version of the same Thunderstore package.
+- **After a publish, r2modman needs a forced online-list refresh** (Settings > Refresh online
+  mod list) before a new package or version shows up; its cached list lags Thunderstore. Link
+  the mod as `thunderstore.io/c/valheim/p/Krool/Krool_World_UI/` - the community-less
+  `/package/...` URL lands on Risk of Rain 2 and 404s.
 - **The Thunderstore token is `TCLI_AUTH_TOKEN` (user env var).** Never write it to a file or
   echo it; the owner sets it with `setx` in their own terminal.
 
