@@ -84,7 +84,7 @@ namespace KroolWorldUI.Features
             private static void Prefix(Skills __instance, Skills.SkillType __0, out Snapshot __state)
             {
                 __state = default;
-                if (!Enabled.Value || !IsLocalPlayer(__instance))
+                if (!IsLocalPlayer(__instance))
                     return;
                 var skill = FindExisting(__instance, __0);
                 if (skill == null)
@@ -107,7 +107,9 @@ namespace KroolWorldUI.Features
 
                 try
                 {
-                    SkillXpBarStack.GetOrCreate()?.OnXpGained(__instance, skill, __state);
+                    var stack = SkillXpBarStack.GetOrCreate();
+                    if (stack != null && !SkillXpBarStack.Failed)
+                        stack.OnXpGained(__instance, skill, __state);
                 }
                 catch (System.Exception e)
                 {
@@ -129,8 +131,17 @@ namespace KroolWorldUI.Features
 
         private static SkillXpBarStack _instance;
         private static bool _loggedPrefab;
-        private static readonly AccessTools.FieldRef<GuiBar, float> GuiBarWidth =
-            AccessTools.FieldRefAccess<GuiBar, float>("m_width");
+        private static readonly System.Reflection.FieldInfo GuiBarWidthField = AccessTools.Field(typeof(GuiBar), "m_width");
+        private static bool _updateFailed;
+
+        internal static bool Failed => _updateFailed;
+
+        // GuiBar.m_width is private; read it defensively so a renamed field only loses this hint.
+        private static float GuiBarWidth(GuiBar g)
+        {
+            try { return GuiBarWidthField != null ? (float)GuiBarWidthField.GetValue(g) : 0f; }
+            catch { return 0f; }
+        }
 
         private class Bar
         {
@@ -149,6 +160,7 @@ namespace KroolWorldUI.Features
             public float StartLevel;
             public float StartPercent;
             public bool SessionStarted;
+            public float ShownLevel;
         }
 
         /// <summary>
@@ -273,6 +285,7 @@ namespace KroolWorldUI.Features
                 return null;
             _bars.Add(bar);
             bar.Rect.anchoredPosition = new Vector2(0f, TargetY(_bars.Count - 1));
+            Place(); // position now, so the first frame is not drawn at the container's default spot
             return bar;
         }
 
@@ -280,6 +293,7 @@ namespace KroolWorldUI.Features
         {
             bar.SessionStarted = true;
             bar.StartLevel = level;
+            bar.ShownLevel = level;
             bar.StartPercent = percent;
             if (bar.Fill != null)
             {
@@ -306,6 +320,26 @@ namespace KroolWorldUI.Features
         }
 
         private void Update()
+        {
+            if (_bars.Count == 0 || _updateFailed)
+                return; // idle: no per-frame work
+            try
+            {
+                Tick();
+            }
+            catch (System.Exception e)
+            {
+                // One error, logged once; a broken bar must not spam the log every frame.
+                _updateFailed = true;
+                Plugin.Log.LogError($"Skill XP bars disabled for this session after an error: {e}");
+                foreach (var bar in _bars)
+                    if (bar.Root != null)
+                        Destroy(bar.Root);
+                _bars.Clear();
+            }
+        }
+
+        private void Tick()
         {
             bool blocked = InventoryGui.IsVisible() || Minimap.IsOpen() || Menu.IsVisible();
             _group.alpha = blocked ? 0f : 1f;
@@ -429,15 +463,16 @@ namespace KroolWorldUI.Features
             // Display only: no hover tooltip, no clicks, no gamepad focus.
             foreach (var tip in go.GetComponentsInChildren<UITooltip>(true))
                 tip.enabled = false;
+            // Disable only: setting interactable=false first can leave the greyed "disabled" tint.
             foreach (var sel in go.GetComponentsInChildren<Selectable>(true))
-            {
-                sel.interactable = false;
                 sel.enabled = false;
-            }
             foreach (var g in go.GetComponentsInChildren<Graphic>(true))
                 g.raycastTarget = false;
 
-            var group = go.GetComponent<CanvasGroup>() ?? go.AddComponent<CanvasGroup>();
+            // Explicit null check: ?? bypasses Unity's destroyed-object check.
+            var group = go.GetComponent<CanvasGroup>();
+            if (group == null)
+                group = go.AddComponent<CanvasGroup>();
             group.blocksRaycasts = false;
             group.interactable = false;
 
@@ -554,14 +589,15 @@ namespace KroolWorldUI.Features
                     // Leveled up this session: everything on the bar is new.
                     bar.Fill.TargetBase = 0f;
                     bar.Fill.TargetGain = pct;
-                    if (bar.Fill.ShownBase > 0f && levelsGained == 1 && bar.Fill.ShownBase + bar.Fill.ShownGain > pct)
-                    {
-                        // Snap on the wrap instead of draining backwards.
-                        bar.Fill.ShownBase = 0f;
-                        bar.Fill.ShownGain = 0f;
-                    }
+                }
+                if (level != bar.ShownLevel)
+                {
+                    // Every level-up wraps the bar: restart the fill from empty instead of draining backwards.
+                    bar.Fill.ShownBase = 0f;
+                    bar.Fill.ShownGain = 0f;
                 }
             }
+            bar.ShownLevel = level;
 
             if (bar.Icon != null)
                 bar.Icon.sprite = skill.m_info.m_icon;
@@ -588,7 +624,7 @@ namespace KroolWorldUI.Features
 
         private static string SkillName(Skills.SkillType type)
         {
-            string key = "$skill_" + type.ToString().ToLower();
+            string key = "$skill_" + type.ToString().ToLowerInvariant();
             string name = Localization.instance != null ? Localization.instance.Localize(key) : key;
             // Unknown tokens come back bracketed or unchanged (custom skills without a translation).
             if (string.IsNullOrEmpty(name) || name.StartsWith("[") || name.StartsWith("$"))

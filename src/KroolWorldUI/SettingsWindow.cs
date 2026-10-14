@@ -159,11 +159,16 @@ namespace KroolWorldUI
 
                 case float f when range is AcceptableValueRange<float> fr:
                     GUILayout.Label(label, _styles.Label, GUILayout.Width(170f));
-                    float nf = GUILayout.HorizontalSlider(f, fr.MinValue, fr.MaxValue, _styles.Slider, _styles.Thumb,
+                    float raw = GUILayout.HorizontalSlider(f, fr.MinValue, fr.MaxValue, _styles.Slider, _styles.Thumb,
                         GUILayout.ExpandWidth(true));
-                    nf = Mathf.Round(nf * 100f) / 100f;
-                    GUILayout.Label(nf.ToString("0.##"), _styles.Value, GUILayout.Width(60f));
-                    if (!Mathf.Approximately(nf, f)) entry.BoxedValue = nf;
+                    GUILayout.Label(f.ToString(fr.MaxValue - fr.MinValue >= 50f ? "0" : "0.###"), _styles.Value, GUILayout.Width(60f));
+                    // Only write when the user actually moved the slider. Snapping an untouched value
+                    // (e.g. 0.985 -> 0.99) would silently change settings just by opening the window.
+                    if (raw != f)
+                    {
+                        float step = fr.MaxValue - fr.MinValue >= 50f ? 1f : 0.01f;
+                        entry.BoxedValue = Mathf.Clamp(Mathf.Round(raw / step) * step, fr.MinValue, fr.MaxValue);
+                    }
                     break;
 
                 case int i when range is AcceptableValueRange<int> ir:
