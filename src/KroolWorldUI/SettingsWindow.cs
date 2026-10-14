@@ -179,6 +179,18 @@ namespace KroolWorldUI
                     if (ni != i) entry.BoxedValue = ni;
                     break;
 
+                case System.Enum e:
+                    GUILayout.Label(label, _styles.Label, GUILayout.Width(170f));
+                    GUILayout.FlexibleSpace();
+                    // Click to cycle through the choices.
+                    if (GUILayout.Button(Pretty(e.ToString()), _styles.Button, GUILayout.MinWidth(130f), GUILayout.Height(26f)))
+                    {
+                        var values = System.Enum.GetValues(e.GetType());
+                        int idx = System.Array.IndexOf(values, e);
+                        entry.BoxedValue = values.GetValue((idx + 1) % values.Length);
+                    }
+                    break;
+
                 case KeyboardShortcut k:
                     GUILayout.Label(label, _styles.Label, GUILayout.Width(170f));
                     string text = _capturingKey == entry ? "Press a key (Esc = default)" : k.ToString();

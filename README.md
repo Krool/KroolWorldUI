@@ -16,9 +16,18 @@ When you earn XP in a skill, a bar for that skill appears on the right side of t
 - Bars for different skills stack, up to 5 at once. When one fades out, the bars below it slide up.
 - The stack stays out of the way: it hides while the inventory, the big map or the menu is open, and moves down if the minimap or status effect icons would overlap it.
 
+### Weight on the HUD
+
+Your carry weight, always visible, without opening the inventory. It sits at the top left, just under the hotbar, with a weight icon, `current/max` and a thin fill bar.
+
+- The numbers match the inventory screen exactly, including extra slots and backpacks from other mods and your strength belt.
+- The current weight turns orange near your limit (80% by default) and flashes red when you are over, like the inventory does.
+- Show mode: **Always** (default), **Near Limit** (only when you are close to full), or **When Changed** (a few seconds after you pick up or drop something).
+- It hides while the inventory is open, since the inventory already shows weight.
+
 ## Settings
 
-Press **F7** in game to open the Krool World UI settings window. Every option is there: on/off buttons for features, sliders for sizes and timings, and a Reset button next to anything changed from its default. **Preview XP bars** shows sample bars for your top skills so you can place and size them live. Esc or F7 closes it; while it is open your character ignores input.
+Press **F7** in game to open the Krool World UI settings window. Every option is there: on/off buttons for features, sliders for sizes and timings, click-to-cycle buttons for choices, and a Reset button next to anything changed from its default. **Preview XP bars** shows sample bars for your top skills so you can place and size them live. Esc or F7 closes it; while it is open your character ignores input.
 
 No other mod is needed for this. The same settings are also in `BepInEx/config/krool.kroolworldui.cfg` (r2modman: Config editor).
 
@@ -32,6 +41,12 @@ No other mod is needed for this. The same settings are also in `BepInEx/config/k
 | MaxBars | 5 | Most bars shown at once |
 | AnchorX / AnchorY | 0.985 / 0.6 | Where the top-right corner of the stack sits (0-1 of the screen) |
 | BarWidth | 260 | Bar width in HUD pixels |
+| Weight: Enabled | true | Show carry weight on the HUD |
+| Weight: Show | Always | Always, Near Limit, or When Changed |
+| Weight: NearLimitPercent | 80 | Percent of max where it turns orange (and appears, in Near Limit mode) |
+| Weight: ChangedSeconds | 3 | When Changed mode: how long it stays |
+| Weight: ShowBar | true | Thin fill bar under the numbers |
+| Weight: AnchorX / AnchorY / Scale | 0.008 / 0.99 / 1 | Position of its top-left corner, and size. It always stays below the hotbar |
 
 ## Building from source
 

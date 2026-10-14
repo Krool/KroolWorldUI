@@ -30,7 +30,8 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
 - Game DLLs are referenced from the Steam install (`-p:ValheimDir=...` to override); BepInEx and
   HarmonyX come from nuget.bepinex.dev.
 - HUD placement: the owner's mods (ExtraSlots panels, EpicLoot ability bar) all live bottom-left.
-  Keep new HUD elements off that corner; the right side at mid-height is free in vanilla.
+  Keep new HUD elements off that corner. Taken so far: skill XP bars (right side, mid-height),
+  weight readout (top-left, auto-pushed below any HotkeyBar).
 - The skill XP bar clones `InventoryGui.instance.m_skillsDialog.m_elementPrefab` and finds
   children by name (`icon`, `name`, `leveltext`, `bonustext`, GuiBars). The first spawn logs the
   prefab size/anchors to `BepInEx/LogOutput.log`; check it after a Valheim update.

@@ -26,6 +26,7 @@ namespace KroolWorldUI
             // settings window (F7) lists every entry automatically.
             SettingsWindow.BindConfig(Config);
             SkillXpBars.BindConfig(Config);
+            WeightDisplay.BindConfig(Config);
             gameObject.AddComponent<SettingsWindow>();
 
             _harmony = new Harmony(Guid);
