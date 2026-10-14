@@ -163,6 +163,10 @@ namespace KroolWorldUI.Features
             var textGo = Instantiate(inv.m_weight.gameObject, go.transform, false);
             textGo.name = "text";
             textGo.SetActive(true);
+            // The source text may be rotated or scaled in its own panel (the HUD health text is
+            // turned 90 degrees); the copy must sit flat.
+            textGo.transform.localRotation = Quaternion.identity;
+            textGo.transform.localScale = Vector3.one;
             for (int i = textGo.transform.childCount - 1; i >= 0; i--)
                 Destroy(textGo.transform.GetChild(i).gameObject);
             foreach (var c in textGo.GetComponents<Component>())
