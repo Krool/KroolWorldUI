@@ -28,5 +28,12 @@ try {
 } catch {
     throw "Could not copy the DLL (is Valheim running on the '$ProfileName' profile? Close it first). $_"
 }
+# Same files r2modman lays down on install, so the mod list shows the icon and readme.
 Copy-Item (Join-Path $root "thunderstore\manifest.json") $target -Force
+Copy-Item (Join-Path $root "thunderstore\icon.png") $target -Force
+Copy-Item (Join-Path $root "README.md") $target -Force
+Copy-Item (Join-Path $root "CHANGELOG.md") $target -Force
+if (-not (Select-String -Path (Join-Path $profileDir "mods.yml") -Pattern "name: Krool-Krool_World_UI" -Quiet)) {
+    Write-Warning "r2modman does not list this mod in '$ProfileName' yet (it still loads). Use Settings > Import local mod with the dist zip once to register it."
+}
 Write-Host "Deployed to $target. Launch Valheim from r2modman with the '$ProfileName' profile."
