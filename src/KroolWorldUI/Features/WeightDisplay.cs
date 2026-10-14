@@ -21,7 +21,10 @@ namespace KroolWorldUI.Features
         internal static ConfigEntry<float> ChangedSeconds;
         internal static ConfigEntry<Placement> Position;
         internal static ConfigEntry<float> Height;
-        internal static ConfigEntry<float> CustomWidth;
+        internal static ConfigEntry<float> BaseWidth;
+
+        /// <summary>Vanilla base carry weight; BaseWidth is the bar width at this max.</summary>
+        internal const float BaseMaxWeight = 300f;
         internal static ConfigEntry<float> AnchorX;
         internal static ConfigEntry<float> AnchorY;
 
@@ -40,12 +43,13 @@ namespace KroolWorldUI.Features
                 new ConfigDescription("WhenChanged mode: seconds the bar stays after a change.",
                     new AcceptableValueRange<float>(1f, 15f)));
             Position = config.Bind(Section, "Position", Placement.AboveHotbar,
-                "AboveHotbar / BelowHotbar: lined up with the hotbar, same width. Custom: use AnchorX/AnchorY and CustomWidth.");
+                "AboveHotbar / BelowHotbar: lined up with the hotbar's first slot. Custom: use AnchorX/AnchorY.");
             Height = config.Bind(Section, "Height", 18f,
                 new ConfigDescription("Bar height in HUD pixels.", new AcceptableValueRange<float>(12f, 40f)));
-            CustomWidth = config.Bind(Section, "CustomWidth", 240f,
-                new ConfigDescription("Bar width in HUD pixels when Position is Custom (or no hotbar is found).",
-                    new AcceptableValueRange<float>(80f, 800f)));
+            BaseWidth = config.Bind(Section, "BaseWidth", 140f,
+                new ConfigDescription("Bar width in HUD pixels at the normal 300 max weight (about two hotbar slots). " +
+                                      "It grows with your max weight: a Megingjord (+150) makes it 50% longer.",
+                    new AcceptableValueRange<float>(60f, 400f)));
             AnchorX = config.Bind(Section, "AnchorX", 0.01f,
                 new ConfigDescription("Custom position: left edge (0 = left of screen, 1 = right).",
                     new AcceptableValueRange<float>(0f, 1f)));
@@ -70,7 +74,7 @@ namespace KroolWorldUI.Features
     internal class WeightHud : MonoBehaviour
     {
         private const float Gap = 4f;          // HUD pixels between the bar and the hotbar
-        private const float MinWidth = 120f;
+        private const float MinWidth = 60f;
         private const float RefreshInterval = 0.2f;
 
         private static readonly Color Normal = new Color(0.92f, 0.87f, 0.78f, 1f);
@@ -97,7 +101,8 @@ namespace KroolWorldUI.Features
         private float _lastChange;
         private float _nextRefresh;
         private float _nextHotbarScan;
-        private Rect? _hotbar; // world-space bounds of the main hotbar, if found
+        private Rect? _hotbar; // world-space rect of the main hotbar's first slot, if found
+        private float _maxWeight = WeightDisplay.BaseMaxWeight;
         private readonly Vector3[] _corners = new Vector3[4];
 
         internal static void Ensure()
@@ -182,7 +187,7 @@ namespace KroolWorldUI.Features
             Stretch(w._text.rectTransform);
 
             w._lastChange = Time.time;
-            w.ApplySize(WeightDisplay.CustomWidth.Value);
+            w.ApplySize(w.CurrentWidth());
             w.Place();
         }
 
@@ -231,6 +236,7 @@ namespace KroolWorldUI.Features
                     _max = mi;
                 }
                 _ratio = max > 0f ? total / max : 0f;
+                _maxWeight = max;
             }
 
             bool over = _weight > _max;
@@ -269,6 +275,13 @@ namespace KroolWorldUI.Features
             Place();
         }
 
+        /// <summary>BaseWidth at 300 max weight, scaled by your actual max (belt: 450 = 1.5x).</summary>
+        private float CurrentWidth()
+        {
+            float scale = Mathf.Clamp(_maxWeight / WeightDisplay.BaseMaxWeight, 0.5f, 3f);
+            return WeightDisplay.BaseWidth.Value * scale;
+        }
+
         private void ApplySize(float width)
         {
             float h = WeightDisplay.Height.Value;
@@ -279,16 +292,18 @@ namespace KroolWorldUI.Features
         }
 
         /// <summary>
-        /// Lines the bar up with the hotbar: same left edge and width, just above it. Falls back to
-        /// just below when there is no room above (large UI scale), or to the custom anchor.
+        /// Sits just above the hotbar's first slot, left-aligned with it. Falls back to just below
+        /// when there is no room above (large UI scale), or to the custom anchor.
         /// </summary>
         private void Place()
         {
             if (Time.time >= _nextHotbarScan)
             {
                 _nextHotbarScan = Time.time + 1f;
-                _hotbar = FindMainHotbar();
+                _hotbar = FindFirstSlot() ?? _hotbar; // keep the last good position if the bar hides briefly
             }
+
+            ApplySize(CurrentWidth());
 
             var mode = WeightDisplay.Position.Value;
             if (mode == WeightDisplay.Placement.Custom || _hotbar == null)
@@ -298,61 +313,54 @@ namespace KroolWorldUI.Features
                 _rect.anchorMax = anchor;
                 _rect.pivot = new Vector2(0f, 1f);
                 _rect.anchoredPosition = Vector2.zero;
-                ApplySize(WeightDisplay.CustomWidth.Value);
                 return;
             }
 
-            var hot = _hotbar.Value;
+            var slot = _hotbar.Value;
             var parent = (RectTransform)_rect.parent;
-            float toLocal = 1f / Mathf.Max(0.0001f, parent.lossyScale.x);
-            ApplySize(hot.width * toLocal);
-
+            float worldPerPixel = Mathf.Max(0.0001f, parent.lossyScale.y);
             parent.GetWorldCorners(_corners);
             float screenTop = _corners[1].y;
-            float gap = Gap / toLocal;
-            float height = WeightDisplay.Height.Value / toLocal;
-            bool roomAbove = hot.yMax + gap + height <= screenTop - 1f;
+            float gap = Gap * worldPerPixel;
+            float height = WeightDisplay.Height.Value * worldPerPixel;
+            bool roomAbove = slot.yMax + gap + height <= screenTop - 1f;
 
             _rect.anchorMin = _rect.anchorMax = new Vector2(0.5f, 0.5f);
             if (mode == WeightDisplay.Placement.AboveHotbar && roomAbove)
             {
                 _rect.pivot = new Vector2(0f, 0f);
-                _rect.position = new Vector3(hot.xMin, hot.yMax + gap, _rect.position.z);
+                _rect.position = new Vector3(slot.xMin, slot.yMax + gap, _rect.position.z);
             }
             else
             {
                 _rect.pivot = new Vector2(0f, 1f);
-                _rect.position = new Vector3(hot.xMin, hot.yMin - gap, _rect.position.z);
+                _rect.position = new Vector3(slot.xMin, slot.yMin - gap, _rect.position.z);
             }
         }
 
         /// <summary>
-        /// World bounds of the main hotbar: the highest on screen of all HotkeyBars (mods such as
-        /// ExtraSlots add more), measured by visible graphics since the bar object can be zero-sized.
+        /// World rect of the main hotbar's first slot frame. The game places slot i at
+        /// (i * m_elementSpace, 0) from the HotkeyBar origin using m_elementPrefab, so the frame is
+        /// fixed no matter which items or gear you have; measuring visible graphics was not.
+        /// The main hotbar is the highest HotkeyBar on screen (mods such as ExtraSlots add more).
         /// </summary>
-        private Rect? FindMainHotbar()
+        private Rect? FindFirstSlot()
         {
             Rect? best = null;
             foreach (var bar in FindObjectsByType<HotkeyBar>(FindObjectsSortMode.None))
             {
-                if (!bar.isActiveAndEnabled)
+                if (!bar.isActiveAndEnabled || bar.m_elementPrefab == null)
                     continue;
-                bool any = false;
-                float x0 = float.MaxValue, y0 = float.MaxValue, x1 = float.MinValue, y1 = float.MinValue;
-                foreach (var g in bar.GetComponentsInChildren<Graphic>())
-                {
-                    if (!g.isActiveAndEnabled || g.color.a < 0.01f)
-                        continue;
-                    g.rectTransform.GetWorldCorners(_corners);
-                    x0 = Mathf.Min(x0, _corners[0].x);
-                    y0 = Mathf.Min(y0, _corners[0].y);
-                    x1 = Mathf.Max(x1, _corners[2].x);
-                    y1 = Mathf.Max(y1, _corners[2].y);
-                    any = true;
-                }
-                if (!any)
+                var prefab = bar.m_elementPrefab.transform as RectTransform;
+                if (prefab == null)
                     continue;
-                var r = Rect.MinMaxRect(x0, y0, x1, y1);
+                Vector2 size = prefab.rect.size, pivot = prefab.pivot;
+                if (size.x < 1f || size.y < 1f) // stretched prefab outside a parent: fall back to the slot spacing
+                    size = new Vector2(bar.m_elementSpace, bar.m_elementSpace);
+                var t = bar.transform;
+                Vector3 bl = t.TransformPoint(new Vector3(-pivot.x * size.x, -pivot.y * size.y, 0f));
+                Vector3 tr = t.TransformPoint(new Vector3((1f - pivot.x) * size.x, (1f - pivot.y) * size.y, 0f));
+                var r = Rect.MinMaxRect(Mathf.Min(bl.x, tr.x), Mathf.Min(bl.y, tr.y), Mathf.Max(bl.x, tr.x), Mathf.Max(bl.y, tr.y));
                 if (best == null || r.yMax > best.Value.yMax)
                     best = r;
             }

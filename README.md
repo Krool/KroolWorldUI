@@ -18,7 +18,7 @@ When you earn XP in a skill, a bar for that skill appears on the right side of t
 
 ### Weight on the HUD
 
-Your carry weight, always visible, without opening the inventory: a slim bar just above the hotbar, the same width as it, with `current / max` inside and a fill that shows how full you are.
+Your carry weight, always visible, without opening the inventory: a slim bar just above the first hotbar slot, with `current / max` inside and a fill that shows how full you are. It is about two slots wide at the normal 300 max weight and grows with your capacity: a Megingjord (+150) makes it half again as long.
 
 - The numbers match the inventory screen exactly, including extra slots and backpacks from other mods and your strength belt.
 - The bar and the current weight turn orange near your limit (80% by default) and flash red when you are over, like the inventory does.
@@ -56,7 +56,8 @@ No other mod is needed for this. The same settings are also in `BepInEx/config/k
 | Weight: ChangedSeconds | 3 | When Changed mode: how long it stays |
 | Weight: Position | Above Hotbar | Above Hotbar, Below Hotbar, or Custom |
 | Weight: Height | 18 | Bar height in HUD pixels |
-| Weight: CustomWidth / AnchorX / AnchorY | 240 / 0.01 / 0.98 | Width and top-left corner, used only for Custom |
+| Weight: BaseWidth | 140 | Bar width in HUD pixels at 300 max weight; scales with your max |
+| Weight: AnchorX / AnchorY | 0.01 / 0.98 | Top-left corner, used only for Custom |
 | Food Reminder: Enabled | true | Remind you when a food is about to run out |
 | Food Reminder: ThresholdMinutes | 4 | Remind when a food has less than this many minutes left |
 | Food Reminder: ShowSeconds | 6 | How long the reminder stays |

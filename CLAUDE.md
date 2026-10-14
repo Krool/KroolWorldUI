@@ -51,7 +51,9 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
   HarmonyX come from nuget.bepinex.dev.
 - HUD placement: the owner's mods (ExtraSlots panels, EpicLoot ability bar) all live bottom-left.
   Keep new HUD elements off that corner. Taken so far: skill XP bars (right side, mid-height),
-  weight bar (slim, directly above the top-most HotkeyBar, matched to its width). Below the
+  weight bar (slim, directly above the first slot of the top-most HotkeyBar; width = BaseWidth x
+  max/300, never the hotbar width - visible hotbar graphics change with items, so measure the slot
+  frame from m_elementPrefab instead). Below the
   hotbar is the raven tutorial text area: the owner saw overlap there, avoid it. Food reminder
   toast: top-center (0.5, 0.84), pushed below Hud.m_eventBar (raid banner) when that is up.
 - Sounds are synthesized at runtime (AudioClip.Create) and routed to AudioMan.m_guiMixer so they
