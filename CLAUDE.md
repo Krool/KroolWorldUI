@@ -39,6 +39,10 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
 
 ## Gotchas
 
+- Commit from PowerShell 5.1 with `git commit -F <file>` (or no double quotes in the message):
+  5.1 mangles embedded `"` in native arguments, the commit fails, and with stderr hidden the
+  staged changes silently ride along into the next commit (happened in 0.2.0).
+
 - Target `netstandard2.1`: Valheim's Unity DLLs reference netstandard 2.1; `net462` fails to build.
 - Game DLLs are referenced from the Steam install (`-p:ValheimDir=...` to override); BepInEx and
   HarmonyX come from nuget.bepinex.dev.
