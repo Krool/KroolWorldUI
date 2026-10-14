@@ -80,14 +80,22 @@ if ($Publish) {
 }
 
 # Commit only the files this script owns (the working tree may be shared with other sessions).
+# Windows PowerShell turns any git stderr line (e.g. the CRLF warning) into a terminating error
+# under ErrorActionPreference=Stop, so judge git by its exit code instead.
+$ErrorActionPreference = "Continue"
+function Invoke-Git {
+    $out = & git -C $root @args 2>&1
+    if ($LASTEXITCODE -ne 0) { throw "git $($args -join ' ') failed: $out" }
+    return $out
+}
 $tag = "v$Version"
-git -C $root add -- thunderstore/manifest.json thunderstore.toml src/KroolWorldUI/Plugin.cs CHANGELOG.md
-git -C $root diff --cached --quiet
+Invoke-Git add -- thunderstore/manifest.json thunderstore.toml src/KroolWorldUI/Plugin.cs CHANGELOG.md | Out-Null
+& git -C $root diff --cached --quiet 2>$null
 if ($LASTEXITCODE -ne 0) {
-    git -C $root commit -q -m "Release $Version"
+    Invoke-Git commit -q -m "Release $Version" | Out-Null
 }
-if (-not (git -C $root tag --list $tag)) {
-    git -C $root tag -a $tag -m "Release $Version"  # annotated: --follow-tags only pushes these
+if (-not (& git -C $root tag --list $tag 2>$null)) {
+    Invoke-Git tag -a $tag -m "Release $Version" | Out-Null  # annotated: --follow-tags only pushes these
 }
-git -C $root push -q --follow-tags
+Invoke-Git push -q --follow-tags | Out-Null
 Write-Host "Tagged $tag and pushed."
