@@ -1,0 +1,37 @@
+# Thunderstore CLI (tcli) config. Used by scripts\release.ps1 -Publish, which uploads the zip
+# that scripts\build.ps1 makes. Package metadata in the zip comes from thunderstore\manifest.json;
+# versionNumber here is kept in sync by release.ps1.
+
+[config]
+schemaVersion = "0.0.1"
+
+[package]
+namespace = "Krool"
+name = "Krool_World_UI"
+versionNumber = "0.1.0"
+description = "Client-side HUD additions, each with its own toggle in an F7 settings window."
+websiteUrl = "https://github.com/Krool/KroolWorldUI"
+containsNsfwContent = false
+
+[package.dependencies]
+denikson-BepInExPack_Valheim = "5.4.2351"
+
+[build]
+icon = "./thunderstore/icon.png"
+readme = "./README.md"
+outdir = "./dist"
+
+[[build.copy]]
+source = "./src/KroolWorldUI/bin/Release/KroolWorldUI.dll"
+target = "/"
+
+[[build.copy]]
+source = "./CHANGELOG.md"
+target = "/"
+
+[publish]
+repository = "https://thunderstore.io"
+communities = ["valheim"]
+
+[publish.categories]
+valheim = ["client-side", "tweaks", "utility"]

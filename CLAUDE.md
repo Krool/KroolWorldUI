@@ -12,8 +12,13 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
   try/catch and log.
 - **Test in the `KroolDev` r2modman profile**, never `BCCBoys` (the owner's play profile).
   `scripts\deploy-dev.ps1` targets KroolDev by default.
-- **Version lives in three places:** `thunderstore/manifest.json`, `Plugin.Version`, and the
-  CHANGELOG. `build.ps1` refuses to package if the first two differ.
+- **Releases go through `scripts\release.ps1 -Version x.y.z [-Publish]`.** It syncs the version
+  in `thunderstore/manifest.json`, `thunderstore.toml` and `Plugin.Version` (the csproj gets it
+  from build.ps1), requires a `## x.y.z` CHANGELOG section, builds, uploads with tcli, then
+  commits, tags `vx.y.z` (annotated) and pushes. Write the changelog entry before running it.
+  r2modman only offers updates for a strictly higher version of the same Thunderstore package.
+- **The Thunderstore token is `TCLI_AUTH_TOKEN` (user env var).** Never write it to a file or
+  echo it; the owner sets it with `setx` in their own terminal.
 
 ## Layout
 

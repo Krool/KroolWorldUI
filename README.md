@@ -60,3 +60,13 @@ Requires Windows, the .NET 8 SDK (`winget install Microsoft.DotNet.SDK.8`) and V
 ```
 
 If Valheim is not in the default Steam folder, pass `-ValheimDir "<path>"` to `build.ps1`.
+
+### Releasing
+
+Add a `## x.y.z` section to `CHANGELOG.md`, then:
+
+```powershell
+.\scripts\release.ps1 -Version 0.2.0 -Publish
+```
+
+This bumps the version everywhere, builds the zip, uploads it to Thunderstore with [tcli](https://github.com/thunderstore-io/thunderstore-cli) (`dotnet tool install -g tcli`), then commits, tags and pushes. Uploading needs a Thunderstore service-account token for the Krool team in the `TCLI_AUTH_TOKEN` environment variable.
