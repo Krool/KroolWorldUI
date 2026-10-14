@@ -60,7 +60,8 @@ namespace KroolWorldUI.Features
     {
         private const float RowHeight = 30f;
         private const float Pad = 6f;
-        private const float Width = 330f;
+        private const float Width = 270f;
+        private const float TimeWidth = 54f;
         private const float FadeSeconds = 0.6f;
         private const float LoginGraceSeconds = 10f;
 
@@ -86,7 +87,8 @@ namespace KroolWorldUI.Features
             public string Key;
             public GameObject Root;
             public Image Icon;
-            public TMP_Text Text;
+            public TMP_Text Name;
+            public TMP_Text Time; // right-aligned, fixed-width digits, so the countdown holds still
         }
 
         private readonly List<Row> _rows = new List<Row>();
@@ -243,7 +245,7 @@ namespace KroolWorldUI.Features
                 // Rows already on screen keep their countdown current.
                 var row = _rows.Find(r => r.Key == key);
                 if (row != null)
-                    row.Text.text = RowText(food);
+                    row.Time.text = TimeText(food.m_time);
             }
 
             // Forget foods that expired, so eating them again later starts fresh.
@@ -281,15 +283,17 @@ namespace KroolWorldUI.Features
                 Place();
         }
 
-        private static string RowText(Player.Food food)
+        private static string FoodName(Player.Food food)
         {
-            string name = Localization.instance != null
-                ? Localization.instance.Localize(food.m_item.m_shared.m_name)
-                : food.m_item.m_shared.m_name;
-            int secs = Mathf.Max(0, Mathf.CeilToInt(food.m_time));
-            string time = $"{secs / 60}:{secs % 60:00}";
-            return $"{name}  <color=#{ColorUtility.ToHtmlStringRGB(Warn)}>{time}</color>  " +
-                   $"<color=#{ColorUtility.ToHtmlStringRGB(Gold)}>eat again</color>";
+            string raw = food.m_item.m_shared.m_name;
+            return Localization.instance != null ? Localization.instance.Localize(raw) : raw;
+        }
+
+        // <mspace> gives every digit the same advance, so 3:59 -> 3:11 does not shift.
+        private static string TimeText(float seconds)
+        {
+            int secs = Mathf.Max(0, Mathf.CeilToInt(seconds));
+            return $"<mspace=0.6em>{secs / 60}:{secs % 60:00}</mspace>";
         }
 
         private void AddOrUpdateRow(Player.Food food)
@@ -301,7 +305,8 @@ namespace KroolWorldUI.Features
                 row.Icon.sprite = food.m_item.GetIcon();
                 row.Icon.enabled = row.Icon.sprite != null;
             }
-            row.Text.text = RowText(food);
+            row.Name.text = FoodName(food);
+            row.Time.text = TimeText(food.m_time);
         }
 
         private void AddSampleRow()
@@ -309,10 +314,9 @@ namespace KroolWorldUI.Features
             var row = _rows.Find(r => r.Key == "_sample") ?? NewRow("_sample");
             if (row.Icon != null)
                 row.Icon.enabled = false;
-            row.Text.text = $"Your food  <color=#{ColorUtility.ToHtmlStringRGB(Warn)}>3:59</color>  " +
-                            $"<color=#{ColorUtility.ToHtmlStringRGB(Gold)}>eat again</color>";
+            row.Name.text = "Your food";
+            row.Time.text = TimeText(239f);
         }
-
         private Row NewRow(string key)
         {
             var go = new GameObject("row", typeof(RectTransform));
@@ -332,8 +336,30 @@ namespace KroolWorldUI.Features
             irt.sizeDelta = new Vector2(RowHeight - 4f, RowHeight - 4f);
             irt.anchoredPosition = Vector2.zero;
 
-            var textGo = Instantiate(_textTemplate.gameObject, go.transform, false);
-            textGo.name = "text";
+            var name = NewText(go.transform, "name", TextAlignmentOptions.MidlineLeft, Parchment);
+            name.overflowMode = TextOverflowModes.Ellipsis;
+            name.rectTransform.offsetMin = new Vector2(RowHeight + 2f, 0f);
+            name.rectTransform.offsetMax = new Vector2(-(TimeWidth + 6f), 0f);
+
+            var time = NewText(go.transform, "time", TextAlignmentOptions.MidlineRight, Warn);
+            var tr = time.rectTransform;
+            tr.anchorMin = new Vector2(1f, 0f);
+            tr.anchorMax = new Vector2(1f, 1f);
+            tr.pivot = new Vector2(1f, 0.5f);
+            tr.sizeDelta = new Vector2(TimeWidth, 0f);
+            tr.anchoredPosition = new Vector2(-2f, 0f);
+
+            var row = new Row { Key = key, Root = go, Icon = icon, Name = name, Time = time };
+            _rows.Add(row);
+            _rect.sizeDelta = new Vector2(Width, RowHeight * _rows.Count + Pad * 2f);
+            return row;
+        }
+
+        /// <summary>A text cloned from the HUD's own, so it uses the game's font and material.</summary>
+        private TMP_Text NewText(Transform parent, string name, TextAlignmentOptions align, Color color)
+        {
+            var textGo = Instantiate(_textTemplate.gameObject, parent, false);
+            textGo.name = name;
             textGo.SetActive(true);
             // The source text may be rotated or scaled in its own panel (the HUD health text is
             // turned 90 degrees); the copy must sit flat.
@@ -347,23 +373,20 @@ namespace KroolWorldUI.Features
             var text = textGo.GetComponent<TMP_Text>();
             text.enableAutoSizing = false;
             text.fontSize = 18f;
-            text.color = Parchment;
-            text.alignment = TextAlignmentOptions.MidlineLeft;
+            text.color = color;
+            text.alignment = align;
             text.textWrappingMode = TextWrappingModes.NoWrap;
-            text.overflowMode = TextOverflowModes.Ellipsis;
+            text.overflowMode = TextOverflowModes.Overflow;
+            text.richText = true;
             text.raycastTarget = false;
-            var trt = text.rectTransform;
-            trt.anchorMin = Vector2.zero;
-            trt.anchorMax = Vector2.one;
-            trt.offsetMin = new Vector2(RowHeight + 2f, 0f);
-            trt.offsetMax = Vector2.zero;
-
-            var row = new Row { Key = key, Root = go, Icon = icon, Text = text };
-            _rows.Add(row);
-            _rect.sizeDelta = new Vector2(Width, RowHeight * _rows.Count + Pad * 2f);
-            return row;
+            var rt = text.rectTransform;
+            rt.anchorMin = Vector2.zero;
+            rt.anchorMax = Vector2.one;
+            rt.pivot = new Vector2(0.5f, 0.5f);
+            rt.offsetMin = Vector2.zero;
+            rt.offsetMax = Vector2.zero;
+            return text;
         }
-
         private void ClearRows()
         {
             foreach (var r in _rows)
