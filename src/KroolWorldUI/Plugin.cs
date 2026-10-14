@@ -10,7 +10,7 @@ namespace KroolWorldUI
     {
         public const string Guid = "krool.kroolworldui";
         public const string Name = "Krool World UI";
-        public const string Version = "0.1.2";
+        public const string Version = "0.2.0";
 
         internal static Plugin Instance;
         internal static BepInEx.Logging.ManualLogSource Log;
@@ -27,6 +27,7 @@ namespace KroolWorldUI
             SettingsWindow.BindConfig(Config);
             SkillXpBars.BindConfig(Config);
             WeightDisplay.BindConfig(Config);
+            FoodCallout.BindConfig(Config);
             gameObject.AddComponent<SettingsWindow>();
 
             _harmony = new Harmony(Guid);

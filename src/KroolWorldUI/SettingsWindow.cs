@@ -26,6 +26,7 @@ namespace KroolWorldUI
         private Vector2 _scroll;
         private ConfigEntryBase _capturingKey;
         private bool _preview;
+        private bool _previewWas;
         private bool _wasSaveOnSet;
         private bool _closeRequested;
 
@@ -39,15 +40,31 @@ namespace KroolWorldUI
 
         private void Update()
         {
-            if (_capturingKey != null)
-                return; // the next key press is being recorded, not acted on
-            if (ToggleKey.Value.IsDown() && !TextFocusElsewhere())
-                SetOpen(!IsOpen);
-            else if (IsOpen && Input.GetKeyDown(KeyCode.Escape))
-                _closeRequested = true; // closed in LateUpdate, after Menu.Update has been skipped
+            // While a key is being recorded, the next press is the new binding, not a command.
+            if (_capturingKey == null)
+            {
+                if (ToggleKey.Value.IsDown() && !TextFocusElsewhere())
+                    SetOpen(!IsOpen);
+                else if (IsOpen && Input.GetKeyDown(KeyCode.Escape))
+                    _closeRequested = true; // closed in LateUpdate, after Menu.Update has been skipped
+            }
+            UpdatePreview();
+        }
 
-            if (IsOpen && _preview && Player.m_localPlayer != null)
+        /// <summary>Shows every feature's sample on the HUD while Preview is on; chime once on enable.</summary>
+        private void UpdatePreview()
+        {
+            bool active = IsOpen && _preview && Player.m_localPlayer != null;
+            if (active)
+            {
                 SkillXpBarStack.GetOrCreate()?.Preview(Player.m_localPlayer.GetSkills());
+                FoodCalloutHud.Preview(true, playSound: !_previewWas && FoodCallout.Sound.Value);
+            }
+            else if (_previewWas)
+            {
+                FoodCalloutHud.Preview(false, playSound: false);
+            }
+            _previewWas = active;
         }
 
         private void LateUpdate()
@@ -131,7 +148,7 @@ namespace KroolWorldUI
             GUILayout.BeginHorizontal();
             bool canPreview = Player.m_localPlayer != null;
             GUI.enabled = canPreview;
-            _preview = GUILayout.Toggle(_preview, canPreview ? "Preview XP bars" : "Preview XP bars (in game only)",
+            _preview = GUILayout.Toggle(_preview, canPreview ? "Preview on HUD" : "Preview on HUD (in game only)",
                 _styles.Button, GUILayout.Height(32f));
             GUI.enabled = true;
             GUILayout.FlexibleSpace();

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.0
+
+- Food reminder: when a food drops under 4 minutes, a small reminder with its icon, time left and "eat again" appears at the top of the screen, with a soft chime. Once per food, fades after 6 seconds.
+- The settings window's Preview button now previews every feature on the HUD (XP bars and the food reminder, with the chime).
+
 ## 0.1.2
 
 - The F7 settings window title shows the installed version, so you can see which one you are running.

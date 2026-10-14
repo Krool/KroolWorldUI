@@ -45,7 +45,10 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
 - HUD placement: the owner's mods (ExtraSlots panels, EpicLoot ability bar) all live bottom-left.
   Keep new HUD elements off that corner. Taken so far: skill XP bars (right side, mid-height),
   weight bar (slim, directly above the top-most HotkeyBar, matched to its width). Below the
-  hotbar is the raven tutorial text area: the owner saw overlap there, avoid it.
+  hotbar is the raven tutorial text area: the owner saw overlap there, avoid it. Food reminder
+  toast: top-center (0.5, 0.84), pushed below Hud.m_eventBar (raid banner) when that is up.
+- Sounds are synthesized at runtime (AudioClip.Create) and routed to AudioMan.m_guiMixer so they
+  follow the game's volume. Keep them short and quiet; the owner asked for non-annoying.
 - The skill XP bar clones `InventoryGui.instance.m_skillsDialog.m_elementPrefab` and finds
   children by name (`icon`, `name`, `leveltext`, `bonustext`, GuiBars). The first spawn logs the
   prefab size/anchors to `BepInEx/LogOutput.log`; check it after a Valheim update.
