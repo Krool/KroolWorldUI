@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1
+
+- Fixed the food reminder text showing rotated 90 degrees.
+
 ## 0.2.0
 
 - Food reminder: when a food drops under 4 minutes, a small reminder with its icon, time left and "eat again" appears at the top of the screen, with a soft chime. Once per food, fades after 6 seconds.
