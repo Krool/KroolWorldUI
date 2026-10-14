@@ -12,6 +12,10 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
   try/catch and log.
 - **Test in the `KroolDev` r2modman profile**, never `BCCBoys` (the owner's play profile).
   `scripts\deploy-dev.ps1` targets KroolDev by default.
+- **Every change to the mod gets a new version and a commit (owner, 2026-10-14).** Bump patch
+  for fixes and tweaks, minor for a new feature; add the `## x.y.z` CHANGELOG entry and run
+  `release.ps1 -Version x.y.z` (add `-Publish` once the token exists), which commits, tags and
+  pushes. Never ship two different builds under one version number.
 - **Releases go through `scripts\release.ps1 -Version x.y.z [-Publish]`.** It syncs the version
   in `thunderstore/manifest.json`, `thunderstore.toml` and `Plugin.Version` (the csproj gets it
   from build.ps1), requires a `## x.y.z` CHANGELOG section, builds, uploads with tcli, then
