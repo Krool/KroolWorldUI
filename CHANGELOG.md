@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2
+
+- The F7 settings window title shows the installed version, so you can see which one you are running.
+
 ## 0.1.1
 
 - Mod page shows only player information; build and release notes moved to GitHub.
