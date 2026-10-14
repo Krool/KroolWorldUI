@@ -70,7 +70,7 @@ Requires Windows, the .NET 8 SDK (`winget install Microsoft.DotNet.SDK.8`) and V
 ```powershell
 .\scripts\build.ps1                 # builds and writes dist\Krool-Krool_World_UI-<version>.zip
 .\scripts\new-dev-profile.ps1       # one time: copies the BCCBoys r2modman profile to KroolDev
-.\scripts\deploy-dev.ps1            # builds and installs into the KroolDev profile
+.\scripts\deploy-dev.ps1            # dev build into KroolDev as Krool_World_UI_Dev (close r2modman first time)
 ```
 
 If Valheim is not in the default Steam folder, pass `-ValheimDir "<path>"` to `build.ps1`.

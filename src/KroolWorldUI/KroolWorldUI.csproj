@@ -14,6 +14,12 @@
     <RestoreAdditionalProjectSources>https://nuget.bepinex.dev/v3/index.json</RestoreAdditionalProjectSources>
   </PropertyGroup>
 
+  <!-- Dev configuration (scripts\deploy-dev.ps1): a release build tagged DEV_BUILD, output in bin\Dev. -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Dev'">
+    <Optimize>true</Optimize>
+    <DefineConstants>$(DefineConstants);DEV_BUILD</DefineConstants>
+  </PropertyGroup>
+
   <!-- Game install. Override with: dotnet build -p:ValheimDir="D:\Games\Valheim" -->
   <PropertyGroup>
     <ValheimDir Condition="'$(ValheimDir)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Valheim</ValheimDir>
