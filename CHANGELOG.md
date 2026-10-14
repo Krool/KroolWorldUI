@@ -4,4 +4,4 @@
 
 - Skill XP bars: a Skills-tab style bar appears while you earn XP in a skill, shows the XP gained since it appeared in a lighter shade, and fades out after 3 seconds without XP. Up to 5 stack on the right side of the screen.
 - Built-in settings window (F7) with on/off buttons, sliders, per-setting reset and a live preview of the XP bars. No ConfigurationManager needed.
-- Weight on the HUD: current/max carry weight under the hotbar, matching the inventory screen, with near-limit and over-limit colors and Always / Near Limit / When Changed modes.
+- Weight on the HUD: a slim bar above the hotbar with current / max inside, matching the inventory screen, with near-limit and over-limit colors, Always / Near Limit / When Changed modes and Above / Below Hotbar / Custom placement.

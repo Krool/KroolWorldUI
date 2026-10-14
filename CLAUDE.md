@@ -31,7 +31,8 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
   HarmonyX come from nuget.bepinex.dev.
 - HUD placement: the owner's mods (ExtraSlots panels, EpicLoot ability bar) all live bottom-left.
   Keep new HUD elements off that corner. Taken so far: skill XP bars (right side, mid-height),
-  weight readout (top-left, auto-pushed below any HotkeyBar).
+  weight bar (slim, directly above the top-most HotkeyBar, matched to its width). Below the
+  hotbar is the raven tutorial text area: the owner saw overlap there, avoid it.
 - The skill XP bar clones `InventoryGui.instance.m_skillsDialog.m_elementPrefab` and finds
   children by name (`icon`, `name`, `leveltext`, `bonustext`, GuiBars). The first spawn logs the
   prefab size/anchors to `BepInEx/LogOutput.log`; check it after a Valheim update.

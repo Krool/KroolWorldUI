@@ -18,13 +18,13 @@ When you earn XP in a skill, a bar for that skill appears on the right side of t
 
 ### Weight on the HUD
 
-Your carry weight, always visible, without opening the inventory. It sits at the top left, just under the hotbar, with a weight icon, `current/max` and a thin fill bar.
+Your carry weight, always visible, without opening the inventory: a slim bar just above the hotbar, the same width as it, with `current / max` inside and a fill that shows how full you are.
 
 - The numbers match the inventory screen exactly, including extra slots and backpacks from other mods and your strength belt.
-- The current weight turns orange near your limit (80% by default) and flashes red when you are over, like the inventory does.
+- The bar and the current weight turn orange near your limit (80% by default) and flash red when you are over, like the inventory does.
 - Show mode: **Always** (default), **Near Limit** (only when you are close to full), or **When Changed** (a few seconds after you pick up or drop something).
+- Position: **Above Hotbar** (default), **Below Hotbar**, or **Custom**. If a large UI scale leaves no room above the hotbar, it sits just below it.
 - It hides while the inventory is open, since the inventory already shows weight.
-
 ## Settings
 
 Press **F7** in game to open the Krool World UI settings window. Every option is there: on/off buttons for features, sliders for sizes and timings, click-to-cycle buttons for choices, and a Reset button next to anything changed from its default. **Preview XP bars** shows sample bars for your top skills so you can place and size them live. Esc or F7 closes it; while it is open your character ignores input.
@@ -45,8 +45,9 @@ No other mod is needed for this. The same settings are also in `BepInEx/config/k
 | Weight: Show | Always | Always, Near Limit, or When Changed |
 | Weight: NearLimitPercent | 80 | Percent of max where it turns orange (and appears, in Near Limit mode) |
 | Weight: ChangedSeconds | 3 | When Changed mode: how long it stays |
-| Weight: ShowBar | true | Thin fill bar under the numbers |
-| Weight: AnchorX / AnchorY / Scale | 0.008 / 0.99 / 1 | Position of its top-left corner, and size. It always stays below the hotbar |
+| Weight: Position | Above Hotbar | Above Hotbar, Below Hotbar, or Custom |
+| Weight: Height | 18 | Bar height in HUD pixels |
+| Weight: CustomWidth / AnchorX / AnchorY | 240 / 0.01 / 0.98 | Width and top-left corner, used only for Custom |
 
 ## Building from source
 

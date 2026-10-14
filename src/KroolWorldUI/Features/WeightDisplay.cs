@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using BepInEx.Configuration;
 using HarmonyLib;
 using TMPro;
@@ -8,21 +7,23 @@ using UnityEngine.UI;
 namespace KroolWorldUI.Features
 {
     /// <summary>
-    /// Carry weight on the HUD, using the same numbers as the inventory screen
-    /// (ceil(total) / ceil(max), red flash when over). Read-only.
+    /// Carry weight on the HUD as one slim bar with the numbers inside, using the same numbers as
+    /// the inventory screen (ceil(total) / ceil(max), red flash when over). Read-only.
     /// </summary>
     internal static class WeightDisplay
     {
         internal enum ShowMode { Always, NearLimit, WhenChanged }
+        internal enum Placement { AboveHotbar, BelowHotbar, Custom }
 
         internal static ConfigEntry<bool> Enabled;
         internal static ConfigEntry<ShowMode> Mode;
         internal static ConfigEntry<float> NearLimitPercent;
         internal static ConfigEntry<float> ChangedSeconds;
-        internal static ConfigEntry<bool> ShowBar;
+        internal static ConfigEntry<Placement> Position;
+        internal static ConfigEntry<float> Height;
+        internal static ConfigEntry<float> CustomWidth;
         internal static ConfigEntry<float> AnchorX;
         internal static ConfigEntry<float> AnchorY;
-        internal static ConfigEntry<float> Scale;
 
         private const string Section = "Weight";
 
@@ -33,24 +34,27 @@ namespace KroolWorldUI.Features
             Mode = config.Bind(Section, "Show", ShowMode.Always,
                 "Always; NearLimit = only at or above NearLimitPercent; WhenChanged = for a few seconds after your weight changes.");
             NearLimitPercent = config.Bind(Section, "NearLimitPercent", 80f,
-                new ConfigDescription("Percent of max weight where the readout turns orange (and appears, in NearLimit mode).",
+                new ConfigDescription("Percent of max weight where the bar turns orange (and appears, in NearLimit mode).",
                     new AcceptableValueRange<float>(10f, 100f)));
             ChangedSeconds = config.Bind(Section, "ChangedSeconds", 3f,
-                new ConfigDescription("WhenChanged mode: seconds the readout stays after a change.",
+                new ConfigDescription("WhenChanged mode: seconds the bar stays after a change.",
                     new AcceptableValueRange<float>(1f, 15f)));
-            ShowBar = config.Bind(Section, "ShowBar", true, "Show a thin fill bar under the numbers.");
-            AnchorX = config.Bind(Section, "AnchorX", 0.008f,
-                new ConfigDescription("Horizontal position of the readout's left edge (0 = left of screen, 1 = right).",
+            Position = config.Bind(Section, "Position", Placement.AboveHotbar,
+                "AboveHotbar / BelowHotbar: lined up with the hotbar, same width. Custom: use AnchorX/AnchorY and CustomWidth.");
+            Height = config.Bind(Section, "Height", 18f,
+                new ConfigDescription("Bar height in HUD pixels.", new AcceptableValueRange<float>(12f, 40f)));
+            CustomWidth = config.Bind(Section, "CustomWidth", 240f,
+                new ConfigDescription("Bar width in HUD pixels when Position is Custom (or no hotbar is found).",
+                    new AcceptableValueRange<float>(80f, 800f)));
+            AnchorX = config.Bind(Section, "AnchorX", 0.01f,
+                new ConfigDescription("Custom position: left edge (0 = left of screen, 1 = right).",
                     new AcceptableValueRange<float>(0f, 1f)));
-            AnchorY = config.Bind(Section, "AnchorY", 0.99f,
-                new ConfigDescription("Vertical position of the readout's top edge (0 = bottom, 1 = top). " +
-                                      "It moves down on its own to stay below the hotbar.",
+            AnchorY = config.Bind(Section, "AnchorY", 0.98f,
+                new ConfigDescription("Custom position: top edge (0 = bottom of screen, 1 = top).",
                     new AcceptableValueRange<float>(0f, 1f)));
-            Scale = config.Bind(Section, "Scale", 1f,
-                new ConfigDescription("Size of the readout.", new AcceptableValueRange<float>(0.5f, 2f)));
         }
 
-        // Hud.Update runs every frame in game; cheap check that builds the readout once the HUD,
+        // Hud.Update runs every frame in game; cheap check that builds the bar once the HUD,
         // inventory screen and player all exist (it is rebuilt after each logout, with the HUD).
         [HarmonyPatch(typeof(Hud), "Update")]
         private static class EnsureOnHud
@@ -65,18 +69,16 @@ namespace KroolWorldUI.Features
 
     internal class WeightHud : MonoBehaviour
     {
-        private const float Width = 150f;
-        private const float TextHeight = 30f;
-        private const float BarHeight = 5f;
-        private const float Pad = 6f;
-        private const float IconSize = 24f;
-        private const float BlockerMargin = 8f;
+        private const float Gap = 4f;          // HUD pixels between the bar and the hotbar
+        private const float MinWidth = 120f;
         private const float RefreshInterval = 0.2f;
 
         private static readonly Color Normal = new Color(0.92f, 0.87f, 0.78f, 1f);
         private static readonly Color Warn = new Color(1f, 0.69f, 0.25f, 1f);
         private static readonly Color Over = new Color(0.9f, 0.2f, 0.15f, 1f);
-        private static readonly Color BarFill = new Color(0.87f, 0.70f, 0.36f, 1f);
+        private static readonly Color Fill = new Color(0.58f, 0.43f, 0.18f, 0.95f);
+        private static readonly Color FillWarn = new Color(0.72f, 0.42f, 0.1f, 0.95f);
+        private static readonly Color FillOver = new Color(0.62f, 0.13f, 0.1f, 0.95f);
 
         private static WeightHud _instance;
         private static bool _failed;
@@ -84,9 +86,9 @@ namespace KroolWorldUI.Features
         private RectTransform _rect;
         private CanvasGroup _group;
         private TMP_Text _text;
-        private GameObject _barRoot;
-        private RectTransform _barFill;
-        private Image _barFillImage;
+        private RectTransform _icon;
+        private RectTransform _fill;
+        private Image _fillImage;
 
         private int _weight = -1;
         private int _max = -1;
@@ -94,8 +96,8 @@ namespace KroolWorldUI.Features
         private string _shownText;
         private float _lastChange;
         private float _nextRefresh;
-        private float _nextBlockerScan;
-        private readonly List<Rect> _blockers = new List<Rect>();
+        private float _nextHotbarScan;
+        private Rect? _hotbar; // world-space bounds of the main hotbar, if found
         private readonly Vector3[] _corners = new Vector3[4];
 
         internal static void Ensure()
@@ -113,7 +115,7 @@ namespace KroolWorldUI.Features
             catch (System.Exception e)
             {
                 _failed = true;
-                Plugin.Log.LogError($"Weight readout disabled for this session: {e}");
+                Plugin.Log.LogError($"Weight bar disabled for this session: {e}");
             }
         }
 
@@ -124,30 +126,37 @@ namespace KroolWorldUI.Features
             var w = go.AddComponent<WeightHud>();
             _instance = w;
             w._rect = (RectTransform)go.transform;
-            w._rect.pivot = new Vector2(0f, 1f);
-            w._rect.sizeDelta = new Vector2(Width, TextHeight + BarHeight + Pad);
             w._group = go.GetComponent<CanvasGroup>();
             w._group.blocksRaycasts = false;
             w._group.interactable = false;
             w._group.alpha = 0f;
 
-            var bg = NewImage("bg", go.transform, new Color(0.06f, 0.045f, 0.03f, 0.6f));
-            Stretch(bg.rectTransform, 0f, 0f, 0f, 0f);
+            // Track, fill, then icon and text drawn on top of the fill.
+            var track = NewImage("track", go.transform, new Color(0.05f, 0.035f, 0.025f, 0.75f));
+            Stretch(track.rectTransform);
+            var frame = track.gameObject.AddComponent<Outline>();
+            frame.effectColor = new Color(0.87f, 0.70f, 0.36f, 0.35f);
+            frame.effectDistance = new Vector2(1f, -1f);
 
-            // The inventory's weight icon, if the game still names it that way; text-only otherwise.
+            w._fillImage = NewImage("fill", go.transform, Fill);
+            w._fill = w._fillImage.rectTransform;
+            w._fill.anchorMin = Vector2.zero;
+            w._fill.anchorMax = new Vector2(0f, 1f);
+            w._fill.pivot = new Vector2(0f, 0.5f);
+            w._fill.offsetMin = Vector2.zero;
+            w._fill.offsetMax = Vector2.zero;
+
             var iconSprite = FindWeightIcon(inv.m_weight.transform);
-            float textLeft = Pad;
             if (iconSprite != null)
             {
                 var icon = NewImage("icon", go.transform, Color.white);
                 icon.sprite = iconSprite;
                 icon.preserveAspect = true;
-                var irt = icon.rectTransform;
-                irt.anchorMin = irt.anchorMax = new Vector2(0f, 1f);
-                irt.pivot = new Vector2(0f, 1f);
-                irt.sizeDelta = new Vector2(IconSize, IconSize);
-                irt.anchoredPosition = new Vector2(Pad, -(TextHeight - IconSize) / 2f - 2f);
-                textLeft = Pad + IconSize + 4f;
+                w._icon = icon.rectTransform;
+                w._icon.anchorMin = new Vector2(0f, 0.5f);
+                w._icon.anchorMax = new Vector2(0f, 0.5f);
+                w._icon.pivot = new Vector2(0f, 0.5f);
+                w._icon.anchoredPosition = new Vector2(3f, 0f);
             }
 
             // Clone the inventory's own weight text so font and material match the game.
@@ -161,36 +170,15 @@ namespace KroolWorldUI.Features
                     Destroy(c);
             w._text = textGo.GetComponent<TMP_Text>();
             w._text.enableAutoSizing = false;
-            w._text.fontSize = 22f;
-            w._text.alignment = TextAlignmentOptions.MidlineLeft;
+            w._text.alignment = TextAlignmentOptions.Center;
             w._text.textWrappingMode = TextWrappingModes.NoWrap;
+            w._text.overflowMode = TextOverflowModes.Overflow;
             w._text.raycastTarget = false;
-            var trt = w._text.rectTransform;
-            trt.anchorMin = new Vector2(0f, 1f);
-            trt.anchorMax = new Vector2(1f, 1f);
-            trt.pivot = new Vector2(0f, 1f);
-            trt.offsetMin = new Vector2(textLeft, -TextHeight);
-            trt.offsetMax = new Vector2(-Pad, 0f);
-
-            w._barRoot = new GameObject("bar", typeof(RectTransform));
-            w._barRoot.transform.SetParent(go.transform, false);
-            var brt = (RectTransform)w._barRoot.transform;
-            brt.anchorMin = new Vector2(0f, 0f);
-            brt.anchorMax = new Vector2(1f, 0f);
-            brt.pivot = new Vector2(0f, 0f);
-            brt.offsetMin = new Vector2(Pad, Pad - 2f);
-            brt.offsetMax = new Vector2(-Pad, Pad - 2f + BarHeight);
-            var track = NewImage("track", brt, new Color(0f, 0f, 0f, 0.6f));
-            Stretch(track.rectTransform, 0f, 0f, 0f, 0f);
-            w._barFillImage = NewImage("fill", brt, BarFill);
-            w._barFill = w._barFillImage.rectTransform;
-            w._barFill.anchorMin = new Vector2(0f, 0f);
-            w._barFill.anchorMax = new Vector2(0f, 1f);
-            w._barFill.pivot = new Vector2(0f, 0.5f);
-            w._barFill.offsetMin = Vector2.zero;
-            w._barFill.offsetMax = Vector2.zero;
+            w._text.color = Normal;
+            Stretch(w._text.rectTransform);
 
             w._lastChange = Time.time;
+            w.ApplySize(WeightDisplay.CustomWidth.Value);
             w.Place();
         }
 
@@ -211,7 +199,7 @@ namespace KroolWorldUI.Features
             catch (System.Exception e)
             {
                 _failed = true;
-                Plugin.Log.LogError($"Weight readout disabled for this session after an error: {e}");
+                Plugin.Log.LogError($"Weight bar disabled for this session after an error: {e}");
                 Destroy(gameObject);
             }
         }
@@ -256,84 +244,91 @@ namespace KroolWorldUI.Features
             if (InventoryGui.IsVisible() || Minimap.IsOpen() || Menu.IsVisible())
                 wanted = false; // the inventory shows weight itself; maps and menus need the space
 
-            float target = wanted ? 1f : 0f;
-            _group.alpha = Mathf.MoveTowards(_group.alpha, target, Time.deltaTime * 4f);
+            _group.alpha = Mathf.MoveTowards(_group.alpha, wanted ? 1f : 0f, Time.deltaTime * 4f);
             if (_group.alpha <= 0f && !wanted)
                 return;
 
             // Same flash as the inventory screen when over capacity.
             bool flashRed = over && Mathf.Sin(Time.time * 10f) > 0f;
             Color numColor = flashRed ? Over : near ? Warn : Normal;
-            string label = $"<color=#{ColorUtility.ToHtmlStringRGB(numColor)}>{_weight}</color>/{_max}";
+            string label = $"<color=#{ColorUtility.ToHtmlStringRGB(numColor)}>{_weight}</color> / {_max}";
             if (label != _shownText)
             {
                 // Rebuilding a TMP mesh is not free; only when the text actually changes.
                 _shownText = label;
                 _text.text = label;
-                _text.color = Normal;
             }
 
-            _barRoot.SetActive(WeightDisplay.ShowBar.Value);
-            if (WeightDisplay.ShowBar.Value)
-            {
-                _barFill.anchorMax = new Vector2(Mathf.Clamp01(_ratio), 1f);
-                _barFillImage.color = over ? Over : near ? Warn : BarFill;
-            }
+            _fill.anchorMax = new Vector2(Mathf.Clamp01(_ratio), 1f);
+            _fillImage.color = over ? FillOver : near ? FillWarn : Fill;
 
             Place();
         }
 
-        /// <summary>Configured anchor, then pushed down below the hotbar (or anything else in the way).</summary>
+        private void ApplySize(float width)
+        {
+            float h = WeightDisplay.Height.Value;
+            _rect.sizeDelta = new Vector2(Mathf.Max(MinWidth, width), h);
+            _text.fontSize = Mathf.Round(h * 0.78f);
+            if (_icon != null)
+                _icon.sizeDelta = new Vector2(h - 4f, h - 4f);
+        }
+
+        /// <summary>
+        /// Lines the bar up with the hotbar: same left edge and width, just above it. Falls back to
+        /// just below when there is no room above (large UI scale), or to the custom anchor.
+        /// </summary>
         private void Place()
         {
-            var anchor = new Vector2(WeightDisplay.AnchorX.Value, WeightDisplay.AnchorY.Value);
-            _rect.anchorMin = anchor;
-            _rect.anchorMax = anchor;
-            _rect.anchoredPosition = Vector2.zero;
-            float s = WeightDisplay.Scale.Value;
-            _rect.localScale = new Vector3(s, s, 1f);
-
-            if (Time.time >= _nextBlockerScan)
+            if (Time.time >= _nextHotbarScan)
             {
-                _nextBlockerScan = Time.time + 1f;
-                ScanBlockers();
+                _nextHotbarScan = Time.time + 1f;
+                _hotbar = FindMainHotbar();
             }
 
-            _rect.GetWorldCorners(_corners);
-            float xMin = _corners[0].x, xMax = _corners[2].x;
-            float yTop = _corners[1].y, height = _corners[1].y - _corners[0].y;
-            float margin = BlockerMargin * _rect.lossyScale.y / Mathf.Max(0.0001f, s);
-            float start = yTop;
-
-            for (int pass = 0; pass < 3; pass++)
+            var mode = WeightDisplay.Position.Value;
+            if (mode == WeightDisplay.Placement.Custom || _hotbar == null)
             {
-                bool moved = false;
-                foreach (var b in _blockers)
-                {
-                    bool overlapX = b.xMin < xMax && b.xMax > xMin;
-                    bool overlapY = b.yMin < yTop && b.yMax > yTop - height;
-                    if (overlapX && overlapY)
-                    {
-                        yTop = b.yMin - margin;
-                        moved = true;
-                    }
-                }
-                if (!moved)
-                    break;
+                var anchor = new Vector2(WeightDisplay.AnchorX.Value, WeightDisplay.AnchorY.Value);
+                _rect.anchorMin = anchor;
+                _rect.anchorMax = anchor;
+                _rect.pivot = new Vector2(0f, 1f);
+                _rect.anchoredPosition = Vector2.zero;
+                ApplySize(WeightDisplay.CustomWidth.Value);
+                return;
             }
 
-            if (yTop != start)
+            var hot = _hotbar.Value;
+            var parent = (RectTransform)_rect.parent;
+            float toLocal = 1f / Mathf.Max(0.0001f, parent.lossyScale.x);
+            ApplySize(hot.width * toLocal);
+
+            parent.GetWorldCorners(_corners);
+            float screenTop = _corners[1].y;
+            float gap = Gap / toLocal;
+            float height = WeightDisplay.Height.Value / toLocal;
+            bool roomAbove = hot.yMax + gap + height <= screenTop - 1f;
+
+            _rect.anchorMin = _rect.anchorMax = new Vector2(0.5f, 0.5f);
+            if (mode == WeightDisplay.Placement.AboveHotbar && roomAbove)
             {
-                var pos = _rect.position;
-                _rect.position = new Vector3(pos.x, pos.y + (yTop - start), pos.z);
+                _rect.pivot = new Vector2(0f, 0f);
+                _rect.position = new Vector3(hot.xMin, hot.yMax + gap, _rect.position.z);
+            }
+            else
+            {
+                _rect.pivot = new Vector2(0f, 1f);
+                _rect.position = new Vector3(hot.xMin, hot.yMin - gap, _rect.position.z);
             }
         }
 
-        // Hotbars (vanilla, plus any mod that reuses HotkeyBar) measured by their visible graphics,
-        // since the HotkeyBar object itself can be zero-sized.
-        private void ScanBlockers()
+        /// <summary>
+        /// World bounds of the main hotbar: the highest on screen of all HotkeyBars (mods such as
+        /// ExtraSlots add more), measured by visible graphics since the bar object can be zero-sized.
+        /// </summary>
+        private Rect? FindMainHotbar()
         {
-            _blockers.Clear();
+            Rect? best = null;
             foreach (var bar in FindObjectsByType<HotkeyBar>(FindObjectsSortMode.None))
             {
                 if (!bar.isActiveAndEnabled)
@@ -351,9 +346,13 @@ namespace KroolWorldUI.Features
                     y1 = Mathf.Max(y1, _corners[2].y);
                     any = true;
                 }
-                if (any)
-                    _blockers.Add(Rect.MinMaxRect(x0, y0, x1, y1));
+                if (!any)
+                    continue;
+                var r = Rect.MinMaxRect(x0, y0, x1, y1);
+                if (best == null || r.yMax > best.Value.yMax)
+                    best = r;
             }
+            return best;
         }
 
         private static Sprite FindWeightIcon(Transform weightText)
@@ -380,12 +379,12 @@ namespace KroolWorldUI.Features
             return img;
         }
 
-        private static void Stretch(RectTransform rt, float l, float b, float r, float t)
+        private static void Stretch(RectTransform rt)
         {
             rt.anchorMin = Vector2.zero;
             rt.anchorMax = Vector2.one;
-            rt.offsetMin = new Vector2(l, b);
-            rt.offsetMax = new Vector2(-r, -t);
+            rt.offsetMin = Vector2.zero;
+            rt.offsetMax = Vector2.zero;
         }
     }
 }
