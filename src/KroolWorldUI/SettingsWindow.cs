@@ -100,7 +100,7 @@ namespace KroolWorldUI
 
             float scale = Screen.height / RefHeight;
             GUI.matrix = Matrix4x4.Scale(new Vector3(scale, scale, 1f));
-            _window = GUI.Window(WindowId, _window, DrawWindow, "Krool World UI", _styles.Window);
+            _window = GUI.Window(WindowId, _window, DrawWindow, $"{Plugin.Name} v{Plugin.Version}", _styles.Window);
 
             if (_capturingKey != null && Event.current.type == EventType.KeyDown && Event.current.keyCode != KeyCode.None)
             {
