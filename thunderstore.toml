@@ -8,7 +8,7 @@ schemaVersion = "0.0.1"
 [package]
 namespace = "Krool"
 name = "Krool_World_UI"
-versionNumber = "0.1.0"
+versionNumber = "0.1.1"
 description = "Client-side HUD additions, each with its own toggle in an F7 settings window."
 websiteUrl = "https://github.com/Krool/KroolWorldUI"
 containsNsfwContent = false

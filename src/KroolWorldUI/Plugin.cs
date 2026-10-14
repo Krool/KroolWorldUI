@@ -10,7 +10,7 @@ namespace KroolWorldUI
     {
         public const string Guid = "krool.kroolworldui";
         public const string Name = "Krool World UI";
-        public const string Version = "0.1.0";
+        public const string Version = "0.1.1";
 
         internal static Plugin Instance;
         internal static BepInEx.Logging.ManualLogSource Log;

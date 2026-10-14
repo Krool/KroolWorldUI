@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1
+
+- Mod page shows only player information; build and release notes moved to GitHub.
+
 ## 0.1.0
 
 - Skill XP bars: a Skills-tab style bar appears while you earn XP in a skill, shows the XP gained since it appeared in a lighter shade, and fades out after 3 seconds without XP. Up to 5 stack on the right side of the screen.
