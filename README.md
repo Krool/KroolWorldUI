@@ -21,6 +21,7 @@ When you earn XP in a skill, a bar for that skill appears on the right side of t
 Press **F7** in game to open the Krool World UI settings window. Every option is there: on/off buttons for features, sliders for sizes and timings, and a Reset button next to anything changed from its default. **Preview XP bars** shows sample bars for your top skills so you can place and size them live. Esc or F7 closes it; while it is open your character ignores input.
 
 No other mod is needed for this. The same settings are also in `BepInEx/config/krool.kroolworldui.cfg` (r2modman: Config editor).
+
 | Setting | Default | What it does |
 |---|---|---|
 | SettingsKey | F7 | Key that opens the settings window |
