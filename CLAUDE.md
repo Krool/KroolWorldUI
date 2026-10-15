@@ -35,8 +35,14 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
 
 - `src/KroolWorldUI/Plugin.cs` - entry point; each feature exposes `BindConfig` and Harmony patches.
 - `src/KroolWorldUI/SettingsWindow.cs` - built-in F7 settings window (IMGUI). It renders every
-  config entry generically, so a new feature only needs `config.Bind` with an `AcceptableValueRange`
-  for numbers to get a slider. No dependency on ConfigurationManager (Azumatt's is deprecated).
+  config entry generically in collapsible sections, so a new feature only needs `config.Bind` (with
+  an `AcceptableValueRange` for a slider) plus a line in `Plugin.BindAll`. A section's `Enabled`
+  bool becomes its header On/Off; the description is the hover tooltip, so write it for players and
+  use the window's spaced names ("Near Limit Percent"). Tag window-only state with
+  `ConfigText.Hidden.Tag`. No dependency on ConfigurationManager (Azumatt's is deprecated).
+- `tools/SettingsDoc` - rewrites the README settings tables (between the `settings:begin/end`
+  markers) from `Plugin.BindAll`; `build.ps1` runs it via `scripts/settings-doc.ps1`, and
+  `release.ps1` commits README.md. Never hand-edit those tables.
 - `src/KroolWorldUI/Features/` - one file per feature.
 - `thunderstore/` - manifest.json and icon.png (256x256). Package = these + DLL + README + CHANGELOG.
 
@@ -50,8 +56,9 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
 - Game DLLs are referenced from the Steam install (`-p:ValheimDir=...` to override); BepInEx and
   HarmonyX come from nuget.bepinex.dev.
 - HUD placement: the owner's mods (ExtraSlots panels, EpicLoot ability bar) all live bottom-left.
-  Keep new HUD elements off that corner. Taken so far: skill XP bars (default centered under
-  the stamina/adrenaline bars, stacking down), weight bar (child of Hud.m_healthPanel, left of the
+  Keep new HUD elements off that corner. Taken so far: skill XP tiles (default bottom right,
+  growing left, just above the highest KeyHints graphic seen this session; key hints are one row,
+  about 20-80 px up), weight bar (child of Hud.m_healthPanel, left of the
   food column: icon beside the fork, a clone of the health bar rising above it), the food
   max-health segment (child of Hud.m_healthBarRoot, past its far end). Below the hotbar is the
   raven tutorial text area: the owner saw overlap there, avoid it. Food reminder toast:

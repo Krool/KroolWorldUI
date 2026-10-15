@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Writes the README settings tables from the plugin's own config.Bind calls.
+       Run through scripts\settings-doc.ps1 (build.ps1 does it on every build). -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <RestoreAdditionalProjectSources>https://nuget.bepinex.dev/v3/index.json</RestoreAdditionalProjectSources>
+    <MSBuildWarningsAsMessages>MSB3277;NU1701</MSBuildWarningsAsMessages>
+    <ValheimDir Condition="'$(ValheimDir)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Valheim</ValheimDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BepInEx.BaseLib" Version="5.4.20" />
+    <ProjectReference Include="..\..\src\KroolWorldUI\KroolWorldUI.csproj" />
+    <Reference Include="UnityEngine" HintPath="$(ValheimDir)\valheim_Data\Managed\UnityEngine.dll" Private="false" />
+    <Reference Include="UnityEngine.CoreModule" HintPath="$(ValheimDir)\valheim_Data\Managed\UnityEngine.CoreModule.dll" Private="false" />
+  </ItemGroup>
+
+</Project>

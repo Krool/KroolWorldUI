@@ -9,18 +9,22 @@ using UnityEngine.UI;
 namespace KroolWorldUI.Features
 {
     /// <summary>
-    /// Shows a slim skill bar on the HUD whenever the local player gains XP in a skill: progress to
-    /// the next level in two shades, darker for where it stood when the bar appeared, lighter for
-    /// XP gained since. Each bar fades after a few seconds without XP. Optionally floats a small
+    /// Shows a skill on the HUD whenever the local player gains XP in it: a tile (icon over a bar)
+    /// or a row, with progress to the next level in two shades, darker for where it stood when it
+    /// appeared, lighter for XP gained since. Each fades after a few seconds without XP. Optionally floats a small
     /// colored "+x% Skill" over the player, like the damage numbers. Read-only: never writes skill data.
     /// </summary>
     internal static class SkillXpBars
     {
+        internal enum BarStyle { Tiles, Rows }
         internal enum LabelStyle { NameAndLevel, IconOnly }
-        internal enum Placement { BelowStamina, RightSide, Custom }
+        internal enum Placement { BottomRight, BelowStamina, RightSide, Custom }
         internal enum FloatMode { Off, EveryGain, LevelUpOnly }
 
         internal static ConfigEntry<bool> Enabled;
+        internal static ConfigEntry<BarStyle> Style;
+        internal static ConfigEntry<float> TileSize;
+        internal static ConfigEntry<bool> TileLevel;
         internal static ConfigEntry<LabelStyle> Labels;
         internal static ConfigEntry<bool> ShowGainText;
         internal static ConfigEntry<Placement> Position;
@@ -42,41 +46,50 @@ namespace KroolWorldUI.Features
         internal static void BindConfig(ConfigFile config)
         {
             Enabled = config.Bind(Section, "Enabled", true,
-                "Show a skill bar on the HUD while you gain XP in that skill.");
+                "Show a skill on the HUD while you gain XP in it.");
+            Style = config.Bind(Section, "Style", BarStyle.Tiles,
+                "Tiles: the skill icon with its XP bar underneath, side by side. " +
+                "Rows: a wide bar with the icon on the left, stacked.");
+            // "Placement", not "Position": 0.3.0-0.3.2 saved a Position that would hide the new default.
+            Position = config.Bind(Section, "Placement", Placement.BottomRight,
+                "Bottom Right: above the key hints, growing left. Below Stamina: centered under the stamina bar. " +
+                "Right Side: right edge of the screen, below the minimap. Custom: placed by Anchor X and Anchor Y.");
+            TileSize = config.Bind(Section, "TileSize", 64f,
+                new ConfigDescription("Tiles: width in HUD pixels. The tile is a third taller than it is wide.",
+                    new AcceptableValueRange<float>(40f, 128f)));
+            TileLevel = config.Bind(Section, "TileLevel", false,
+                "Tiles: show the skill level in the tile's corner.");
             Labels = config.Bind(Section, "Labels", LabelStyle.NameAndLevel,
-                "NameAndLevel: icon, skill name and level on the bar. IconOnly: just the icon and the bar.");
+                "Rows: Name And Level shows the skill name and level on the bar. Icon Only: just the icon and the bar.");
             ShowGainText = config.Bind(Section, "ShowGainText", true,
-                "With labels: show the XP gained since the bar appeared, as a percent of a level.");
-            Position = config.Bind(Section, "Position", Placement.BelowStamina,
-                "BelowStamina: centered under the stamina bar, stacking down. RightSide: right edge of the " +
-                "screen, below the minimap. Custom: AnchorX/AnchorY.");
+                "Rows with Name And Level: show the XP gained since the bar appeared, as a percent of a level.");
             BarWidth = config.Bind(Section, "BarWidth", 220f,
-                new ConfigDescription("Width of one bar in HUD pixels.", new AcceptableValueRange<float>(100f, 500f)));
+                new ConfigDescription("Rows: width of one bar in HUD pixels.", new AcceptableValueRange<float>(100f, 500f)));
             BarHeight = config.Bind(Section, "BarHeight", 22f,
-                new ConfigDescription("Height of one bar in HUD pixels.", new AcceptableValueRange<float>(12f, 48f)));
+                new ConfigDescription("Rows: height of one bar in HUD pixels.", new AcceptableValueRange<float>(12f, 48f)));
             BarColor = config.Bind(Section, "BarColor", new Color(0.86f, 0.66f, 0.28f, 1f),
-                "Bar color (hex RRGGBBAA). Progress you had is a darker shade, new XP a lighter one.");
+                "Bar color. Progress you had is a darker shade, new XP a lighter one.");
             HoldSeconds = config.Bind(Section, "HoldSeconds", 3f,
                 new ConfigDescription("Seconds a bar stays fully visible after the last XP gain.",
                     new AcceptableValueRange<float>(0.5f, 30f)));
             FadeSeconds = config.Bind(Section, "FadeSeconds", 0.6f,
                 new ConfigDescription("Seconds the fade-out takes.", new AcceptableValueRange<float>(0f, 5f)));
             MaxBars = config.Bind(Section, "MaxBars", 4,
-                new ConfigDescription("Most bars shown at once (fewer if they would not fit on screen). " +
-                                      "The stalest bar is reused past this.",
+                new ConfigDescription("Most skills shown at once (fewer if they would not fit on screen). " +
+                                      "The stalest one is reused past this.",
                     new AcceptableValueRange<int>(1, 10)));
             OffsetX = config.Bind(Section, "OffsetX", 0f,
                 new ConfigDescription("Nudge left (-) or right (+), in HUD pixels.", new AcceptableValueRange<float>(-400f, 400f)));
             OffsetY = config.Bind(Section, "OffsetY", 0f,
                 new ConfigDescription("Nudge down (-) or up (+), in HUD pixels.", new AcceptableValueRange<float>(-400f, 400f)));
             AnchorX = config.Bind(Section, "AnchorX", 0.5f,
-                new ConfigDescription("Custom position: horizontal center of the stack (0 = left of screen, 1 = right).",
+                new ConfigDescription("Custom placement: horizontal center (0 = left of screen, 1 = right).",
                     new AcceptableValueRange<float>(0f, 1f)));
             AnchorY = config.Bind(Section, "AnchorY", 0.3f,
-                new ConfigDescription("Custom position: top edge of the stack (0 = bottom of screen, 1 = top).",
+                new ConfigDescription("Custom placement: top edge (0 = bottom of screen, 1 = top).",
                     new AcceptableValueRange<float>(0f, 1f)));
             FloatingText = config.Bind(Section, "FloatingText", FloatMode.EveryGain,
-                "Float the XP gain over your character like a damage number. LevelUpOnly: just the new level.");
+                "Float each XP gain over your character like a damage number, seen only by you. Level Up Only: just new levels.");
             FloatingColor = config.Bind(Section, "FloatingTextColor", new Color(0.45f, 0.72f, 1f, 1f),
                 "Color of the floating XP text.");
         }
@@ -330,14 +343,18 @@ namespace KroolWorldUI.Features
         }
     }
 
-    /// <summary>Lives under the HUD root, owns the visible bars, handles fade and layout.</summary>
+    /// <summary>Lives under the HUD root, owns the visible skills, handles fade and layout.</summary>
     internal class SkillXpBarStack : MonoBehaviour
     {
         private const string ObjectName = "KroolWorldUI_SkillXpBars";
         private const float RowGap = 3f;
+        private const float TileGap = 6f;
         private const float BlockerMargin = 12f;
         private const float StaminaMargin = 6f;
         private const float MaxBelowStamina = 40f; // vanilla adrenaline bar ends 15 px below the stamina panel
+        private const float EdgeMargin = 20f;      // matches the key hints' own right margin
+        private const float HintsMargin = 10f;
+        private const float MinHintsTop = 80f;     // vanilla key hints: one row, 20 to about 80 px up
 
         private static readonly Color Parchment = new Color(0.92f, 0.87f, 0.78f, 1f);
 
@@ -361,8 +378,10 @@ namespace KroolWorldUI.Features
             public TMP_Text Name;
             public TMP_Text Level;
             public float LastGain;
+            public Skills Skills;      // last update, to redraw the text when the layout changes
+            public Skills.Skill Skill;
 
-            // Session: reset each time the bar appears.
+            // Session: reset each time the skill appears.
             public float StartLevel;
             public float StartPercent;
             public bool SessionStarted;
@@ -371,7 +390,9 @@ namespace KroolWorldUI.Features
 
             // Layout these were built for; rebuilt when settings change.
             public float Width, Height;
+            public SkillXpBars.BarStyle Style;
             public SkillXpBars.LabelStyle Labels;
+            public bool TileLevel;
         }
 
         private readonly List<Bar> _bars = new List<Bar>();
@@ -379,9 +400,20 @@ namespace KroolWorldUI.Features
         private CanvasGroup _group;
         private TMP_Text _textTemplate;
         private int _fitBars = int.MaxValue;
+        private float _hintsTop = MinHintsTop;
+        private float _nextHintsScan;
         private readonly Vector3[] _corners = new Vector3[4];
 
-        private float Pitch => SkillXpBars.BarHeight.Value + RowGap;
+        private static bool Tiles => SkillXpBars.Style.Value == SkillXpBars.BarStyle.Tiles;
+
+        /// <summary>One tile (3 wide by 4 tall) or one row, in HUD pixels.</summary>
+        private static Vector2 ItemSize => Tiles
+            ? new Vector2(SkillXpBars.TileSize.Value, Mathf.Round(SkillXpBars.TileSize.Value * 4f / 3f))
+            : new Vector2(SkillXpBars.BarWidth.Value, SkillXpBars.BarHeight.Value);
+
+        /// <summary>Distance between neighbors: sideways for tiles, down (or up) for rows.</summary>
+        private static float Pitch => Tiles ? ItemSize.x + TileGap : ItemSize.y + RowGap;
+
         private int Capacity => Mathf.Max(1, Mathf.Min(SkillXpBars.MaxBars.Value, _fitBars));
 
         internal static SkillXpBarStack GetOrCreate()
@@ -410,7 +442,24 @@ namespace KroolWorldUI.Features
                 _instance = null;
         }
 
-        private float TargetY(int index) => -index * Pitch;
+        /// <summary>
+        /// Where item <paramref name="index"/> of <paramref name="count"/> sits, relative to the
+        /// stack's pivot. Tiles line up sideways (leftward from a right pivot, centered otherwise);
+        /// rows stack away from the pivot's edge (down from the top, up from the bottom).
+        /// </summary>
+        private Vector2 TargetPos(int index, int count)
+        {
+            Vector2 pivot = _rect.pivot;
+            float pitch = Pitch;
+            if (Tiles)
+            {
+                float x = pivot.x >= 0.99f ? -index * pitch
+                    : pivot.x <= 0.01f ? index * pitch
+                    : (index - (count - 1) * 0.5f) * pitch;
+                return new Vector2(x, 0f);
+            }
+            return new Vector2(0f, pivot.y <= 0.01f ? index * pitch : -index * pitch);
+        }
 
         internal void OnXpGained(Skills skills, Skills.Skill skill, SkillXpBars.Snapshot before)
         {
@@ -429,7 +478,7 @@ namespace KroolWorldUI.Features
         }
 
         /// <summary>
-        /// Settings-window preview: keeps a bar up for each of the player's top skills, with a
+        /// Settings-window preview: keeps one up for each of the player's top skills, with a
         /// made-up gain, so position and size can be tuned live.
         /// </summary>
         internal void Preview(Skills skills)
@@ -458,7 +507,7 @@ namespace KroolWorldUI.Features
             Place(); // refresh how many fit before deciding to reuse
             if (_bars.Count >= Capacity)
             {
-                // Reuse the bar that has gone longest without XP, as a fresh session.
+                // Reuse the one that has gone longest without XP, as a fresh session.
                 bar = _bars[0];
                 foreach (var b in _bars)
                     if (b.LastGain < bar.LastGain)
@@ -470,8 +519,8 @@ namespace KroolWorldUI.Features
             bar = CreateBar(type);
             _bars.Add(bar);
             LayoutBar(bar);
-            Place(); // anchors the new row now, so its first frame is not drawn mid-screen
-            bar.Rect.anchoredPosition = new Vector2(0f, TargetY(_bars.Count - 1));
+            Place(); // anchors the new one now, so its first frame is not drawn mid-screen
+            bar.Rect.anchoredPosition = TargetPos(_bars.Count - 1, _bars.Count);
             return bar;
         }
 
@@ -487,6 +536,8 @@ namespace KroolWorldUI.Features
 
         private void Touch(Bar bar, Skills skills, Skills.Skill skill)
         {
+            bar.Skills = skills;
+            bar.Skill = skill;
             UpdateContents(bar, skills, skill);
             bar.LastGain = Time.time;
             bar.Group.alpha = 1f;
@@ -536,80 +587,124 @@ namespace KroolWorldUI.Features
                 bar.Group.alpha = alpha;
             }
 
+            Place();
             float t = 1f - Mathf.Exp(-12f * Time.deltaTime);
             for (int i = 0; i < _bars.Count; i++)
             {
                 var bar = _bars[i];
                 LayoutBar(bar);
-                // Slide remaining bars up into gaps left by faded ones.
-                var pos = bar.Rect.anchoredPosition;
-                pos.y = Mathf.Lerp(pos.y, TargetY(i), t);
-                pos.x = 0f;
-                bar.Rect.anchoredPosition = pos;
+                // Slide the rest into gaps left by faded ones.
+                bar.Rect.anchoredPosition = Vector2.Lerp(bar.Rect.anchoredPosition, TargetPos(i, _bars.Count), t);
 
                 bar.ShownBase = Mathf.Lerp(bar.ShownBase, bar.TargetBase, t);
                 bar.ShownGain = Mathf.Lerp(bar.ShownGain, bar.TargetGain, t);
                 ApplyFill(bar);
             }
-
-            Place();
         }
 
         // ---------- placement ----------
 
-        /// <summary>
-        /// Puts the stack where Position says, and works out how many rows fit below that point.
-        /// </summary>
+        /// <summary>Puts the stack where Placement says, and works out how many fit on screen.</summary>
         private void Place()
         {
             var hud = Hud.instance;
-            float width = SkillXpBars.BarWidth.Value;
-            float pitch = Pitch;
             var root = (RectTransform)_rect.parent;
             float unit = Mathf.Max(0.0001f, root.lossyScale.y); // world units per HUD pixel
-            var offset = new Vector3(SkillXpBars.OffsetX.Value, SkillXpBars.OffsetY.Value, 0f) * unit;
-            _rect.sizeDelta = new Vector2(width, pitch * SkillXpBars.MaxBars.Value);
+            Vector2 item = ItemSize;
+            float pitch = Pitch;
+            int max = SkillXpBars.MaxBars.Value;
+            Vector2 size = Tiles ? new Vector2(pitch * max - TileGap, item.y) : new Vector2(item.x, pitch * max - RowGap);
+            _rect.sizeDelta = size;
+            var offset = new Vector2(SkillXpBars.OffsetX.Value, SkillXpBars.OffsetY.Value);
 
             var mode = SkillXpBars.Position.Value;
-            if (mode == SkillXpBars.Placement.BelowStamina && hud != null && hud.m_staminaBar2Root != null)
+            if (mode == SkillXpBars.Placement.BelowStamina && (hud == null || hud.m_staminaBar2Root == null))
+                mode = SkillXpBars.Placement.BottomRight;
+
+            switch (mode)
             {
-                _rect.anchorMin = _rect.anchorMax = new Vector2(0.5f, 0.5f);
-                _rect.pivot = new Vector2(0.5f, 1f);
-                var stamina = hud.m_staminaBar2Root;
-                float bottom = LowestBottom(stamina);
-                if (hud.m_adrenalineBarRoot != null)
-                    bottom = Mathf.Min(bottom, LowestBottom(hud.m_adrenalineBarRoot));
-                float top = bottom - StaminaMargin;
-                _rect.position = new Vector3(stamina.position.x, stamina.position.y + top * unit, _rect.position.z) + offset;
-            }
-            else if (mode == SkillXpBars.Placement.Custom)
-            {
-                var anchor = new Vector2(SkillXpBars.AnchorX.Value, SkillXpBars.AnchorY.Value);
-                _rect.anchorMin = _rect.anchorMax = anchor;
-                _rect.pivot = new Vector2(0.5f, 1f);
-                _rect.anchoredPosition = new Vector2(SkillXpBars.OffsetX.Value, SkillXpBars.OffsetY.Value);
-            }
-            else
-            {
-                var anchor = new Vector2(0.985f, 0.6f);
-                _rect.anchorMin = _rect.anchorMax = anchor;
-                _rect.pivot = new Vector2(1f, 1f);
-                _rect.anchoredPosition = new Vector2(SkillXpBars.OffsetX.Value, SkillXpBars.OffsetY.Value);
-                AvoidBlockers(width * unit, pitch * SkillXpBars.MaxBars.Value * unit, unit);
+                case SkillXpBars.Placement.BelowStamina:
+                {
+                    _rect.anchorMin = _rect.anchorMax = new Vector2(0.5f, 0.5f);
+                    _rect.pivot = new Vector2(0.5f, 1f);
+                    var stamina = hud.m_staminaBar2Root;
+                    float bottom = LowestBottom(stamina);
+                    if (hud.m_adrenalineBarRoot != null)
+                        bottom = Mathf.Min(bottom, LowestBottom(hud.m_adrenalineBarRoot));
+                    float top = bottom - StaminaMargin;
+                    _rect.position = new Vector3(stamina.position.x + offset.x * unit,
+                        stamina.position.y + (top + offset.y) * unit, _rect.position.z);
+                    break;
+                }
+                case SkillXpBars.Placement.Custom:
+                    _rect.anchorMin = _rect.anchorMax = new Vector2(SkillXpBars.AnchorX.Value, SkillXpBars.AnchorY.Value);
+                    _rect.pivot = new Vector2(0.5f, 1f);
+                    _rect.anchoredPosition = offset;
+                    break;
+                case SkillXpBars.Placement.RightSide:
+                    _rect.anchorMin = _rect.anchorMax = new Vector2(0.985f, 0.6f);
+                    _rect.pivot = new Vector2(1f, 1f);
+                    _rect.anchoredPosition = offset;
+                    AvoidBlockers(size.x * unit, size.y * unit, unit);
+                    break;
+                default: // BottomRight
+                    _rect.anchorMin = _rect.anchorMax = new Vector2(1f, 0f);
+                    _rect.pivot = new Vector2(1f, 0f);
+                    _rect.anchoredPosition = new Vector2(-EdgeMargin, HintsTop(root, unit) + HintsMargin) + offset;
+                    break;
             }
 
-            // Rows hang from the stack's top, aligned with its pivot.
+            // Items hang from the stack's pivot.
             foreach (var bar in _bars)
             {
-                bar.Rect.anchorMin = bar.Rect.anchorMax = new Vector2(_rect.pivot.x, 1f);
-                bar.Rect.pivot = new Vector2(_rect.pivot.x, 1f);
+                bar.Rect.anchorMin = bar.Rect.anchorMax = _rect.pivot;
+                bar.Rect.pivot = _rect.pivot;
             }
 
-            // How many rows fit between the stack's top and the bottom of the screen.
+            // How many fit on screen from where the stack starts.
             root.GetWorldCorners(_corners);
-            float screenBottom = _corners[0].y + 4f * unit;
-            float room = (_rect.position.y - screenBottom) / (pitch * unit);
-            _fitBars = Mathf.Max(1, Mathf.FloorToInt(room + RowGap / pitch));
+            float screenLeft = _corners[0].x + 4f * unit, screenBottom = _corners[0].y + 4f * unit;
+            float screenTop = _corners[1].y - 4f * unit;
+            Vector3 p = _rect.position;
+            float room;
+            if (Tiles)
+                room = _rect.pivot.x >= 0.99f ? (p.x - screenLeft) / unit
+                    : (p.x - screenLeft) * 2f / unit;
+            else
+                room = _rect.pivot.y <= 0.01f ? (screenTop - p.y) / unit : (p.y - screenBottom) / unit;
+            float gap = Tiles ? TileGap : RowGap;
+            _fitBars = Mathf.Max(1, Mathf.FloorToInt((room + gap) / pitch));
+        }
+
+        /// <summary>
+        /// Top of the game's key hints (attack, block, build controls...) in HUD pixels above the
+        /// bottom of the screen. Only ever rises during a session, so the skills do not hop when
+        /// you equip or unequip something.
+        /// </summary>
+        private float HintsTop(RectTransform root, float unit)
+        {
+            if (Time.unscaledTime < _nextHintsScan)
+                return _hintsTop;
+            _nextHintsScan = Time.unscaledTime + 0.25f;
+            var hints = KeyHints.instance;
+            if (hints == null)
+                return _hintsTop;
+            root.GetWorldCorners(_corners);
+            float rootBottom = _corners[0].y, rootRight = _corners[2].x;
+            float rootWidth = (_corners[2].x - _corners[0].x) / unit;
+            foreach (var g in hints.GetComponentsInChildren<Graphic>(false))
+            {
+                if (!g.enabled || g.canvasRenderer.GetAlpha() <= 0.01f)
+                    continue;
+                g.rectTransform.GetWorldCorners(_corners);
+                // Only the right half of the screen; gamepad hints can sit near the center.
+                if ((rootRight - _corners[2].x) / unit > rootWidth * 0.5f)
+                    continue;
+                float top = (_corners[1].y - rootBottom) / unit;
+                if (top > _hintsTop && top < 400f)
+                    _hintsTop = top;
+            }
+            return _hintsTop;
         }
 
         /// <summary>
@@ -674,11 +769,11 @@ namespace KroolWorldUI.Features
             }
         }
 
-        // ---------- one bar ----------
+        // ---------- one skill ----------
 
         /// <summary>
-        /// A row: dark panel, skill icon on the left, and a bar filling the rest, with the skill
-        /// name on the left of the bar and the level on the right (unless IconOnly).
+        /// One skill: dark panel, skill icon, and a two-shade XP bar. LayoutBar arranges the parts
+        /// as a tile (icon on top, bar under it) or a row (icon left, bar right with text on it).
         /// </summary>
         private Bar CreateBar(Skills.SkillType type)
         {
@@ -723,11 +818,13 @@ namespace KroolWorldUI.Features
             };
         }
 
-        /// <summary>Sizes a row's parts from the current settings; cheap when nothing changed.</summary>
+        /// <summary>Sizes a skill's parts from the current settings; cheap when nothing changed.</summary>
         private void LayoutBar(Bar bar)
         {
-            float w = SkillXpBars.BarWidth.Value, h = SkillXpBars.BarHeight.Value;
+            Vector2 size = ItemSize;
+            var style = SkillXpBars.Style.Value;
             var labels = SkillXpBars.Labels.Value;
+            bool tileLevel = SkillXpBars.TileLevel.Value;
 
             // Colors follow the setting live (cheap compare).
             Color c = SkillXpBars.BarColor.Value;
@@ -738,13 +835,64 @@ namespace KroolWorldUI.Features
             if (bar.BaseImage.color != dark) bar.BaseImage.color = dark;
             if (bar.GainImage.color != bright) bar.GainImage.color = bright;
 
-            if (bar.Width == w && bar.Height == h && bar.Labels == labels)
+            if (bar.Width == size.x && bar.Height == size.y && bar.Style == style && bar.Labels == labels
+                && bar.TileLevel == tileLevel)
                 return;
-            bar.Width = w;
-            bar.Height = h;
+            bar.Width = size.x;
+            bar.Height = size.y;
+            bar.Style = style;
             bar.Labels = labels;
+            bar.TileLevel = tileLevel;
 
-            bar.Rect.sizeDelta = new Vector2(w, h);
+            bar.Rect.sizeDelta = size;
+            foreach (var fill in new[] { bar.Base, bar.Gain })
+            {
+                fill.pivot = new Vector2(0f, 0.5f);
+                fill.offsetMin = Vector2.zero;
+                fill.offsetMax = Vector2.zero;
+            }
+            if (style == SkillXpBars.BarStyle.Tiles)
+                LayoutTile(bar, size.x, size.y, tileLevel);
+            else
+                LayoutRow(bar, size.x, size.y, labels);
+            if (bar.Skill != null && bar.Skills != null)
+                UpdateContents(bar, bar.Skills, bar.Skill); // the level text differs between styles
+        }
+
+        /// <summary>Tile: the icon fills the top square, the bar sits under it at the icon's width.</summary>
+        private static void LayoutTile(Bar bar, float w, float h, bool showLevel)
+        {
+            float pad = Mathf.Max(3f, Mathf.Round(w * 0.08f));
+            float iconSize = w - pad * 2f;
+
+            var irt = bar.Icon.rectTransform;
+            irt.anchorMin = irt.anchorMax = new Vector2(0.5f, 1f);
+            irt.pivot = new Vector2(0.5f, 1f);
+            irt.sizeDelta = new Vector2(iconSize, iconSize);
+            irt.anchoredPosition = new Vector2(0f, -pad);
+
+            var trt = bar.Track;
+            trt.anchorMin = new Vector2(0f, 0f);
+            trt.anchorMax = new Vector2(1f, 0f);
+            trt.pivot = new Vector2(0.5f, 0f);
+            float barHeight = Mathf.Max(4f, h - iconSize - pad * 3f);
+            trt.offsetMin = new Vector2(pad, pad);
+            trt.offsetMax = new Vector2(-pad, pad + barHeight);
+
+            bar.Name.gameObject.SetActive(false);
+            bar.Level.gameObject.SetActive(showLevel);
+            bar.Level.alignment = TextAlignmentOptions.TopRight;
+            bar.Level.fontSize = Mathf.Clamp(Mathf.Round(w * 0.24f), 10f, 28f);
+            var lrt = bar.Level.rectTransform;
+            lrt.anchorMin = new Vector2(0f, 1f);
+            lrt.anchorMax = new Vector2(1f, 1f);
+            lrt.offsetMin = new Vector2(pad, -(pad + iconSize));
+            lrt.offsetMax = new Vector2(-pad - 1f, -pad + 1f);
+        }
+
+        /// <summary>Row: icon on the left, the bar filling the rest, name and level on top of it.</summary>
+        private static void LayoutRow(Bar bar, float w, float h, SkillXpBars.LabelStyle labels)
+        {
             float pad = Mathf.Max(2f, Mathf.Round(h * 0.12f));
             float iconSize = h - pad * 2f + 2f;
 
@@ -758,19 +906,14 @@ namespace KroolWorldUI.Features
             var trt = bar.Track;
             trt.anchorMin = Vector2.zero;
             trt.anchorMax = Vector2.one;
+            trt.pivot = new Vector2(0.5f, 0.5f);
             trt.offsetMin = new Vector2(pad + iconSize + pad, pad);
             trt.offsetMax = new Vector2(-pad, -pad);
-
-            foreach (var fill in new[] { bar.Base, bar.Gain })
-            {
-                fill.pivot = new Vector2(0f, 0.5f);
-                fill.offsetMin = Vector2.zero;
-                fill.offsetMax = Vector2.zero;
-            }
 
             bool text = labels == SkillXpBars.LabelStyle.NameAndLevel;
             bar.Name.gameObject.SetActive(text);
             bar.Level.gameObject.SetActive(text);
+            bar.Level.alignment = TextAlignmentOptions.MidlineRight;
             float fontSize = Mathf.Clamp(Mathf.Round(h * 0.6f), 9f, 26f);
             foreach (var t in new[] { bar.Name, bar.Level })
             {
@@ -832,7 +975,7 @@ namespace KroolWorldUI.Features
             string levelText = ((int)level).ToString();
             if (bonus != 0)
                 levelText += $"<size=80%><color=#9fd27a>{(bonus > 0 ? "+" : "")}{bonus}</color></size>";
-            if (SkillXpBars.ShowGainText.Value)
+            if (SkillXpBars.ShowGainText.Value && bar.Style == SkillXpBars.BarStyle.Rows)
             {
                 float gained = levelsGained + pct - bar.StartPercent;
                 string hex = ColorUtility.ToHtmlStringRGB(bar.GainImage.color);

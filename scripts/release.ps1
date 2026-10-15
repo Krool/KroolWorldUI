@@ -89,7 +89,7 @@ function Invoke-Git {
     return $out
 }
 $tag = "v$Version"
-Invoke-Git add -- thunderstore/manifest.json thunderstore.toml src/KroolWorldUI/Plugin.cs CHANGELOG.md | Out-Null
+Invoke-Git add -- thunderstore/manifest.json thunderstore.toml src/KroolWorldUI/Plugin.cs CHANGELOG.md README.md | Out-Null
 & git -C $root diff --cached --quiet 2>$null
 if ($LASTEXITCODE -ne 0) {
     Invoke-Git commit -q -m "Release $Version" | Out-Null

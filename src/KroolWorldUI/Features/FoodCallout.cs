@@ -37,17 +37,17 @@ namespace KroolWorldUI.Features
             Enabled = config.Bind(Section, "Enabled", true,
                 "Food reminders on the HUD. The switches below pick which ones.");
             RunningOut = config.Bind(Section, "RunningOut", true,
-                "Remind when a food has less than ThresholdMinutes left.");
+                "Remind when a food has less than Threshold Minutes left.");
             ThresholdMinutes = config.Bind(Section, "ThresholdMinutes", 4f,
                 new ConfigDescription("Running-out reminder: minutes left that trigger it.",
                     new AcceptableValueRange<float>(1f, 15f)));
             CanEatAgain = config.Bind(Section, "CanEatAgain", false,
                 "Remind when a food can be eaten again (the game allows it once half its time has passed).");
             NoFood = config.Bind(Section, "NoFoodMessage", true,
-                "Keep a message up while you have no food, until you eat or press DismissKey. " +
+                "Keep a message up while you have no food, until you eat or press Dismiss Key. " +
                 "Shows on a new character after the arrival, and after respawning.");
             NoFoodWhen = config.Bind(Section, "NoFoodWhen", EmptyWhen.NoFood,
-                "NoFood: only when all food is gone. AnySlotEmpty: whenever a food slot is free.");
+                "No Food: only when all your food is gone. Any Slot Empty: whenever a food slot is free.");
             DismissKey = config.Bind(Section, "DismissKey", new KeyboardShortcut(KeyCode.Backspace),
                 "Hides the no-food message until you next eat.");
             ShowSeconds = config.Bind(Section, "ShowSeconds", 6f,

@@ -10,10 +10,10 @@ around it so the image reads at the page's width.
 
 | File | Shot |
 |---|---|
-| `hud-overview.png` | Full screen, bottom half: weight bar beside the food, red segment on the health bar, one skill bar under stamina. Eat two foods, wait a few minutes so the red segment shows. |
-| `skill-bars.png` | Two or three skill bars stacked under stamina (chop a tree, then run and jump). |
+| `hud-overview.png` | Full screen, bottom half: weight bar beside the food, red segment on the health bar, one skill tile at the bottom right. Eat two foods, wait a few minutes so the red segment shows. |
+| `skill-tiles.png` | Two or three skill tiles at the bottom right, above the key hints (equip an axe, chop a tree, then run and jump). |
 | `floating-text.png` | The blue floating `+x% Skill` text over the character. |
 | `weight-bar.png` | Bottom-left corner: weight icon, bar and numbers next to the food and health bar, near the orange threshold. |
 | `food-health.png` | Health bar with the faint red lost-health segment and the food column beside it. |
 | `food-reminder.png` | Top-center toast: one running-out row, plus the no-food row if you can catch both. |
-| `settings.png` | The F7 window with Preview on HUD on. |
+| `settings.png` | The F7 window with one section open, a tooltip showing, and Preview on HUD on. |

@@ -43,17 +43,17 @@ namespace KroolWorldUI.Features
             Enabled = config.Bind(Section, "Enabled", true,
                 "Show your carry weight on the HUD, left of the food icons.");
             Mode = config.Bind(Section, "Show", ShowMode.Always,
-                "Always; NearLimit = only at or above NearLimitPercent; WhenChanged = for a few seconds after your weight changes.");
+                "Always. Near Limit: only at or above Near Limit Percent. When Changed: for a few seconds after your weight changes.");
             NearLimitPercent = config.Bind(Section, "NearLimitPercent", 80f,
-                new ConfigDescription("Percent of max weight where the bar turns to the near-limit color (and appears, in NearLimit mode).",
+                new ConfigDescription("Percent of max weight where the bar turns to the near-limit color (and where it appears, in Near Limit mode).",
                     new AcceptableValueRange<float>(10f, 100f)));
             ChangedSeconds = config.Bind(Section, "ChangedSeconds", 3f,
-                new ConfigDescription("WhenChanged mode: seconds the bar stays after a change.",
+                new ConfigDescription("When Changed mode: seconds the bar stays after a change.",
                     new AcceptableValueRange<float>(1f, 15f)));
             Colors = config.Bind(Section, "Colors", ColorMode.Thresholds,
-                "Thresholds: fill color, near-limit color past NearLimitPercent, over color when overweight. " +
-                "Gradient: blends fill -> near-limit -> over as you fill up. Single: always the fill color.");
-            FillColor = config.Bind(Section, "FillColor", new Color(0.80f, 0.62f, 0.30f, 1f), "Bar color under the limit (hex RRGGBBAA).");
+                "Thresholds: fill color, near-limit color past Near Limit Percent, over color when overweight. " +
+                "Gradient: blends from fill to near-limit to over as you fill up. Single: always the fill color.");
+            FillColor = config.Bind(Section, "FillColor", new Color(0.80f, 0.62f, 0.30f, 1f), "Bar color under the limit.");
             NearColor = config.Bind(Section, "NearLimitColor", new Color(1f, 0.55f, 0.12f, 1f), "Bar color near the limit.");
             OverColor = config.Bind(Section, "OverColor", new Color(0.86f, 0.16f, 0.12f, 1f), "Bar color when overweight.");
             Text = config.Bind(Section, "Text", TextMode.CurrentAndMax,

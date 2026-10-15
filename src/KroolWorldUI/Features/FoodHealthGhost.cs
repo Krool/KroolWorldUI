@@ -30,7 +30,7 @@ namespace KroolWorldUI.Features
             Enabled = config.Bind(Section, "Enabled", true,
                 "Extend the health bar with a faint segment showing max health your foods have lost as they wear off.");
             GhostColor = config.Bind(Section, "Color", new Color(0.75f, 0.18f, 0.14f, 0.45f),
-                "Color of the lost-health segment (hex RRGGBBAA; the last two digits are opacity).");
+                "Color of the lost-health segment. Lower the last two digits to make it fainter.");
         }
 
         /// <summary>Health the current foods would add if they were all freshly eaten.</summary>

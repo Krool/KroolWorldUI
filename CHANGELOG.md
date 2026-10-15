@@ -1,8 +1,11 @@
 # Changelog
 
-## 0.3.2
+## 0.4.0
 
-- Mod page rewritten: banner, an at-a-glance table, bulleted features, the full settings list grouped by feature, install steps and tips.
+- Skill XP: new default Tiles style, the skill icon with its XP bar underneath, a third taller than wide, side by side at the bottom right just above the key hints. It only moves up to make room for them, so it does not hop when you equip something. Rows (the bar with the name on it) is still a choice. New settings: Style, Tile Size, Tile Level (level number in the corner, off by default), and Bottom Right placement. The placement setting is now named Placement, so it starts from the new default.
+- Settings window: one collapsible section per feature, with the feature's On/Off and a Reset all on the header; it remembers which are open. Hover a setting to see what it does, its default and its range. The mouse wheel scrolls the window instead of zooming the camera.
+- Setting descriptions use the names shown in the window.
+- Mod page rewritten: banner, an at-a-glance table, bulleted features, install steps and tips. The settings tables are generated from the code, so they always match the window.
 
 ## 0.3.1
 

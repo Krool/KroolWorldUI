@@ -1,8 +1,8 @@
 {
   "name": "Krool_World_UI",
-  "version_number": "0.3.1",
+  "version_number": "0.4.0",
   "website_url": "https://github.com/Krool/KroolWorldUI",
-  "description": "Client-side HUD additions, each with its own toggle in an F7 settings window: skill XP bars, a carry weight bar beside your food, max health lost to wearing-off food, and food reminders.",
+  "description": "HUD and UI additions: skill XP (experience) bars with level-up text, a carry weight / encumbrance bar, food timer reminders and notifications, and max health lost to food decay. Client-side; every feature toggles in an F7 settings menu.",
   "dependencies": [
     "denikson-BepInExPack_Valheim-5.4.2351"
   ]
