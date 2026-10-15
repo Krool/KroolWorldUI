@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0
+
+- Weight moved beside the food icons and rebuilt like the health bar: a weight icon next to the fork, a vertical bar rising above it, and your weight over your max on top. New settings for colors (thresholds, gradient or single, with all three colors editable), bar length and thickness, text style and size, growth with max weight, and a nudge offset. The old hotbar placement is gone.
+- New: the health bar continues in a faint red segment showing the max health your foods have lost as they wear off (a food at half time gives about 81% of its health).
+- Skill XP bars rebuilt as slim bars centered under the stamina bar, stacking down. New settings: name-and-level or icon-only labels, width, height, color, and position (below stamina, right side or custom) with nudge offsets. Default max bars is now 4.
+- New: blue floating XP text over your character, like a damage number, only on your screen. Every gain, level-ups only, or off.
+- Food reminders: separate switches for running out (on) and can eat again (off, new). New no-food message that stays up until you eat or press Backspace; it waits for the arrival on a new character and shows again after a respawn.
+- Settings window: colors show a swatch and an editable hex value. Preview also shows a sample max-health segment.
 ## 0.2.3
 
 - Food reminder: removed the "eat again" text; the time left is right-aligned with fixed-width digits so the countdown no longer jiggles.

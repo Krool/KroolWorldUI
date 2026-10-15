@@ -1,6 +1,6 @@
 {
   "name": "Krool_World_UI",
-  "version_number": "0.2.3",
+  "version_number": "0.3.0",
   "website_url": "https://github.com/Krool/KroolWorldUI",
   "description": "Client-side HUD additions, each with its own toggle in an F7 settings window: skill XP bars, a carry weight bar beside your food, max health lost to wearing-off food, and food reminders.",
   "dependencies": [
