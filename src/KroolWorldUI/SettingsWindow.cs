@@ -18,6 +18,8 @@ namespace KroolWorldUI
     {
         internal static ConfigEntry<KeyboardShortcut> ToggleKey;
         internal static bool IsOpen { get; private set; }
+        /// <summary>"Preview on HUD" is on: features show samples even without real data.</summary>
+        internal static bool Previewing { get; private set; }
 
         private const int WindowId = 0x4B57_5549; // "KWUI"
         private const float RefHeight = 1080f;
@@ -25,6 +27,7 @@ namespace KroolWorldUI
         private Rect _window = new Rect(80f, 80f, 520f, 640f);
         private Vector2 _scroll;
         private ConfigEntryBase _capturingKey;
+        private readonly Dictionary<ConfigEntryBase, string> _colorEdits = new Dictionary<ConfigEntryBase, string>();
         private bool _preview;
         private bool _previewWas;
         private bool _wasSaveOnSet;
@@ -55,6 +58,7 @@ namespace KroolWorldUI
         private void UpdatePreview()
         {
             bool active = IsOpen && _preview && Player.m_localPlayer != null;
+            Previewing = active;
             if (active)
             {
                 SkillXpBarStack.GetOrCreate()?.Preview(Player.m_localPlayer.GetSkills());
@@ -99,6 +103,7 @@ namespace KroolWorldUI
                 config.SaveOnConfigSet = _wasSaveOnSet;
                 _capturingKey = null;
                 _preview = false;
+                _colorEdits.Clear();
             }
             IsOpen = open;
         }
@@ -208,6 +213,28 @@ namespace KroolWorldUI
                     }
                     break;
 
+                case Color col:
+                    GUILayout.Label(label, _styles.Label, GUILayout.Width(170f));
+                    GUILayout.FlexibleSpace();
+                    // Swatch, then the hex value to edit (RRGGBBAA; AA is opacity).
+                    var swatch = GUILayoutUtility.GetRect(26f, 26f, GUILayout.Width(26f), GUILayout.Height(26f));
+                    var old = GUI.color;
+                    GUI.color = new Color(col.r, col.g, col.b, 1f);
+                    GUI.DrawTexture(swatch, Texture2D.whiteTexture);
+                    GUI.color = old;
+                    // Typed text lives in a buffer, so a half-typed value is not snapped back.
+                    string hex = ColorUtility.ToHtmlStringRGBA(col);
+                    if (!_colorEdits.TryGetValue(entry, out var shown))
+                        shown = hex;
+                    string nh = GUILayout.TextField(shown, 8, _styles.Field, GUILayout.Width(110f), GUILayout.Height(26f));
+                    if (nh != shown)
+                    {
+                        _colorEdits[entry] = nh;
+                        if ((nh.Length == 6 || nh.Length == 8) && ColorUtility.TryParseHtmlString("#" + nh, out var parsed))
+                            entry.BoxedValue = parsed;
+                    }
+                    break;
+
                 case KeyboardShortcut k:
                     GUILayout.Label(label, _styles.Label, GUILayout.Width(170f));
                     string text = _capturingKey == entry ? "Press a key (Esc = default)" : k.ToString();
@@ -230,7 +257,10 @@ namespace KroolWorldUI
             if (!Equals(entry.BoxedValue, entry.DefaultValue))
             {
                 if (GUILayout.Button(new GUIContent("Reset", "Back to the default value"), _styles.Small, GUILayout.Width(52f)))
+                {
                     entry.BoxedValue = entry.DefaultValue;
+                    _colorEdits.Remove(entry);
+                }
             }
             else
             {

@@ -33,6 +33,7 @@ namespace KroolWorldUI
             SkillXpBars.BindConfig(Config);
             WeightDisplay.BindConfig(Config);
             FoodCallout.BindConfig(Config);
+            FoodHealthGhost.BindConfig(Config);
             gameObject.AddComponent<SettingsWindow>();
 
             _harmony = new Harmony(Guid);

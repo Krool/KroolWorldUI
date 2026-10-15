@@ -7,58 +7,74 @@ using UnityEngine.UI;
 namespace KroolWorldUI.Features
 {
     /// <summary>
-    /// Carry weight on the HUD as one slim bar with the numbers inside, using the same numbers as
-    /// the inventory screen (ceil(total) / ceil(max), red flash when over). Read-only.
+    /// Carry weight as a vertical bar left of the food column, built like the health bar next to
+    /// it: a weight icon beside the fork (as the heart sits under the health bar), the bar rising
+    /// above it, and the numbers on top. Same numbers as the inventory screen. Read-only.
     /// </summary>
     internal static class WeightDisplay
     {
         internal enum ShowMode { Always, NearLimit, WhenChanged }
-        internal enum Placement { AboveHotbar, BelowHotbar, Custom }
+        internal enum ColorMode { Thresholds, Gradient, Single }
+        internal enum TextMode { CurrentAndMax, Current, Percent, None }
 
         internal static ConfigEntry<bool> Enabled;
         internal static ConfigEntry<ShowMode> Mode;
         internal static ConfigEntry<float> NearLimitPercent;
         internal static ConfigEntry<float> ChangedSeconds;
-        internal static ConfigEntry<Placement> Position;
-        internal static ConfigEntry<float> Height;
-        internal static ConfigEntry<float> BaseWidth;
+        internal static ConfigEntry<ColorMode> Colors;
+        internal static ConfigEntry<Color> FillColor;
+        internal static ConfigEntry<Color> NearColor;
+        internal static ConfigEntry<Color> OverColor;
+        internal static ConfigEntry<TextMode> Text;
+        internal static ConfigEntry<float> TextSize;
+        internal static ConfigEntry<float> BarLength;
+        internal static ConfigEntry<float> BarThickness;
+        internal static ConfigEntry<bool> ScaleWithMaxWeight;
+        internal static ConfigEntry<float> OffsetX;
+        internal static ConfigEntry<float> OffsetY;
 
-        /// <summary>Vanilla base carry weight; BaseWidth is the bar width at this max.</summary>
+        /// <summary>Vanilla base carry weight; BarLength is the bar length at this max.</summary>
         internal const float BaseMaxWeight = 300f;
-        internal static ConfigEntry<float> AnchorX;
-        internal static ConfigEntry<float> AnchorY;
 
         private const string Section = "Weight";
 
         internal static void BindConfig(ConfigFile config)
         {
             Enabled = config.Bind(Section, "Enabled", true,
-                "Show your carry weight on the HUD without opening the inventory.");
+                "Show your carry weight on the HUD, left of the food icons.");
             Mode = config.Bind(Section, "Show", ShowMode.Always,
                 "Always; NearLimit = only at or above NearLimitPercent; WhenChanged = for a few seconds after your weight changes.");
             NearLimitPercent = config.Bind(Section, "NearLimitPercent", 80f,
-                new ConfigDescription("Percent of max weight where the bar turns orange (and appears, in NearLimit mode).",
+                new ConfigDescription("Percent of max weight where the bar turns to the near-limit color (and appears, in NearLimit mode).",
                     new AcceptableValueRange<float>(10f, 100f)));
             ChangedSeconds = config.Bind(Section, "ChangedSeconds", 3f,
                 new ConfigDescription("WhenChanged mode: seconds the bar stays after a change.",
                     new AcceptableValueRange<float>(1f, 15f)));
-            Position = config.Bind(Section, "Position", Placement.AboveHotbar,
-                "AboveHotbar / BelowHotbar: lined up with the hotbar's first slot. Custom: use AnchorX/AnchorY.");
-            Height = config.Bind(Section, "Height", 18f,
-                new ConfigDescription("Bar height in HUD pixels.", new AcceptableValueRange<float>(12f, 40f)));
-            BaseWidth = config.Bind(Section, "BaseWidth", 140f,
-                new ConfigDescription("Bar width in HUD pixels at the normal 300 max weight (about two hotbar slots). " +
-                                      "It grows with your max weight: a Megingjord (+150) makes it 50% longer.",
-                    new AcceptableValueRange<float>(60f, 400f)));
-            AnchorX = config.Bind(Section, "AnchorX", 0.01f,
-                new ConfigDescription("Custom position: left edge (0 = left of screen, 1 = right).",
-                    new AcceptableValueRange<float>(0f, 1f)));
-            AnchorY = config.Bind(Section, "AnchorY", 0.98f,
-                new ConfigDescription("Custom position: top edge (0 = bottom of screen, 1 = top).",
-                    new AcceptableValueRange<float>(0f, 1f)));
+            Colors = config.Bind(Section, "Colors", ColorMode.Thresholds,
+                "Thresholds: fill color, near-limit color past NearLimitPercent, over color when overweight. " +
+                "Gradient: blends fill -> near-limit -> over as you fill up. Single: always the fill color.");
+            FillColor = config.Bind(Section, "FillColor", new Color(0.80f, 0.62f, 0.30f, 1f), "Bar color under the limit (hex RRGGBBAA).");
+            NearColor = config.Bind(Section, "NearLimitColor", new Color(1f, 0.55f, 0.12f, 1f), "Bar color near the limit.");
+            OverColor = config.Bind(Section, "OverColor", new Color(0.86f, 0.16f, 0.12f, 1f), "Bar color when overweight.");
+            Text = config.Bind(Section, "Text", TextMode.CurrentAndMax,
+                "Numbers above the bar: current over max, current only, percent, or none.");
+            TextSize = config.Bind(Section, "TextSize", 16f,
+                new ConfigDescription("Font size of the numbers.", new AcceptableValueRange<float>(10f, 28f)));
+            BarLength = config.Bind(Section, "BarLength", 110f,
+                new ConfigDescription("Bar length in HUD pixels at the normal 300 max weight.",
+                    new AcceptableValueRange<float>(40f, 220f)));
+            BarThickness = config.Bind(Section, "BarThickness", 16f,
+                new ConfigDescription("Bar thickness in HUD pixels (the health bar is 32).",
+                    new AcceptableValueRange<float>(6f, 32f)));
+            ScaleWithMaxWeight = config.Bind(Section, "ScaleWithMaxWeight", true,
+                "Grow the bar with your max weight: a Megingjord (+150) makes it 50% longer.");
+            OffsetX = config.Bind(Section, "OffsetX", 0f,
+                new ConfigDescription("Nudge left (-) or right (+), in HUD pixels.", new AcceptableValueRange<float>(-200f, 200f)));
+            OffsetY = config.Bind(Section, "OffsetY", 0f,
+                new ConfigDescription("Nudge down (-) or up (+), in HUD pixels.", new AcceptableValueRange<float>(-200f, 300f)));
         }
 
-        // Hud.Update runs every frame in game; cheap check that builds the bar once the HUD,
+        // Hud.Update runs every frame in game; cheap check that builds the widget once the HUD,
         // inventory screen and player all exist (it is rebuilt after each logout, with the HUD).
         [HarmonyPatch(typeof(Hud), "Update")]
         private static class EnsureOnHud
@@ -73,37 +89,31 @@ namespace KroolWorldUI.Features
 
     internal class WeightHud : MonoBehaviour
     {
-        private const float Gap = 4f;          // HUD pixels between the bar and the hotbar
-        private const float MinWidth = 60f;
+        private const float Gap = 4f;           // HUD pixels between fork, icon and bar
         private const float RefreshInterval = 0.2f;
 
-        private static readonly Color Normal = new Color(0.92f, 0.87f, 0.78f, 1f);
-        private static readonly Color Warn = new Color(1f, 0.69f, 0.25f, 1f);
-        private static readonly Color Over = new Color(0.9f, 0.2f, 0.15f, 1f);
-        private static readonly Color Fill = new Color(0.58f, 0.43f, 0.18f, 0.95f);
-        private static readonly Color FillWarn = new Color(0.72f, 0.42f, 0.1f, 0.95f);
-        private static readonly Color FillOver = new Color(0.62f, 0.13f, 0.1f, 0.95f);
+        private static readonly Color Parchment = new Color(0.92f, 0.87f, 0.78f, 1f);
+        private static readonly Color Muted = new Color(0.72f, 0.66f, 0.56f, 1f);
 
         private static WeightHud _instance;
         private static bool _failed;
 
-        private RectTransform _rect;
+        private RectTransform _rect;      // our root: a point in the health panel at the fork's center
         private CanvasGroup _group;
-        private TMP_Text _text;
         private RectTransform _icon;
-        private RectTransform _fill;
-        private Image _fillImage;
+        private RectTransform _bar;       // clone of the health bar root, rotated like it
+        private GuiBar _fill;
+        private TMP_Text _text;
+        private Transform _fork;
+        private Transform _food0;
 
+        private float _total;
+        private float _max = WeightDisplay.BaseMaxWeight;
         private int _weight = -1;
-        private int _max = -1;
-        private float _ratio;
+        private int _maxShown = -1;
         private string _shownText;
         private float _lastChange;
         private float _nextRefresh;
-        private float _nextHotbarScan;
-        private Rect? _hotbar; // world-space rect of the main hotbar's first slot, if found
-        private float _maxWeight = WeightDisplay.BaseMaxWeight;
-        private readonly Vector3[] _corners = new Vector3[4];
 
         internal static void Ensure()
         {
@@ -111,7 +121,8 @@ namespace KroolWorldUI.Features
                 return;
             var hud = Hud.instance;
             var inv = InventoryGui.instance;
-            if (hud == null || hud.m_rootObject == null || inv == null || inv.m_weight == null || Player.m_localPlayer == null)
+            if (hud == null || hud.m_healthPanel == null || hud.m_healthBarRoot == null || hud.m_foodIcons == null
+                || hud.m_foodIcons.Length == 0 || inv == null || inv.m_weight == null || Player.m_localPlayer == null)
                 return;
             try
             {
@@ -126,69 +137,74 @@ namespace KroolWorldUI.Features
 
         private static void Create(Hud hud, InventoryGui inv)
         {
-            var go = new GameObject("KroolWorldUI_Weight", typeof(RectTransform), typeof(CanvasGroup));
-            go.transform.SetParent(hud.m_rootObject.transform, false);
+            var go = new GameObject("KroolWorldUI_Weight", typeof(RectTransform), typeof(CanvasGroup), typeof(LayoutElement));
+            go.GetComponent<LayoutElement>().ignoreLayout = true;
+            go.transform.SetParent(hud.m_healthPanel, false);
             var w = go.AddComponent<WeightHud>();
             _instance = w;
             w._rect = (RectTransform)go.transform;
+            w._rect.anchorMin = w._rect.anchorMax = new Vector2(0.5f, 0.5f);
+            w._rect.pivot = new Vector2(0.5f, 0.5f);
+            w._rect.sizeDelta = Vector2.zero;
             w._group = go.GetComponent<CanvasGroup>();
             w._group.blocksRaycasts = false;
             w._group.interactable = false;
             w._group.alpha = 0f;
 
-            // Track, fill, then icon and text drawn on top of the fill.
-            var track = NewImage("track", go.transform, new Color(0.05f, 0.035f, 0.025f, 0.75f));
-            Stretch(track.rectTransform);
-            var frame = track.gameObject.AddComponent<Outline>();
-            frame.effectColor = new Color(0.87f, 0.70f, 0.36f, 0.35f);
-            frame.effectDistance = new Vector2(1f, -1f);
+            w._food0 = hud.m_foodIcons[0].transform.parent; // the slot frame, not the icon inside it
+            w._fork = FindFork(hud.m_healthPanel);
 
-            w._fillImage = NewImage("fill", go.transform, Fill);
-            w._fill = w._fillImage.rectTransform;
-            w._fill.anchorMin = Vector2.zero;
-            w._fill.anchorMax = new Vector2(0f, 1f);
-            w._fill.pivot = new Vector2(0f, 0.5f);
-            w._fill.offsetMin = Vector2.zero;
-            w._fill.offsetMax = Vector2.zero;
+            // The bar: a copy of the game's health bar, minus its second (slow) fill and text.
+            var barGo = Instantiate(hud.m_healthBarRoot.gameObject, go.transform, false);
+            barGo.name = "bar";
+            w._bar = (RectTransform)barGo.transform;
+            string fastName = hud.m_healthBarFast != null ? hud.m_healthBarFast.name : "fast";
+            foreach (var g in barGo.GetComponentsInChildren<GuiBar>(true))
+            {
+                if (w._fill == null && g.name == fastName)
+                    w._fill = g;
+                else
+                    DestroyImmediate(g.gameObject);
+            }
+            foreach (var t in barGo.GetComponentsInChildren<TMP_Text>(true))
+                DestroyImmediate(t.gameObject);
+            // Our own additions to the health bar (the food max-health segment) are not wanted here.
+            foreach (var t in barGo.GetComponentsInChildren<Transform>(true))
+                if (t != null && t != barGo.transform && t.name.StartsWith("KroolWorldUI"))
+                    DestroyImmediate(t.gameObject);
+            foreach (var gr in barGo.GetComponentsInChildren<Graphic>(true))
+                gr.raycastTarget = false;
+            if (w._fill == null || w._fill.m_bar == null)
+                throw new System.Exception("health bar layout changed: no fill bar found");
+            w._bar.anchorMin = w._bar.anchorMax = new Vector2(0.5f, 0.5f);
+            w._bar.pivot = new Vector2(0f, 0.5f); // grows from its base, like health
+            var fillRt = w._fill.m_bar;
+            fillRt.anchorMin = fillRt.anchorMax = new Vector2(0f, 0.5f);
+            fillRt.pivot = new Vector2(0f, 0.5f);
+            fillRt.anchoredPosition = Vector2.zero;
+            w._fill.SetMaxValue(1f);
+            w._fill.SetValue(0f);
 
             var iconSprite = FindWeightIcon(inv.m_weight.transform);
-            if (iconSprite != null)
-            {
-                var icon = NewImage("icon", go.transform, Color.white);
-                icon.sprite = iconSprite;
-                icon.preserveAspect = true;
-                w._icon = icon.rectTransform;
-                w._icon.anchorMin = new Vector2(0f, 0.5f);
-                w._icon.anchorMax = new Vector2(0f, 0.5f);
-                w._icon.pivot = new Vector2(0f, 0.5f);
-                w._icon.anchoredPosition = new Vector2(3f, 0f);
-            }
+            var icon = NewImage("icon", go.transform, Color.white);
+            icon.sprite = iconSprite;
+            icon.enabled = iconSprite != null;
+            icon.preserveAspect = true;
+            w._icon = icon.rectTransform;
+            w._icon.anchorMin = w._icon.anchorMax = new Vector2(0.5f, 0.5f);
+            w._icon.pivot = new Vector2(0.5f, 0.5f);
 
-            // Clone the inventory's own weight text so font and material match the game.
-            var textGo = Instantiate(inv.m_weight.gameObject, go.transform, false);
-            textGo.name = "text";
-            textGo.SetActive(true);
-            // The source text may be rotated or scaled in its own panel (the HUD health text is
-            // turned 90 degrees); the copy must sit flat.
-            textGo.transform.localRotation = Quaternion.identity;
-            textGo.transform.localScale = Vector3.one;
-            for (int i = textGo.transform.childCount - 1; i >= 0; i--)
-                Destroy(textGo.transform.GetChild(i).gameObject);
-            foreach (var c in textGo.GetComponents<Component>())
-                if (!(c is Transform) && !(c is TMP_Text) && !(c is CanvasRenderer))
-                    Destroy(c);
-            w._text = textGo.GetComponent<TMP_Text>();
-            w._text.enableAutoSizing = false;
-            w._text.alignment = TextAlignmentOptions.Center;
-            w._text.textWrappingMode = TextWrappingModes.NoWrap;
-            w._text.overflowMode = TextOverflowModes.Overflow;
-            w._text.raycastTarget = false;
-            w._text.color = Normal;
-            Stretch(w._text.rectTransform);
+            // Same text style as the food timers next to it.
+            TMP_Text template = hud.m_foodTime != null && hud.m_foodTime.Length > 0 && hud.m_foodTime[0] != null
+                ? hud.m_foodTime[0] : (TMP_Text)inv.m_weight;
+            w._text = CloneText(template, go.transform);
+            w._text.alignment = TextAlignmentOptions.Bottom;
+            w._text.rectTransform.anchorMin = w._text.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+            w._text.rectTransform.pivot = new Vector2(0.5f, 0f);
+            w._text.rectTransform.sizeDelta = new Vector2(80f, 50f);
 
             w._lastChange = Time.time;
-            w.ApplySize(w.CurrentWidth());
-            w.Place();
+            w.Layout();
         }
 
         private void OnDestroy()
@@ -225,22 +241,21 @@ namespace KroolWorldUI.Features
             if (Time.time >= _nextRefresh)
             {
                 _nextRefresh = Time.time + RefreshInterval;
-                float total = player.GetInventory().GetTotalWeight();
-                float max = player.GetMaxCarryWeight();
-                int wi = Mathf.CeilToInt(total), mi = Mathf.CeilToInt(max);
-                if (wi != _weight || mi != _max)
+                _total = player.GetInventory().GetTotalWeight();
+                _max = player.GetMaxCarryWeight();
+                int wi = Mathf.CeilToInt(_total), mi = Mathf.CeilToInt(_max);
+                if (wi != _weight || mi != _maxShown)
                 {
                     if (_weight >= 0)
                         _lastChange = Time.time;
                     _weight = wi;
-                    _max = mi;
+                    _maxShown = mi;
                 }
-                _ratio = max > 0f ? total / max : 0f;
-                _maxWeight = max;
             }
 
-            bool over = _weight > _max;
-            bool near = _ratio * 100f >= WeightDisplay.NearLimitPercent.Value;
+            float ratio = _max > 0f ? _total / _max : 0f;
+            bool over = _weight > _maxShown;
+            bool near = ratio * 100f >= WeightDisplay.NearLimitPercent.Value;
 
             bool wanted;
             switch (WeightDisplay.Mode.Value)
@@ -250,121 +265,156 @@ namespace KroolWorldUI.Features
                 default: wanted = true; break;
             }
             if (SettingsWindow.IsOpen)
-                wanted = true; // visible while positioning it
-            if (InventoryGui.IsVisible() || Minimap.IsOpen() || Menu.IsVisible())
-                wanted = false; // the inventory shows weight itself; maps and menus need the space
+                wanted = true; // visible while tuning it
 
             _group.alpha = Mathf.MoveTowards(_group.alpha, wanted ? 1f : 0f, Time.deltaTime * 4f);
             if (_group.alpha <= 0f && !wanted)
                 return;
 
+            Layout();
+            _fill.SetValue(Mathf.Clamp01(ratio));
             // Same flash as the inventory screen when over capacity.
-            bool flashRed = over && Mathf.Sin(Time.time * 10f) > 0f;
-            Color numColor = flashRed ? Over : near ? Warn : Normal;
-            string label = $"<color=#{ColorUtility.ToHtmlStringRGB(numColor)}>{_weight}</color> / {_max}";
+            bool flash = over && Mathf.Sin(Time.time * 10f) > 0f;
+            _fill.SetColor(flash ? Color.Lerp(BarColor(ratio, over, near), Color.white, 0.35f) : BarColor(ratio, over, near));
+            UpdateText(ratio, over, near);
+        }
+
+        private static Color BarColor(float ratio, bool over, bool near)
+        {
+            var fill = WeightDisplay.FillColor.Value;
+            var warn = WeightDisplay.NearColor.Value;
+            var bad = WeightDisplay.OverColor.Value;
+            switch (WeightDisplay.Colors.Value)
+            {
+                case WeightDisplay.ColorMode.Single:
+                    return fill;
+                case WeightDisplay.ColorMode.Gradient:
+                    float nearAt = Mathf.Max(0.01f, WeightDisplay.NearLimitPercent.Value / 100f);
+                    if (over)
+                        return bad;
+                    return ratio < nearAt
+                        ? Color.Lerp(fill, warn, ratio / nearAt)
+                        : Color.Lerp(warn, bad, Mathf.InverseLerp(nearAt, 1f, ratio));
+                default:
+                    return over ? bad : near ? warn : fill;
+            }
+        }
+
+        private void UpdateText(float ratio, bool over, bool near)
+        {
+            string current = over || near
+                ? $"<color=#{ColorUtility.ToHtmlStringRGB(over ? WeightDisplay.OverColor.Value : WeightDisplay.NearColor.Value)}>{_weight}</color>"
+                : _weight.ToString();
+            string label;
+            switch (WeightDisplay.Text.Value)
+            {
+                case WeightDisplay.TextMode.None: label = ""; break;
+                case WeightDisplay.TextMode.Current: label = current; break;
+                case WeightDisplay.TextMode.Percent: label = $"{Mathf.RoundToInt(ratio * 100f)}%"; break;
+                // Stacked, so it stays narrow enough for the space left of the food column.
+                default: label = $"{current}\n<size=80%><color=#{ColorUtility.ToHtmlStringRGB(Muted)}>{_maxShown}</color></size>"; break;
+            }
             if (label != _shownText)
             {
                 // Rebuilding a TMP mesh is not free; only when the text actually changes.
                 _shownText = label;
                 _text.text = label;
             }
-
-            _fill.anchorMax = new Vector2(Mathf.Clamp01(_ratio), 1f);
-            _fillImage.color = over ? FillOver : near ? FillWarn : Fill;
-
-            Place();
-        }
-
-        /// <summary>BaseWidth at 300 max weight, scaled by your actual max (belt: 450 = 1.5x).</summary>
-        private float CurrentWidth()
-        {
-            float scale = Mathf.Clamp(_maxWeight / WeightDisplay.BaseMaxWeight, 0.5f, 3f);
-            return WeightDisplay.BaseWidth.Value * scale;
-        }
-
-        private void ApplySize(float width)
-        {
-            float h = WeightDisplay.Height.Value;
-            _rect.sizeDelta = new Vector2(Mathf.Max(MinWidth, width), h);
-            _text.fontSize = Mathf.Round(h * 0.78f);
-            if (_icon != null)
-                _icon.sizeDelta = new Vector2(h - 4f, h - 4f);
         }
 
         /// <summary>
-        /// Sits just above the hotbar's first slot, left-aligned with it. Falls back to just below
-        /// when there is no room above (large UI scale), or to the custom anchor.
+        /// Lays the widget out in the health panel's space: icon left of the fork, bar rising from
+        /// just above the icon, numbers above the bar.
         /// </summary>
-        private void Place()
+        private void Layout()
         {
-            if (Time.time >= _nextHotbarScan)
+            float iconSize = 32f;
+            Vector3 forkPos;
+            if (_fork != null)
             {
-                _nextHotbarScan = Time.time + 1f;
-                _hotbar = FindFirstSlot() ?? _hotbar; // keep the last good position if the bar hides briefly
-            }
-
-            ApplySize(CurrentWidth());
-
-            var mode = WeightDisplay.Position.Value;
-            if (mode == WeightDisplay.Placement.Custom || _hotbar == null)
-            {
-                var anchor = new Vector2(WeightDisplay.AnchorX.Value, WeightDisplay.AnchorY.Value);
-                _rect.anchorMin = anchor;
-                _rect.anchorMax = anchor;
-                _rect.pivot = new Vector2(0f, 1f);
-                _rect.anchoredPosition = Vector2.zero;
-                return;
-            }
-
-            var slot = _hotbar.Value;
-            var parent = (RectTransform)_rect.parent;
-            float worldPerPixel = Mathf.Max(0.0001f, parent.lossyScale.y);
-            parent.GetWorldCorners(_corners);
-            float screenTop = _corners[1].y;
-            float gap = Gap * worldPerPixel;
-            float height = WeightDisplay.Height.Value * worldPerPixel;
-            bool roomAbove = slot.yMax + gap + height <= screenTop - 1f;
-
-            _rect.anchorMin = _rect.anchorMax = new Vector2(0.5f, 0.5f);
-            if (mode == WeightDisplay.Placement.AboveHotbar && roomAbove)
-            {
-                _rect.pivot = new Vector2(0f, 0f);
-                _rect.position = new Vector3(slot.xMin, slot.yMax + gap, _rect.position.z);
+                var fr = (RectTransform)_fork;
+                iconSize = Mathf.Max(16f, Mathf.Min(fr.rect.width, fr.rect.height));
+                forkPos = fr.localPosition + (Vector3)RectCenterOffset(fr);
             }
             else
             {
-                _rect.pivot = new Vector2(0f, 1f);
-                _rect.position = new Vector3(slot.xMin, slot.yMin - gap, _rect.position.z);
+                // No fork found: one slot below the first food slot.
+                var f0 = (RectTransform)_food0;
+                forkPos = f0.localPosition + (Vector3)RectCenterOffset(f0) + new Vector3(0f, -(f0.rect.height + iconSize) * 0.5f, 0f);
             }
+            float slotHalf = _fork != null ? iconSize * 0.5f : ((RectTransform)_food0).rect.width * 0.5f;
+
+            var origin = new Vector3(forkPos.x - slotHalf - Gap - iconSize * 0.5f + WeightDisplay.OffsetX.Value,
+                forkPos.y + WeightDisplay.OffsetY.Value, 0f);
+            _rect.localPosition = origin;
+
+            _icon.sizeDelta = new Vector2(iconSize, iconSize);
+            _icon.anchoredPosition = Vector2.zero;
+
+            float scale = WeightDisplay.ScaleWithMaxWeight.Value
+                ? Mathf.Clamp(_max / WeightDisplay.BaseMaxWeight, 0.5f, 3f) : 1f;
+            float length = Mathf.Round(WeightDisplay.BarLength.Value * scale);
+            float thick = WeightDisplay.BarThickness.Value;
+            float barBase = iconSize * 0.5f + Gap;
+            _bar.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, length);
+            _bar.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, thick);
+            _bar.anchoredPosition = new Vector2(0f, barBase);
+            _fill.m_bar.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, thick);
+            _fill.SetWidth(length);
+
+            // The clone keeps the health bar's 90 degree turn, so its length runs up the screen.
+            _text.fontSize = WeightDisplay.TextSize.Value;
+            _text.rectTransform.anchoredPosition = new Vector2(0f, barBase + length + Gap);
+        }
+
+        /// <summary>Center of a rect relative to its own pivot, in its parent's units.</summary>
+        private static Vector2 RectCenterOffset(RectTransform rt)
+        {
+            var r = rt.rect;
+            return new Vector2(r.center.x, r.center.y);
         }
 
         /// <summary>
-        /// World rect of the main hotbar's first slot frame. The game places slot i at
-        /// (i * m_elementSpace, 0) from the HotkeyBar origin using m_elementPrefab, so the frame is
-        /// fixed no matter which items or gear you have; measuring visible graphics was not.
-        /// The main hotbar is the highest HotkeyBar on screen (mods such as ExtraSlots add more).
+        /// The fork icon under the food column. Hud keeps no reference to it, so look for an active
+        /// image named like the food icons that is not inside a food slot.
         /// </summary>
-        private Rect? FindFirstSlot()
+        private static Transform FindFork(Transform panel)
         {
-            Rect? best = null;
-            foreach (var bar in FindObjectsByType<HotkeyBar>(FindObjectsSortMode.None))
+            Transform best = null;
+            foreach (Transform child in panel)
             {
-                if (!bar.isActiveAndEnabled || bar.m_elementPrefab == null)
+                if (!child.gameObject.activeSelf || child.GetComponent<Image>() == null)
                     continue;
-                var prefab = bar.m_elementPrefab.transform as RectTransform;
-                if (prefab == null)
-                    continue;
-                Vector2 size = prefab.rect.size, pivot = prefab.pivot;
-                if (size.x < 1f || size.y < 1f) // stretched prefab outside a parent: fall back to the slot spacing
-                    size = new Vector2(bar.m_elementSpace, bar.m_elementSpace);
-                var t = bar.transform;
-                Vector3 bl = t.TransformPoint(new Vector3(-pivot.x * size.x, -pivot.y * size.y, 0f));
-                Vector3 tr = t.TransformPoint(new Vector3((1f - pivot.x) * size.x, (1f - pivot.y) * size.y, 0f));
-                var r = Rect.MinMaxRect(Mathf.Min(bl.x, tr.x), Mathf.Min(bl.y, tr.y), Mathf.Max(bl.x, tr.x), Mathf.Max(bl.y, tr.y));
-                if (best == null || r.yMax > best.Value.yMax)
-                    best = r;
+                string n = child.name.ToLowerInvariant();
+                if (n.StartsWith("foodicon"))
+                    best = child;
             }
+            if (best == null)
+                Plugin.Log.LogWarning("Food fork icon not found; weight bar placed from the food slots instead.");
             return best;
+        }
+
+        private static TMP_Text CloneText(TMP_Text source, Transform parent)
+        {
+            var textGo = Instantiate(source.gameObject, parent, false);
+            textGo.name = "text";
+            textGo.SetActive(true);
+            // The source may be rotated or scaled in its own panel; the copy must sit flat.
+            textGo.transform.localRotation = Quaternion.identity;
+            textGo.transform.localScale = Vector3.one;
+            for (int i = textGo.transform.childCount - 1; i >= 0; i--)
+                Destroy(textGo.transform.GetChild(i).gameObject);
+            foreach (var c in textGo.GetComponents<Component>())
+                if (!(c is Transform) && !(c is TMP_Text) && !(c is CanvasRenderer))
+                    Destroy(c);
+            var text = textGo.GetComponent<TMP_Text>();
+            text.enableAutoSizing = false;
+            text.textWrappingMode = TextWrappingModes.NoWrap;
+            text.overflowMode = TextOverflowModes.Overflow;
+            text.richText = true;
+            text.raycastTarget = false;
+            text.color = Parchment;
+            return text;
         }
 
         private static Sprite FindWeightIcon(Transform weightText)
@@ -389,14 +439,6 @@ namespace KroolWorldUI.Features
             img.color = color;
             img.raycastTarget = false;
             return img;
-        }
-
-        private static void Stretch(RectTransform rt)
-        {
-            rt.anchorMin = Vector2.zero;
-            rt.anchorMax = Vector2.one;
-            rt.offsetMin = Vector2.zero;
-            rt.offsetMax = Vector2.zero;
         }
     }
 }

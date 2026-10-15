@@ -8,13 +8,22 @@ using UnityEngine.UI;
 namespace KroolWorldUI.Features
 {
     /// <summary>
-    /// A short toast (and an optional soft chime) when one of your foods drops under a few minutes,
-    /// i.e. it can be eaten again to refresh it. Fires once per food per run-down. Read-only.
+    /// Food reminders in one small toast near the top of the screen, with an optional soft chime:
+    /// a food running low, a food that can be eaten again (past half its time), and a message that
+    /// stays up while you have no food until you eat or dismiss it. Each fires once per food per
+    /// run-down. Read-only.
     /// </summary>
     internal static class FoodCallout
     {
+        internal enum EmptyWhen { NoFood, AnySlotEmpty }
+
         internal static ConfigEntry<bool> Enabled;
+        internal static ConfigEntry<bool> RunningOut;
         internal static ConfigEntry<float> ThresholdMinutes;
+        internal static ConfigEntry<bool> CanEatAgain;
+        internal static ConfigEntry<bool> NoFood;
+        internal static ConfigEntry<EmptyWhen> NoFoodWhen;
+        internal static ConfigEntry<KeyboardShortcut> DismissKey;
         internal static ConfigEntry<float> ShowSeconds;
         internal static ConfigEntry<bool> Sound;
         internal static ConfigEntry<float> SoundVolume;
@@ -26,13 +35,24 @@ namespace KroolWorldUI.Features
         internal static void BindConfig(ConfigFile config)
         {
             Enabled = config.Bind(Section, "Enabled", true,
-                "Show a reminder when a food is about to run out and can be eaten again.");
+                "Food reminders on the HUD. The switches below pick which ones.");
+            RunningOut = config.Bind(Section, "RunningOut", true,
+                "Remind when a food has less than ThresholdMinutes left.");
             ThresholdMinutes = config.Bind(Section, "ThresholdMinutes", 4f,
-                new ConfigDescription("Remind when a food has less than this many minutes left.",
+                new ConfigDescription("Running-out reminder: minutes left that trigger it.",
                     new AcceptableValueRange<float>(1f, 15f)));
+            CanEatAgain = config.Bind(Section, "CanEatAgain", false,
+                "Remind when a food can be eaten again (the game allows it once half its time has passed).");
+            NoFood = config.Bind(Section, "NoFoodMessage", true,
+                "Keep a message up while you have no food, until you eat or press DismissKey. " +
+                "Shows on a new character after the arrival, and after respawning.");
+            NoFoodWhen = config.Bind(Section, "NoFoodWhen", EmptyWhen.NoFood,
+                "NoFood: only when all food is gone. AnySlotEmpty: whenever a food slot is free.");
+            DismissKey = config.Bind(Section, "DismissKey", new KeyboardShortcut(KeyCode.Backspace),
+                "Hides the no-food message until you next eat.");
             ShowSeconds = config.Bind(Section, "ShowSeconds", 6f,
-                new ConfigDescription("How long the reminder stays on screen.", new AcceptableValueRange<float>(2f, 20f)));
-            Sound = config.Bind(Section, "Sound", true, "Play a soft chime with the reminder.");
+                new ConfigDescription("How long a reminder stays on screen.", new AcceptableValueRange<float>(2f, 20f)));
+            Sound = config.Bind(Section, "Sound", true, "Play a soft chime with each reminder.");
             SoundVolume = config.Bind(Section, "SoundVolume", 0.35f,
                 new ConfigDescription("Chime volume (also follows the game's sound settings).",
                     new AcceptableValueRange<float>(0.05f, 1f)));
@@ -60,14 +80,18 @@ namespace KroolWorldUI.Features
     {
         private const float RowHeight = 30f;
         private const float Pad = 6f;
-        private const float Width = 270f;
-        private const float TimeWidth = 54f;
+        private const float Width = 290f;
+        private const float TimeWidth = 92f;
         private const float FadeSeconds = 0.6f;
         private const float LoginGraceSeconds = 10f;
+        private const float NoFoodDelaySeconds = 3f; // foods load with the player; do not flash before
+        private const string NoFoodKey = "_nofood";
 
         private static readonly Color Parchment = new Color(0.92f, 0.87f, 0.78f, 1f);
         private static readonly Color Gold = new Color(0.87f, 0.70f, 0.36f, 1f);
         private static readonly Color Warn = new Color(1f, 0.69f, 0.25f, 1f);
+        private static readonly Color Ready = new Color(0.62f, 0.86f, 0.45f, 1f);
+        private static readonly Color Muted = new Color(0.72f, 0.66f, 0.56f, 1f);
 
         private static FoodCalloutHud _instance;
         private static bool _failed;
@@ -75,25 +99,34 @@ namespace KroolWorldUI.Features
 
         private RectTransform _rect;
         private CanvasGroup _group;
-        private Image _background;
         private AudioSource _audio;
         private TMP_Text _textTemplate;
+        private Sprite _forkSprite;
         private float _createdAt;
-        private float _shownAt = -999f;
         private bool _previewing;
+        private bool _noFoodDismissed;
+
+        private enum Kind { RunningOut, CanEat, NoFood, Sample }
 
         private class Row
         {
             public string Key;
+            public Kind Kind;
             public GameObject Root;
+            public RectTransform Rect;
+            public CanvasGroup Group;
             public Image Icon;
             public TMP_Text Name;
             public TMP_Text Time; // right-aligned, fixed-width digits, so the countdown holds still
+            public float ShownAt;
+            public bool Persistent;
         }
 
         private readonly List<Row> _rows = new List<Row>();
         // Per food (by item name): true once seen above the threshold, so the next drop below it fires.
-        private readonly Dictionary<string, bool> _armed = new Dictionary<string, bool>();
+        private readonly Dictionary<string, bool> _armedLow = new Dictionary<string, bool>();
+        // Per food: true once seen while it could not be eaten again, so the next "can eat" fires.
+        private readonly Dictionary<string, bool> _armedEat = new Dictionary<string, bool>();
         private readonly HashSet<string> _seen = new HashSet<string>();
         private readonly HashSet<string> _present = new HashSet<string>();
         private readonly Vector3[] _corners = new Vector3[4];
@@ -130,14 +163,15 @@ namespace KroolWorldUI.Features
             f._group.blocksRaycasts = false;
             f._group.interactable = false;
 
-            f._background = NewImage("bg", go.transform, new Color(0.05f, 0.035f, 0.025f, 0.8f));
-            Stretch(f._background.rectTransform);
-            var frame = f._background.gameObject.AddComponent<Outline>();
+            var background = NewImage("bg", go.transform, new Color(0.05f, 0.035f, 0.025f, 0.8f));
+            Stretch(background.rectTransform);
+            var frame = background.gameObject.AddComponent<Outline>();
             frame.effectColor = new Color(Gold.r, Gold.g, Gold.b, 0.45f);
             frame.effectDistance = new Vector2(1f, -1f);
 
             // HUD text as the template, so rows use the game's font and material.
             f._textTemplate = hud.m_healthText;
+            f._forkSprite = FindForkSprite(hud);
 
             f._audio = go.AddComponent<AudioSource>();
             f._audio.playOnAwake = false;
@@ -155,7 +189,7 @@ namespace KroolWorldUI.Features
                 _instance = null;
         }
 
-        /// <summary>Settings-window preview: show the reminder with your current foods (or a sample).</summary>
+        /// <summary>Settings-window preview: one sample row per enabled reminder.</summary>
         internal static void Preview(bool on, bool playSound)
         {
             var f = _instance;
@@ -164,23 +198,17 @@ namespace KroolWorldUI.Features
             f._previewing = on;
             if (!on)
             {
-                f._shownAt = -999f; // hide now instead of holding for ShowSeconds
-                f.ClearRows();
+                f.RemoveRows(r => r.Kind == Kind.Sample);
                 return;
             }
-            var player = Player.m_localPlayer;
-            var foods = player != null ? player.GetFoods() : null;
-            var keys = new HashSet<string>();
-            if (foods != null)
-                foreach (var food in foods)
-                    if (food?.m_item?.m_shared != null)
-                    {
-                        f.AddOrUpdateRow(food);
-                        keys.Add(food.m_item.m_shared.m_name);
-                    }
-            if (keys.Count == 0)
-                f.AddSampleRow();
-            f._shownAt = Time.time;
+            if (f._rows.Exists(r => r.Kind == Kind.Sample))
+                return;
+            if (FoodCallout.RunningOut.Value)
+                f.SampleRow("_s1", "Running low", f.TimeText(239f), Warn);
+            if (FoodCallout.CanEatAgain.Value)
+                f.SampleRow("_s2", "Can eat again", f.TimeText(1199f), Ready);
+            if (FoodCallout.NoFood.Value)
+                f.SampleRow("_s3", "No food", f.DismissHint(), Muted);
             if (playSound)
                 f.PlayChime();
         }
@@ -210,9 +238,51 @@ namespace KroolWorldUI.Features
                 return;
             }
 
-            float threshold = FoodCallout.ThresholdMinutes.Value * 60f;
             bool fired = false;
             var foods = player.GetFoods();
+            CheckFoods(foods, ref fired);
+            CheckNoFood(player, foods, ref fired);
+
+            if (fired && FoodCallout.Sound.Value)
+                PlayChime();
+
+            // Per-row fade; persistent and preview rows stay at full.
+            float hold = FoodCallout.ShowSeconds.Value;
+            float now = Time.time;
+            bool removed = false;
+            for (int i = _rows.Count - 1; i >= 0; i--)
+            {
+                var row = _rows[i];
+                if (row.Persistent || row.Kind == Kind.Sample)
+                {
+                    row.Group.alpha = 1f;
+                    continue;
+                }
+                float age = now - row.ShownAt;
+                if (age > hold + FadeSeconds)
+                {
+                    Destroy(row.Root);
+                    _rows.RemoveAt(i);
+                    removed = true;
+                    continue;
+                }
+                row.Group.alpha = age <= hold ? 1f : 1f - (age - hold) / FadeSeconds;
+            }
+            if (removed)
+                Relayout();
+
+            bool wanted = _rows.Count > 0;
+            if (InventoryGui.IsVisible() || Minimap.IsOpen() || Menu.IsVisible())
+                wanted = false;
+            _group.alpha = wanted ? 1f : 0f;
+            if (wanted)
+                Place();
+        }
+
+        private void CheckFoods(List<Player.Food> foods, ref bool fired)
+        {
+            float threshold = FoodCallout.ThresholdMinutes.Value * 60f;
+            bool atLogin = Time.time - _createdAt < LoginGraceSeconds;
             var present = _present;
             present.Clear();
             foreach (var food in foods)
@@ -222,65 +292,111 @@ namespace KroolWorldUI.Features
                     continue;
                 string key = shared.m_name;
                 present.Add(key);
-                bool low = food.m_time < threshold;
                 bool firstSight = _seen.Add(key);
 
+                // Running low: fire on the drop below the threshold, or once at login if already
+                // low. A food that starts out below the threshold (very short foods) never fires.
+                bool low = food.m_time < threshold;
                 if (!low)
+                    _armedLow[key] = true;
+                else if (FoodCallout.RunningOut.Value && ((_armedLow.TryGetValue(key, out bool armed) && armed) || (firstSight && atLogin)))
                 {
-                    _armed[key] = true; // eaten/refreshed: the next run-down will remind again
+                    _armedLow[key] = false;
+                    Show(food, Kind.RunningOut);
+                    fired = true;
                 }
-                else
+
+                // Can eat again: the game's own rule (past half the burn time).
+                bool canEat = food.CanEatAgain();
+                if (!canEat)
+                    _armedEat[key] = true;
+                else if (FoodCallout.CanEatAgain.Value && ((_armedEat.TryGetValue(key, out bool armedE) && armedE) || (firstSight && atLogin)))
                 {
-                    // Fire on the drop below the threshold, or once at login if already low. A food
-                    // that starts out below the threshold when eaten (very short foods) never fires.
-                    bool atLogin = firstSight && Time.time - _createdAt < LoginGraceSeconds;
-                    if ((_armed.TryGetValue(key, out bool armed) && armed) || atLogin)
+                    _armedEat[key] = false;
+                    // Running low also means it can be eaten; one row per food is enough.
+                    if (!_rows.Exists(r => r.Key == key && r.Kind == Kind.RunningOut))
                     {
-                        _armed[key] = false;
-                        AddOrUpdateRow(food);
+                        Show(food, Kind.CanEat);
                         fired = true;
                     }
                 }
 
-                // Rows already on screen keep their countdown current.
-                var row = _rows.Find(r => r.Key == key);
-                if (row != null)
-                    row.Time.text = TimeText(food.m_time);
+                // Rows on screen keep their countdown current.
+                foreach (var row in _rows)
+                    if (row.Key == key)
+                        row.Time.text = TimeText(food.m_time);
             }
 
             // Forget foods that expired, so eating them again later starts fresh.
             if (present.Count < _seen.Count)
             {
                 _seen.RemoveWhere(k => !present.Contains(k));
-                var gone = new List<string>();
-                foreach (var k in _armed.Keys)
-                    if (!present.Contains(k))
-                        gone.Add(k);
-                foreach (var k in gone)
-                    _armed.Remove(k);
+                Forget(_armedLow, present);
+                Forget(_armedEat, present);
             }
+        }
 
-            if (fired)
+        private static void Forget(Dictionary<string, bool> map, HashSet<string> keep)
+        {
+            var gone = new List<string>();
+            foreach (var k in map.Keys)
+                if (!keep.Contains(k))
+                    gone.Add(k);
+            foreach (var k in gone)
+                map.Remove(k);
+        }
+
+        /// <summary>
+        /// The no-food message: up while the condition holds, not dismissed, and the player is
+        /// actually in control (not mid-arrival on a new character, not dead).
+        /// </summary>
+        private void CheckNoFood(Player player, List<Player.Food> foods, ref bool fired)
+        {
+            bool empty = FoodCallout.NoFoodWhen.Value == FoodCallout.EmptyWhen.AnySlotEmpty
+                ? foods.Count < 3
+                : foods.Count == 0;
+            if (!empty)
+                _noFoodDismissed = false; // ate: the next time you run out, it shows again
+
+            var row = _rows.Find(r => r.Key == NoFoodKey);
+            if (row != null && FoodCallout.DismissKey.Value.IsDown() && !TextFocus())
+                _noFoodDismissed = true;
+
+            bool want = FoodCallout.NoFood.Value && empty && !_noFoodDismissed
+                        && Time.time - _createdAt >= NoFoodDelaySeconds
+                        && !player.InIntro() && !player.IsDead();
+            if (!want)
             {
-                _shownAt = Time.time;
-                if (FoodCallout.Sound.Value)
-                    PlayChime();
+                if (row != null)
+                    RemoveRows(r => r.Key == NoFoodKey);
+                return;
             }
 
-            float age = Time.time - _shownAt;
-            float hold = FoodCallout.ShowSeconds.Value;
-            bool wanted = _previewing || age <= hold + FadeSeconds;
-            if (InventoryGui.IsVisible() || Minimap.IsOpen() || Menu.IsVisible())
-                wanted = false;
+            string label = foods.Count == 0 ? "No food" : $"Food slot empty ({foods.Count}/3)";
+            if (row == null)
+            {
+                row = NewRow(NoFoodKey, Kind.NoFood);
+                row.Persistent = true;
+                Relayout(); // to the top
+                row.Icon.sprite = _forkSprite;
+                row.Icon.enabled = _forkSprite != null;
+                row.Time.color = Muted;
+                fired = true;
+            }
+            row.Name.text = label;
+            row.Time.text = DismissHint();
+        }
 
-            float alpha = _previewing ? 1f : age <= hold ? 1f : 1f - (age - hold) / FadeSeconds;
-            _group.alpha = wanted ? Mathf.Clamp01(alpha) : 0f;
+        private string DismissHint()
+        {
+            var key = FoodCallout.DismissKey.Value;
+            return key.MainKey == KeyCode.None ? "" : $"<size=75%>[{key}] hide</size>";
+        }
 
-            if (!_previewing && age > hold + FadeSeconds && _rows.Count > 0)
-                ClearRows();
-
-            if (_group.alpha > 0f)
-                Place();
+        private static bool TextFocus()
+        {
+            return global::Console.IsVisible() || TextInput.IsVisible()
+                   || (Chat.instance != null && Chat.instance.HasFocus()) || SettingsWindow.IsOpen;
         }
 
         private static string FoodName(Player.Food food)
@@ -290,43 +406,48 @@ namespace KroolWorldUI.Features
         }
 
         // <mspace> gives every digit the same advance, so 3:59 -> 3:11 does not shift.
-        private static string TimeText(float seconds)
+        private string TimeText(float seconds)
         {
             int secs = Mathf.Max(0, Mathf.CeilToInt(seconds));
             return $"<mspace=0.6em>{secs / 60}:{secs % 60:00}</mspace>";
         }
 
-        private void AddOrUpdateRow(Player.Food food)
+        private void Show(Player.Food food, Kind kind)
         {
             string key = food.m_item.m_shared.m_name;
-            var row = _rows.Find(r => r.Key == key) ?? NewRow(key);
-            if (row.Icon != null)
-            {
-                row.Icon.sprite = food.m_item.GetIcon();
-                row.Icon.enabled = row.Icon.sprite != null;
-            }
-            row.Name.text = FoodName(food);
+            var row = _rows.Find(r => r.Key == key && !r.Persistent);
+            if (row == null)
+                row = NewRow(key, kind);
+            row.Kind = kind;
+            row.ShownAt = Time.time;
+            row.Icon.sprite = food.m_item.GetIcon();
+            row.Icon.enabled = row.Icon.sprite != null;
+            string name = FoodName(food);
+            if (kind == Kind.CanEat)
+                name += $" <size=80%><color=#{ColorUtility.ToHtmlStringRGB(Muted)}>can eat</color></size>";
+            row.Name.text = name;
+            row.Time.color = kind == Kind.CanEat ? Ready : Warn;
             row.Time.text = TimeText(food.m_time);
         }
 
-        private void AddSampleRow()
+        private void SampleRow(string key, string name, string time, Color timeColor)
         {
-            var row = _rows.Find(r => r.Key == "_sample") ?? NewRow("_sample");
-            if (row.Icon != null)
-                row.Icon.enabled = false;
-            row.Name.text = "Your food";
-            row.Time.text = TimeText(239f);
+            var row = NewRow(key, Kind.Sample);
+            row.Icon.sprite = _forkSprite;
+            row.Icon.enabled = _forkSprite != null;
+            row.Name.text = name;
+            row.Time.text = time;
+            row.Time.color = timeColor;
         }
-        private Row NewRow(string key)
+
+        private Row NewRow(string key, Kind kind)
         {
-            var go = new GameObject("row", typeof(RectTransform));
+            var go = new GameObject("row", typeof(RectTransform), typeof(CanvasGroup));
             go.transform.SetParent(transform, false);
             var rt = (RectTransform)go.transform;
             rt.anchorMin = new Vector2(0f, 1f);
             rt.anchorMax = new Vector2(1f, 1f);
             rt.pivot = new Vector2(0.5f, 1f);
-            rt.offsetMin = new Vector2(Pad, -Pad - RowHeight * (_rows.Count + 1));
-            rt.offsetMax = new Vector2(-Pad, -Pad - RowHeight * _rows.Count);
 
             var icon = NewImage("icon", go.transform, Color.white);
             icon.preserveAspect = true;
@@ -349,10 +470,44 @@ namespace KroolWorldUI.Features
             tr.sizeDelta = new Vector2(TimeWidth, 0f);
             tr.anchoredPosition = new Vector2(-2f, 0f);
 
-            var row = new Row { Key = key, Root = go, Icon = icon, Name = name, Time = time };
+            var row = new Row
+            {
+                Key = key, Kind = kind, Root = go, Rect = rt, Group = go.GetComponent<CanvasGroup>(),
+                Icon = icon, Name = name, Time = time, ShownAt = Time.time,
+            };
             _rows.Add(row);
-            _rect.sizeDelta = new Vector2(Width, RowHeight * _rows.Count + Pad * 2f);
+            Relayout();
             return row;
+        }
+
+        /// <summary>The no-food message first, then reminders in the order they came.</summary>
+        private void Relayout()
+        {
+            // Stable: List.Sort could shuffle rows that compare equal.
+            var ordered = _rows.FindAll(r => r.Persistent);
+            ordered.AddRange(_rows.FindAll(r => !r.Persistent));
+            _rows.Clear();
+            _rows.AddRange(ordered);
+            for (int i = 0; i < _rows.Count; i++)
+            {
+                var rt = _rows[i].Rect;
+                rt.offsetMin = new Vector2(Pad, -Pad - RowHeight * (i + 1));
+                rt.offsetMax = new Vector2(-Pad, -Pad - RowHeight * i);
+            }
+            _rect.sizeDelta = new Vector2(Width, RowHeight * Mathf.Max(1, _rows.Count) + Pad * 2f);
+        }
+
+        private void RemoveRows(System.Predicate<Row> match)
+        {
+            for (int i = _rows.Count - 1; i >= 0; i--)
+            {
+                if (!match(_rows[i]))
+                    continue;
+                if (_rows[i].Root != null)
+                    Destroy(_rows[i].Root);
+                _rows.RemoveAt(i);
+            }
+            Relayout();
         }
 
         /// <summary>A text cloned from the HUD's own, so it uses the game's font and material.</summary>
@@ -387,14 +542,6 @@ namespace KroolWorldUI.Features
             rt.offsetMax = Vector2.zero;
             return text;
         }
-        private void ClearRows()
-        {
-            foreach (var r in _rows)
-                if (r.Root != null)
-                    Destroy(r.Root);
-            _rows.Clear();
-            _rect.sizeDelta = new Vector2(Width, RowHeight + Pad * 2f);
-        }
 
         /// <summary>Configured anchor, pushed down below the raid/event banner when it is up.</summary>
         private void Place()
@@ -418,6 +565,20 @@ namespace KroolWorldUI.Features
                 var pos = _rect.position;
                 _rect.position = new Vector3(pos.x, pos.y - (top - barBottom) - margin, pos.z);
             }
+        }
+
+        /// <summary>The fork icon under the HUD's food column, for the no-food row.</summary>
+        private static Sprite FindForkSprite(Hud hud)
+        {
+            if (hud.m_healthPanel == null)
+                return null;
+            foreach (Transform child in hud.m_healthPanel)
+            {
+                var img = child.GetComponent<Image>();
+                if (img != null && img.sprite != null && child.name.ToLowerInvariant().StartsWith("foodicon"))
+                    return img.sprite;
+            }
+            return null;
         }
 
         private void PlayChime()
