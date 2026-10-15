@@ -105,6 +105,8 @@ namespace KroolWorldUI.Features
         private float _createdAt;
         private bool _previewing;
         private bool _noFoodDismissed;
+        private Player _noFoodPlayer;
+        private float _playerSince;
 
         private enum Kind { RunningOut, CanEat, NoFood, Sample }
 
@@ -355,15 +357,23 @@ namespace KroolWorldUI.Features
             bool empty = FoodCallout.NoFoodWhen.Value == FoodCallout.EmptyWhen.AnySlotEmpty
                 ? foods.Count < 3
                 : foods.Count == 0;
+            // Ate, or a new body after a respawn: the next time you have no food, it shows again.
+            if (player != _noFoodPlayer)
+            {
+                _noFoodPlayer = player;
+                _playerSince = Time.time;
+                _noFoodDismissed = false;
+            }
             if (!empty)
-                _noFoodDismissed = false; // ate: the next time you run out, it shows again
+                _noFoodDismissed = false;
 
+            // Only a message you can see can be dismissed (it hides under the inventory and maps).
             var row = _rows.Find(r => r.Key == NoFoodKey);
-            if (row != null && FoodCallout.DismissKey.Value.IsDown() && !TextFocus())
+            if (row != null && _group.alpha > 0f && FoodCallout.DismissKey.Value.IsDown() && !TextFocus())
                 _noFoodDismissed = true;
 
             bool want = FoodCallout.NoFood.Value && empty && !_noFoodDismissed
-                        && Time.time - _createdAt >= NoFoodDelaySeconds
+                        && Time.time - _playerSince >= NoFoodDelaySeconds
                         && !player.InIntro() && !player.IsDead();
             if (!want)
             {

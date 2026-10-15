@@ -193,6 +193,7 @@ namespace KroolWorldUI.Features
         private static readonly System.Reflection.MethodInfo AddText = AccessTools.Method(typeof(DamageText), "AddInworldText");
         private static readonly System.Reflection.FieldInfo WorldTexts = AccessTools.Field(typeof(DamageText), "m_worldTexts");
         private static bool _broken;
+        private static Player _owner;
 
         private class Pending
         {
@@ -215,20 +216,76 @@ namespace KroolWorldUI.Features
                 return;
             }
 
-            float now = before.Exists ? skill.m_level + skill.GetLevelPercentage() : skill.m_level;
-            float was = before.Exists ? before.Level + SkillXpBars.Percent(before.Level, before.Accumulator) : now;
+            if (Player.m_localPlayer != _owner)
+            {
+                _owner = Player.m_localPlayer;
+                _pending.Clear();
+            }
             if (!_pending.TryGetValue(type, out var p))
                 _pending[type] = p = new Pending();
+            if (leveled)
+            {
+                // The level-up replaces whatever small gain was waiting.
+                p.Gain = 0f;
+                p.LastShown = Time.time;
+                Show($"{SkillXpBars.SkillName(type)} {(int)skill.m_level}", big: true);
+                return;
+            }
+            float now = skill.m_level + skill.GetLevelPercentage();
+            float was = before.Exists ? before.Level + SkillXpBars.Percent(before.Level, before.Accumulator) : now;
             p.Gain += Mathf.Max(0f, now - was);
-            if (Time.time - p.LastShown < MinInterval && !leveled)
+            Flush(type, p);
+        }
+
+        /// <summary>
+        /// Shows a skill's waiting gain once MinInterval has passed since its last text. Called on
+        /// each gain and every frame from Hud.Update, so the last gain of a burst is not held back
+        /// until the next time that skill gains XP.
+        /// </summary>
+        private static void Flush(Skills.SkillType type, Pending p)
+        {
+            // Under 0.05% would print as "+0%": keep adding to it instead.
+            if (p.Gain < 0.0005f || Time.time - p.LastShown < MinInterval)
                 return;
             float gain = p.Gain;
             p.Gain = 0f;
             p.LastShown = Time.time;
-            if (leveled)
-                Show($"{SkillXpBars.SkillName(type)} {(int)skill.m_level}", big: true);
-            else if (gain > 0f)
-                Show($"+{gain * 100f:0.#}% {SkillXpBars.SkillName(type)}", big: false);
+            Show($"+{gain * 100f:0.#}% {SkillXpBars.SkillName(type)}", big: false);
+        }
+
+        internal static void FlushAll()
+        {
+            if (_broken || _pending.Count == 0)
+                return;
+            // A new character or a respawn must not get the last one's leftover gains.
+            if (Player.m_localPlayer != _owner)
+            {
+                _owner = Player.m_localPlayer;
+                _pending.Clear();
+                return;
+            }
+            foreach (var kv in _pending)
+                if (kv.Value.Gain > 0f)
+                    Flush(kv.Key, kv.Value);
+        }
+
+        [HarmonyPatch(typeof(Hud), "Update")]
+        private static class FlushOnHud
+        {
+            private static void Postfix()
+            {
+                if (SkillXpBars.FloatingText.Value != SkillXpBars.FloatMode.EveryGain)
+                    return;
+                try
+                {
+                    FlushAll();
+                }
+                catch (System.Exception e)
+                {
+                    _broken = true;
+                    Plugin.Log.LogError($"Skill floating text disabled for this session after an error: {e}");
+                }
+            }
         }
 
         internal static void Show(string text, bool big)
@@ -236,7 +293,7 @@ namespace KroolWorldUI.Features
             var dt = DamageText.instance;
             var player = Player.m_localPlayer;
             var cam = Utils.GetMainCamera();
-            if (dt == null || player == null || cam == null || Hud.IsUserHidden())
+            if (_broken || dt == null || player == null || cam == null || Hud.IsUserHidden())
                 return;
             if (AddText == null || WorldTexts == null)
             {
@@ -244,6 +301,20 @@ namespace KroolWorldUI.Features
                 Plugin.Log.LogWarning("DamageText layout changed; skill floating text disabled.");
                 return;
             }
+            try
+            {
+                Spawn(dt, player, cam, text, big);
+            }
+            catch (System.Exception e)
+            {
+                // Once, not on every XP tick.
+                _broken = true;
+                Plugin.Log.LogError($"Skill floating text disabled for this session after an error: {e}");
+            }
+        }
+
+        private static void Spawn(DamageText dt, Player player, Camera cam, string text, bool big)
+        {
             Vector3 pos = player.transform.position + Vector3.up * 2.1f;
             float distance = Vector3.Distance(cam.transform.position, pos);
             var type = big ? DamageText.TextType.Bonus : DamageText.TextType.Normal;
@@ -266,6 +337,7 @@ namespace KroolWorldUI.Features
         private const float RowGap = 3f;
         private const float BlockerMargin = 12f;
         private const float StaminaMargin = 6f;
+        private const float MaxBelowStamina = 40f; // vanilla adrenaline bar ends 15 px below the stamina panel
 
         private static readonly Color Parchment = new Color(0.92f, 0.87f, 0.78f, 1f);
 
@@ -398,6 +470,7 @@ namespace KroolWorldUI.Features
             bar = CreateBar(type);
             _bars.Add(bar);
             LayoutBar(bar);
+            Place(); // anchors the new row now, so its first frame is not drawn mid-screen
             bar.Rect.anchoredPosition = new Vector2(0f, TargetY(_bars.Count - 1));
             return bar;
         }
@@ -549,10 +622,11 @@ namespace KroolWorldUI.Features
             float lowest = panel.rect.yMin;
             foreach (Transform child in panel)
             {
-                if (child is RectTransform rt)
+                if (child is RectTransform rt && rt.gameObject.activeSelf)
                     lowest = Mathf.Min(lowest, rt.localPosition.y + rt.rect.yMin);
             }
-            return lowest;
+            // If the show/hide animation slides a bar, do not chase it far down the screen.
+            return Mathf.Max(lowest, -MaxBelowStamina);
         }
 
         /// <summary>RightSide: push the stack down below the minimap and status effects.</summary>
@@ -707,9 +781,9 @@ namespace KroolWorldUI.Features
             }
             float left = pad + iconSize + pad + 4f;
             bar.Name.rectTransform.offsetMin = new Vector2(left, 0f);
-            bar.Name.rectTransform.offsetMax = new Vector2(-(pad + 4f), 0f); // narrowed to fit the level text in UpdateContents
             bar.Level.rectTransform.offsetMin = new Vector2(left, 0f);
             bar.Level.rectTransform.offsetMax = new Vector2(-(pad + 4f), 0f);
+            FitName(bar);
         }
 
         /// <summary>Two fills on one track: base up to the session start, gain from there to now.</summary>
@@ -764,9 +838,20 @@ namespace KroolWorldUI.Features
                 string hex = ColorUtility.ToHtmlStringRGB(bar.GainImage.color);
                 levelText = $"<size=85%><color=#{hex}>+{gained * 100f:0.#}%</color></size>  {levelText}";
             }
-            bar.Level.text = levelText;
-            // The name gets whatever the level text leaves, then ellipsis.
-            bar.Name.rectTransform.offsetMax = new Vector2(bar.Level.rectTransform.offsetMax.x - bar.Level.preferredWidth - 6f, 0f);
+            if (bar.Level.text != levelText)
+            {
+                bar.Level.text = levelText;
+                FitName(bar);
+            }
+        }
+
+        // The name gets whatever the level text leaves, then ellipsis.
+        private static void FitName(Bar bar)
+        {
+            if (!bar.Name.gameObject.activeSelf)
+                return;
+            float levelWidth = string.IsNullOrEmpty(bar.Level.text) ? 0f : bar.Level.preferredWidth;
+            bar.Name.rectTransform.offsetMax = new Vector2(bar.Level.rectTransform.offsetMax.x - levelWidth - 6f, 0f);
         }
 
         private TMP_Text NewText(Transform parent, string name, TextAlignmentOptions align)
