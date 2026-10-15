@@ -24,6 +24,12 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
   from build.ps1), requires a `## x.y.z` CHANGELOG section, builds, uploads with tcli, then
   commits, tags `vx.y.z` (annotated) and pushes. Write the changelog entry before running it.
   r2modman only offers updates for a strictly higher version of the same Thunderstore package.
+- **Review the package description on every commit (owner, 2026-10-15).** r2modman's search
+  matches only the package name and the description, and the name cannot change without breaking
+  updates. Before committing, reread `description` in `thunderstore/manifest.json` and update it
+  if a feature was added, renamed or removed: name every feature in the words players search
+  for (HUD, UI, skill XP, carry weight, food timer...), max 250 characters, same text in
+  `thunderstore.toml`. release.ps1 enforces the length and the match and prints it.
 - **After a publish, r2modman needs a forced online-list refresh** (Settings > Refresh online
   mod list) before a new package or version shows up; its cached list lags Thunderstore. Link
   the mod as `thunderstore.io/c/valheim/p/Krool/Krool_World_UI/` - the community-less

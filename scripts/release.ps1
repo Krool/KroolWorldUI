@@ -39,6 +39,16 @@ if ($changelog -notmatch "(?m)^## $([regex]::Escape($Version))\s*$") {
     throw "CHANGELOG.md has no '## $Version' section. Write the release notes first."
 }
 
+# The description is what r2modman searches (with the name), so it must name every feature.
+# Thunderstore caps it at 250 characters; thunderstore.toml carries a copy that must match.
+$description = (Get-Content $manifestPath -Raw | ConvertFrom-Json).description
+if ($description.Length -gt 250) { throw "manifest.json description is $($description.Length) characters; Thunderstore allows 250." }
+$tomlText = [IO.File]::ReadAllText($tomlPath)
+if ($tomlText -notmatch "(?m)^description = `"$([regex]::Escape($description))`"") {
+    throw "thunderstore.toml description differs from manifest.json. Make them the same."
+}
+Write-Host "Description ($($description.Length)/250), check it still covers every feature:`n  $description"
+
 # Token check before changing anything, so a missing token does not leave a half-done release.
 $token = $null
 if ($Publish) {
