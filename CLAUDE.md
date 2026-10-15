@@ -7,7 +7,9 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
 
 - **Never write game state.** Read skills/inventory/etc. for display only. `Skills.GetSkill()`
   creates a missing skill (which then saves to the character); use `SkillXpBars.FindExisting`
-  (walks `GetSkillList()`) instead.
+  (walks `GetSkillList()`) instead. One owner-approved exception (2026-10-15): Bench Pins adds a
+  saved pin to the local player's own map via `Minimap.AddPin` when they build a workbench. Any
+  other write needs the owner's explicit OK.
 - **Patches must not throw into game code.** Wrap UI work called from Harmony postfixes in
   try/catch and log.
 - **Test in the `KroolDev` r2modman profile**, never `BCCBoys` (the owner's play profile, which
@@ -49,7 +51,10 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
 - `tools/SettingsDoc` - rewrites the README settings tables (between the `settings:begin/end`
   markers) from `Plugin.BindAll`; `build.ps1` runs it via `scripts/settings-doc.ps1`, and
   `release.ps1` commits README.md. Never hand-edit those tables.
-- `src/KroolWorldUI/Features/` - one file per feature.
+- `src/KroolWorldUI/Features/` - one file per feature. `HudKit.cs` holds the shared toast look,
+  game-font text cloning and synthesized sounds; new HUD toasts should use it. Static fields
+  must not touch Harmony or game types in their initializers: SettingsDoc runs `BindConfig`
+  outside the game.
 - `thunderstore/` - manifest.json and icon.png (256x256). Package = these + DLL + README + CHANGELOG.
 
 ## Gotchas
@@ -68,7 +73,12 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
   food column: icon beside the fork, a clone of the health bar rising above it), the food
   max-health segment (child of Hud.m_healthBarRoot, past its far end). Below the hotbar is the
   raven tutorial text area: the owner saw overlap there, avoid it. Food reminder toast:
-  top-center (0.5, 0.84), pushed below Hud.m_eventBar (raid banner) when that is up.
+  top-center (0.5, 0.84), pushed below Hud.m_eventBar (raid banner) when that is up. Save
+  countdown: centered at (0.5, 0.72), below the food toast.
+- Auto-save timing: Game.UpdateSaving adds unscaled time to `Game.m_saveTimer` and saves at the
+  static `Game.m_saveInterval` (1800 s); the server broadcasts `$msg_worldsavewarning 30s` to
+  everyone 30 s before. A client's own timer saves only its character, and the server's
+  SavePlayerProfile RPC resets it. `Minimap.AddPin` needs a Splatform.dll reference (PlatformUserID).
 - Vanilla bottom-left HUD (from the game's bundle): `healthpanel` holds a vertical health bar
   (`Health`, rotated 90 degrees, grows up, 32 px per 25 HP) with the heart under it, and the food
   column (`food0..2`, 45 px) with the fork (`foodicon (1)`, not referenced by Hud) under it. The

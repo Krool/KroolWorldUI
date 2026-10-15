@@ -9,7 +9,7 @@ schemaVersion = "0.0.1"
 namespace = "Krool"
 name = "Krool_World_UI"
 versionNumber = "0.4.0"
-description = "HUD and UI additions: skill XP (experience) bars with level-up text, a carry weight / encumbrance bar, food timer reminders and notifications, and max health lost to food decay. Client-side; every feature toggles in an F7 settings menu."
+description = "HUD and UI: skill XP (experience) bars, carry weight / encumbrance bar, food timer reminders, max health lost to food decay, world autosave countdown, auto map pins for workbenches with Norse names. Client-side; toggle each in an F7 menu."
 websiteUrl = "https://github.com/Krool/KroolWorldUI"
 containsNsfwContent = false
 

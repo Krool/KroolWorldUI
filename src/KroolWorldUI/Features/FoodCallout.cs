@@ -87,11 +87,10 @@ namespace KroolWorldUI.Features
         private const float NoFoodDelaySeconds = 3f; // foods load with the player; do not flash before
         private const string NoFoodKey = "_nofood";
 
-        private static readonly Color Parchment = new Color(0.92f, 0.87f, 0.78f, 1f);
-        private static readonly Color Gold = new Color(0.87f, 0.70f, 0.36f, 1f);
-        private static readonly Color Warn = new Color(1f, 0.69f, 0.25f, 1f);
-        private static readonly Color Ready = new Color(0.62f, 0.86f, 0.45f, 1f);
-        private static readonly Color Muted = new Color(0.72f, 0.66f, 0.56f, 1f);
+        private static Color Parchment => HudKit.Parchment;
+        private static Color Warn => HudKit.Warn;
+        private static Color Ready => HudKit.Ready;
+        private static Color Muted => HudKit.Muted;
 
         private static FoodCalloutHud _instance;
         private static bool _failed;
@@ -165,22 +164,13 @@ namespace KroolWorldUI.Features
             f._group.blocksRaycasts = false;
             f._group.interactable = false;
 
-            var background = NewImage("bg", go.transform, new Color(0.05f, 0.035f, 0.025f, 0.8f));
-            Stretch(background.rectTransform);
-            var frame = background.gameObject.AddComponent<Outline>();
-            frame.effectColor = new Color(Gold.r, Gold.g, Gold.b, 0.45f);
-            frame.effectDistance = new Vector2(1f, -1f);
+            HudKit.ToastBackground(go.transform);
 
             // HUD text as the template, so rows use the game's font and material.
             f._textTemplate = hud.m_healthText;
             f._forkSprite = FindForkSprite(hud);
 
-            f._audio = go.AddComponent<AudioSource>();
-            f._audio.playOnAwake = false;
-            f._audio.spatialBlend = 0f;
-            f._audio.ignoreListenerPause = true;
-            if (AudioMan.instance != null && AudioMan.instance.m_guiMixer != null)
-                f._audio.outputAudioMixerGroup = AudioMan.instance.m_guiMixer; // follows the game's UI volume
+            f._audio = HudKit.NewAudio(go);
 
             f._createdAt = Time.time;
         }
@@ -459,7 +449,7 @@ namespace KroolWorldUI.Features
             rt.anchorMax = new Vector2(1f, 1f);
             rt.pivot = new Vector2(0.5f, 1f);
 
-            var icon = NewImage("icon", go.transform, Color.white);
+            var icon = HudKit.NewImage("icon", go.transform, Color.white);
             icon.preserveAspect = true;
             var irt = icon.rectTransform;
             irt.anchorMin = irt.anchorMax = new Vector2(0f, 0.5f);
@@ -520,39 +510,8 @@ namespace KroolWorldUI.Features
             Relayout();
         }
 
-        /// <summary>A text cloned from the HUD's own, so it uses the game's font and material.</summary>
-        private TMP_Text NewText(Transform parent, string name, TextAlignmentOptions align, Color color)
-        {
-            var textGo = Instantiate(_textTemplate.gameObject, parent, false);
-            textGo.name = name;
-            textGo.SetActive(true);
-            // The source text may be rotated or scaled in its own panel (the HUD health text is
-            // turned 90 degrees); the copy must sit flat.
-            textGo.transform.localRotation = Quaternion.identity;
-            textGo.transform.localScale = Vector3.one;
-            for (int i = textGo.transform.childCount - 1; i >= 0; i--)
-                Destroy(textGo.transform.GetChild(i).gameObject);
-            foreach (var c in textGo.GetComponents<Component>())
-                if (!(c is Transform) && !(c is TMP_Text) && !(c is CanvasRenderer))
-                    Destroy(c);
-            var text = textGo.GetComponent<TMP_Text>();
-            text.enableAutoSizing = false;
-            text.fontSize = 18f;
-            text.color = color;
-            text.alignment = align;
-            text.textWrappingMode = TextWrappingModes.NoWrap;
-            text.overflowMode = TextOverflowModes.Overflow;
-            text.richText = true;
-            text.raycastTarget = false;
-            var rt = text.rectTransform;
-            rt.anchorMin = Vector2.zero;
-            rt.anchorMax = Vector2.one;
-            rt.pivot = new Vector2(0.5f, 0.5f);
-            rt.offsetMin = Vector2.zero;
-            rt.offsetMax = Vector2.zero;
-            return text;
-        }
-
+        private TMP_Text NewText(Transform parent, string name, TextAlignmentOptions align, Color color) =>
+            HudKit.NewText(_textTemplate, parent, name, align, color);
         /// <summary>Configured anchor, pushed down below the raid/event banner when it is up.</summary>
         private void Place()
         {
@@ -600,60 +559,9 @@ namespace KroolWorldUI.Features
             _audio.PlayOneShot(_chime, FoodCallout.SoundVolume.Value);
         }
 
-        /// <summary>
-        /// Two soft rising sine notes (E5 then A5) with quick attack and gentle decay, about 0.35 s.
-        /// Generated at runtime, so the mod ships no audio files.
-        /// </summary>
-        private static AudioClip BuildChime()
-        {
-            const int rate = 44100;
-            const float length = 0.42f;
-            int n = (int)(rate * length);
-            var data = new float[n];
-            AddNote(data, rate, 659.25f, 0.00f, 0.30f);
-            AddNote(data, rate, 880.00f, 0.11f, 0.31f);
-            float peak = 0f;
-            foreach (var s in data)
-                peak = Mathf.Max(peak, Mathf.Abs(s));
-            if (peak > 0f)
-                for (int i = 0; i < n; i++)
-                    data[i] = data[i] / peak * 0.8f;
-            var clip = AudioClip.Create("KroolWorldUI_FoodChime", n, 1, rate, false);
-            clip.SetData(data, 0);
-            return clip;
-        }
-
-        private static void AddNote(float[] data, int rate, float freq, float start, float duration)
-        {
-            int s0 = (int)(start * rate);
-            int len = (int)(duration * rate);
-            for (int i = 0; i < len && s0 + i < data.Length; i++)
-            {
-                float t = i / (float)rate;
-                float attack = Mathf.Clamp01(t / 0.008f);
-                float decay = Mathf.Exp(-t * 9f);
-                // A touch of the octave for a bell-like tone instead of a bare beep.
-                float wave = Mathf.Sin(2f * Mathf.PI * freq * t) + 0.25f * Mathf.Sin(4f * Mathf.PI * freq * t);
-                data[s0 + i] += wave * attack * decay;
-            }
-        }
-
-        private static Image NewImage(string name, Transform parent, Color color)
-        {
-            var go = new GameObject(name, typeof(RectTransform), typeof(Image));
-            go.transform.SetParent(parent, false);
-            var img = go.GetComponent<Image>();
-            img.color = color;
-            img.raycastTarget = false;
-            return img;
-        }
-
-        private static void Stretch(RectTransform rt)
-        {
-            rt.anchorMin = Vector2.zero;
-            rt.anchorMax = Vector2.one;
-            rt.offsetMin = Vector2.zero;
-            rt.offsetMax = Vector2.zero;
-        }
+        /// <summary>Two soft rising notes (E5 then A5), about 0.35 s.</summary>
+        private static AudioClip BuildChime() =>
+            HudKit.Tone("KroolWorldUI_FoodChime", 0.42f,
+                new HudKit.Note(659.25f, 0.00f, 0.30f), new HudKit.Note(880.00f, 0.11f, 0.31f));
     }
 }

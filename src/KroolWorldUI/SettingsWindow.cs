@@ -30,6 +30,9 @@ namespace KroolWorldUI
         private const float ControlHeight = 26f;
         private const float TooltipDelay = 0.35f;
         private const float TooltipWidth = 340f;
+        private const float TitleBand = 46f;     // title strip at the top of the window; content starts below it
+        private const float ResetWidth = 56f;    // the per-row Reset button, or the space kept for it
+        private const float ScrollbarWidth = 22f;
 
         private Rect _window = new Rect(80f, 80f, 540f, 700f);
         private Vector2 _scroll;
@@ -87,10 +90,12 @@ namespace KroolWorldUI
             {
                 SkillXpBarStack.GetOrCreate()?.Preview(Player.m_localPlayer.GetSkills());
                 FoodCalloutHud.Preview(true, playSound: !_previewWas && FoodCallout.Sound.Value);
+                SaveCountdownHud.Preview(true);
             }
             else if (_previewWas)
             {
                 FoodCalloutHud.Preview(false, playSound: false);
+                SaveCountdownHud.Preview(false);
             }
             _previewWas = active;
         }
@@ -181,8 +186,8 @@ namespace KroolWorldUI
                 .Where(s => s.Entries.Count > 0)
                 .ToList();
 
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("Hover a setting for details.", _styles.Hint);
+            GUILayout.BeginHorizontal(GUILayout.Height(26f));
+            GUILayout.Label("Hover a setting for details.", _styles.Hint, GUILayout.MinWidth(0f));
             GUILayout.FlexibleSpace();
             if (GUILayout.Button("Expand all", _styles.Small, GUILayout.Width(96f), GUILayout.Height(24f)))
                 SetExpanded(sections.Select(s => s.Name), true);
@@ -191,7 +196,9 @@ namespace KroolWorldUI
             GUILayout.EndHorizontal();
             GUILayout.Space(6f);
 
-            _scroll = GUILayout.BeginScrollView(_scroll, GUILayout.ExpandHeight(true));
+            // No horizontal bar: rows are sized to the view, and a bar would cover the last row.
+            _scroll = GUILayout.BeginScrollView(_scroll, false, false, GUIStyle.none, GUI.skin.verticalScrollbar,
+                GUILayout.ExpandHeight(true));
             foreach (var (name, entries) in sections)
                 DrawSection(name, entries, mouseInList);
             GUILayout.EndScrollView();
@@ -214,7 +221,7 @@ namespace KroolWorldUI
             if (repaint)
                 UpdateTooltip(mouse);
 
-            GUI.DragWindow(new Rect(0f, 0f, 10000f, 28f));
+            GUI.DragWindow(new Rect(0f, 0f, 10000f, TitleBand));
         }
 
         private void DrawSection(string name, List<ConfigEntryBase> entries, bool mouseInList)
@@ -225,7 +232,8 @@ namespace KroolWorldUI
 
             GUILayout.BeginHorizontal(_styles.Header);
             string title = changed > 0 ? $"{name}   <size=13><color=#B3A38C>{changed} changed</color></size>" : name;
-            if (GUILayout.Button(title, _styles.HeaderButton, GUILayout.ExpandWidth(true), GUILayout.Height(30f)))
+            // MinWidth 0: the name clips rather than pushing the Reset all / On-Off buttons out.
+            if (GUILayout.Button(title, _styles.HeaderButton, GUILayout.MinWidth(0f), GUILayout.ExpandWidth(true), GUILayout.Height(30f)))
                 SetExpanded(new[] { name }, !open);
             if (Event.current.type == EventType.Repaint)
             {
@@ -266,7 +274,10 @@ namespace KroolWorldUI
             var range = entry.Description?.AcceptableValues;
             GUILayout.BeginHorizontal();
             GUILayout.Space(6f);
-            GUILayout.Label(ConfigText.Pretty(entry.Definition.Key), _styles.Label, GUILayout.Width(LabelWidth));
+            // Long names widen their own label instead of wrapping into the row below.
+            var label = new GUIContent(ConfigText.Pretty(entry.Definition.Key));
+            float labelWidth = Mathf.Max(LabelWidth, _styles.Label.CalcSize(label).x + 8f);
+            GUILayout.Label(label, _styles.Label, GUILayout.Width(labelWidth));
             switch (entry.BoxedValue)
             {
                 case bool _:
@@ -346,7 +357,9 @@ namespace KroolWorldUI
                 default:
                 {
                     string s = entry.GetSerializedValue();
-                    string ns = GUILayout.TextField(s, _styles.Field, GUILayout.Height(ControlHeight));
+                    // Fixed width: a long value (the pin name lists) would otherwise widen the row past the window.
+                    float fieldWidth = Mathf.Max(120f, _listRect.width - ScrollbarWidth - 6f - labelWidth - ResetWidth - 24f);
+                    string ns = GUILayout.TextField(s, _styles.Field, GUILayout.Width(fieldWidth), GUILayout.Height(ControlHeight));
                     if (ns != s)
                     {
                         try { entry.SetSerializedValue(ns); }
@@ -358,12 +371,12 @@ namespace KroolWorldUI
 
             if (IsChanged(entry))
             {
-                if (GUILayout.Button("Reset", _styles.Small, GUILayout.Width(52f), GUILayout.Height(24f)))
+                if (GUILayout.Button("Reset", _styles.Small, GUILayout.Width(ResetWidth - 4f), GUILayout.Height(24f)))
                     ResetAll(new[] { entry });
             }
             else
             {
-                GUILayout.Space(56f);
+                GUILayout.Space(ResetWidth);
             }
             GUILayout.EndHorizontal();
             TrackHover(entry, ConfigText.Tooltip(entry), mouseInList);
@@ -453,8 +466,11 @@ namespace KroolWorldUI
                 Window = new GUIStyle(GUI.skin.window)
                 {
                     font = font, fontSize = 22, fontStyle = FontStyle.Bold,
-                    padding = new RectOffset(16, 16, 40, 14), border = new RectOffset(4, 4, 4, 4),
-                    alignment = TextAnchor.UpperCenter,
+                    // The title draws inside the top padding: contentOffset lifts it 10 px from the
+                    // top edge, and the padding keeps the first row below it.
+                    padding = new RectOffset(16, 16, (int)TitleBand + 4, 14), border = new RectOffset(4, 4, 4, 4),
+                    alignment = TextAnchor.UpperCenter, contentOffset = new Vector2(0f, -(TitleBand - 6f)),
+                    wordWrap = false, clipping = TextClipping.Clip,
                 };
                 SetAll(Window, Tex(Wood, Gold), Gold);
 
@@ -479,7 +495,7 @@ namespace KroolWorldUI
                 Hint.fixedHeight = 24f;
 
                 Tooltip = Text(font, 15, Parchment);
-                Tooltip.wordWrap = true;
+                Tooltip.wordWrap = true; // the one style that wraps (CalcHeight sizes it)
                 Tooltip.padding = new RectOffset(10, 10, 8, 8);
                 Tooltip.border = new RectOffset(2, 2, 2, 2);
                 Tooltip.normal.background = Tex(new Color(0.08f, 0.055f, 0.035f, 0.98f), Gold);
@@ -517,7 +533,11 @@ namespace KroolWorldUI
 
             private static GUIStyle Text(Font font, int size, Color color, FontStyle style = FontStyle.Normal)
             {
-                var s = new GUIStyle(GUI.skin.label) { font = font, fontSize = size, fontStyle = style };
+                // One line, clipped: wrapped text would spill over the next row (rows have fixed heights).
+                var s = new GUIStyle(GUI.skin.label)
+                {
+                    font = font, fontSize = size, fontStyle = style, wordWrap = false, clipping = TextClipping.Clip,
+                };
                 s.normal.textColor = color;
                 return s;
             }

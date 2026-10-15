@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.0
+
+- New: save countdown. A box near the top of the screen counts down the last 5 seconds (adjustable, 3 to 30) before the auto-save, then shows Saving..., with a soft tick each second. Exact in single player and as host; on a dedicated server it times the world save from the server's 30-second warning. A client's own character save shows as Character save.
+- New: bench pins. Building a workbench adds a map pin with a random Norse-sounding name (Hrafnvik, Trollhaven, Odinheim). Choose the icon, the naming (random, station name or none) and whether all crafting stations get pins; no new pin within 30 meters of an existing one. The name bank is two editable lists in F7. This is the mod's first change to anything: it adds pins to your own map, as you would by hand.
+- Settings window: the title no longer overlaps the Expand all / Collapse all row; long setting names and section titles stay on one line instead of wrapping over the next row; long text values (the name lists) fit the window instead of widening it.
+- Preview on HUD also shows a looping save countdown.
 ## 0.4.0
 
 - Skill XP: new default Tiles style, the skill icon with its XP bar underneath, a third taller than wide, side by side at the bottom right just above the key hints. It only moves up to make room for them, so it does not hop when you equip something. Rows (the bar with the name on it) is still a choice. New settings: Style, Tile Size, Tile Level (level number in the corner, off by default), and Bottom Right placement. The placement setting is now named Placement, so it starts from the new default.
@@ -21,6 +27,7 @@
 - New: blue floating XP text over your character, like a damage number, only on your screen. Every gain, level-ups only, or off.
 - Food reminders: separate switches for running out (on) and can eat again (off, new). New no-food message that stays up until you eat or press Backspace; it waits for the arrival on a new character and shows again after a respawn.
 - Settings window: colors show a swatch and an editable hex value. Preview also shows a sample max-health segment.
+
 ## 0.2.3
 
 - Food reminder: removed the "eat again" text; the time left is right-aligned with fixed-width digits so the countdown no longer jiggles.

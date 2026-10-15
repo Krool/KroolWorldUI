@@ -1,9 +1,9 @@
 ![Krool World UI](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/banner.png)
 
-**Small HUD additions for Valheim that show what the game keeps hidden:** how close a skill is to its next level, how much you are carrying, how much health your food has lost, and when to eat.
+**Small HUD additions for Valheim that show what the game keeps hidden:** how close a skill is to its next level, how much you are carrying, how much health your food has lost, when to eat, and when the auto-save lag spike is coming. It can also pin your workbenches on the map with Norse-sounding names.
 
 - **Client-side only.** The server and other players do not need it.
-- **Read-only.** It reads game state for display and never changes your character or world.
+- **Read-only, with one exception.** It reads game state for display. The only thing it ever changes is your own map: **Bench Pins** adds a pin when you build a workbench, as you would by hand. It never touches your character or world.
 - **Pick what you want.** Every feature has its own on/off switch in an in-game settings window (**F7**). No other config mod needed.
 
 ## At a glance
@@ -14,6 +14,8 @@
 | **Carry weight** | A vertical weight bar beside your food, styled like the health bar | Yes |
 | **Food max health** | A faint red segment on the health bar: the max health your food has lost as it wears off | Yes |
 | **Food reminders** | A toast when food runs low, a message while you have none, and an optional "can eat again" | Yes ("can eat again" off) |
+| **Save countdown** | A clear 5-second countdown before the auto-save, so its lag spike never catches you mid-fight | Yes |
+| **Bench pins** | A map pin with a random Norse name (Hrafnvik, Trollhaven, Odinheim) when you build a workbench | Yes |
 | **Settings window** | Every option in game, with a live preview | Press **F7** |
 
 ---
@@ -31,6 +33,7 @@ Swing an axe and a Woodcutting tile appears at the bottom right of the screen, j
   - Tile size, an optional level number in the tile's corner, bar color.
   - Placement: **Bottom Right**, **Below Stamina**, **Right Side** (clear of the minimap), or **Custom**, plus nudge offsets.
 - Hides while the inventory, the big map or the menu is open.
+
 ## Carry weight
 
 Your weight, always on screen, without opening the inventory. It sits left of the food icons and is built like the health bar beside it: a weight icon next to the fork, a bar rising above it, and your weight over your max on top.
@@ -70,6 +73,26 @@ A small toast at the top of the screen with the food's icon, its name and the ti
 - The countdown uses fixed-width digits, so it holds still.
 - Moves down to clear the raid banner, and hides while the inventory, the big map or the menu is open.
 
+## Save countdown
+
+Valheim auto-saves every 30 minutes, and on a big world the save freezes the game for a moment. On hardcore that hitch can be the difference in a fight. A few seconds before it, a box near the top of the screen counts down: **World save in 5, 4, 3, 2, 1**, then **Saving...**
+
+- **Exact in single player and as host:** it reads the game's own save timer.
+- **On a dedicated server:** it times the world save from the server's 30-second warning, which every player receives. Your own client also saves your character on its own timer; that shows as **Character save in 5**.
+- A soft tick each second, a brighter one on the last. It follows the game's sound volume and can be turned off.
+- Start time (3 to 30 seconds) and position are adjustable.
+
+## Bench pins
+
+Build a workbench and a pin appears on your map, named like a Norse settlement: **Hrafnvik**, **Frostgard**, **Trollhaven**, **Eikthyrhold**, **Meadhall**.
+
+- **One pin per base.** No new pin if one is already within 30 meters (adjustable), so a camp with three benches gets one pin.
+- **Pick the icon:** fire, house (default), hammer, dot or portal.
+- **Pick the name:** random (default), the station's name, or none.
+- **Make it yours:** the name bank is two editable lists, prefixes and suffixes, in **F7**. Add your clan's names.
+- Workbench only by default; switch to **All Crafting Stations** to also pin forges, stonecutters and the rest.
+- Pins are saved with your character like any pin you place. Removing the bench leaves the pin.
+
 ## Settings window
 
 Press **F7** in game.
@@ -78,7 +101,7 @@ Press **F7** in game.
 - **Hover any setting** to see what it does, its default and its range.
 - **Every option in one place:** sliders for sizes and timings, click-to-cycle buttons for choices, and a color swatch with an editable hex value.
 - **Reset** sits next to anything you changed, and **Reset all** on a section's header.
-- **Preview on HUD** shows sample skill tiles for your top skills, the food reminders and a sample max-health segment (and plays the chime once), so you can place and size things live.
+- **Preview on HUD** shows sample skill tiles for your top skills, the food reminders, a sample max-health segment and a looping save countdown (with sound on the first pass), so you can place and size things live.
 - **Esc** or **F7** closes it. While it is open your character ignores input, and the mouse wheel scrolls the window instead of zooming the camera.
 
 The same settings are in `BepInEx/config/krool.kroolworldui.cfg` (in r2modman: **Config editor**). Colors there are hex `RRGGBBAA`; the last two digits are opacity.
@@ -162,6 +185,30 @@ Generated from the mod's code on every build, so it always matches the F7 window
 | Sound Volume | 0.35 | 0.05 to 1 | Chime volume (also follows the game's sound settings). |
 | Anchor X | 0.5 | 0 to 1 | Horizontal position of the reminder's center (0 = left, 1 = right). |
 | Anchor Y | 0.84 | 0 to 1 | Vertical position of the reminder's top edge (0 = bottom, 1 = top). It moves down on its own to clear the raid banner. |
+
+**Save Countdown**
+
+| Setting | Default | Range or choices | What it does |
+|---|---|---|---|
+| Enabled | On |  | Counts down the last seconds before the auto-save, so its lag spike does not catch you mid-fight. Works in single player, as host, and on a dedicated server. |
+| Seconds | 5 | 3 to 30 | How many seconds before the save the countdown starts. |
+| Sound | On |  | A soft tick each second of the countdown. |
+| Sound Volume | 0.35 | 0.05 to 1 | Tick volume (also follows the game's sound settings). |
+| Anchor X | 0.5 | 0 to 1 | Horizontal position of the countdown's center (0 = left, 1 = right). |
+| Anchor Y | 0.72 | 0 to 1 | Vertical position of the countdown's center (0 = bottom, 1 = top). |
+
+**Bench Pins**
+
+| Setting | Default | Range or choices | What it does |
+|---|---|---|---|
+| Enabled | On |  | Adds a map pin when you build a workbench, so you can find your camps again. This adds a pin to your map like you would by hand; removing the bench leaves the pin. |
+| Pin Stations | Workbench Only | Workbench Only, All Crafting Stations | Workbench Only, or every crafting station (forge, stonecutter, artisan table, and so on). |
+| Icon | House | Fire, House, Hammer, Dot, Portal | Which map pin icon to use. |
+| Names | Random Name | Random Name, Station Name, No Name | Random Name: a Norse-sounding name from Name Prefixes + Name Suffixes. Station Name: "Workbench". No Name: just the icon. |
+| Skip Near Pin Meters | 30 | 0 to 200 | No new pin if one is already on your map this close (meters), so a base gets one pin, not one per bench. 0 = always pin. |
+| Announce | On |  | Show the new pin's name in the top-left messages. |
+| Name Prefixes | Ulf, Hrafn, Jarn, Frost, Grim, Skjold, Bjorn, Eld, Svart, Thor, Odin, Rune, Troll, Mead, Ash, Ygg, Valk, Draugr, Fenris, Storm, Iron, Wolf, Raven, Boar, Elk, Ember, Hel, Njord, Sig, Hjalm, Gunn, Kald, Myrk, Vind, Stein, Gull, Sol, Eikthyr, Bonemass, Greyling |  | First halves of random names, separated by commas. |
+| Name Suffixes | heim, gard, vik, stad, borg, holt, fjord, hall, by, hold, keep, stead, haven, mark, fell, dal, ness, wall, rest, ford, hof, skali, rock, watch, hearth |  | Second halves of random names, separated by commas. |
 
 <!-- settings:end -->
 
