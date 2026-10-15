@@ -1,90 +1,162 @@
-# Krool World UI
+![Krool World UI](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/banner.png)
 
-Client-side HUD additions for Valheim. Each feature has its own on/off switch, so you keep only the ones you like.
+**Small HUD additions for Valheim that show what the game keeps hidden:** how close a skill is to its next level, how much you are carrying, how much health your food has lost, and when to eat.
 
-Client-side only: the server and other players do not need it. It reads game state for display and never changes your character or world.
+- **Client-side only.** The server and other players do not need it.
+- **Read-only.** It reads game state for display and never changes your character or world.
+- **Pick what you want.** Every feature has its own on/off switch in an in-game settings window (**F7**). No other config mod needed.
 
-## Features
+## At a glance
 
-### Skill XP bars
+| Feature | What you get | On by default |
+|---|---|---|
+| **Skill XP bars** | A bar under your stamina that fills as you earn XP, plus a floating `+0.8% Swords` | Yes |
+| **Carry weight** | A vertical weight bar beside your food, styled like the health bar | Yes |
+| **Food max health** | A faint red segment on the health bar: the max health your food has lost as it wears off | Yes |
+| **Food reminders** | A toast when food runs low, a message while you have none, and an optional "can eat again" | Yes ("can eat again" off) |
+| **Settings window** | Every option in game, with a live preview | Press **F7** |
 
-When you earn XP in a skill, a slim bar for that skill appears centered under the stamina bar: the skill's icon, then a bar with the skill name and level on it.
+---
 
-- The bar shows progress toward the next level in two shades of one color. The darker part is where you were when the bar appeared. The lighter part is what you have earned since, so each axe swing visibly adds to it.
-- Keep earning XP and the lighter part keeps growing, carrying over through a level-up. The `+12%` before the level is the running total as a percent of a level.
-- After 3 seconds without XP for that skill, the bar fades out. Next time it appears, the lighter part starts from zero again.
-- Bars for different skills stack downward, up to 4 at once (fewer if they would run off the bottom of the screen). When one fades out, the bars below it slide up.
-- Labels: **Name And Level** (default) or **Icon Only** (just the icon and the bar). Width, height and color are adjustable.
-- Position: **Below Stamina** (default), **Right Side** (right edge, moved down clear of the minimap and status effects), or **Custom**, plus nudge offsets.
-- Floating text: a blue `+0.8% Swords` floats up over your character like a damage number, shown only on your screen. Gains within about a second are added together. Set it to **Level Up Only** to see just new levels, or **Off**.
-- The bars hide while the inventory, the big map or the menu is open.
+## Skill XP bars
 
-### Weight on the HUD
+Swing an axe and a slim bar for Woodcutting appears under your stamina bar: the skill's icon, then a bar with the skill name and level on it.
 
-Your carry weight, always visible, without opening the inventory. It sits left of the food icons and is built like the health bar beside it: a weight icon next to the fork, a bar rising above it, and your weight over your max on top.
+- **See every gain.** The darker part of the bar is where you were when it appeared. The lighter part is what you have earned since, so each swing visibly adds to it.
+- **Running total.** The `+12%` before the level counts everything earned while the bar is up, carrying over through a level-up.
+- **Stacks neatly.** Each skill gets its own bar, stacking downward (up to 4, fewer if they would run off the screen). After 3 seconds without XP a bar fades out and the ones below slide up.
+- **Floating text.** A blue `+0.8% Swords` floats up over your character like a damage number. Only you see it. Quick gains are added together. Set it to **Level Up Only** or **Off** if you prefer.
+- **Your layout:**
+  - Labels: **Name And Level** or **Icon Only**.
+  - Width, height and color.
+  - Position: **Below Stamina**, **Right Side** (clear of the minimap), or **Custom**, plus nudge offsets.
+- Hides while the inventory, the big map or the menu is open.
 
-- The numbers match the inventory screen exactly, including extra slots and backpacks from other mods and your strength belt.
-- The bar is 110 pixels tall at the normal 300 max weight and grows with your capacity: a Megingjord (+150) makes it half again as tall. Length, thickness, text size and a nudge offset are adjustable, and the growth can be turned off.
-- Colors: **Thresholds** (default: your fill color, orange from 80% full, red when over), **Gradient** (blends through the three as you fill up), or **Single**. All three colors can be changed. Over capacity it flashes, like the inventory does.
-- Text: weight over max (default), weight only, percent, or none.
-- Show mode: **Always** (default), **Near Limit** (only when you are close to full), or **When Changed** (a few seconds after you pick up or drop something).
+## Carry weight
 
-### Food max health
+Your weight, always on screen, without opening the inventory. It sits left of the food icons and is built like the health bar beside it: a weight icon next to the fork, a bar rising above it, and your weight over your max on top.
 
-The game shrinks each food's health bonus as it wears off: a food at half its time gives about 81% of its health, and the drop speeds up near the end. The health bar now continues past its end in a faint red segment showing the max health you have lost this way, which is what eating fresh would give back. The color and opacity are adjustable.
+- **Exact numbers.** Matches the inventory screen, including your strength belt and the extra slots and backpacks from other mods.
+- **Grows with you.** The bar is 110 pixels tall at the normal 300 max and grows with your capacity: a Megingjord (+150) makes it half again as tall. You can turn the growth off.
+- **Reads at a glance:**
+  - **Thresholds** (default): your fill color, orange from 80% full, red when over.
+  - **Gradient**: blends through the three as you fill up.
+  - **Single**: one color.
+  - Over capacity it flashes, like the inventory does. All three colors can be changed.
+- **Text:** weight over max (default), weight only, percent, or none, at any size.
+- **When to show it:** **Always**, **Near Limit** (only when you are close to full), or **When Changed** (a few seconds after you pick up or drop something).
+- Bar length, thickness and position are adjustable.
 
-### Food reminders
+## Food max health
 
-A small reminder at the top of the screen with the food's icon, its name and the time left. The time is right-aligned with fixed-width digits, so the countdown holds still. Each kind has its own switch:
+Valheim quietly shrinks each food's health bonus as it wears off. A food at half its time gives only about 81% of its health, and the drop speeds up near the end.
 
-- **Running out** (on): when a food drops under 4 minutes.
-- **Can eat again** (off): when a food passes half its time, the point where the game lets you eat it again.
-- **No food** (on): a message that stays up while you have no food, until you eat or press **Backspace** to hide it. It shows on a new character once the arrival is over, and after you respawn. Set it to **Any Slot Empty** to be told whenever a food slot is free.
+- The health bar continues past its end in a **faint red segment**: the max health you have lost this way.
+- That is exactly what eating fresh food would give back, so you can tell when a top-up is worth it.
+- Color and opacity are adjustable.
 
-A soft two-note chime plays with each (generated by the mod, no sound files). It follows the game's sound volume, and can be turned down or off. Timed reminders show once per food and fade after 6 seconds; they will not repeat until you have eaten that food again. The reminder moves down to clear the raid banner, and hides while the inventory, the big map or the menu is open.
+## Food reminders
 
-## Settings
+A small toast at the top of the screen with the food's icon, its name and the time left. Each kind has its own switch:
 
-Press **F7** in game to open the Krool World UI settings window. Every option is there: on/off buttons for features, sliders for sizes and timings, click-to-cycle buttons for choices, a swatch and hex value for colors, and a Reset button next to anything changed from its default. **Preview on HUD** shows sample XP bars for your top skills, the food reminders and a sample max-health segment (and plays the chime once), so you can place and size things live. Esc or F7 closes it; while it is open your character ignores input.
+| Reminder | Default | When |
+|---|---|---|
+| **Running out** | On | A food drops under 4 minutes (adjustable) |
+| **Can eat again** | Off | A food passes half its time, the point where the game lets you eat it again |
+| **No food** | On | Stays up while you have no food, until you eat or press **Backspace** |
 
-No other mod is needed for this. The same settings are also in `BepInEx/config/krool.kroolworldui.cfg` (r2modman: Config editor). Colors there are hex `RRGGBBAA`; the last two digits are opacity.
+- The no-food message waits until a new character has arrived, and shows again after you respawn. Set it to **Any Slot Empty** to be told whenever a food slot is free.
+- A soft two-note chime plays with each reminder. It follows the game's sound volume, and can be turned down or off.
+- Timed reminders show once per food and fade after 6 seconds. They do not repeat until you have eaten that food again.
+- The countdown uses fixed-width digits, so it holds still.
+- Moves down to clear the raid banner, and hides while the inventory, the big map or the menu is open.
+
+## Settings window
+
+Press **F7** in game.
+
+- **Every option in one place:** on/off buttons for features, sliders for sizes and timings, click-to-cycle buttons for choices, and a color swatch with an editable hex value.
+- **Reset** sits next to anything you changed from its default.
+- **Preview on HUD** shows sample XP bars for your top skills, the food reminders and a sample max-health segment (and plays the chime once), so you can place and size things live.
+- **Esc** or **F7** closes it. While it is open your character ignores input.
+
+The same settings are in `BepInEx/config/krool.kroolworldui.cfg` (in r2modman: **Config editor**). Colors there are hex `RRGGBBAA`; the last two digits are opacity.
+
+### Full settings list
+
+**General**
 
 | Setting | Default | What it does |
 |---|---|---|
 | SettingsKey | F7 | Key that opens the settings window |
-| Skill XP Bars: Enabled | true | Turn skill XP bars on or off |
-| Skill XP Bars: Labels | Name And Level | Name And Level, or Icon Only |
-| Skill XP Bars: ShowGainText | true | Show `+N%` gained before the level |
-| Skill XP Bars: Position | Below Stamina | Below Stamina, Right Side, or Custom |
-| Skill XP Bars: BarWidth / BarHeight | 220 / 22 | Size of one bar in HUD pixels |
-| Skill XP Bars: BarColor | gold | Bar color; earlier progress is a darker shade, new XP lighter |
-| Skill XP Bars: HoldSeconds / FadeSeconds | 3 / 0.6 | How long a bar stays after the last XP, and its fade |
-| Skill XP Bars: MaxBars | 4 | Most bars shown at once |
-| Skill XP Bars: OffsetX / OffsetY | 0 / 0 | Nudge the stack, in HUD pixels |
-| Skill XP Bars: AnchorX / AnchorY | 0.5 / 0.3 | Custom position: center of the stack's top edge (0-1 of the screen) |
-| Skill XP Bars: FloatingText | Every Gain | Every Gain, Level Up Only, or Off |
-| Skill XP Bars: FloatingTextColor | blue | Color of the floating text |
-| Weight: Enabled | true | Show carry weight on the HUD |
-| Weight: Show | Always | Always, Near Limit, or When Changed |
-| Weight: NearLimitPercent | 80 | Percent of max where the near-limit color starts (and it appears, in Near Limit mode) |
-| Weight: ChangedSeconds | 3 | When Changed mode: how long it stays |
-| Weight: Colors | Thresholds | Thresholds, Gradient, or Single |
-| Weight: FillColor / NearLimitColor / OverColor | tan / orange / red | Bar colors |
-| Weight: Text / TextSize | Current And Max / 16 | Numbers above the bar |
-| Weight: BarLength / BarThickness | 110 / 16 | Bar size in HUD pixels (length at 300 max weight) |
-| Weight: ScaleWithMaxWeight | true | Grow the bar with your max weight |
-| Weight: OffsetX / OffsetY | 0 / 0 | Nudge it, in HUD pixels |
-| Food Max Health: Enabled / Color | true / faint red | The lost-max-health segment on the health bar |
-| Food Reminder: Enabled | true | All food reminders on or off |
-| Food Reminder: RunningOut / ThresholdMinutes | true / 4 | Remind when a food has less than this many minutes left |
-| Food Reminder: CanEatAgain | false | Remind when a food can be eaten again |
-| Food Reminder: NoFoodMessage / NoFoodWhen | true / No Food | Message while you have no food (or any empty slot) |
-| Food Reminder: DismissKey | Backspace | Hides the no-food message until you next eat |
-| Food Reminder: ShowSeconds | 6 | How long a timed reminder stays |
-| Food Reminder: Sound / SoundVolume | true / 0.35 | Soft chime with each reminder, and its volume |
-| Food Reminder: AnchorX / AnchorY | 0.5 / 0.84 | Where the reminder sits (center of its top edge) |
 
-Settings saved by an older version keep their values. The removed hotbar placement settings for the weight bar are ignored.
+**Skill XP Bars**
+
+| Setting | Default | What it does |
+|---|---|---|
+| Enabled | true | Turn skill XP bars on or off |
+| Labels | Name And Level | Name And Level, or Icon Only |
+| ShowGainText | true | Show `+N%` gained before the level |
+| Position | Below Stamina | Below Stamina, Right Side, or Custom |
+| BarWidth / BarHeight | 220 / 22 | Size of one bar in HUD pixels |
+| BarColor | gold | Bar color; earlier progress is a darker shade, new XP lighter |
+| HoldSeconds / FadeSeconds | 3 / 0.6 | How long a bar stays after the last XP, and its fade |
+| MaxBars | 4 | Most bars shown at once |
+| OffsetX / OffsetY | 0 / 0 | Nudge the stack, in HUD pixels |
+| AnchorX / AnchorY | 0.5 / 0.3 | Custom position: center of the stack's top edge (0-1 of the screen) |
+| FloatingText | Every Gain | Every Gain, Level Up Only, or Off |
+| FloatingTextColor | blue | Color of the floating text |
+
+**Weight**
+
+| Setting | Default | What it does |
+|---|---|---|
+| Enabled | true | Show carry weight on the HUD |
+| Show | Always | Always, Near Limit, or When Changed |
+| NearLimitPercent | 80 | Percent of max where the near-limit color starts (and where it appears, in Near Limit mode) |
+| ChangedSeconds | 3 | When Changed mode: how long it stays |
+| Colors | Thresholds | Thresholds, Gradient, or Single |
+| FillColor / NearLimitColor / OverColor | tan / orange / red | Bar colors |
+| Text / TextSize | Current And Max / 16 | Numbers above the bar |
+| BarLength / BarThickness | 110 / 16 | Bar size in HUD pixels (length at 300 max weight) |
+| ScaleWithMaxWeight | true | Grow the bar with your max weight |
+| OffsetX / OffsetY | 0 / 0 | Nudge it, in HUD pixels |
+
+**Food Max Health**
+
+| Setting | Default | What it does |
+|---|---|---|
+| Enabled | true | Show the lost-max-health segment on the health bar |
+| Color | faint red | Segment color and opacity |
+
+**Food Reminder**
+
+| Setting | Default | What it does |
+|---|---|---|
+| Enabled | true | All food reminders on or off |
+| RunningOut / ThresholdMinutes | true / 4 | Remind when a food has less than this many minutes left |
+| CanEatAgain | false | Remind when a food can be eaten again |
+| NoFoodMessage / NoFoodWhen | true / No Food | Message while you have no food (or any empty slot) |
+| DismissKey | Backspace | Hides the no-food message until you next eat |
+| ShowSeconds | 6 | How long a timed reminder stays |
+| Sound / SoundVolume | true / 0.35 | Soft chime with each reminder, and its volume |
+| AnchorX / AnchorY | 0.5 / 0.84 | Where the reminder sits (center of its top edge) |
+
+Settings saved by an older version keep their values. Removed settings (the old hotbar placement for weight) are ignored.
+
+## Install
+
+- **r2modman / Thunderstore Mod Manager:** search for **Krool World UI** and install. BepInEx comes with it.
+- **Manual:** install [BepInExPack Valheim](https://thunderstore.io/c/valheim/p/denikson/BepInExPack_Valheim/), then put `KroolWorldUI.dll` in `BepInEx/plugins`.
+
+## Compatibility and tips
+
+- Used in a modpack with EpicLoot, ExtraSlots, AdventureBackpacks, Quick Stack, MultiUserChest, PlantEverything and Warfare.
+- **Something overlaps?** Other mods like the bottom-left corner too. Every element has nudge offsets in **F7**, and **Preview on HUD** shows where things land.
+- **Floating text too busy** while running or sneaking? Set **FloatingText** to **Level Up Only**.
+- **Updated and the defaults look off?** Settings you saved earlier are kept. Use **Reset** in **F7** to take the new defaults.
+
+Source, issues and changelog: [github.com/Krool/KroolWorldUI](https://github.com/Krool/KroolWorldUI). MIT licensed.
 
 ## Building from source
 
@@ -103,7 +175,11 @@ If Valheim is not in the default Steam folder, pass `-ValheimDir "<path>"` to `b
 Add a `## x.y.z` section to `CHANGELOG.md`, then:
 
 ```powershell
-.\scripts\release.ps1 -Version 0.2.0 -Publish
+.\scripts\release.ps1 -Version 0.3.2 -Publish
 ```
 
 This bumps the version everywhere, builds the zip, uploads it to Thunderstore with [tcli](https://github.com/thunderstore-io/thunderstore-cli) (`dotnet tool install -g tcli`), then commits, tags and pushes. Uploading needs a Thunderstore service-account token for the Krool team in the `TCLI_AUTH_TOKEN` environment variable.
+
+### Screenshots
+
+The shot list for the mod page is in [docs/screenshots](docs/screenshots/README.md).

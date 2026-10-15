@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.2
+
+- Mod page rewritten: banner, an at-a-glance table, bulleted features, the full settings list grouped by feature, install steps and tips.
+
 ## 0.3.1
 
 - Floating XP text: the last gain of a burst now shows about a second later instead of waiting for that skill's next XP; tiny gains no longer print as +0%; leftover gains are dropped on a new character or respawn; an error disables it once instead of logging on every XP tick.
