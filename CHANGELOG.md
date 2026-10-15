@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.1
+
+- Floating XP text: the last gain of a burst now shows about a second later instead of waiting for that skill's next XP; tiny gains no longer print as +0%; leftover gains are dropped on a new character or respawn; an error disables it once instead of logging on every XP tick.
+- Skill XP bars: a new bar is placed before its first frame is drawn; the skill name makes room for the level text after a settings change; the stack no longer follows the stamina bar's show/hide animation more than 40 pixels down.
+- No-food message: Backspace only hides it while you can see it; the 3-second wait and the hidden state reset with each respawn.
+
 ## 0.3.0
 
 - Weight moved beside the food icons and rebuilt like the health bar: a weight icon next to the fork, a vertical bar rising above it, and your weight over your max on top. New settings for colors (thresholds, gradient or single, with all three colors editable), bar length and thickness, text style and size, growth with max weight, and a nudge offset. The old hotbar placement is gone.
