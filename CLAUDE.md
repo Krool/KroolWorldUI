@@ -71,7 +71,7 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
   growing left, just above the highest KeyHints graphic seen this session; key hints are one row,
   about 20-80 px up), weight bar (child of Hud.m_healthPanel, left of the
   food column: icon beside the fork, a clone of the health bar rising above it), the food
-  max-health segment (child of Hud.m_healthBarRoot, past its far end). Below the hotbar is the
+  decay segments (FoodDecay: children of Hud.m_healthBarRoot and of the stamina/eitr bars' inner "Stamina" rect, the parent of m_staminaBar2Slow / m_eitrBarSlow, past the far end; those panels hide when full and the segment hides with them). Below the hotbar is the
   raven tutorial text area: the owner saw overlap there, avoid it. Food reminder toast:
   top-center (0.5, 0.84), pushed below Hud.m_eventBar (raid banner) when that is up. Save
   countdown: centered at (0.5, 0.72), below the food toast.
