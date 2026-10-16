@@ -1,6 +1,6 @@
 ![Krool World UI](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/banner.png)
 
-**Small HUD additions for Valheim that show what the game keeps hidden:** how close a skill is to its next level, how much you are carrying, how much health your food has lost, when to eat, and when the auto-save lag spike is coming. It can also pin your workbenches on the map with Norse-sounding names.
+**Small HUD additions for Valheim that show what the game keeps hidden:** how close a skill is to its next level, how much you are carrying, how much health and stamina your food has lost, when to eat, and when the auto-save lag spike is coming. It can also pin your workbenches on the map with Norse-sounding names.
 
 - **Client-side only.** The server and other players do not need it.
 - **Read-only, with one exception.** It reads game state for display. The only thing it ever changes is your own map: **Bench Pins** adds a pin when you build a workbench, as you would by hand. It never touches your character or world.
@@ -12,7 +12,7 @@
 |---|---|---|
 | **Skill XP bars** | A skill icon with an XP bar that fills as you earn XP, plus a floating `+0.8% Swords` | Yes |
 | **Carry weight** | A vertical weight bar beside your food, styled like the health bar | Yes |
-| **Food max health** | A faint red segment on the health bar: the max health your food has lost as it wears off | Yes |
+| **Food decay** | Faint segments past the end of the health, stamina and eitr bars: the max your food has lost as it wears off | Yes |
 | **Food reminders** | A toast when food runs low, a message while you have none, and an optional "can eat again" | Yes ("can eat again" off) |
 | **Save countdown** | A clear 5-second countdown before the auto-save, so its lag spike never catches you mid-fight | Yes |
 | **Bench pins** | A map pin with a random Norse name (Hrafnvik, Trollhaven, Odinheim) when you build a workbench | Yes |
@@ -49,13 +49,14 @@ Your weight, always on screen, without opening the inventory. It sits left of th
 - **When to show it:** **Always**, **Near Limit** (only when you are close to full), or **When Changed** (a few seconds after you pick up or drop something).
 - Bar length, thickness and position are adjustable.
 
-## Food max health
+## Food decay
 
-Valheim quietly shrinks each food's health bonus as it wears off. A food at half its time gives only about 81% of its health, and the drop speeds up near the end.
+Valheim quietly shrinks each food's bonuses as it wears off: health, stamina and eitr alike. A food at half its time gives only about 81% of each, and the drop speeds up near the end.
 
-- The health bar continues past its end in a **faint red segment**: the max health you have lost this way.
-- That is exactly what eating fresh food would give back, so you can tell when a top-up is worth it.
-- Color and opacity are adjustable.
+- Each bar continues past its end in a **faint segment**: red on health, gold on stamina, purple on eitr. That is the max you have lost this way.
+- It is exactly what eating fresh food would give back, so you can tell when a top-up is worth it before a fight or a long run.
+- The stamina and eitr bars only show while not full, and their segments come and go with them.
+- Each bar has its own switch and color.
 
 ## Food reminders
 
@@ -101,7 +102,7 @@ Press **F7** in game.
 - **Hover any setting** to see what it does, its default and its range.
 - **Every option in one place:** sliders for sizes and timings, click-to-cycle buttons for choices, and a color swatch with an editable hex value.
 - **Reset** sits next to anything you changed, and **Reset all** on a section's header.
-- **Preview on HUD** shows sample skill tiles for your top skills, the food reminders, a sample max-health segment and a looping save countdown (with sound on the first pass), so you can place and size things live.
+- **Preview on HUD** shows sample skill tiles for your top skills, the food reminders, sample food decay segments and a looping save countdown (with sound on the first pass), so you can place and size things live.
 - **Esc** or **F7** closes it. While it is open your character ignores input, and the mouse wheel scrolls the window instead of zooming the camera.
 
 The same settings are in `BepInEx/config/krool.kroolworldui.cfg` (in r2modman: **Config editor**). Colors there are hex `RRGGBBAA`; the last two digits are opacity.
@@ -162,12 +163,17 @@ Generated from the mod's code on every build, so it always matches the F7 window
 | Offset X | 0 | -200 to 200 | Nudge left (-) or right (+), in HUD pixels. |
 | Offset Y | 0 | -200 to 300 | Nudge down (-) or up (+), in HUD pixels. |
 
-**Food Max Health**
+**Food Decay**
 
 | Setting | Default | Range or choices | What it does |
 |---|---|---|---|
-| Enabled | On |  | Extend the health bar with a faint segment showing max health your foods have lost as they wear off. |
-| Color | `BF2E2473` | Hex RRGGBBAA (AA = opacity) | Color of the lost-health segment. Lower the last two digits to make it fainter. |
+| Enabled | On |  | Extend the health, stamina and eitr bars with faint segments showing the max your foods have lost as they wear off: what eating fresh food would give back. |
+| Health | On |  | Segment on the health bar. |
+| Health Color | `BF2E2473` | Hex RRGGBBAA (AA = opacity) | Color of the lost-health segment. Lower the last two digits to make it fainter. |
+| Stamina | On |  | Segment on the stamina bar. Like the bar itself, it shows only while your stamina is not full. |
+| Stamina Color | `EBB83373` | Hex RRGGBBAA (AA = opacity) | Color of the lost-stamina segment. |
+| Eitr | On |  | Segment on the eitr bar (eitr foods only). Shows only while your eitr is not full. |
+| Eitr Color | `9961E673` | Hex RRGGBBAA (AA = opacity) | Color of the lost-eitr segment. |
 
 **Food Reminder**
 

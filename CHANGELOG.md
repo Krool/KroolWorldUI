@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.0
+
+- Food decay: the stamina and eitr bars now get the same faint segment as the health bar, showing the max your food has lost as it wears off (the game shrinks all three alike). Gold on stamina, purple on eitr; each bar has its own switch and color. The stamina and eitr segments show while those bars do (when not full).
+- The Food Max Health settings section is now Food Decay. A health segment color you had changed starts from the default again.
 ## 0.5.0
 
 - New: save countdown. A box near the top of the screen counts down the last 5 seconds (adjustable, 3 to 30) before the auto-save, then shows Saving..., with a soft tick each second. Exact in single player and as host; on a dedicated server it times the world save from the server's 30-second warning. A client's own character save shows as Character save.
