@@ -1,6 +1,6 @@
 {
   "name": "Krool_World_UI",
-  "version_number": "0.7.1",
+  "version_number": "0.8.0",
   "website_url": "https://github.com/Krool/KroolWorldUI",
   "description": "HUD/UI: skill XP (experience) bars, carry weight / encumbrance bar, food timers, max health and stamina lost to food decay, build material counts, day/night bar and clock, autosave countdown, workbench map pins. Client-side; F7 settings.",
   "dependencies": [
