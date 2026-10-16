@@ -1,6 +1,6 @@
 ![Krool World UI](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/banner.png)
 
-**Small HUD additions for Valheim that show what the game keeps hidden:** how close a skill is to its next level, how much you are carrying, how much health and stamina your food has lost, when to eat, and when the auto-save lag spike is coming. It can also pin your workbenches on the map with Norse-sounding names.
+**Small HUD additions for Valheim that show what the game keeps hidden:** how close a skill is to its next level, how much you are carrying, how much wood and stone you have while building, how much health and stamina your food has lost, when to eat, and when the auto-save lag spike is coming. It can also pin your workbenches on the map with Norse-sounding names.
 
 - **Client-side only.** The server and other players do not need it.
 - **Read-only, with one exception.** It reads game state for display. The only thing it ever changes is your own map: **Bench Pins** adds a pin when you build a workbench, as you would by hand. It never touches your character or world.
@@ -12,6 +12,7 @@
 |---|---|---|
 | **Skill XP bars** | A skill icon with an XP bar that fills as you earn XP, plus a floating `+0.8% Swords` | Yes |
 | **Carry weight** | A vertical weight bar beside your food, styled like the health bar | Yes |
+| **Build materials** | While the hammer is out: how much wood and stone you carry, what the selected piece costs, and how many you can build | Yes |
 | **Food decay** | Faint segments past the end of the health, stamina and eitr bars: the max your food has lost as it wears off | Yes |
 | **Food reminders** | A toast when food runs low, a message while you have none, and an optional "can eat again" | Yes ("can eat again" off) |
 | **Save countdown** | A clear 5-second countdown before the auto-save, so its lag spike never catches you mid-fight | Yes |
@@ -48,6 +49,17 @@ Your weight, always on screen, without opening the inventory. It sits left of th
 - **Text:** weight over max (default), weight only, percent, or none, at any size.
 - **When to show it:** **Always**, **Near Limit** (only when you are close to full), or **When Changed** (a few seconds after you pick up or drop something).
 - Bar length, thickness and position are adjustable.
+
+## Build materials
+
+Take out the hammer (or the hoe or cultivator) and a small panel appears right of the build menu's piece box, counting what you carry as you build.
+
+- **What the selected piece costs,** each material with how many you have: `Wood 245 /2`. Red when you are short.
+- **Always listed:** Wood and Stone by default. Add anything to the list in **F7** by the name the game shows (`Fine Wood, Iron Nails`) or the prefab name.
+- **Enough for 12:** how many of the selected piece your materials cover, or **Not enough**.
+- Counts what the game itself counts when you place a piece: your inventory, not chests or backpacks.
+- Updates five times a second while you build. Hides with the inventory, the big map and the menu.
+- Sits left of the piece box instead on narrow screens, or anywhere with **Custom** placement.
 
 ## Food decay
 
@@ -191,6 +203,18 @@ Generated from the mod's code on every build, so it always matches the F7 window
 | Sound Volume | 0.35 | 0.05 to 1 | Chime volume (also follows the game's sound settings). |
 | Anchor X | 0.5 | 0 to 1 | Horizontal position of the reminder's center (0 = left, 1 = right). |
 | Anchor Y | 0.84 | 0 to 1 | Vertical position of the reminder's top edge (0 = bottom, 1 = top). It moves down on its own to clear the raid banner. |
+
+**Build Materials**
+
+| Setting | Default | Range or choices | What it does |
+|---|---|---|---|
+| Enabled | On |  | While a build tool is out, count the materials you carry, so you can watch your wood and stone as you build. |
+| Selected Piece | On |  | List what the selected piece costs, each with how many you carry. Red when you are short. |
+| Always Show | Wood, Stone |  | Materials always listed, separated by commas. Use the item's name as the game shows it (Fine Wood, Iron Nails) or its prefab name (FineWood, BronzeNails). |
+| Can Build Count | On |  | Show how many of the selected piece your materials cover. |
+| Placement | Beside Build Info | Beside Build Info, Custom | Beside Build Info: right of the selected-piece box at the bottom center. Custom: placed by Anchor X and Anchor Y. |
+| Anchor X | 0.8 | 0 to 1 | Custom placement: left edge (0 = left of screen, 1 = right). |
+| Anchor Y | 0.1 | 0 to 1 | Custom placement: bottom edge (0 = bottom of screen, 1 = top). |
 
 **Save Countdown**
 

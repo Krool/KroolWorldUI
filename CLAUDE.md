@@ -77,6 +77,8 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
   raven tutorial text area: the owner saw overlap there, avoid it. Food reminder toast:
   top-center (0.5, 0.84), pushed below Hud.m_eventBar (raid banner) when that is up. Save
   countdown: centered at (0.5, 0.72), below the food toast.
+  Build materials: in place mode, right of the build HUD's `SelectedInfo` box (found under
+  Hud.m_buildHud by name, placed from its world corners), bottom-aligned with it.
 - Auto-save timing: Game.UpdateSaving adds unscaled time to `Game.m_saveTimer` and saves at the
   static `Game.m_saveInterval` (1800 s); the server broadcasts `$msg_worldsavewarning 30s` to
   everyone 30 s before. A client's own timer saves only its character, and the server's

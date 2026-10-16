@@ -2,7 +2,7 @@
   "name": "Krool_World_UI",
   "version_number": "0.6.0",
   "website_url": "https://github.com/Krool/KroolWorldUI",
-  "description": "HUD and UI: skill XP (experience) bars, carry weight / encumbrance bar, food timer reminders, max health and stamina lost to food decay, world autosave countdown, auto map pins for workbenches with Norse names. Client-side; toggle each in F7.",
+  "description": "HUD and UI: skill XP (experience) bars, carry weight / encumbrance bar, food timers, max health and stamina lost to food decay, build material counts (wood, stone), autosave countdown, workbench map pins with Norse names. Client-side; F7 settings.",
   "dependencies": [
     "denikson-BepInExPack_Valheim-5.4.2351"
   ]

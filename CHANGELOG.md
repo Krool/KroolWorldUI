@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.7.0
+
+- New: build materials. While the hammer, hoe or cultivator is out, a panel right of the build menu's piece box counts the materials you carry: what the selected piece costs (red when short), an always-shown list (Wood and Stone by default, editable in F7), and how many of the piece you can build. Counts match what the game checks when you place.
 ## 0.6.0
 
 - Food decay: the stamina and eitr bars now get the same faint segment as the health bar, showing the max your food has lost as it wears off (the game shrinks all three alike). Gold on stamina, purple on eitr; each bar has its own switch and color. The stamina and eitr segments show while those bars do (when not full).
