@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.9.1
+
+- Rested countdown: moved from the middle of the screen to the buff row, in the next slot left of your buff icons, and trimmed to just the timer (Rested 14s). The comfort and duration text, the progress line, the green Rested flash and the position settings are gone.
+
 ## 0.9.0
 
 - New: rested countdown. While you rest by a fire, a box below the middle of the screen counts down the seconds until you are Rested, with a fill line, your comfort level and how long Rested will last at it. A soft chime when it lands (can be turned off). Timing comes from the game's own Resting effect.

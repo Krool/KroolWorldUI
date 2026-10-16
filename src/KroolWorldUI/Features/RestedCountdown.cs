@@ -1,43 +1,33 @@
+using System.Collections.Generic;
 using BepInEx.Configuration;
 using HarmonyLib;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace KroolWorldUI.Features
 {
     /// <summary>
     /// Counts down to Rested while you rest. The game's "Resting" effect (SE_Cozy) adds Rested once
-    /// it has run m_delay seconds, so the countdown is m_delay minus its elapsed time. Rested lasts
-    /// SE_Rested.m_baseTTL plus m_TTLPerComfortLevel per comfort level above 1. Read-only.
+    /// it has run m_delay seconds, so the countdown is m_delay minus its elapsed time. Shown in the
+    /// next free slot left of the status effect icons, like one more buff. Read-only.
     /// </summary>
     internal static class RestedCountdown
     {
         internal static ConfigEntry<bool> Enabled;
-        internal static ConfigEntry<bool> ShowDuration;
         internal static ConfigEntry<bool> Sound;
         internal static ConfigEntry<float> SoundVolume;
-        internal static ConfigEntry<float> AnchorX;
-        internal static ConfigEntry<float> AnchorY;
 
         private const string Section = "Rested Countdown";
 
         internal static void BindConfig(ConfigFile config)
         {
             Enabled = config.Bind(Section, "Enabled", true,
-                "While you are resting (sitting or under a roof, near a fire), counts down the seconds until you become Rested.");
-            ShowDuration = config.Bind(Section, "ShowDuration", true,
-                "Also show your comfort level and how long Rested will last at that comfort.");
+                "While you are resting (sitting or under a roof, near a fire), counts down the seconds until " +
+                "you become Rested, beside your buff icons.");
             Sound = config.Bind(Section, "Sound", true, "A soft chime when you become Rested.");
             SoundVolume = config.Bind(Section, "SoundVolume", 0.35f,
                 new ConfigDescription("Chime volume (also follows the game's sound settings).",
                     new AcceptableValueRange<float>(0.05f, 1f)));
-            AnchorX = config.Bind(Section, "AnchorX", 0.5f,
-                new ConfigDescription("Horizontal position of the countdown's center (0 = left, 1 = right).",
-                    new AcceptableValueRange<float>(0f, 1f)));
-            AnchorY = config.Bind(Section, "AnchorY", 0.64f,
-                new ConfigDescription("Vertical position of the countdown's center (0 = bottom, 1 = top).",
-                    new AcceptableValueRange<float>(0f, 1f)));
         }
 
         [HarmonyPatch(typeof(Hud), "Update")]
@@ -49,35 +39,25 @@ namespace KroolWorldUI.Features
                     RestedCountdownHud.Ensure();
             }
         }
-
-        /// <summary>Seconds Rested lasts at a comfort level, from the game's Rested effect.</summary>
-        internal static float RestedSeconds(int comfort)
-        {
-            var rested = ObjectDB.instance?.GetStatusEffect(SEMan.s_statusEffectRested) as SE_Rested;
-            float baseTtl = rested != null ? rested.m_baseTTL : 300f;
-            float perLevel = rested != null ? rested.m_TTLPerComfortLevel : 60f;
-            return baseTtl + (comfort - 1) * perLevel;
-        }
     }
 
     internal class RestedCountdownHud : MonoBehaviour
     {
-        private const float Width = 300f;
-        private const float Height = 50f;
-        private const float DoneSeconds = 2.5f;
         private const float PreviewDelay = 10f;
+        private const float PreviewGap = 2f;
 
         private static RestedCountdownHud _instance;
         private static bool _failed;
         private static AudioClip _chime;
 
+        // Built on first use, not in a static initializer: tools\SettingsDoc runs BindConfig outside the game.
+        private static AccessTools.FieldRef<Hud, List<RectTransform>> _icons;
+
         private RectTransform _rect;
         private CanvasGroup _group;
         private TMP_Text _text;
-        private RectTransform _fill;
         private AudioSource _audio;
         private bool _counting;
-        private float _doneUntil;
         private bool _previewing;
         private float _previewStart;
 
@@ -86,41 +66,29 @@ namespace KroolWorldUI.Features
             if (_instance != null || _failed)
                 return;
             var hud = Hud.instance;
-            if (hud == null || hud.m_rootObject == null || hud.m_healthText == null || Player.m_localPlayer == null)
+            if (hud == null || hud.m_statusEffectListRoot == null || hud.m_statusEffectTemplate == null ||
+                hud.m_healthText == null || Player.m_localPlayer == null)
                 return;
             try
             {
+                _icons ??= AccessTools.FieldRefAccess<Hud, List<RectTransform>>("m_statusEffects");
                 var go = new GameObject("KroolWorldUI_RestedCountdown", typeof(RectTransform), typeof(CanvasGroup));
-                go.transform.SetParent(hud.m_rootObject.transform, false);
+                go.transform.SetParent(hud.m_statusEffectListRoot, false);
                 var c = go.AddComponent<RestedCountdownHud>();
                 _instance = c;
+                // Same anchoring and size as a buff icon, so slot math matches Hud.UpdateStatusEffects.
+                var template = hud.m_statusEffectTemplate;
                 c._rect = (RectTransform)go.transform;
-                c._rect.pivot = new Vector2(0.5f, 0.5f);
-                c._rect.sizeDelta = new Vector2(Width, Height);
+                c._rect.anchorMin = template.anchorMin;
+                c._rect.anchorMax = template.anchorMax;
+                c._rect.pivot = template.pivot;
+                c._rect.sizeDelta = template.sizeDelta.x >= 10f ? template.sizeDelta : new Vector2(50f, 50f);
                 c._group = go.GetComponent<CanvasGroup>();
                 c._group.alpha = 0f;
                 c._group.blocksRaycasts = false;
                 c._group.interactable = false;
-                HudKit.ToastBackground(go.transform);
                 c._text = HudKit.NewText(hud.m_healthText, go.transform, "text", TextAlignmentOptions.Center,
-                    HudKit.Parchment, 22f);
-                c._text.rectTransform.offsetMin = new Vector2(0f, 4f);
-
-                // Thin progress line along the bottom edge.
-                var track = HudKit.NewImage("track", go.transform, new Color(0f, 0f, 0f, 0.5f));
-                var trackRect = track.rectTransform;
-                trackRect.anchorMin = new Vector2(0f, 0f);
-                trackRect.anchorMax = new Vector2(1f, 0f);
-                trackRect.pivot = new Vector2(0.5f, 0f);
-                trackRect.offsetMin = new Vector2(6f, 4f);
-                trackRect.offsetMax = new Vector2(-6f, 8f);
-                var fill = HudKit.NewImage("fill", track.transform, HudKit.Gold);
-                c._fill = fill.rectTransform;
-                c._fill.anchorMin = Vector2.zero;
-                c._fill.anchorMax = new Vector2(0f, 1f);
-                c._fill.offsetMin = Vector2.zero;
-                c._fill.offsetMax = Vector2.zero;
-
+                    HudKit.Parchment, 15f);
                 c._audio = HudKit.NewAudio(go);
             }
             catch (System.Exception e)
@@ -145,7 +113,6 @@ namespace KroolWorldUI.Features
             c._previewing = on;
             c._previewStart = Time.unscaledTime;
             c._counting = false;
-            c._doneUntil = 0f;
         }
 
         private void Update()
@@ -167,26 +134,23 @@ namespace KroolWorldUI.Features
         private void Tick()
         {
             var player = Player.m_localPlayer;
-            if (!RestedCountdown.Enabled.Value || player == null)
+            var hud = Hud.instance;
+            if (!RestedCountdown.Enabled.Value || player == null || hud == null)
             {
                 _group.alpha = 0f;
                 _counting = false;
                 return;
             }
 
-            float now = Time.unscaledTime;
-            int comfort = player.GetComfortLevel();
             float delay, elapsed;
             bool resting, sound = RestedCountdown.Sound.Value;
             if (_previewing)
             {
-                float cycle = PreviewDelay + DoneSeconds;
-                float t = now - _previewStart;
+                float t = Time.unscaledTime - _previewStart;
                 delay = PreviewDelay;
-                elapsed = t % cycle;
+                elapsed = t % (PreviewDelay + PreviewGap);
                 resting = true;
-                sound &= t < cycle;
-                comfort = Mathf.Max(comfort, 2);
+                sound &= t < PreviewDelay + PreviewGap;
             }
             else
             {
@@ -200,54 +164,29 @@ namespace KroolWorldUI.Features
             if (resting && remaining > 0f)
             {
                 _counting = true;
-                _doneUntil = 0f;
                 int secs = Mathf.CeilToInt(remaining);
-                _text.text = $"<size=75%>Rested in</size>  <color=#{Hex(HudKit.Gold)}><size=125%><mspace=0.6em>{secs}</mspace></size></color>" +
-                             Duration(comfort);
-                SetFill(delay > 0f ? elapsed / delay : 1f, HudKit.Gold);
+                _text.text = $"<size=80%>Rested</size>\n<color=#{ColorUtility.ToHtmlStringRGB(HudKit.Gold)}>{secs}s</color>";
             }
             else if (_counting)
             {
                 // Became Rested, or stopped resting before the end.
                 _counting = false;
-                if (resting)
-                {
-                    _doneUntil = now + DoneSeconds;
-                    _text.text = $"<color=#{Hex(HudKit.Ready)}>Rested</color>" + Duration(comfort);
-                    SetFill(1f, HudKit.Ready);
-                    if (sound)
-                        PlayChime();
-                }
+                if (resting && sound)
+                    PlayChime();
             }
 
-            bool visible = _counting || now < _doneUntil;
-            _group.alpha = visible ? 1f : 0f;
-            if (visible)
-            {
-                var anchor = new Vector2(RestedCountdown.AnchorX.Value, RestedCountdown.AnchorY.Value);
-                _rect.anchorMin = anchor;
-                _rect.anchorMax = anchor;
-                _rect.anchoredPosition = Vector2.zero;
-            }
+            _group.alpha = _counting ? 1f : 0f;
+            if (_counting)
+                PlaceInNextSlot(hud);
         }
 
-        private static string Duration(int comfort)
+        /// <summary>The slot just left of the last buff icon in the top row.</summary>
+        private void PlaceInNextSlot(Hud hud)
         {
-            if (!RestedCountdown.ShowDuration.Value)
-                return "";
-            string time = StatusEffect.GetTimeString(RestedCountdown.RestedSeconds(comfort), sufix: true);
-            return $"  <size=70%><color=#{Hex(HudKit.Muted)}>Comfort {comfort}, {time}</color></size>";
+            var icons = _icons(hud);
+            int slot = Mathf.Min(icons?.Count ?? 0, Mathf.Max(1, hud.m_effectsPerRow));
+            _rect.anchoredPosition = new Vector2(-4f - slot * hud.m_statusEffectSpacing, 0f);
         }
-
-        private void SetFill(float fraction, Color color)
-        {
-            _fill.anchorMax = new Vector2(Mathf.Clamp01(fraction), 1f);
-            var image = _fill.GetComponent<Image>();
-            if (image.color != color)
-                image.color = color;
-        }
-
-        private static string Hex(Color c) => ColorUtility.ToHtmlStringRGB(c);
 
         private void PlayChime()
         {

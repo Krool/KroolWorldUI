@@ -18,7 +18,7 @@ around it so the image reads at the page's width.
 | `food-reminder.png` | Top-center toast: one running-out row, plus the no-food row if you can catch both. |
 | `build-materials.png` | Hammer out, a wall piece selected: the materials panel right of the build menu's piece box, with the build count. |
 | `day-night.png` | Top-right corner: the day/night bar above the minimap, late afternoon so the dusk countdown shows. |
-| `rested-countdown.png` | The rested countdown box mid-count while sitting by a fire. |
+| `rested-countdown.png` | Top right: the Rested countdown beside the buff icons while sitting by a fire. |
 | `save-countdown.png` | The save countdown box mid-count (turn on Preview on HUD in F7 to catch it). |
 | `bench-pin.png` | The big map with a named workbench pin next to your base. |
 | `settings.png` | The F7 window with one section open, a tooltip showing, and Preview on HUD on. |
