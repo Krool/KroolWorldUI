@@ -91,11 +91,13 @@ namespace KroolWorldUI
                 SkillXpBarStack.GetOrCreate()?.Preview(Player.m_localPlayer.GetSkills());
                 FoodCalloutHud.Preview(true, playSound: !_previewWas && FoodCallout.Sound.Value);
                 SaveCountdownHud.Preview(true);
+                RestedCountdownHud.Preview(true);
             }
             else if (_previewWas)
             {
                 FoodCalloutHud.Preview(false, playSound: false);
                 SaveCountdownHud.Preview(false);
+                RestedCountdownHud.Preview(false);
             }
             _previewWas = active;
         }

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.9.0
+
+- New: rested countdown. While you rest by a fire, a box below the middle of the screen counts down the seconds until you are Rested, with a fill line, your comfort level and how long Rested will last at it. A soft chime when it lands (can be turned off). Timing comes from the game's own Resting effect.
+
 ## 0.8.0
 
 - New: day/night bar above the minimap. Night at both ends with a moon, day in the middle with a sun, a marker for now, the day number, and the time until dusk or dawn (orange in the last minute before dark). Optional 24-hour clock. Uses the game's synced clock; hides with the minimap.

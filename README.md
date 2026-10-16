@@ -1,6 +1,6 @@
 ![Krool World UI](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/banner.png)
 
-**Small HUD additions for Valheim that show what the game keeps hidden:** how close a skill is to its next level, how much you are carrying, how much wood and stone you have while building, how much health and stamina your food has lost, when to eat, how long until nightfall, and when the auto-save lag spike is coming. It can also pin your workbenches on the map with Norse-sounding names.
+**Small HUD additions for Valheim that show what the game keeps hidden:** how close a skill is to its next level, how much you are carrying, how much wood and stone you have while building, how much health and stamina your food has lost, when to eat, how long until nightfall, how long until you are rested, and when the auto-save lag spike is coming. It can also pin your workbenches on the map with Norse-sounding names.
 
 - **Client-side only.** The server and other players do not need it.
 - **Read-only, with one exception.** It reads game state for display. The only thing it ever changes is your own map: **Bench Pins** adds a pin when you build a workbench, as you would by hand. It never touches your character or world.
@@ -16,6 +16,7 @@
 | **Food decay** | Faint segments past the end of the health, stamina and eitr bars: the max your food has lost as it wears off | Yes |
 | **Food reminders** | A toast when food runs low, a message while you have none, and an optional "can eat again" | Yes ("can eat again" off) |
 | **Day/night bar** | A bar above the minimap: night and day with moon and sun, where you are now, and the time until dusk or dawn | Yes |
+| **Rested countdown** | While you rest by a fire, the seconds until you are Rested and how long it will last | Yes |
 | **Save countdown** | A clear 5-second countdown before the auto-save, so its lag spike never catches you mid-fight | Yes |
 | **Bench pins** | A map pin with a random Norse name (Hrafnvik, Trollhaven, Odinheim) when you build a workbench | Yes |
 | **Settings window** | Every option in game, with a live preview | Press **F7** |
@@ -100,6 +101,14 @@ A slim bar along the top of the minimap shows the whole day, midnight to midnigh
 - An optional 24-hour clock (06:00 sunrise, 18:00 sunset).
 - Uses the game's own clock, synced from the server: a 20-minute day, about 14 minutes of daylight and 6 of night.
 - Hides with the minimap. Bar height and both colors are adjustable.
+
+## Rested countdown
+
+Sit or stand under a roof by a fire and the game starts **Resting**, but it never says how long until you are **Rested**. A box below the middle of the screen counts it down: **Rested in 14**, with a fill line, your comfort level and how long Rested will last at it (**Comfort 9, 13m:00s**). When it lands, it turns green with a soft chime.
+
+- The timing comes from the game's own Resting effect, so it is exact.
+- Step away from the fire and it disappears; the game starts the count over when you rest again.
+- Comfort info, chime and position are adjustable.
 
 ## Save countdown
 
@@ -254,6 +263,17 @@ Generated from the mod's code on every build, so it always matches the F7 window
 | Bar Height | 10 | 6 to 18 | Bar height in HUD pixels. |
 | Day Color | `DBAD52D9` | Hex RRGGBBAA (AA = opacity) | Color of the day part. |
 | Night Color | `212B5CE6` | Hex RRGGBBAA (AA = opacity) | Color of the night part. |
+
+**Rested Countdown**
+
+| Setting | Default | Range or choices | What it does |
+|---|---|---|---|
+| Enabled | On |  | While you are resting (sitting or under a roof, near a fire), counts down the seconds until you become Rested. |
+| Show Duration | On |  | Also show your comfort level and how long Rested will last at that comfort. |
+| Sound | On |  | A soft chime when you become Rested. |
+| Sound Volume | 0.35 | 0.05 to 1 | Chime volume (also follows the game's sound settings). |
+| Anchor X | 0.5 | 0 to 1 | Horizontal position of the countdown's center (0 = left, 1 = right). |
+| Anchor Y | 0.64 | 0 to 1 | Vertical position of the countdown's center (0 = bottom, 1 = top). |
 
 **Save Countdown**
 
