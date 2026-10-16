@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.0
+
+- New: day/night bar above the minimap. Night at both ends with a moon, day in the middle with a sun, a marker for now, the day number, and the time until dusk or dawn (orange in the last minute before dark). Optional 24-hour clock. Uses the game's synced clock; hides with the minimap.
+
 ## 0.7.1
 
 - Build materials: each common building material has its own setting (Always, When Known, When Carried or Never) in place of the single list. Defaults: Wood, Stone, Core Wood and Fine Wood once your character has found them; Resin, Bronze and Iron Nails, Black Marble, Yggdrasil Wood, Grausten and Ashwood only while carried. Other Materials takes any item by the name the game shows. With the hoe or cultivator out, only the selected piece's cost is listed.

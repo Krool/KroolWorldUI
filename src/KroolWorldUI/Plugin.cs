@@ -51,6 +51,7 @@ namespace KroolWorldUI
             FoodDecay.BindConfig(config);
             FoodCallout.BindConfig(config);
             BuildMaterials.BindConfig(config);
+            DayNightBar.BindConfig(config);
             SaveCountdown.BindConfig(config);
             BenchPins.BindConfig(config);
         }

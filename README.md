@@ -1,6 +1,6 @@
 ![Krool World UI](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/banner.png)
 
-**Small HUD additions for Valheim that show what the game keeps hidden:** how close a skill is to its next level, how much you are carrying, how much wood and stone you have while building, how much health and stamina your food has lost, when to eat, and when the auto-save lag spike is coming. It can also pin your workbenches on the map with Norse-sounding names.
+**Small HUD additions for Valheim that show what the game keeps hidden:** how close a skill is to its next level, how much you are carrying, how much wood and stone you have while building, how much health and stamina your food has lost, when to eat, how long until nightfall, and when the auto-save lag spike is coming. It can also pin your workbenches on the map with Norse-sounding names.
 
 - **Client-side only.** The server and other players do not need it.
 - **Read-only, with one exception.** It reads game state for display. The only thing it ever changes is your own map: **Bench Pins** adds a pin when you build a workbench, as you would by hand. It never touches your character or world.
@@ -15,6 +15,7 @@
 | **Build materials** | While the hammer is out: the wood, stone and other building materials you carry, what the selected piece costs, and how many you can build | Yes |
 | **Food decay** | Faint segments past the end of the health, stamina and eitr bars: the max your food has lost as it wears off | Yes |
 | **Food reminders** | A toast when food runs low, a message while you have none, and an optional "can eat again" | Yes ("can eat again" off) |
+| **Day/night bar** | A bar above the minimap: night and day with moon and sun, where you are now, and the time until dusk or dawn | Yes |
 | **Save countdown** | A clear 5-second countdown before the auto-save, so its lag spike never catches you mid-fight | Yes |
 | **Bench pins** | A map pin with a random Norse name (Hrafnvik, Trollhaven, Odinheim) when you build a workbench | Yes |
 | **Settings window** | Every option in game, with a live preview | Press **F7** |
@@ -89,6 +90,16 @@ A small toast at the top of the screen with the food's icon, its name and the ti
 - Timed reminders show once per food and fade after 6 seconds. They do not repeat until you have eaten that food again.
 - The countdown uses fixed-width digits, so it holds still.
 - Moves down to clear the raid banner, and hides while the inventory, the big map or the menu is open.
+
+## Day/night bar
+
+A slim bar along the top of the minimap shows the whole day, midnight to midnight: night at both ends with a moon, day in the middle with a sun, and a white marker for now.
+
+- **Dusk in 6:40** by day, **Dawn in 2:10** by night. In the last minute before dark (adjustable) the dusk countdown turns orange, so you can head home before the night spawns.
+- The day number, in your game's language, as the game shows it at sunrise.
+- An optional 24-hour clock (06:00 sunrise, 18:00 sunset).
+- Uses the game's own clock, synced from the server: a 20-minute day, about 14 minutes of daylight and 6 of night.
+- Hides with the minimap. Bar height and both colors are adjustable.
 
 ## Save countdown
 
@@ -230,6 +241,19 @@ Generated from the mod's code on every build, so it always matches the F7 window
 | Grausten | When Carried | Always, When Known, When Carried, Never | When to list Grausten. When Known: once your character has picked one up. When Carried: only while you have some. |
 | Ashwood | When Carried | Always, When Known, When Carried, Never | When to list Ashwood. When Known: once your character has picked one up. When Carried: only while you have some. |
 | Other Materials |  |  | More materials to always list, by the names the game shows, separated by commas (for example: Copper, Deer Hide). |
+
+**Day Night Bar**
+
+| Setting | Default | Range or choices | What it does |
+|---|---|---|---|
+| Enabled | On |  | A day and night bar above the minimap: where you are in the day, and how long until dusk or dawn. |
+| Countdown | On |  | Show the time left until dusk (by day) or dawn (by night). |
+| Day Number | On |  | Show the day number. |
+| Clock | Off |  | Show the time of day as a 24-hour clock: 06:00 is sunrise, 18:00 sunset. |
+| Dusk Warning Seconds | 60 | 0 to 300 | The dusk countdown turns orange this many seconds before night. 0 = never. |
+| Bar Height | 10 | 6 to 18 | Bar height in HUD pixels. |
+| Day Color | `DBAD52D9` | Hex RRGGBBAA (AA = opacity) | Color of the day part. |
+| Night Color | `212B5CE6` | Hex RRGGBBAA (AA = opacity) | Color of the night part. |
 
 **Save Countdown**
 
