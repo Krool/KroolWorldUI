@@ -10,17 +10,44 @@ namespace KroolWorldUI.Features
 {
     /// <summary>
     /// While a build tool is out (hammer, hoe, cultivator), a small panel beside the build menu's
-    /// selected-piece box counts the materials you carry: what the selected piece costs, plus an
-    /// always-shown list (wood and stone by default), and how many of the piece you can afford.
-    /// Counts use the same inventory count the game checks when you place. Read-only.
+    /// selected-piece box counts the materials you carry: what the selected piece costs, the
+    /// common building materials (each with its own When setting), and how many of the piece you
+    /// can afford. Counts use the same inventory count the game checks when you place. Read-only.
     /// </summary>
     internal static class BuildMaterials
     {
         internal enum Place { BesideBuildInfo, Custom }
 
+        /// <summary>
+        /// When a material is listed. When Known: once the character has ever picked one up (the
+        /// game's "new material" unlock, saved with the character). When Carried: while you have any.
+        /// </summary>
+        internal enum Show { Always, WhenKnown, WhenCarried, Never }
+
+        /// <summary>
+        /// The common building materials, in progression order. Setting key, the item's prefab name
+        /// (language-independent, used to find it), and its default: the four everyday ones once
+        /// found, later ones only while carried so a late-game panel stays short.
+        /// </summary>
+        internal static readonly (string Key, string Prefab, Show Default)[] Materials =
+        {
+            ("Wood", "Wood", Show.WhenKnown),
+            ("Stone", "Stone", Show.WhenKnown),
+            ("CoreWood", "RoundLog", Show.WhenKnown),
+            ("FineWood", "FineWood", Show.WhenKnown),
+            ("Resin", "Resin", Show.WhenCarried),
+            ("BronzeNails", "BronzeNails", Show.WhenCarried),
+            ("IronNails", "IronNails", Show.WhenCarried),
+            ("BlackMarble", "BlackMarble", Show.WhenCarried),
+            ("YggdrasilWood", "YggdrasilWood", Show.WhenCarried),
+            ("Grausten", "Grausten", Show.WhenCarried),
+            ("Ashwood", "Blackwood", Show.WhenCarried),
+        };
+
         internal static ConfigEntry<bool> Enabled;
         internal static ConfigEntry<bool> SelectedPiece;
-        internal static ConfigEntry<string> AlwaysShow;
+        internal static ConfigEntry<Show>[] MaterialShow;
+        internal static ConfigEntry<string> OtherMaterials;
         internal static ConfigEntry<bool> CanBuildCount;
         internal static ConfigEntry<Place> Placement;
         internal static ConfigEntry<float> AnchorX;
@@ -35,9 +62,6 @@ namespace KroolWorldUI.Features
                 "stone as you build.");
             SelectedPiece = config.Bind(Section, "SelectedPiece", true,
                 "List what the selected piece costs, each with how many you carry. Red when you are short.");
-            AlwaysShow = config.Bind(Section, "AlwaysShow", "Wood, Stone",
-                "Materials always listed, separated by commas. Use the item's name as the game shows it " +
-                "(Fine Wood, Iron Nails) or its prefab name (FineWood, BronzeNails).");
             CanBuildCount = config.Bind(Section, "CanBuildCount", true,
                 "Show how many of the selected piece your materials cover.");
             Placement = config.Bind(Section, "Placement", Place.BesideBuildInfo,
@@ -49,6 +73,18 @@ namespace KroolWorldUI.Features
             AnchorY = config.Bind(Section, "AnchorY", 0.1f,
                 new ConfigDescription("Custom placement: bottom edge (0 = bottom of screen, 1 = top).",
                     new AcceptableValueRange<float>(0f, 1f)));
+
+            MaterialShow = new ConfigEntry<Show>[Materials.Length];
+            for (int i = 0; i < Materials.Length; i++)
+            {
+                string name = ConfigText.Pretty(Materials[i].Key);
+                MaterialShow[i] = config.Bind(Section, Materials[i].Key, Materials[i].Default,
+                    $"When to list {name}. When Known: once your character has picked one up. " +
+                    "When Carried: only while you have some.");
+            }
+            OtherMaterials = config.Bind(Section, "OtherMaterials", "",
+                "More materials to always list, by the names the game shows, separated by commas " +
+                "(for example: Copper, Deer Hide).");
         }
 
         [HarmonyPatch(typeof(Hud), "Update")]
@@ -79,9 +115,11 @@ namespace KroolWorldUI.Features
         private RectTransform _buildInfo;
         private float _nextRefresh;
 
-        // Always-shown list, resolved from AlwaysShow once ObjectDB is loaded.
-        private string _resolvedFrom;
-        private readonly List<ItemDrop.ItemData.SharedData> _always = new List<ItemDrop.ItemData.SharedData>();
+        // Items for BuildMaterials.Materials (same order; null if a game update renamed one) and for
+        // Other Materials, resolved once ObjectDB is loaded and again when Other Materials changes.
+        private ItemDrop.ItemData.SharedData[] _common;
+        private string _otherFrom;
+        private readonly List<ItemDrop.ItemData.SharedData> _other = new List<ItemDrop.ItemData.SharedData>();
 
         private class Row
         {
@@ -194,12 +232,33 @@ namespace KroolWorldUI.Features
                 }
             }
 
-            ResolveAlwaysShow();
-            foreach (var shared in _always)
+            Resolve();
+            // The hoe and cultivator build terrain and crops; wood and stone counts are noise there.
+            bool listMaterials = !UsingTerrainTool(player);
+            if (_common != null && listMaterials)
             {
-                if (!listed.Add(shared.m_name))
-                    continue;
-                SetRow(shown++, shared, inventory.CountItems(shared.m_name).ToString(), HudKit.Parchment);
+                for (int i = 0; i < _common.Length; i++)
+                {
+                    var shared = _common[i];
+                    if (shared == null || listed.Contains(shared.m_name))
+                        continue;
+                    int have = inventory.CountItems(shared.m_name);
+                    bool show;
+                    switch (BuildMaterials.MaterialShow[i].Value)
+                    {
+                        case BuildMaterials.Show.Always: show = true; break;
+                        case BuildMaterials.Show.WhenKnown: show = have > 0 || player.IsKnownMaterial(shared.m_name); break;
+                        case BuildMaterials.Show.WhenCarried: show = have > 0; break;
+                        default: show = false; break;
+                    }
+                    if (show && listed.Add(shared.m_name))
+                        SetRow(shown++, shared, have.ToString(), HudKit.Parchment);
+                }
+            }
+            foreach (var shared in _other)
+            {
+                if (listMaterials && listed.Add(shared.m_name))
+                    SetRow(shown++, shared, inventory.CountItems(shared.m_name).ToString(), HudKit.Parchment);
             }
 
             for (int i = shown; i < _rows.Count; i++)
@@ -278,38 +337,69 @@ namespace KroolWorldUI.Features
             return new Row { Root = go, Icon = icon, Name = name, Count = count };
         }
 
-        /// <summary>Turns AlwaysShow into items, matching prefab names or shown names, ignoring case and spaces.</summary>
-        private void ResolveAlwaysShow()
+        /// <summary>
+        /// Finds the common materials by prefab name (works in any language) and Other Materials by
+        /// the names the game shows (prefab names work too), ignoring case and spaces.
+        /// </summary>
+        private void Resolve()
         {
-            string wanted = BuildMaterials.AlwaysShow.Value ?? "";
-            if (wanted == _resolvedFrom || ObjectDB.instance == null || ObjectDB.instance.m_items.Count == 0)
+            string other = BuildMaterials.OtherMaterials.Value ?? "";
+            if ((_common != null && other == _otherFrom) || ObjectDB.instance == null || ObjectDB.instance.m_items.Count == 0)
                 return;
-            _resolvedFrom = wanted;
-            _always.Clear();
-            var byName = new Dictionary<string, ItemDrop.ItemData.SharedData>();
+            var byPrefab = new Dictionary<string, ItemDrop.ItemData.SharedData>();
+            var byShown = new Dictionary<string, ItemDrop.ItemData.SharedData>();
             foreach (var prefab in ObjectDB.instance.m_items)
             {
                 var shared = prefab != null ? prefab.GetComponent<ItemDrop>()?.m_itemData?.m_shared : null;
                 if (shared == null)
                     continue;
-                byName[Key(prefab.name)] = shared;
-                if (Localization.instance != null)
+                byPrefab[Key(prefab.name)] = shared;
+                string shownName = Key(Localization.instance != null ? Localization.instance.Localize(shared.m_name) : shared.m_name);
+                if (!byShown.ContainsKey(shownName))
+                    byShown[shownName] = shared;
+            }
+
+            if (_common == null)
+            {
+                _common = new ItemDrop.ItemData.SharedData[BuildMaterials.Materials.Length];
+                for (int i = 0; i < _common.Length; i++)
                 {
-                    string shownName = Key(Localization.instance.Localize(shared.m_name));
-                    if (!byName.ContainsKey(shownName))
-                        byName[shownName] = shared;
+                    byPrefab.TryGetValue(Key(BuildMaterials.Materials[i].Prefab), out _common[i]);
+                    if (_common[i] == null)
+                        Plugin.Log.LogWarning($"Build materials: item '{BuildMaterials.Materials[i].Prefab}' not found.");
                 }
             }
-            foreach (var part in wanted.Split(','))
+
+            _otherFrom = other;
+            _other.Clear();
+            foreach (var part in other.Split(','))
             {
                 string key = Key(part);
                 if (key.Length == 0)
                     continue;
-                if (byName.TryGetValue(key, out var shared) && !_always.Contains(shared))
-                    _always.Add(shared);
-                else if (!byName.ContainsKey(key))
+                if (byShown.TryGetValue(key, out var shared) || byPrefab.TryGetValue(key, out shared))
+                {
+                    if (!_other.Contains(shared))
+                        _other.Add(shared);
+                }
+                else
+                {
                     Plugin.Log.LogWarning($"Build materials: no item named '{part.Trim()}'.");
+                }
             }
+        }
+
+        private static bool UsingTerrainTool(Player player)
+        {
+            if (!player.InPlaceMode())
+                return false;
+            foreach (var item in player.GetInventory().GetEquippedItems())
+            {
+                string tool = item?.m_dropPrefab != null ? item.m_dropPrefab.name : null;
+                if (tool == "Hoe" || tool == "Cultivator")
+                    return true;
+            }
+            return false;
         }
 
         private static string Key(string s) => new string((s ?? "").Where(c => !char.IsWhiteSpace(c)).ToArray()).ToLowerInvariant();

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.7.1
+
+- Build materials: each common building material has its own setting (Always, When Known, When Carried or Never) in place of the single list. Defaults: Wood, Stone, Core Wood and Fine Wood once your character has found them; Resin, Bronze and Iron Nails, Black Marble, Yggdrasil Wood, Grausten and Ashwood only while carried. Other Materials takes any item by the name the game shows. With the hoe or cultivator out, only the selected piece's cost is listed.
+- Bench pins: the default skip distance is now 50 meters (was 30), since a workbench alone covers 20. A value you saved earlier is kept.
+
 ## 0.7.0
 
 - New: build materials. While the hammer, hoe or cultivator is out, a panel right of the build menu's piece box counts the materials you carry: what the selected piece costs (red when short), an always-shown list (Wood and Stone by default, editable in F7), and how many of the piece you can build. Counts match what the game checks when you place.

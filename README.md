@@ -12,7 +12,7 @@
 |---|---|---|
 | **Skill XP bars** | A skill icon with an XP bar that fills as you earn XP, plus a floating `+0.8% Swords` | Yes |
 | **Carry weight** | A vertical weight bar beside your food, styled like the health bar | Yes |
-| **Build materials** | While the hammer is out: how much wood and stone you carry, what the selected piece costs, and how many you can build | Yes |
+| **Build materials** | While the hammer is out: the wood, stone and other building materials you carry, what the selected piece costs, and how many you can build | Yes |
 | **Food decay** | Faint segments past the end of the health, stamina and eitr bars: the max your food has lost as it wears off | Yes |
 | **Food reminders** | A toast when food runs low, a message while you have none, and an optional "can eat again" | Yes ("can eat again" off) |
 | **Save countdown** | A clear 5-second countdown before the auto-save, so its lag spike never catches you mid-fight | Yes |
@@ -55,7 +55,11 @@ Your weight, always on screen, without opening the inventory. It sits left of th
 Take out the hammer (or the hoe or cultivator) and a small panel appears right of the build menu's piece box, counting what you carry as you build.
 
 - **What the selected piece costs,** each material with how many you have: `Wood 245 /2`. Red when you are short.
-- **Always listed:** Wood and Stone by default. Add anything to the list in **F7** by the name the game shows (`Fine Wood, Iron Nails`) or the prefab name.
+- **Your building materials, sensibly:**
+  - **Wood, Stone, Core Wood, Fine Wood** once your character has found them, so a new character is not shown materials it has never seen.
+  - **Resin, Bronze Nails, Iron Nails, Black Marble, Yggdrasil Wood, Grausten, Ashwood** only while you carry some, so a late-game panel stays short.
+  - Each material has its own setting in **F7**: **Always**, **When Known**, **When Carried** or **Never**. Add anything else by the name the game shows (`Copper, Deer Hide`).
+- With the **hoe** or **cultivator** out, it lists only what the selected piece costs.
 - **Enough for 12:** how many of the selected piece your materials cover, or **Not enough**.
 - Counts what the game itself counts when you place a piece: your inventory, not chests or backpacks.
 - Updates five times a second while you build. Hides with the inventory, the big map and the menu.
@@ -99,7 +103,7 @@ Valheim auto-saves every 30 minutes, and on a big world the save freezes the gam
 
 Build a workbench and a pin appears on your map, named like a Norse settlement: **Hrafnvik**, **Frostgard**, **Trollhaven**, **Eikthyrhold**, **Meadhall**.
 
-- **One pin per base.** No new pin if one is already within 30 meters (adjustable), so a camp with three benches gets one pin.
+- **One pin per base.** No new pin if one is already within 50 meters (adjustable), so a base with several benches gets one pin.
 - **Pick the icon:** fire, house (default), hammer, dot or portal.
 - **Pick the name:** random (default), the station's name, or none.
 - **Make it yours:** the name bank is two editable lists, prefixes and suffixes, in **F7**. Add your clan's names.
@@ -210,11 +214,22 @@ Generated from the mod's code on every build, so it always matches the F7 window
 |---|---|---|---|
 | Enabled | On |  | While a build tool is out, count the materials you carry, so you can watch your wood and stone as you build. |
 | Selected Piece | On |  | List what the selected piece costs, each with how many you carry. Red when you are short. |
-| Always Show | Wood, Stone |  | Materials always listed, separated by commas. Use the item's name as the game shows it (Fine Wood, Iron Nails) or its prefab name (FineWood, BronzeNails). |
 | Can Build Count | On |  | Show how many of the selected piece your materials cover. |
 | Placement | Beside Build Info | Beside Build Info, Custom | Beside Build Info: right of the selected-piece box at the bottom center. Custom: placed by Anchor X and Anchor Y. |
 | Anchor X | 0.8 | 0 to 1 | Custom placement: left edge (0 = left of screen, 1 = right). |
 | Anchor Y | 0.1 | 0 to 1 | Custom placement: bottom edge (0 = bottom of screen, 1 = top). |
+| Wood | When Known | Always, When Known, When Carried, Never | When to list Wood. When Known: once your character has picked one up. When Carried: only while you have some. |
+| Stone | When Known | Always, When Known, When Carried, Never | When to list Stone. When Known: once your character has picked one up. When Carried: only while you have some. |
+| Core Wood | When Known | Always, When Known, When Carried, Never | When to list Core Wood. When Known: once your character has picked one up. When Carried: only while you have some. |
+| Fine Wood | When Known | Always, When Known, When Carried, Never | When to list Fine Wood. When Known: once your character has picked one up. When Carried: only while you have some. |
+| Resin | When Carried | Always, When Known, When Carried, Never | When to list Resin. When Known: once your character has picked one up. When Carried: only while you have some. |
+| Bronze Nails | When Carried | Always, When Known, When Carried, Never | When to list Bronze Nails. When Known: once your character has picked one up. When Carried: only while you have some. |
+| Iron Nails | When Carried | Always, When Known, When Carried, Never | When to list Iron Nails. When Known: once your character has picked one up. When Carried: only while you have some. |
+| Black Marble | When Carried | Always, When Known, When Carried, Never | When to list Black Marble. When Known: once your character has picked one up. When Carried: only while you have some. |
+| Yggdrasil Wood | When Carried | Always, When Known, When Carried, Never | When to list Yggdrasil Wood. When Known: once your character has picked one up. When Carried: only while you have some. |
+| Grausten | When Carried | Always, When Known, When Carried, Never | When to list Grausten. When Known: once your character has picked one up. When Carried: only while you have some. |
+| Ashwood | When Carried | Always, When Known, When Carried, Never | When to list Ashwood. When Known: once your character has picked one up. When Carried: only while you have some. |
+| Other Materials |  |  | More materials to always list, by the names the game shows, separated by commas (for example: Copper, Deer Hide). |
 
 **Save Countdown**
 
@@ -235,7 +250,7 @@ Generated from the mod's code on every build, so it always matches the F7 window
 | Pin Stations | Workbench Only | Workbench Only, All Crafting Stations | Workbench Only, or every crafting station (forge, stonecutter, artisan table, and so on). |
 | Icon | House | Fire, House, Hammer, Dot, Portal | Which map pin icon to use. |
 | Names | Random Name | Random Name, Station Name, No Name | Random Name: a Norse-sounding name from Name Prefixes + Name Suffixes. Station Name: "Workbench". No Name: just the icon. |
-| Skip Near Pin Meters | 30 | 0 to 200 | No new pin if one is already on your map this close (meters), so a base gets one pin, not one per bench. 0 = always pin. |
+| Skip Near Pin Meters | 50 | 0 to 200 | No new pin if one is already on your map this close (meters), so a base gets one pin, not one per bench. 0 = always pin. |
 | Announce | On |  | Show the new pin's name in the top-left messages. |
 | Name Prefixes | Ulf, Hrafn, Jarn, Frost, Grim, Skjold, Bjorn, Eld, Svart, Thor, Odin, Rune, Troll, Mead, Ash, Ygg, Valk, Draugr, Fenris, Storm, Iron, Wolf, Raven, Boar, Elk, Ember, Hel, Njord, Sig, Hjalm, Gunn, Kald, Myrk, Vind, Stein, Gull, Sol, Eikthyr, Bonemass, Greyling |  | First halves of random names, separated by commas. |
 | Name Suffixes | heim, gard, vik, stad, borg, holt, fjord, hall, by, hold, keep, stead, haven, mark, fell, dal, ness, wall, rest, ford, hof, skali, rock, watch, hearth |  | Second halves of random names, separated by commas. |

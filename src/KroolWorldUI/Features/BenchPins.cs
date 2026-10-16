@@ -56,7 +56,7 @@ namespace KroolWorldUI.Features
             Names = config.Bind(Section, "Names", Naming.RandomName,
                 "Random Name: a Norse-sounding name from Name Prefixes + Name Suffixes. " +
                 "Station Name: \"Workbench\". No Name: just the icon.");
-            SkipNearPinMeters = config.Bind(Section, "SkipNearPinMeters", 30f,
+            SkipNearPinMeters = config.Bind(Section, "SkipNearPinMeters", 50f,
                 new ConfigDescription("No new pin if one is already on your map this close (meters), " +
                                       "so a base gets one pin, not one per bench. 0 = always pin.",
                     new AcceptableValueRange<float>(0f, 200f)));
