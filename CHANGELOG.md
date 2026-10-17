@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.9.2
+
+- Rested countdown: now sits just above the Resting buff icon, on one line (Rested in 14s), instead of in the slot beside it.
+
 ## 0.9.1
 
 - Rested countdown: moved from the middle of the screen to the buff row, in the next slot left of your buff icons, and trimmed to just the timer (Rested 14s). The comfort and duration text, the progress line, the green Rested flash and the position settings are gone.

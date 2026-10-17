@@ -9,7 +9,7 @@ namespace KroolWorldUI.Features
     /// <summary>
     /// Counts down to Rested while you rest. The game's "Resting" effect (SE_Cozy) adds Rested once
     /// it has run m_delay seconds, so the countdown is m_delay minus its elapsed time. Shown in the
-    /// next free slot left of the status effect icons, like one more buff. Read-only.
+    /// buff row, just above the Resting icon. Read-only.
     /// </summary>
     internal static class RestedCountdown
     {
@@ -23,7 +23,7 @@ namespace KroolWorldUI.Features
         {
             Enabled = config.Bind(Section, "Enabled", true,
                 "While you are resting (sitting or under a roof, near a fire), counts down the seconds until " +
-                "you become Rested, beside your buff icons.");
+                "you become Rested, above the Resting buff icon.");
             Sound = config.Bind(Section, "Sound", true, "A soft chime when you become Rested.");
             SoundVolume = config.Bind(Section, "SoundVolume", 0.35f,
                 new ConfigDescription("Chime volume (also follows the game's sound settings).",
@@ -52,6 +52,8 @@ namespace KroolWorldUI.Features
 
         // Built on first use, not in a static initializer: tools\SettingsDoc runs BindConfig outside the game.
         private static AccessTools.FieldRef<Hud, List<RectTransform>> _icons;
+        private static readonly List<StatusEffect> _effects = new List<StatusEffect>();
+        private static readonly Vector3[] Corners = new Vector3[4];
 
         private RectTransform _rect;
         private CanvasGroup _group;
@@ -76,18 +78,18 @@ namespace KroolWorldUI.Features
                 go.transform.SetParent(hud.m_statusEffectListRoot, false);
                 var c = go.AddComponent<RestedCountdownHud>();
                 _instance = c;
-                // Same anchoring and size as a buff icon, so slot math matches Hud.UpdateStatusEffects.
+                // Placed in world space above the Resting icon's name; bottom-center pivot so it sits on it.
                 var template = hud.m_statusEffectTemplate;
                 c._rect = (RectTransform)go.transform;
                 c._rect.anchorMin = template.anchorMin;
                 c._rect.anchorMax = template.anchorMax;
-                c._rect.pivot = template.pivot;
-                c._rect.sizeDelta = template.sizeDelta.x >= 10f ? template.sizeDelta : new Vector2(50f, 50f);
+                c._rect.pivot = new Vector2(0.5f, 0f);
+                c._rect.sizeDelta = new Vector2(template.sizeDelta.x >= 10f ? template.sizeDelta.x : 50f, 20f);
                 c._group = go.GetComponent<CanvasGroup>();
                 c._group.alpha = 0f;
                 c._group.blocksRaycasts = false;
                 c._group.interactable = false;
-                c._text = HudKit.NewText(hud.m_healthText, go.transform, "text", TextAlignmentOptions.Center,
+                c._text = HudKit.NewText(hud.m_healthText, go.transform, "text", TextAlignmentOptions.Bottom,
                     HudKit.Parchment, 15f);
                 c._audio = HudKit.NewAudio(go);
             }
@@ -144,6 +146,7 @@ namespace KroolWorldUI.Features
 
             float delay, elapsed;
             bool resting, sound = RestedCountdown.Sound.Value;
+            var cozy = player.GetSEMan().GetStatusEffect(SEMan.s_statusEffectResting) as SE_Cozy;
             if (_previewing)
             {
                 float t = Time.unscaledTime - _previewStart;
@@ -154,7 +157,6 @@ namespace KroolWorldUI.Features
             }
             else
             {
-                var cozy = player.GetSEMan().GetStatusEffect(SEMan.s_statusEffectResting) as SE_Cozy;
                 resting = cozy != null;
                 delay = cozy != null ? cozy.m_delay : 0f;
                 elapsed = cozy != null ? cozy.GetDuration() : 0f;
@@ -165,7 +167,7 @@ namespace KroolWorldUI.Features
             {
                 _counting = true;
                 int secs = Mathf.CeilToInt(remaining);
-                _text.text = $"<size=80%>Rested</size>\n<color=#{ColorUtility.ToHtmlStringRGB(HudKit.Gold)}>{secs}s</color>";
+                _text.text = $"<size=85%>Rested in</size> <color=#{ColorUtility.ToHtmlStringRGB(HudKit.Gold)}>{secs}s</color>";
             }
             else if (_counting)
             {
@@ -177,15 +179,38 @@ namespace KroolWorldUI.Features
 
             _group.alpha = _counting ? 1f : 0f;
             if (_counting)
-                PlaceInNextSlot(hud);
+                PlaceAbove(hud, player, cozy);
         }
 
-        /// <summary>The slot just left of the last buff icon in the top row.</summary>
-        private void PlaceInNextSlot(Hud hud)
+        /// <summary>
+        /// Just above the Resting icon's name label. Hud.UpdateStatusEffects lays its icons out in
+        /// SEMan.GetHUDStatusEffects order, so the effect's index there is its icon's index.
+        /// Without a Resting icon (preview), above the first icon.
+        /// </summary>
+        private void PlaceAbove(Hud hud, Player player, StatusEffect target)
         {
             var icons = _icons(hud);
-            int slot = Mathf.Min(icons?.Count ?? 0, Mathf.Max(1, hud.m_effectsPerRow));
-            _rect.anchoredPosition = new Vector2(-4f - slot * hud.m_statusEffectSpacing, 0f);
+            if (icons == null || icons.Count == 0)
+            {
+                _rect.anchoredPosition = new Vector2(-4f, 40f);
+                return;
+            }
+            _effects.Clear();
+            player.GetSEMan().GetHUDStatusEffects(_effects);
+            int index = target != null ? _effects.IndexOf(target) : -1;
+            var icon = icons[index >= 0 && index < icons.Count ? index : 0];
+            if (icon == null)
+                return;
+
+            icon.GetWorldCorners(Corners);
+            float x = (Corners[0].x + Corners[2].x) * 0.5f;
+            float top = Corners[1].y;
+            // The name label ("Resting") sits above the icon; stand on its drawn text, not its rect.
+            var label = icon.GetComponentInChildren<TMP_Text>();
+            if (label != null && label.gameObject.activeInHierarchy && !string.IsNullOrEmpty(label.text))
+                top = Mathf.Max(top, label.transform.TransformPoint(label.bounds.max).y);
+            float gap = 2f * _rect.lossyScale.y;
+            _rect.position = new Vector3(x, top + gap, _rect.position.z);
         }
 
         private void PlayChime()

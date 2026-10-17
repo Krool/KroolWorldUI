@@ -16,7 +16,7 @@
 | **Food decay** | Faint segments past the end of the health, stamina and eitr bars: the max your food has lost as it wears off | Yes |
 | **Food reminders** | A toast when food runs low, a message while you have none, and an optional "can eat again" | Yes ("can eat again" off) |
 | **Day/night bar** | A bar above the minimap: night and day with moon and sun, where you are now, and the time until dusk or dawn | Yes |
-| **Rested countdown** | While you rest by a fire, the seconds until you are Rested, beside your buff icons | Yes |
+| **Rested countdown** | While you rest by a fire, the seconds until you are Rested, above the Resting buff | Yes |
 | **Save countdown** | A clear 5-second countdown before the auto-save, so its lag spike never catches you mid-fight | Yes |
 | **Bench pins** | A map pin with a random Norse name (Hrafnvik, Trollhaven, Odinheim) when you build a workbench | Yes |
 | **Settings window** | Every option in game, with a live preview | Press **F7** |
@@ -104,7 +104,7 @@ A slim bar along the top of the minimap shows the whole day, midnight to midnigh
 
 ## Rested countdown
 
-Sit or stand under a roof by a fire and the game starts **Resting**, but it never says how long until you are **Rested**. While you rest, a small **Rested 14s** counts down in the next slot left of your buff icons.
+Sit or stand under a roof by a fire and the game starts **Resting**, but it never says how long until you are **Rested**. While you rest, a small **Rested in 14s** counts down just above the Resting buff icon.
 
 - The timing comes from the game's own Resting effect, so it is exact.
 - Step away from the fire and it disappears; the game starts the count over when you rest again.
@@ -268,7 +268,7 @@ Generated from the mod's code on every build, so it always matches the F7 window
 
 | Setting | Default | Range or choices | What it does |
 |---|---|---|---|
-| Enabled | On |  | While you are resting (sitting or under a roof, near a fire), counts down the seconds until you become Rested, beside your buff icons. |
+| Enabled | On |  | While you are resting (sitting or under a roof, near a fire), counts down the seconds until you become Rested, above the Resting buff icon. |
 | Sound | On |  | A soft chime when you become Rested. |
 | Sound Volume | 0.35 | 0.05 to 1 | Chime volume (also follows the game's sound settings). |
 
