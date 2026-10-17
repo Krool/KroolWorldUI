@@ -38,6 +38,13 @@ namespace KroolWorldUI.Features
 
         private const string Section = "Weight";
 
+        private static readonly Color DefaultFill = new Color(0.98f, 0.78f, 0.38f, 1f);
+        private static readonly Color OldDefaultFill = new Color(0.80f, 0.62f, 0.30f, 1f);
+
+        private static bool Approximately(Color a, Color b) =>
+            Mathf.Abs(a.r - b.r) < 0.005f && Mathf.Abs(a.g - b.g) < 0.005f &&
+            Mathf.Abs(a.b - b.b) < 0.005f && Mathf.Abs(a.a - b.a) < 0.005f;
+
         internal static void BindConfig(ConfigFile config)
         {
             Enabled = config.Bind(Section, "Enabled", true,
@@ -53,7 +60,10 @@ namespace KroolWorldUI.Features
             Colors = config.Bind(Section, "Colors", ColorMode.Thresholds,
                 "Thresholds: fill color, near-limit color past Near Limit Percent, over color when overweight. " +
                 "Gradient: blends from fill to near-limit to over as you fill up. Single: always the fill color.");
-            FillColor = config.Bind(Section, "FillColor", new Color(0.80f, 0.62f, 0.30f, 1f), "Bar color under the limit.");
+            FillColor = config.Bind(Section, "FillColor", DefaultFill, "Bar color under the limit.");
+            // 0.9.3 brightened the default for contrast; move anyone still on the old default along.
+            if (Approximately(FillColor.Value, OldDefaultFill))
+                FillColor.Value = DefaultFill;
             NearColor = config.Bind(Section, "NearLimitColor", new Color(1f, 0.55f, 0.12f, 1f), "Bar color near the limit.");
             OverColor = config.Bind(Section, "OverColor", new Color(0.86f, 0.16f, 0.12f, 1f), "Bar color when overweight.");
             Text = config.Bind(Section, "Text", TextMode.CurrentAndMax,
@@ -90,10 +100,11 @@ namespace KroolWorldUI.Features
     internal class WeightHud : MonoBehaviour
     {
         private const float Gap = 4f;           // HUD pixels between fork, icon and bar
-        private const float RefreshInterval = 0.2f;
+        private const float RefreshInterval = 0.1f;
+        private const float FillSpeed = 2.5f;   // bar lengths per second: a quick slide, no wait
 
         private static readonly Color Parchment = new Color(0.92f, 0.87f, 0.78f, 1f);
-        private static readonly Color Muted = new Color(0.72f, 0.66f, 0.56f, 1f);
+        private static readonly Color Muted = new Color(0.82f, 0.77f, 0.68f, 1f);
 
         private static WeightHud _instance;
         private static bool _failed;
@@ -182,8 +193,22 @@ namespace KroolWorldUI.Features
             fillRt.anchorMin = fillRt.anchorMax = new Vector2(0f, 0.5f);
             fillRt.pivot = new Vector2(0f, 0.5f);
             fillRt.anchoredPosition = Vector2.zero;
+            // The health bar's fast fill waits (m_changeDelay) before it moves; slide at once instead.
+            w._fill.m_changeDelay = 0f;
+            w._fill.m_smoothFill = true;
+            w._fill.m_smoothDrain = true;
+            w._fill.m_smoothSpeed = FillSpeed;
             w._fill.SetMaxValue(1f);
             w._fill.SetValue(0f);
+
+            // Dark backing a little larger than the bar, so the fill reads over snow and sand.
+            var backing = NewImage("backing", barGo.transform, new Color(0f, 0f, 0f, 0.6f));
+            backing.transform.SetAsFirstSibling();
+            var br = backing.rectTransform;
+            br.anchorMin = Vector2.zero;
+            br.anchorMax = Vector2.one;
+            br.offsetMin = new Vector2(-2f, -2f);
+            br.offsetMax = new Vector2(2f, 2f);
 
             var iconSprite = FindWeightIcon(inv.m_weight.transform);
             var icon = NewImage("icon", go.transform, Color.white);
@@ -202,6 +227,10 @@ namespace KroolWorldUI.Features
             w._text.rectTransform.anchorMin = w._text.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
             w._text.rectTransform.pivot = new Vector2(0.5f, 0f);
             w._text.rectTransform.sizeDelta = new Vector2(80f, 50f);
+            // Black outline so the numbers read on any ground (fontMaterial gives this text its own copy).
+            w._text.fontMaterial.EnableKeyword("OUTLINE_ON");
+            w._text.outlineWidth = 0.25f;
+            w._text.outlineColor = new Color32(0, 0, 0, 255);
 
             w._lastChange = Time.time;
             w.Layout();

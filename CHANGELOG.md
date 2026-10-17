@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9.3
+
+- Weight bar: easier to read. A dark backing behind the bar, a black outline on the numbers, a brighter max-weight line and a brighter default fill (a fill color you changed is kept).
+- Weight bar: the fill now slides to your new weight right away instead of pausing first.
+
 ## 0.9.2
 
 - Rested countdown: now sits just above the Resting buff icon, on one line (Rested in 14s), instead of in the slot beside it.

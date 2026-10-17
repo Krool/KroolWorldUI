@@ -188,7 +188,7 @@ Generated from the mod's code on every build, so it always matches the F7 window
 | Near Limit Percent | 80 | 10 to 100 | Percent of max weight where the bar turns to the near-limit color (and where it appears, in Near Limit mode). |
 | Changed Seconds | 3 | 1 to 15 | When Changed mode: seconds the bar stays after a change. |
 | Colors | Thresholds | Thresholds, Gradient, Single | Thresholds: fill color, near-limit color past Near Limit Percent, over color when overweight. Gradient: blends from fill to near-limit to over as you fill up. Single: always the fill color. |
-| Fill Color | `CC9E4CFF` | Hex RRGGBBAA (AA = opacity) | Bar color under the limit. |
+| Fill Color | `FAC761FF` | Hex RRGGBBAA (AA = opacity) | Bar color under the limit. |
 | Near Limit Color | `FF8C1FFF` | Hex RRGGBBAA (AA = opacity) | Bar color near the limit. |
 | Over Color | `DB291FFF` | Hex RRGGBBAA (AA = opacity) | Bar color when overweight. |
 | Text | Current And Max | Current And Max, Current, Percent, None | Numbers above the bar: current over max, current only, percent, or none. |
