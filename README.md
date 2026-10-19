@@ -1,9 +1,9 @@
 ![Krool World UI](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/banner.png)
 
-**Small HUD additions for Valheim that show what the game keeps hidden:** how close a skill is to its next level, how much you are carrying, how much wood and stone you have while building, how much health and stamina your food has lost, when to eat, how long until nightfall, how long until you are rested, and when the auto-save lag spike is coming. It can also pin your workbenches on the map with Norse-sounding names.
+**Small HUD additions for Valheim that show what the game keeps hidden:** how close a skill is to its next level, how much you are carrying, how much wood and stone you have while building, how much health and stamina your food has lost, when to eat, how long until nightfall, how long until you are rested, and when the auto-save lag spike is coming. It can also pin your workbenches on the map with Norse-sounding names and repair your gear the moment you open a bench.
 
 - **Client-side only.** The server and other players do not need it.
-- **Read-only, with one exception.** It reads game state for display. The only thing it ever changes is your own map: **Bench Pins** adds a pin when you build a workbench, as you would by hand. It never touches your character or world.
+- **Read-only, with two exceptions.** It reads game state for display. The only things it ever changes are ones you would do by hand: **Bench Pins** adds a pin to your own map when you build a workbench, and **Auto Repair** presses a bench's repair button for you. It never touches the world.
 - **Pick what you want.** Every feature has its own on/off switch in an in-game settings window (**F7**). No other config mod needed.
 
 ## At a glance
@@ -18,6 +18,7 @@
 | **Day/night bar** | A bar above the minimap: night and day with moon and sun, where you are now, and the time until dusk or dawn | Yes |
 | **Rested countdown** | While you rest by a fire, the seconds until you are Rested, above the Resting buff | Yes |
 | **Save countdown** | A clear 5-second countdown before the auto-save, so its lag spike never catches you mid-fight | Yes |
+| **Auto repair** | Open a workbench or forge and everything it can fix is repaired, no clicking the hammer | Yes |
 | **Bench pins** | A map pin with a random Norse name (Hrafnvik, Trollhaven, Odinheim) when you build a workbench | Yes |
 | **Settings window** | Every option in game, with a live preview | Press **F7** |
 
@@ -129,6 +130,14 @@ Build a workbench and a pin appears on your map, named like a Norse settlement: 
 - **Make it yours:** the name bank is two editable lists, prefixes and suffixes, in **F7**. Add your clan's names.
 - Workbench only by default; switch to **All Crafting Stations** to also pin forges, stonecutters and the rest.
 - Pins are saved with your character like any pin you place. Removing the bench leaves the pin.
+
+## Auto repair
+
+Open a workbench, forge or any crafting station and every item it can fix is repaired at once, as if you had clicked its repair button once per item.
+
+- **Same rules as the button:** a workbench fixes what a workbench can, a forge fixes metal, and items that need a higher station level stay worn. Free, as in the base game.
+- **Same reward:** you get the Crafting skill XP each repair would give.
+- One repair sound and one message (**Repaired 4 items**); the message can be turned off.
 
 ## Settings window
 
@@ -295,6 +304,13 @@ Generated from the mod's code on every build, so it always matches the F7 window
 | Announce | On |  | Show the new pin's name in the top-left messages. |
 | Name Prefixes | Ulf, Hrafn, Jarn, Frost, Grim, Skjold, Bjorn, Eld, Svart, Thor, Odin, Rune, Troll, Mead, Ash, Ygg, Valk, Draugr, Fenris, Storm, Iron, Wolf, Raven, Boar, Elk, Ember, Hel, Njord, Sig, Hjalm, Gunn, Kald, Myrk, Vind, Stein, Gull, Sol, Eikthyr, Bonemass, Greyling |  | First halves of random names, separated by commas. |
 | Name Suffixes | heim, gard, vik, stad, borg, holt, fjord, hall, by, hold, keep, stead, haven, mark, fell, dal, ness, wall, rest, ford, hof, skali, rock, watch, hearth |  | Second halves of random names, separated by commas. |
+
+**Auto Repair**
+
+| Setting | Default | Range or choices | What it does |
+|---|---|---|---|
+| Enabled | On |  | Opening a workbench, forge or other crafting station repairs every item it can, like pressing its repair button once per item. |
+| Announce | On |  | Show how many items were repaired in the middle of the screen. |
 
 <!-- settings:end -->
 

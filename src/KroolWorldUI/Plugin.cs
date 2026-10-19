@@ -55,6 +55,7 @@ namespace KroolWorldUI
             RestedCountdown.BindConfig(config);
             SaveCountdown.BindConfig(config);
             BenchPins.BindConfig(config);
+            AutoRepair.BindConfig(config);
         }
 
         private void OnDestroy()

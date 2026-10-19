@@ -8,8 +8,9 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
 - **Never write game state.** Read skills/inventory/etc. for display only. `Skills.GetSkill()`
   creates a missing skill (which then saves to the character); use `SkillXpBars.FindExisting`
   (walks `GetSkillList()`) instead. One owner-approved exception (2026-10-15): Bench Pins adds a
-  saved pin to the local player's own map via `Minimap.AddPin` when they build a workbench. Any
-  other write needs the owner's explicit OK.
+  saved pin to the local player's own map via `Minimap.AddPin` when they build a workbench. A second (2026-10-19):
+  Auto Repair repairs worn items when a crafting station opens, through InventoryGui's own CanRepair,
+  matching RepairOneItem. Any other write needs the owner's explicit OK.
 - **Patches must not throw into game code.** Wrap UI work called from Harmony postfixes in
   try/catch and log.
 - **Test in the `KroolDev` r2modman profile**, never `BCCBoys` (the owner's play profile, which

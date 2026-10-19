@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.0
+
+- New: auto repair, on by default. Opening a workbench, forge or other crafting station repairs every item it can, as if you clicked its repair button once per item: the same station and level rules and the same Crafting skill XP. One repair sound and a single Repaired N items message (can be turned off).
+
 ## 0.9.3
 
 - Weight bar: easier to read. A dark backing behind the bar, a black outline on the numbers, a brighter max-weight line and a brighter default fill (a fill color you changed is kept).
