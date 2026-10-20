@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.10.1
+
+- Bench pins: taking a bench down with the hammer removes its pin, so a bench dropped to fix a boat leaves no trace. If another bench still stands within the skip distance, the pin moves to it instead. New setting Remove With Bench (on).
+- Bench pins: the name bank grows to 100 prefixes and 100 suffixes, 10,000 names (Lokihollow, Sleipnirstrand, Frostcairn). If you edited the lists, yours are kept.
+
 ## 0.10.0
 
 - New: auto repair, on by default. Opening a workbench, forge or other crafting station repairs every item it can, as if you clicked its repair button once per item: the same station and level rules and the same Crafting skill XP. One repair sound and a single Repaired N items message (can be turned off).

@@ -129,7 +129,9 @@ Build a workbench and a pin appears on your map, named like a Norse settlement: 
 - **Pick the name:** random (default), the station's name, or none.
 - **Make it yours:** the name bank is two editable lists, prefixes and suffixes, in **F7**. Add your clan's names.
 - Workbench only by default; switch to **All Crafting Stations** to also pin forges, stonecutters and the rest.
-- Pins are saved with your character like any pin you place. Removing the bench leaves the pin.
+- **Temporary benches leave no trace.** Take a bench down with the hammer (say, one you dropped to fix a boat) and its pin goes too. If another bench still stands nearby, the pin moves to it instead. Can be turned off.
+- **10,000 names:** 100 prefixes and 100 suffixes.
+- Pins are saved with your character like any pin you place. A bench lost to damage or decay keeps its pin.
 
 ## Auto repair
 
@@ -296,14 +298,15 @@ Generated from the mod's code on every build, so it always matches the F7 window
 
 | Setting | Default | Range or choices | What it does |
 |---|---|---|---|
-| Enabled | On |  | Adds a map pin when you build a workbench, so you can find your camps again. This adds a pin to your map like you would by hand; removing the bench leaves the pin. |
+| Enabled | On |  | Adds a map pin when you build a workbench, so you can find your camps again. This adds a pin to your map like you would by hand. |
 | Pin Stations | Workbench Only | Workbench Only, All Crafting Stations | Workbench Only, or every crafting station (forge, stonecutter, artisan table, and so on). |
 | Icon | House | Fire, House, Hammer, Dot, Portal | Which map pin icon to use. |
 | Names | Random Name | Random Name, Station Name, No Name | Random Name: a Norse-sounding name from Name Prefixes + Name Suffixes. Station Name: "Workbench". No Name: just the icon. |
 | Skip Near Pin Meters | 50 | 0 to 200 | No new pin if one is already on your map this close (meters), so a base gets one pin, not one per bench. 0 = always pin. |
+| Remove With Bench | On |  | Taking the bench down with the hammer removes its pin, so a bench dropped to fix a boat leaves no trace. If another bench still stands within Skip Near Pin Meters, the pin moves to it instead. |
 | Announce | On |  | Show the new pin's name in the top-left messages. |
-| Name Prefixes | Ulf, Hrafn, Jarn, Frost, Grim, Skjold, Bjorn, Eld, Svart, Thor, Odin, Rune, Troll, Mead, Ash, Ygg, Valk, Draugr, Fenris, Storm, Iron, Wolf, Raven, Boar, Elk, Ember, Hel, Njord, Sig, Hjalm, Gunn, Kald, Myrk, Vind, Stein, Gull, Sol, Eikthyr, Bonemass, Greyling |  | First halves of random names, separated by commas. |
-| Name Suffixes | heim, gard, vik, stad, borg, holt, fjord, hall, by, hold, keep, stead, haven, mark, fell, dal, ness, wall, rest, ford, hof, skali, rock, watch, hearth |  | Second halves of random names, separated by commas. |
+| Name Prefixes | Ulf, Hrafn, Jarn, Frost, Grim, Skjold, Bjorn, Eld, Svart, Thor, Odin, Rune, Troll, Mead, Ash, Ygg, Valk, Draugr, Fenris, Storm, Iron, Wolf, Raven, Boar, Elk, Ember, Hel, Njord, Sig, Hjalm, Gunn, Kald, Myrk, Vind, Stein, Gull, Sol, Eikthyr, Bonemass, Greyling, Freyr, Freya, Baldr, Tyr, Loki, Heimdal, Vidar, Skadi, Bragi, Idun, Frigg, Ullr, Mimir, Surt, Ymir, Jotun, Fafnir, Nidhogg, Sleipnir, Hugin, Munin, Geri, Freki, Moder, Yagluth, Fulling, Lox, Serpent, Neck, Blod, Dverg, Alf, Hvit, Raud, Gra, Kol, Haug, Skog, Fjall, Snae, Bear, Orn, Oak, Birch, Pine, Thunder, Bone, Copper, Silver, Amber, Horn, Tusk, Antler, Mist, Ice, Black, Gold, Saga, Skald, Wyrm |  | First halves of random names, separated by commas. |
+| Name Suffixes | heim, gard, vik, stad, borg, holt, fjord, hall, by, hold, keep, stead, haven, mark, fell, dal, ness, wall, rest, ford, hof, skali, rock, watch, hearth, thorp, tun, vang, berg, havn, sund, ey, lund, mire, moor, mere, strand, haug, stein, garth, helm, hollow, hill, crag, peak, spire, tower, gate, bridge, crossing, ridge, reach, rise, falls, wood, grove, glade, field, vale, marsh, fen, bay, port, harbor, shore, cove, isle, point, cliff, cairn, barrow, howe, mound, ring, forge, mill, lodge, camp, post, fort, bastion, bulwark, rampart, longhouse, steading, saeter, hus, bol, toft, rud, vin, akr, hagi, lid, bekk, foss, hammar, tind, vatn, grip |  | Second halves of random names, separated by commas. |
 
 **Auto Repair**
 
