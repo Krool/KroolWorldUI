@@ -53,6 +53,7 @@ namespace KroolWorldUI
             BuildMaterials.BindConfig(config);
             DayNightBar.BindConfig(config);
             Compass.BindConfig(config);
+            BuffIcons.BindConfig(config);
             RestedCountdown.BindConfig(config);
             SaveCountdown.BindConfig(config);
             BenchPins.BindConfig(config);

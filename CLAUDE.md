@@ -81,6 +81,7 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
   countdown: centered at (0.5, 0.72), below the food toast. Rested countdown: a child of Hud.m_statusEffectListRoot placed above the Resting icon's name label (owner: not center-screen, timer only, above the buff not beside it).
   Compass: top center of Hud.m_rootObject (8 px down, about 74 px tall), pushed below Hud.m_eventBar and
   the boss bar (EnemyHud.m_baseHudBoss clones under m_hudRoot) when those are up.
+  Buff icons (BuffIcons): re-placed after Hud.UpdateStatusEffects every frame at Size scale, wrapping before the compass.
   Day/night bar: child of Minimap.m_smallRoot (its own canvas), in the 40 px above the minimap.
 - Day timing (EnvMan): cycle m_dayLengthSec (1200 s) from midnight on ZNet.GetTimeSeconds();
   daylight from 15% to 85% of it, which EnvMan rescales to the sun's 0.25-0.75 (RescaleDayFraction).

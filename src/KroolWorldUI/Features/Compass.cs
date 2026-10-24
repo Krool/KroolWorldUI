@@ -357,6 +357,22 @@ namespace KroolWorldUI.Features
                 _instance = null;
         }
 
+        /// <summary>
+        /// World-space corners of the compass while it is turned on, so the buff icons can keep
+        /// clear of it. Ignores its fades (map, menu), so the buffs do not jump around under them.
+        /// </summary>
+        internal static bool TryGetBounds(out Vector3 min, out Vector3 max)
+        {
+            min = max = Vector3.zero;
+            var c = _instance;
+            if (c == null || !Compass.Enabled.Value)
+                return false;
+            c._rect.GetWorldCorners(Corners);
+            min = Corners[0];
+            max = Corners[2];
+            return true;
+        }
+
         private void Update()
         {
             if (_failed)

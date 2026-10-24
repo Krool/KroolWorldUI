@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.12.0
+
+- New: buff icons. The game's buff icons at the top right show at 70% size (adjustable, 100% is the game's own), and wrap into a new row before they reach the compass instead of running under it. The wrap point follows your screen, the compass's width and size, and goes back to the game's 7 per row with the compass off.
+
 ## 0.11.1
 
 - Compass: finished animations. Markers spring in and fade out instead of popping, keep their place as they leave, and the one you look at grows while its name and distance ease in. Pings ripple. Friends held at the edge get a chevron pointing the way to turn. Labels swell slightly as they pass the center. The strip fades with the map and glides under a boss bar or raid banner.
