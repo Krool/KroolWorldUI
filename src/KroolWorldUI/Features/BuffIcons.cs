@@ -29,9 +29,12 @@ namespace KroolWorldUI.Features
         {
             Enabled = config.Bind(Section, "Enabled", true,
                 "Resize the buff icons at the top right and keep them clear of the compass.");
-            Size = config.Bind(Section, "Size", 0.7f,
+            Size = config.Bind(Section, "Size", 0.9f,
                 new ConfigDescription("Buff icon size; 1 is the game's own (large) size.",
                     new AcceptableValueRange<float>(0.5f, 1f)));
+            // 0.12.0 shipped 0.7; anyone still on it moves to the new default.
+            if (Mathf.Abs(Size.Value - 0.7f) < 0.001f)
+                Size.Value = 0.9f;
             MakeRoomForCompass = config.Bind(Section, "MakeRoomForCompass", true,
                 "Start a new row of buffs before they reach the compass, instead of running under it.");
         }

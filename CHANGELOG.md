@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.12.1
+
+- Buff icons: default size is now 90% (was 70%). If you were on 70%, you move to 90%; any other size you chose is kept.
+
 ## 0.12.0
 
 - New: buff icons. The game's buff icons at the top right show at 70% size (adjustable, 100% is the game's own), and wrap into a new row before they reach the compass instead of running under it. The wrap point follows your screen, the compass's width and size, and goes back to the game's 7 per row with the compass off.

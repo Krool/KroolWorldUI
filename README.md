@@ -16,7 +16,7 @@
 | **Food decay** | Faint segments past the end of the health, stamina and eitr bars: the max your food has lost as it wears off | Yes |
 | **Food reminders** | A toast when food runs low, a message while you have none, and an optional "can eat again" | Yes ("can eat again" off) |
 | **Compass** | A strip at the top of the screen: your heading for call-outs, friends, and map pins nearby | Yes |
-| **Buff icons** | The game's buff icons at 70% size, wrapping into a new row before they reach the compass | Yes |
+| **Buff icons** | The game's buff icons at 90% size, wrapping into a new row before they reach the compass | Yes |
 | **Day/night bar** | A bar above the minimap: night and day with moon and sun, where you are now, and the time until dusk or dawn | Yes |
 | **Rested countdown** | While you rest by a fire, the seconds until you are Rested, above the Resting buff | Yes |
 | **Save countdown** | A clear 5-second countdown before the auto-save, so its lag spike never catches you mid-fight | Yes |
@@ -113,7 +113,7 @@ A compass strip at the top center, like PUBG's, built for calling things out to 
 
 The game's buff icons (Rested, Wet, mead cooldowns and the rest) are large and grow toward the center of the screen, where the compass sits.
 
-- **70% size** by default, still readable, with their timers. Set it back to 100% for the game's own size.
+- **90% size** by default, with their timers. Set it back to 100% for the game's own size.
 - **They wrap before the compass:** once a row reaches the compass, the next buff starts a new row underneath. Works at any screen size, compass width or size; with the compass off, the game's usual 7 per row applies.
 
 
@@ -329,7 +329,7 @@ Generated from the mod's code on every build, so it always matches the F7 window
 | Setting | Default | Range or choices | What it does |
 |---|---|---|---|
 | Enabled | On |  | Resize the buff icons at the top right and keep them clear of the compass. |
-| Size | 0.7 | 0.5 to 1 | Buff icon size; 1 is the game's own (large) size. |
+| Size | 0.9 | 0.5 to 1 | Buff icon size; 1 is the game's own (large) size. |
 | Make Room For Compass | On |  | Start a new row of buffs before they reach the compass, instead of running under it. |
 
 **Rested Countdown**
