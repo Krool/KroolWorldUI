@@ -58,6 +58,8 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
   must not touch Harmony or game types in their initializers: SettingsDoc runs `BindConfig`
   outside the game.
 - `thunderstore/` - manifest.json and icon.png (256x256). Package = these + DLL + README + CHANGELOG.
+- `docs/wiki/FAQ.md` - the Thunderstore Wiki tab's page, pasted in by hand by the owner. FAQ and troubleshooting only,
+  not a copy of the README; update it when a behavior it describes changes.
 
 ## Gotchas
 
