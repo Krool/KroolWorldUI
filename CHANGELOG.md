@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.11.0
+
+- New: compass. A strip at the top center with your heading for call-outs, friends in their own colors (held at the edge when behind you), map pins within 300 meters (yours, bench pins, bed, tombstone, bosses) and map pings. Look at a marker to see its name and distance. Height arrows for markers well above or below you; overlapping markers fold into a count; moves below a boss bar or raid banner. Window, width, range and opacity are adjustable.
+- Bench pins: the Portal icon now makes a portal pin. It was making a tombstone-type pin, because the game lists Death and Bed before the fifth icon.
+
 ## 0.10.1
 
 - Bench pins: taking a bench down with the hammer removes its pin, so a bench dropped to fix a boat leaves no trace. If another bench still stands within the skip distance, the pin moves to it instead. New setting Remove With Bench (on).

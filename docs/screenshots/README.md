@@ -17,6 +17,7 @@ around it so the image reads at the page's width.
 | `food-decay.png` | Health bar with the faint red lost-health segment and the food column beside it, plus the stamina bar mid-sprint with its gold segment. |
 | `food-reminder.png` | Top-center toast: one running-out row, plus the no-food row if you can catch both. |
 | `build-materials.png` | Hammer out, a wall piece selected: the materials panel right of the build menu's piece box, with the build count. |
+| `compass.png` | Top center: the compass with a friend and a bench pin on it, the bench pin near the center so its name and distance show. |
 | `day-night.png` | Top-right corner: the day/night bar above the minimap, late afternoon so the dusk countdown shows. |
 | `rested-countdown.png` | Top right: the Rested countdown above the Resting buff icon while sitting by a fire. |
 | `save-countdown.png` | The save countdown box mid-count (turn on Preview on HUD in F7 to catch it). |

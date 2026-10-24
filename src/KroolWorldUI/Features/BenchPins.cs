@@ -14,7 +14,7 @@ namespace KroolWorldUI.Features
     /// </summary>
     internal static class BenchPins
     {
-        /// <summary>The five pin icons the map offers, in the game's order (Minimap.PinType Icon0..Icon4).</summary>
+        /// <summary>The five pin icons the map offers, in the map's pin picker order.</summary>
         internal enum PinIcon { Fire, House, Hammer, Dot, Portal }
         internal enum Naming { RandomName, StationName, NoName }
         internal enum Stations { WorkbenchOnly, AllCraftingStations }
@@ -127,6 +127,19 @@ namespace KroolWorldUI.Features
             }
         }
 
+        // Not a plain cast: Minimap.PinType runs Icon0..Icon3, Death, Bed, Icon4.
+        private static Minimap.PinType PinType()
+        {
+            switch (Icon.Value)
+            {
+                case PinIcon.Fire: return Minimap.PinType.Icon0;
+                case PinIcon.Hammer: return Minimap.PinType.Icon2;
+                case PinIcon.Dot: return Minimap.PinType.Icon3;
+                case PinIcon.Portal: return Minimap.PinType.Icon4;
+                default: return Minimap.PinType.Icon1;
+            }
+        }
+
         private static bool Pinned(CraftingStation station) =>
             station != null && (PinStations.Value == Stations.AllCraftingStations || station.m_name == WorkbenchName);
 
@@ -167,7 +180,7 @@ namespace KroolWorldUI.Features
         {
             var map = Minimap.instance;
             var pos = station.transform.position;
-            var type = (Minimap.PinType)(int)Icon.Value;
+            var type = PinType();
             var pin = Pins(map).FirstOrDefault(p => p.m_save && p.m_type == type &&
                                                     Utils.DistanceXZ(p.m_pos, pos) < PinMatchMeters);
             if (pin == null)
@@ -209,7 +222,7 @@ namespace KroolWorldUI.Features
                 case Naming.NoName: name = ""; break;
                 default: name = RandomName(pins); break;
             }
-            var pin = map.AddPin(pos, (Minimap.PinType)(int)Icon.Value, name, save: true, isChecked: false);
+            var pin = map.AddPin(pos, PinType(), name, save: true, isChecked: false);
             if (Announce.Value)
                 Player.m_localPlayer.Message(MessageHud.MessageType.TopLeft,
                     $"$msg_pin_added: {(name.Length > 0 ? name : stationName)}", 0, pin?.m_icon);

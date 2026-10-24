@@ -1,6 +1,6 @@
 ![Krool World UI](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/banner.png)
 
-**Small HUD additions for Valheim that show what the game keeps hidden:** how close a skill is to its next level, how much you are carrying, how much wood and stone you have while building, how much health and stamina your food has lost, when to eat, how long until nightfall, how long until you are rested, and when the auto-save lag spike is coming. It can also pin your workbenches on the map with Norse-sounding names and repair your gear the moment you open a bench.
+**Small HUD additions for Valheim that show what the game keeps hidden:** how close a skill is to its next level, how much you are carrying, how much wood and stone you have while building, how much health and stamina your food has lost, when to eat, which way you are facing, how long until nightfall, how long until you are rested, and when the auto-save lag spike is coming. It can also pin your workbenches on the map with Norse-sounding names and repair your gear the moment you open a bench.
 
 - **Client-side only.** The server and other players do not need it.
 - **Read-only, with two exceptions.** It reads game state for display. The only things it ever changes are ones you would do by hand: **Bench Pins** adds a pin to your own map when you build a workbench, and **Auto Repair** presses a bench's repair button for you. It never touches the world.
@@ -15,6 +15,7 @@
 | **Build materials** | While the hammer is out: the wood, stone and other building materials you carry, what the selected piece costs, and how many you can build | Yes |
 | **Food decay** | Faint segments past the end of the health, stamina and eitr bars: the max your food has lost as it wears off | Yes |
 | **Food reminders** | A toast when food runs low, a message while you have none, and an optional "can eat again" | Yes ("can eat again" off) |
+| **Compass** | A strip at the top of the screen: your heading for call-outs, friends, and map pins nearby | Yes |
 | **Day/night bar** | A bar above the minimap: night and day with moon and sun, where you are now, and the time until dusk or dawn | Yes |
 | **Rested countdown** | While you rest by a fire, the seconds until you are Rested, above the Resting buff | Yes |
 | **Save countdown** | A clear 5-second countdown before the auto-save, so its lag spike never catches you mid-fight | Yes |
@@ -92,6 +93,19 @@ A small toast at the top of the screen with the food's icon, its name and the ti
 - Timed reminders show once per food and fade after 6 seconds. They do not repeat until you have eaten that food again.
 - The countdown uses fixed-width digits, so it holds still.
 - Moves down to clear the raid banner, and hides while the inventory, the big map or the menu is open.
+
+## Compass
+
+A compass strip at the top center, like PUBG's, built for calling things out to friends: **"trolls at 210"**.
+
+- **Your heading** under the center mark: 0 is north (up on the map), 90 east.
+- **A narrow window** (120 degrees by default) that fades at both ends, with N, E, S, W large, NE and the rest smaller, and a number every 15 degrees.
+- **Friends** in their own colors. They stay pinned to the edge when they are behind you, so you never lose them. Far-away friends show if they are visible on the map.
+- **Map pins within 300 meters:** your pins, bench pins, bed, tombstone, bosses, and map pings (pings at any distance). Farther pins are smaller and fade out near the limit instead of popping.
+- **Look at a marker** and its name and distance show beside your heading: **Hrafnvik  120 m**. Only that one; the rest stay icons.
+- **Up and down arrows** on markers 10 or more meters above or below you.
+- Overlapping markers fold into one with a count. Moves below a boss health bar or raid banner, and hides with the map open.
+- Width, window, range and opacity are adjustable; friends, pins and the heading can each be turned off.
 
 ## Day/night bar
 
@@ -274,6 +288,21 @@ Generated from the mod's code on every build, so it always matches the F7 window
 | Bar Height | 10 | 6 to 18 | Bar height in HUD pixels. |
 | Day Color | `DBAD52D9` | Hex RRGGBBAA (AA = opacity) | Color of the day part. |
 | Night Color | `212B5CE6` | Hex RRGGBBAA (AA = opacity) | Color of the night part. |
+
+**Compass**
+
+| Setting | Default | Range or choices | What it does |
+|---|---|---|---|
+| Enabled | On |  | A compass strip at the top of the screen with your heading, friends and nearby map pins. |
+| Field Of View | 120 | 60 to 240 | How many degrees of the compass the strip shows. Narrower is easier to read. |
+| Width | 520 | 300 to 1000 | Strip width in HUD pixels. |
+| Heading | On |  | Your exact heading under the center mark (0 = north, 90 = east), for call-outs. The marker nearest the center shows its name and distance beside it. |
+| Friends | On |  | Other players. Always shown, held at the strip's edge when they are behind you. Far-away players show only if they are visible on the map. |
+| Pins | On |  | Map pins within Pin Range: your own pins, bench pins, bed, tombstone, bosses, and map pings. |
+| Pin Range | 300 | 50 to 2000 | Map pins farther than this (meters) are left off. Pings always show. |
+| Height Arrow Meters | 10 | 0 to 50 | A small up or down arrow on markers this far above or below you. 0 = off. |
+| Opacity | 0.9 | 0.2 to 1 | Overall opacity of the compass. |
+| Offset Y | 0 | 0 to 300 | Nudge down from the top of the screen, in HUD pixels. |
 
 **Rested Countdown**
 
