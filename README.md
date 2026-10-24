@@ -1,10 +1,11 @@
 ![Krool World UI](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/banner.png)
 
-**Small HUD additions for Valheim that show what the game keeps hidden:** how close a skill is to its next level, how much you are carrying, how much wood and stone you have while building, how much health and stamina your food has lost, when to eat, which way you are facing, how long until nightfall, how long until you are rested, and when the auto-save lag spike is coming. It can also pin your workbenches on the map with Norse-sounding names and repair your gear the moment you open a bench.
+**Quality-of-life HUD additions for Valheim.** Small touches that show what the game keeps hidden: how close a skill is to its next level, how much you are carrying, how much wood and stone you have while building, how much health and stamina your food has lost, when to eat, which way you are facing, how long until nightfall, how long until you are rested, and when the auto-save lag spike is coming. It can also pin your workbenches on the map with Norse-sounding names and repair your gear the moment you open a bench.
 
-- **Client-side only.** The server and other players do not need it.
-- **Read-only, with two exceptions.** It reads game state for display. The only things it ever changes are ones you would do by hand: **Bench Pins** adds a pin to your own map when you build a workbench, and **Auto Repair** presses a bench's repair button for you. It never touches the world.
-- **Pick what you want.** Every feature has its own on/off switch in an in-game settings window (**F7**). No other config mod needed.
+- **Quality of life, nothing more.** No new items, no balance changes, no new mechanics. It shows you information and saves you a few clicks; the game plays the same.
+- **Everything is adjustable, in game.** Press **F7** for the settings window: every feature has its own On/Off switch, and every size, color, position, range and threshold is a setting there, with a live preview on the HUD. No config files to edit, no other mods needed. Don't like a feature? Switch it off.
+- **Client-side only.** The server and other players do not need it, and players with and without it can play together.
+- **Read-only, with two exceptions.** It reads game state for display. The only things it ever changes are ones you would do by hand: **Bench Pins** adds a pin to your own map when you build a workbench, and **Auto Repair** presses a bench's repair button for you. Both can be turned off. It never touches the world.
 
 ## At a glance
 

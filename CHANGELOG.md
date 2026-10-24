@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.12.2
+
+- Mod page: says up front that these are quality-of-life additions only, that every feature and option is adjustable in the F7 window, and that players with and without the mod can play together.
+
 ## 0.12.1
 
 - Buff icons: default size is now 90% (was 70%). If you were on 70%, you move to 90%; any other size you chose is kept.
