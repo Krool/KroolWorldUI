@@ -98,14 +98,15 @@ A small toast at the top of the screen with the food's icon, its name and the ti
 
 A compass strip at the top center, like PUBG's, built for calling things out to friends: **"trolls at 210"**.
 
-- **Your heading** under the center mark: 0 is north (up on the map), 90 east.
-- **A narrow window** (120 degrees by default) that fades at both ends, with N, E, S, W large, NE and the rest smaller, and a number every 15 degrees.
-- **Friends** in their own colors. They stay pinned to the edge when they are behind you, so you never lose them. Far-away friends show if they are visible on the map.
-- **Map pins within 300 meters:** your pins, bench pins, bed, tombstone, bosses, and map pings (pings at any distance). Farther pins are smaller and fade out near the limit instead of popping.
-- **Look at a marker** and its name and distance show beside your heading: **Hrafnvik  120 m**. Only that one; the rest stay icons.
+- **Your heading** under the center mark: 0 is north (up on the map), 90 east. Optionally with the direction: **212 SW**.
+- **A narrow window** (120 degrees by default) that fades at both ends. N, E, S, W are large, NE and the rest smaller, a number every 15 degrees, and labels swell slightly as they pass the center.
+- **Friends** in their own colors. Behind you, they wait at the strip's edge with a small chevron pointing the way to turn. Far-away friends show if they are visible on the map.
+- **Map pins within 300 meters:** your pins (bench pins too), bed, tombstone and bosses, each kind with its own switch. **Map pings** show at any distance and send out a slow ripple.
+- **Look at a marker** and it grows a little while its name and distance ease in beside your heading: **Hrafnvik  120 m**. Only that one, so the strip stays clean. Prefer numbers everywhere? Set Distance to **All Markers** for a small distance under every icon.
+- **Busy areas stay readable:** overlapping markers fold into one with a count (**+2 more** when you look at it), and at most 12 show at once, pings and friends first, then the nearest.
+- **Nothing pops:** markers ease in and out, pins fade near the range limit, distances round to steady steps (5 m past 50 m, 10 m past 200 m, km past 1000). The strip glides down under a boss bar or raid banner, and fades out with the map open.
 - **Up and down arrows** on markers 10 or more meters above or below you.
-- Overlapping markers fold into one with a count. Moves below a boss health bar or raid banner, and hides with the map open.
-- Width, window, range and opacity are adjustable; friends, pins and the heading can each be turned off.
+- Size, width, window, range, opacity and marker cap are adjustable, and Animations can be turned off for plain fades.
 
 ## Day/night bar
 
@@ -294,15 +295,25 @@ Generated from the mod's code on every build, so it always matches the F7 window
 | Setting | Default | Range or choices | What it does |
 |---|---|---|---|
 | Enabled | On |  | A compass strip at the top of the screen with your heading, friends and nearby map pins. |
+| Size | 1 | 0.6 to 2 | Overall size of the compass. |
 | Field Of View | 120 | 60 to 240 | How many degrees of the compass the strip shows. Narrower is easier to read. |
 | Width | 520 | 300 to 1000 | Strip width in HUD pixels. |
-| Heading | On |  | Your exact heading under the center mark (0 = north, 90 = east), for call-outs. The marker nearest the center shows its name and distance beside it. |
-| Friends | On |  | Other players. Always shown, held at the strip's edge when they are behind you. Far-away players show only if they are visible on the map. |
-| Pins | On |  | Map pins within Pin Range: your own pins, bench pins, bed, tombstone, bosses, and map pings. |
-| Pin Range | 300 | 50 to 2000 | Map pins farther than this (meters) are left off. Pings always show. |
-| Height Arrow Meters | 10 | 0 to 50 | A small up or down arrow on markers this far above or below you. 0 = off. |
 | Opacity | 0.9 | 0.2 to 1 | Overall opacity of the compass. |
 | Offset Y | 0 | 0 to 300 | Nudge down from the top of the screen, in HUD pixels. |
+| Heading | On |  | Your exact heading under the center mark (0 = north, 90 = east), for call-outs. |
+| Heading Direction | Off |  | Add the compass direction after the heading: 212 SW. |
+| Focus Info | On |  | Name of the marker you are looking at, beside the heading. Stacked markers show how many are there. |
+| Distance | Focused | Focused, All Markers, Off | Focused: the distance of the marker you are looking at, beside its name. All Markers: also a small number under every marker. Off: no distances. |
+| Friends | On |  | Other players, each in their own color. Held at the strip's edge when they are behind you. Far-away players show only if they are visible on the map. |
+| Pins | On |  | Pins you placed on the map, bench pins included. |
+| Bed | On |  | Your bed (spawn point). |
+| Tombstone | On |  | Where you died. |
+| Bosses | On |  | Boss altars and other boss locations on your map. |
+| Pings | On |  | Map pings from you and your friends, at any distance. |
+| Pin Range | 300 | 50 to 2000 | Pins farther than this (meters) are left off. Friends and pings ignore it. |
+| Max Markers | 12 | 3 to 24 | Most markers on the strip at once; pings and friends come first, then the nearest. |
+| Height Arrow Meters | 10 | 0 to 50 | A small up or down arrow on markers this far above or below you. 0 = off. |
+| Animations | On |  | Markers ease in and out, grow when you look at them, and pings pulse. Off: plain fades only. |
 
 **Rested Countdown**
 

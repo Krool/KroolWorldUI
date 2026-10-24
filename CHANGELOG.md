@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.11.1
+
+- Compass: finished animations. Markers spring in and fade out instead of popping, keep their place as they leave, and the one you look at grows while its name and distance ease in. Pings ripple. Friends held at the edge get a chevron pointing the way to turn. Labels swell slightly as they pass the center. The strip fades with the map and glides under a boss bar or raid banner.
+- Compass: distances round to steady steps (5 m past 50 m, 10 m past 200 m, km past 1000) and the readout shows how many markers are stacked (+2 more).
+- Compass: new settings: Size, Heading Direction (212 SW), Distance (Focused, All Markers with a number under each icon, or Off), separate switches for Bed, Tombstone, Bosses and Pings, Max Markers (12), and Animations.
+
 ## 0.11.0
 
 - New: compass. A strip at the top center with your heading for call-outs, friends in their own colors (held at the edge when behind you), map pins within 300 meters (yours, bench pins, bed, tombstone, bosses) and map pings. Look at a marker to see its name and distance. Height arrows for markers well above or below you; overlapping markers fold into a count; moves below a boss bar or raid banner. Window, width, range and opacity are adjustable.
