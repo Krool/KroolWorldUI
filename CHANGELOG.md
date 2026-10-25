@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.12.3
+
+- Mod page: screenshots and short clips of the compass, weight bar, food reminders, build materials, rested countdown and the other features.
+
 ## 0.12.2
 
 - Mod page: says up front that these are quality-of-life additions only, that every feature and option is adjustable in the F7 window, and that players with and without the mod can play together.
