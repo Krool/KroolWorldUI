@@ -1,0 +1,62 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  html,body{margin:0;padding:0;background:#16110c}
+  .b{position:relative;width:1280px;height:320px;overflow:hidden;
+     background:radial-gradient(ellipse at 30% 0%,#33281b 0%,#211a12 55%,#17120c 100%);
+     font-family:Georgia,'Times New Roman',serif}
+  .f1{position:absolute;inset:10px;border:4px solid #d9a94e}
+  .f2{position:absolute;inset:22px;border:1px solid #8a6a33}
+  .tile{position:absolute;left:52px;top:52px;width:216px;height:216px;box-sizing:border-box;
+     border:4px solid #d9a94e;background:linear-gradient(#33281b,#1f1811);box-shadow:0 0 0 4px #120d08}
+  .tile .kw{position:absolute;top:24px;width:100%;text-align:center;font-weight:bold;font-size:80px;color:#e3b35a;letter-spacing:-2px}
+  .tile .bar{position:absolute;left:28px;right:28px;top:144px;height:26px;border:2px solid #d9a94e;background:#0f0b07}
+  .tile .bar i{position:absolute;top:2px;bottom:2px;left:2px}
+  .t{position:absolute;left:308px;top:52px;font-size:88px;font-weight:bold;color:#f3c76e;letter-spacing:-1px;
+     text-shadow:0 2px 0 #120d08}
+  .s{position:absolute;left:310px;top:160px;font-size:28px;color:#e0b766}
+  .s em{font-style:normal;color:#a8885a}
+  .feat{position:absolute;left:310px;top:258px;font-size:19px;color:#a8885a;white-space:nowrap}
+  .feat b{font-weight:normal;color:#6f5a3b;padding:0 7px}
+  svg{position:absolute;left:308px;top:204px}
+</style></head>
+<body><div class="b">
+  <div class="f1"></div><div class="f2"></div>
+  <div class="tile"><div class="kw">KW</div>
+    <div class="bar"><i style="width:82px;background:#9a6d2f"></i><i style="left:84px;width:44px;background:#f3c76e"></i></div></div>
+  <div class="t">Krool World UI</div>
+  <div class="s">Quality-of-life HUD for Valheim <em>&middot; all settings in F7</em></div>
+  <svg width="640" height="44" viewBox="0 0 640 44" id="c"></svg>
+  <div class="feat">Compass<b>&middot;</b>Skill XP<b>&middot;</b>Carry weight<b>&middot;</b>Build materials<b>&middot;</b>Food decay<b>&middot;</b>Day/night<b>&middot;</b>Auto repair</div>
+</div>
+<script>
+// Compass strip motif: heading 15 degrees (NNE), 120 degree field of view, edge fade.
+const W=640, H=44, mid=W/2, fov=120, heading=15, ns='http://www.w3.org/2000/svg', s=document.getElementById('c');
+function el(n,a){const e=document.createElementNS(ns,n);for(const k in a)e.setAttribute(k,a[k]);s.appendChild(e);return e}
+const g=el('linearGradient',{id:'fade'});
+[[0,0],[0.18,1],[0.82,1],[1,0]].forEach(([o,a])=>{const st=document.createElementNS(ns,'stop');st.setAttribute('offset',o);st.setAttribute('stop-color','#fff');st.setAttribute('stop-opacity',a);g.appendChild(st)});
+const m=el('mask',{id:'m'}); const r=document.createElementNS(ns,'rect');
+Object.entries({x:0,y:0,width:W,height:H,fill:'url(#fade)'}).forEach(([k,v])=>r.setAttribute(k,v)); m.appendChild(r);
+const grp=el('g',{mask:'url(#m)'});
+function add(n,a){const e=document.createElementNS(ns,n);for(const k in a)e.setAttribute(k,a[k]);grp.appendChild(e);return e}
+add('rect',{x:0,y:14,width:W,height:24,fill:'#0f0b07',opacity:0.9});
+add('line',{x1:0,y1:38,x2:W,y2:38,stroke:'#8a6a33','stroke-width':1});
+const names={0:'N',45:'NE',90:'E',135:'SE',180:'S',225:'SW',270:'W',315:'NW'};
+for(let d=0;d<360;d+=5){
+  let off=((d-heading+540)%360)-180; if(Math.abs(off)>fov/2+5)continue;
+  const x=mid+off*(W/fov), major=d%15===0;
+  add('line',{x1:x,y1:38,x2:x,y2:major?31:34,stroke:d%45===0?'#e0b766':'#8a6a33','stroke-width':major?1.6:1});
+  if(d%15===0){const card=names[d]; const t=add('text',{x,y:28,'text-anchor':'middle',
+    'font-family':'Georgia,serif','font-size':card?(card.length===1?17:14):12,'font-weight':card?'bold':'normal',
+    fill:d===0?'#f3c76e':card?'#e0b766':'#9a7d52'}); t.textContent=card||d;}
+}
+// Markers above the strip: a friend (green dot) and a map pin (gold diamond), plus one ping ring.
+function at(d){return mid+(((d-heading+540)%360)-180)*(W/fov)}
+add('circle',{cx:at(-28),cy:7,r:4.5,fill:'#7fd36b',stroke:'#0f0b07','stroke-width':1.5});
+add('rect',{x:at(52)-4,y:3,width:8,height:8,fill:'#e0b766',transform:`rotate(45 ${at(52)} 7)`});
+add('circle',{cx:at(-5),cy:7,r:3,fill:'#f0e6d0'});
+add('circle',{cx:at(-5),cy:7,r:6.5,fill:'none',stroke:'#f0e6d0','stroke-width':1,opacity:0.5});
+// Center pointer.
+el('path',{d:`M${mid-6} 44 L${mid+6} 44 L${mid} 37 Z`,fill:'#f3c76e'});
+</script>
+</body></html>
