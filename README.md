@@ -7,6 +7,14 @@
 - **Client-side only.** The server and other players do not need it, and players with and without it can play together.
 - **Read-only, with two exceptions.** It reads game state for display. The only things it ever changes are ones you would do by hand: **Bench Pins** adds a pin to your own map when you build a workbench, and **Auto Repair** presses a bench's repair button for you. Both can be turned off. It never touches the world.
 
+![Compass turning from south to north](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/compass.gif)
+
+| Carry weight | Food reminders |
+|---|---|
+| ![Weight bar](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/weight.gif) | ![Food reminder](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/food-reminder.gif) |
+| **Build materials** | **Rested countdown** |
+| ![Build materials](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/build-materials.png) | ![Rested countdown](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/rested.png) |
+
 ## At a glance
 
 | Feature | What you get | On by default |
@@ -29,6 +37,8 @@
 
 ## Skill XP bars
 
+![Skill XP tiles](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/skills.png)
+
 Swing an axe and a Woodcutting tile appears at the bottom right of the screen, just above the key hints: the skill's icon, with its XP bar underneath.
 
 - **See every gain.** The darker part of the bar is where you were when the tile appeared. The lighter part is what you have earned since, so each swing visibly adds to it, carrying over through a level-up.
@@ -42,6 +52,8 @@ Swing an axe and a Woodcutting tile appears at the bottom right of the screen, j
 - Hides while the inventory, the big map or the menu is open.
 
 ## Carry weight
+
+![Weight bar filling and turning red when over the limit](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/weight.gif)
 
 Your weight, always on screen, without opening the inventory. It sits left of the food icons and is built like the health bar beside it: a weight icon next to the fork, a bar rising above it, and your weight over your max on top.
 
@@ -58,6 +70,8 @@ Your weight, always on screen, without opening the inventory. It sits left of th
 
 ## Build materials
 
+![Build materials panel](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/build-materials.png)
+
 Take out the hammer (or the hoe or cultivator) and a small panel appears right of the build menu's piece box, counting what you carry as you build.
 
 - **What the selected piece costs,** each material with how many you have: `Wood 245 /2`. Red when you are short.
@@ -73,6 +87,8 @@ Take out the hammer (or the hoe or cultivator) and a small panel appears right o
 
 ## Food decay
 
+![Weight bar, food timers and health bar](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/vitals.png)
+
 Valheim quietly shrinks each food's bonuses as it wears off: health, stamina and eitr alike. A food at half its time gives only about 81% of each, and the drop speeds up near the end.
 
 - Each bar continues past its end in a **faint segment**: red on health, gold on stamina, purple on eitr. That is the max you have lost this way.
@@ -81,6 +97,8 @@ Valheim quietly shrinks each food's bonuses as it wears off: health, stamina and
 - Each bar has its own switch and color.
 
 ## Food reminders
+
+![Food running low toast](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/food-reminder.gif)
 
 A small toast at the top of the screen with the food's icon, its name and the time left. Each kind has its own switch:
 
@@ -97,6 +115,8 @@ A small toast at the top of the screen with the food's icon, its name and the ti
 - Moves down to clear the raid banner, and hides while the inventory, the big map or the menu is open.
 
 ## Compass
+
+![Compass with a bench pin](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/compass.png)
 
 A compass strip at the top center, like PUBG's, built for calling things out to friends: **"trolls at 210"**.
 
@@ -120,6 +140,8 @@ The game's buff icons (Rested, Wet, mead cooldowns and the rest) are large and g
 
 ## Day/night bar
 
+![Day/night bar](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/daynight.png)
+
 A slim bar along the top of the minimap shows the whole day, midnight to midnight: night at both ends with a moon, day in the middle with a sun, and a white marker for now.
 
 - **Dusk in 6:40** by day, **Dawn in 2:10** by night. In the last minute before dark (adjustable) the dusk countdown turns orange, so you can head home before the night spawns.
@@ -130,6 +152,8 @@ A slim bar along the top of the minimap shows the whole day, midnight to midnigh
 
 ## Rested countdown
 
+![Rested countdown above the Resting buff](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/rested.png)
+
 Sit or stand under a roof by a fire and the game starts **Resting**, but it never says how long until you are **Rested**. While you rest, a small **Rested in 14s** counts down just above the Resting buff icon.
 
 - The timing comes from the game's own Resting effect, so it is exact.
@@ -137,6 +161,8 @@ Sit or stand under a roof by a fire and the game starts **Resting**, but it neve
 - A soft chime when it lands (can be turned off).
 
 ## Save countdown
+
+![Save countdown](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/save-countdown.png)
 
 Valheim auto-saves every 30 minutes, and on a big world the save freezes the game for a moment. On hardcore that hitch can be the difference in a fight. A few seconds before it, a box near the top of the screen counts down: **World save in 5, 4, 3, 2, 1**, then **Saving...**
 
@@ -167,6 +193,8 @@ Open a workbench, forge or any crafting station and every item it can fix is rep
 - One repair sound and one message (**Repaired 4 items**); the message can be turned off.
 
 ## Settings window
+
+![The F7 settings window](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/settings.png)
 
 Press **F7** in game.
 
