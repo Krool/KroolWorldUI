@@ -7,13 +7,25 @@
 - **Client-side only.** The server and other players do not need it, and players with and without it can play together.
 - **Read-only, with two exceptions.** It reads game state for display. The only things it ever changes are ones you would do by hand: **Bench Pins** adds a pin to your own map when you build a workbench, and **Auto Repair** presses a bench's repair button for you. Both can be turned off. It never touches the world.
 
+**Compass:** your heading at the top of the screen, for calling out directions to friends.
+
 ![Compass turning from south to north](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/compass.gif)
 
-| Carry weight | Food reminders |
-|---|---|
-| ![Weight bar](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/weight.gif) | ![Food reminder](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/food-reminder.gif) |
-| **Build materials** | **Rested countdown** |
-| ![Build materials](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/build-materials.png) | ![Rested countdown](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/rested.png) |
+**Carry weight:** a bar beside your food that fills as you pick things up and turns red past your limit.
+
+![Weight bar](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/weight.gif)
+
+**Food reminders:** a toast at the top when a food is about to run out, with its time left.
+
+![Food reminder](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/food-reminder.gif)
+
+**Build materials:** with the hammer out, what you carry, what the piece costs and how many you can build.
+
+![Build materials](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/build-materials.png)
+
+**Rested countdown:** the seconds until Rested, above the Resting buff.
+
+![Rested countdown](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/rested.png)
 
 ## At a glance
 

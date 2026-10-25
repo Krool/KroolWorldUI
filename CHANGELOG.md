@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.12.4
+
+- Mod page: the preview pictures are a list, one feature per line with a caption, instead of a grid.
+
 ## 0.12.3
 
 - Mod page: screenshots and short clips of the compass, weight bar, food reminders, build materials, rested countdown and the other features.
