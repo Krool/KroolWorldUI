@@ -5,7 +5,16 @@ Quick answers for Krool World UI. The full feature list is on the mod's main pag
 ## Settings
 
 **Where are the settings?**
-Press **F7** in game. Every feature has its own section with an On/Off switch on the header; hover any setting to see what it does, its default and its range. Turn on **Preview on HUD** to see every feature's sample while you adjust it.
+Press **F7** in game, or open the pause menu and pick **Krool World UI**. Every feature has its own section with an On/Off switch on the header; point at or select any setting to see what it does, its default and its range. Turn on **Preview on HUD** to see every feature's sample while you adjust it.
+
+**Can I use it with a controller or on a Steam Deck?**
+Yes. Open the settings from the pause menu. The D-pad moves and changes values, A selects, B closes, X turns the preview on, Y resets a setting, and the bumpers jump between sections.
+
+**Is it in my language?**
+It follows the language you picked in Valheim's own settings, in every language the game offers. If a line reads oddly, open an issue with a better wording.
+
+**Can I hide everything the mod draws for a moment?**
+Set **General > Hide Key** to a key. It hides and shows all of the mod's elements.
 
 **F7 is taken by another mod. Can I change it?**
 Yes: **General > Settings Key** in the F7 window, or `SettingsKey` in the config file.
@@ -42,6 +51,9 @@ Thunderstore rebuilds the mod list r2modman downloads on a schedule, so a new ve
 
 **The compass does not show a friend.**
 Friends nearby always show. Friends far away show only if they have **Visible on map** turned on, the same as on the game's map.
+
+**The compass shows no pins, and I got no bench pin.**
+On a world with the No Map modifier (or with your map turned off), the compass shows only your heading and friends in sight, and Bench Pins adds nothing: the world takes the map away on purpose. The day/night bar moves to the top right corner.
 
 **Auto repair did not fix one of my items.**
 It follows the same rules as the repair button: a workbench fixes what a workbench can, a forge fixes metal, and some items need a higher station level. Open the right station and it repairs on the spot.

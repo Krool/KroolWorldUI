@@ -36,19 +36,19 @@ namespace KroolWorldUI.Features
         internal static void BindConfig(ConfigFile config)
         {
             Enabled = config.Bind(Section, "Enabled", true,
-                "Extend the health, stamina and eitr bars with faint segments showing the max your foods " +
-                "have lost as they wear off: what eating fresh food would give back.");
+                "A faint segment past the end of the health, stamina and eitr bars: the max your food has " +
+                "lost as it wears off, which fresh food would give back.");
             Health = config.Bind(Section, "Health", true, "Segment on the health bar.");
             HealthColor = config.Bind(Section, "HealthColor", new Color(0.75f, 0.18f, 0.14f, 0.45f),
-                "Color of the lost-health segment. Lower the last two digits to make it fainter.");
+                ConfigText.Desc("Color of the health segment.", when: () => Health.Value, whenText: "Health is on"));
             Stamina = config.Bind(Section, "Stamina", true,
-                "Segment on the stamina bar. Like the bar itself, it shows only while your stamina is not full.");
+                "Segment on the stamina bar. Like the bar, it shows while stamina is not full.");
             StaminaColor = config.Bind(Section, "StaminaColor", new Color(0.92f, 0.72f, 0.2f, 0.45f),
-                "Color of the lost-stamina segment.");
+                ConfigText.Desc("Color of the stamina segment.", when: () => Stamina.Value, whenText: "Stamina is on"));
             Eitr = config.Bind(Section, "Eitr", true,
-                "Segment on the eitr bar (eitr foods only). Shows only while your eitr is not full.");
+                "Segment on the eitr bar, for eitr foods. Like the bar, it shows while eitr is not full.");
             EitrColor = config.Bind(Section, "EitrColor", new Color(0.6f, 0.38f, 0.9f, 0.45f),
-                "Color of the lost-eitr segment.");
+                ConfigText.Desc("Color of the eitr segment.", when: () => Eitr.Value, whenText: "Eitr is on"));
         }
 
         /// <summary>Points of a stat the current foods would add if they were all freshly eaten.</summary>
@@ -105,17 +105,17 @@ namespace KroolWorldUI.Features
             private readonly string _objectName;
             private RectTransform _rect;
             private Image _image;
-            private bool _failed;
+            private readonly HudKit.FailFlag _failed = new HudKit.FailFlag();
 
             public Segment(string objectName) => _objectName = objectName;
 
             public void Update(RectTransform root, Player player, Stat stat, ConfigEntry<bool> on, ConfigEntry<Color> color)
             {
-                if (_failed || root == null || player == null)
+                if (_failed.IsSet || root == null || player == null)
                     return;
                 try
                 {
-                    float missing = Enabled.Value && on.Value ? Missing(player, stat) : 0f;
+                    float missing = Enabled.Value && on.Value && HudKit.Allowed ? Missing(player, stat) : 0f;
                     // Sample while tuning the colors.
                     if (SettingsWindow.IsOpen && SettingsWindow.Previewing && Enabled.Value && on.Value && missing < 1f)
                         missing = PreviewPoints;
@@ -139,7 +139,7 @@ namespace KroolWorldUI.Features
                 }
                 catch (System.Exception e)
                 {
-                    _failed = true;
+                    _failed.Set();
                     Plugin.Log.LogError($"Food decay {stat} segment disabled for this session after an error: {e}");
                     if (_rect != null)
                         Object.Destroy(_rect.gameObject);

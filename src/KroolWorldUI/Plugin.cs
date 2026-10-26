@@ -35,6 +35,7 @@ namespace KroolWorldUI
 
             _harmony = new Harmony(Guid);
             _harmony.PatchAll(typeof(Plugin).Assembly);
+            L10n.Init();
             Log.LogInfo($"{Name} {Version}{Flavor} loaded");
         }
 
@@ -45,7 +46,7 @@ namespace KroolWorldUI
         /// </summary>
         internal static void BindAll(ConfigFile config)
         {
-            SettingsWindow.BindConfig(config);
+            General.BindConfig(config);
             SkillXpBars.BindConfig(config);
             WeightDisplay.BindConfig(config);
             FoodDecay.BindConfig(config);
@@ -58,6 +59,7 @@ namespace KroolWorldUI
             SaveCountdown.BindConfig(config);
             BenchPins.BindConfig(config);
             AutoRepair.BindConfig(config);
+            General.Migrate();
         }
 
         private void OnDestroy()

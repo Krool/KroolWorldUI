@@ -1,0 +1,55 @@
+# Krool World UI: texte à l'écran, français (French).
+
+dir_n = N
+dir_ne = NE
+dir_e = E
+dir_se = SE
+dir_s = S
+dir_sw = SO
+dir_w = O
+dir_nw = NO
+unit_m = $1 m
+unit_km = $1 km
+compass_more = +$1 autres
+
+dusk_in = Crépuscule dans $1
+dawn_in = Aube dans $1
+
+character_save_in = Sauvegarde du personnage dans
+saving = Sauvegarde...
+
+rested_in = En forme dans $1
+seconds_short = $1 s
+
+enough_for = Assez pour $1
+not_enough = Pas assez
+
+food_running_low = Bientôt épuisé
+food_can_eat_again = Vous pouvez remanger
+food_can_eat = à remanger
+food_none = Pas de nourriture
+food_slot_empty = Emplacement vide ($1)
+dismiss_hint = [$1] masquer
+
+xp_gain = +$1 % $2
+
+repaired_items = $1 objets réparés
+
+win_search = Rechercher un paramètre
+win_expand_all = Tout développer
+win_collapse_all = Tout réduire
+win_no_results = Aucun paramètre trouvé.
+win_preview = Aperçu sur le HUD
+win_preview_ingame = Aperçu sur le HUD (en jeu seulement)
+win_preview_desc = Affiche tous les éléments à la fois avec des valeurs d'exemple, pour voir où chacun se place pendant le réglage. En jeu, chacun n'apparaît que lorsqu'il s'applique.
+win_describe_hint = Pointez ou sélectionnez un paramètre pour voir son effet.
+win_key_hint = Flèches : déplacer et modifier, Entrée : sélectionner, Échap : fermer
+win_pad_hint = A sélectionner, B fermer, X aperçu, Y réinitialiser, LB/RB section
+win_changed = $1 modifiés
+win_reset = Réinitialiser
+win_reset_all = Tout réinitialiser
+win_press_key = Appuyez sur une touche. Échap annule, Retour arrière efface.
+win_none = Aucune
+win_default = Par défaut : $1
+win_range = Plage : $1
+win_options = Options : $1

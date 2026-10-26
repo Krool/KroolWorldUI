@@ -1,0 +1,55 @@
+# Krool World UI: text pe ecran, română (Romanian).
+
+dir_n = N
+dir_ne = NE
+dir_e = E
+dir_se = SE
+dir_s = S
+dir_sw = SV
+dir_w = V
+dir_nw = NV
+unit_m = $1 m
+unit_km = $1 km
+compass_more = +$1 în plus
+
+dusk_in = Amurg în $1
+dawn_in = Zori în $1
+
+character_save_in = Personajul se va salva în
+saving = Se salvează...
+
+rested_in = Odihnit în $1
+seconds_short = $1 s
+
+enough_for = Ajunge pentru $1
+not_enough = Nu ajunge
+
+food_running_low = Pe terminate
+food_can_eat_again = Poți mânca iar
+food_can_eat = poți mânca
+food_none = Fără mâncare
+food_slot_empty = Slot de mâncare gol ($1)
+dismiss_hint = [$1] ascunde
+
+xp_gain = +$1% $2
+
+repaired_items = $1 obiecte reparate
+
+win_search = Caută setări
+win_expand_all = Extinde tot
+win_collapse_all = Restrânge tot
+win_no_results = Nicio setare găsită.
+win_preview = Previzualizare pe HUD
+win_preview_ingame = Previzualizare pe HUD (doar în joc)
+win_preview_desc = Arată toate elementele deodată cu valori de exemplu, ca să vezi unde stă fiecare cât timp îl ajustezi. În joc, fiecare apare doar când e cazul.
+win_describe_hint = Indică sau selectează o setare ca să vezi ce face.
+win_key_hint = Săgeți: mută și schimbă, Enter: selectează, Esc: închide
+win_pad_hint = A selectează, B închide, X previzualizare, Y resetează, LB/RB secțiune
+win_changed = $1 modificate
+win_reset = Resetează
+win_reset_all = Resetează tot
+win_press_key = Apasă o tastă. Esc anulează, Backspace șterge.
+win_none = Niciuna
+win_default = Implicit: $1
+win_range = Interval: $1
+win_options = Opțiuni: $1

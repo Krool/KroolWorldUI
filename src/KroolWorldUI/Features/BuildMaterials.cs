@@ -29,68 +29,90 @@ namespace KroolWorldUI.Features
         /// (language-independent, used to find it), and its default: the four everyday ones once
         /// found, later ones only while carried so a late-game panel stays short.
         /// </summary>
-        internal static readonly (string Key, string Prefab, Show Default)[] Materials =
+        internal static readonly (string Key, string Prefab, string Name, Show Default)[] Materials =
         {
-            ("Wood", "Wood", Show.WhenKnown),
-            ("Stone", "Stone", Show.WhenKnown),
-            ("CoreWood", "RoundLog", Show.WhenKnown),
-            ("FineWood", "FineWood", Show.WhenKnown),
-            ("Resin", "Resin", Show.WhenCarried),
-            ("BronzeNails", "BronzeNails", Show.WhenCarried),
-            ("IronNails", "IronNails", Show.WhenCarried),
-            ("BlackMarble", "BlackMarble", Show.WhenCarried),
-            ("YggdrasilWood", "YggdrasilWood", Show.WhenCarried),
-            ("Grausten", "Grausten", Show.WhenCarried),
-            ("Ashwood", "Blackwood", Show.WhenCarried),
+            ("Wood", "Wood", "Wood", Show.WhenKnown),
+            ("Stone", "Stone", "Stone", Show.WhenKnown),
+            ("CoreWood", "RoundLog", "Corewood", Show.WhenKnown),
+            ("FineWood", "FineWood", "Finewood", Show.WhenKnown),
+            ("Resin", "Resin", "Resin", Show.WhenCarried),
+            ("BronzeNails", "BronzeNails", "Bronze Nails", Show.WhenCarried),
+            ("IronNails", "IronNails", "Iron Nails", Show.WhenCarried),
+            ("BlackMarble", "BlackMarble", "Black Marble", Show.WhenCarried),
+            ("YggdrasilWood", "YggdrasilWood", "Yggdrasil Wood", Show.WhenCarried),
+            ("Grausten", "Grausten", "Grausten", Show.WhenCarried),
+            ("Ashwood", "Blackwood", "Ashwood", Show.WhenCarried),
         };
 
         internal static ConfigEntry<bool> Enabled;
         internal static ConfigEntry<bool> SelectedPiece;
-        internal static ConfigEntry<bool> CostOnly;
+        internal static ConfigEntry<bool> CanBuildCount;
+        internal static ConfigEntry<bool> CommonWithCost;
         internal static ConfigEntry<Show>[] MaterialShow;
         internal static ConfigEntry<string> OtherMaterials;
-        internal static ConfigEntry<bool> CanBuildCount;
+        internal static ConfigEntry<float> Size;
+        internal static ConfigEntry<float> Opacity;
         internal static ConfigEntry<Place> Placement;
         internal static ConfigEntry<float> AnchorX;
         internal static ConfigEntry<float> AnchorY;
+        internal static ConfigEntry<float> OffsetX;
+        internal static ConfigEntry<float> OffsetY;
 
         private const string Section = "Build Materials";
 
         internal static void BindConfig(ConfigFile config)
         {
             Enabled = config.Bind(Section, "Enabled", true,
-                "While a build tool is out, count the materials you carry, so you can watch your wood and " +
-                "stone as you build.");
-            SelectedPiece = config.Bind(Section, "SelectedPiece", true,
-                "List what the selected piece costs, each with how many you carry. Red when you are short.");
-            CostOnly = config.Bind(Section, "CostOnly", true,
-                "With a piece selected, list only what it costs. The materials below show when nothing " +
-                "is selected. Off: list them alongside the cost.");
-            CanBuildCount = config.Bind(Section, "CanBuildCount", true,
-                "Show how many of the selected piece your materials cover.");
-            Placement = config.Bind(Section, "Placement", Place.BesideBuildInfo,
-                "Beside Build Info: right of the selected-piece box at the bottom center. " +
-                "Custom: placed by Anchor X and Anchor Y.");
-            AnchorX = config.Bind(Section, "AnchorX", 0.8f,
-                new ConfigDescription("Custom placement: left edge (0 = left of screen, 1 = right).",
-                    new AcceptableValueRange<float>(0f, 1f)));
-            AnchorY = config.Bind(Section, "AnchorY", 0.1f,
-                new ConfigDescription("Custom placement: bottom edge (0 = bottom of screen, 1 = top).",
-                    new AcceptableValueRange<float>(0f, 1f)));
+                "With the hammer out, a panel beside the build menu counts the materials you carry.");
 
+            const string piece = "Selected piece";
+            SelectedPiece = config.Bind(Section, "SelectedPiece", true,
+                ConfigText.Desc("List what the selected piece costs and how many you have. Red when short.", group: piece));
+            CanBuildCount = config.Bind(Section, "CanBuildCount", true,
+                ConfigText.Desc("How many of the selected piece you can build.", group: piece,
+                    when: () => SelectedPiece.Value, whenText: "Selected Piece is on"));
+            CommonWithCost = config.Bind(Section, "CommonWithCost", false,
+                ConfigText.Desc("Also list the materials below while a piece is selected. Off: only its cost.",
+                    group: piece, when: () => SelectedPiece.Value, whenText: "Selected Piece is on"));
+
+            const string common = "Materials (nothing selected)";
             MaterialShow = new ConfigEntry<Show>[Materials.Length];
             for (int i = 0; i < Materials.Length; i++)
             {
-                string name = ConfigText.Pretty(Materials[i].Key);
+                string name = Materials[i].Name; // the game's English spelling
                 MaterialShow[i] = config.Bind(Section, Materials[i].Key, Materials[i].Default,
-                    $"When to list {name}. When Known: once your character has picked one up. " +
-                    "When Carried: only while you have some.");
+                    ConfigText.Desc($"When to list {name}. When Known: once you have found one. " +
+                                    "When Carried: while you have some.", group: common, label: name));
             }
             OtherMaterials = config.Bind(Section, "OtherMaterials", "",
-                "More materials to list with the ones above, by the names the game shows, separated by commas " +
-                "(for example: Copper, Deer Hide).");
-        }
+                ConfigText.Desc("More materials to list, separated by commas: Copper, Deer Hide. Names as the game " +
+                                "shows them, or item names (DeerHide), which work in every language.", group: common));
 
+            const string look = "Look";
+            Size = config.Bind(Section, "Size", 1f,
+                ConfigText.Desc("Panel size. 1 is the normal size.", new AcceptableValueRange<float>(0.75f, 1.5f), look, step: 0.05f));
+            Opacity = config.Bind(Section, "Opacity", 1f,
+                ConfigText.Desc("1 is solid; lower shows the game through it.", new AcceptableValueRange<float>(0.2f, 1f), look, step: 0.05f));
+
+            const string placement = "Placement";
+            Placement = config.Bind(Section, "Placement", Place.BesideBuildInfo,
+                ConfigText.Desc("Beside Build Info: right of the piece box at the bottom of the screen. " +
+                                "Custom: at Anchor X and Anchor Y.", group: placement));
+            AnchorX = config.Bind(Section, "AnchorX", 0.8f,
+                ConfigText.Desc("Left edge. 0 is the left of the screen, 1 the right.",
+                    new AcceptableValueRange<float>(0f, 1f), placement,
+                    () => Placement.Value == Place.Custom, "Placement is Custom", 0.01f));
+            AnchorY = config.Bind(Section, "AnchorY", 0.1f,
+                ConfigText.Desc("Bottom edge. 0 is the bottom of the screen, 1 the top.",
+                    new AcceptableValueRange<float>(0f, 1f), placement,
+                    () => Placement.Value == Place.Custom, "Placement is Custom", 0.01f));
+            OffsetX = config.Bind(Section, "OffsetX", 0f,
+                ConfigText.Desc("Move left (-) or right (+), in HUD pixels.",
+                    new AcceptableValueRange<float>(-400f, 400f), placement));
+            OffsetY = config.Bind(Section, "OffsetY", 0f,
+                ConfigText.Desc("Move down (-) or up (+), in HUD pixels.",
+                    new AcceptableValueRange<float>(-400f, 400f), placement));
+        }
         [HarmonyPatch(typeof(Hud), "Update")]
         private static class EnsureOnHud
         {
@@ -104,14 +126,16 @@ namespace KroolWorldUI.Features
 
     internal class BuildMaterialsHud : MonoBehaviour
     {
-        private const float Width = 210f;
+        private const float Width = 210f;          // narrowest; grows to fit long names
+        private const float MaxWidth = 380f;
+        private const float MinCountWidth = 76f;
         private const float RowHeight = 28f;
         private const float Pad = 6f;
         private const float Gap = 12f;
         private const float RefreshSeconds = 0.2f;
 
         private static BuildMaterialsHud _instance;
-        private static bool _failed;
+        private static readonly HudKit.FailFlag _failed = new HudKit.FailFlag();
 
         private RectTransform _rect;
         private CanvasGroup _group;
@@ -123,6 +147,9 @@ namespace KroolWorldUI.Features
         // Other Materials, resolved once ObjectDB is loaded and again when Other Materials changes.
         private ItemDrop.ItemData.SharedData[] _common;
         private string _otherFrom;
+        private string _otherTyped;
+        private float _otherTypedAt;
+        private const float TypingPause = 1f;
         private readonly List<ItemDrop.ItemData.SharedData> _other = new List<ItemDrop.ItemData.SharedData>();
 
         private class Row
@@ -139,7 +166,7 @@ namespace KroolWorldUI.Features
 
         internal static void Ensure()
         {
-            if (_instance != null || _failed)
+            if (_instance != null || _failed.IsSet)
                 return;
             var hud = Hud.instance;
             if (hud == null || hud.m_rootObject == null || hud.m_healthText == null || Player.m_localPlayer == null)
@@ -161,23 +188,28 @@ namespace KroolWorldUI.Features
                 b._template = hud.m_healthText;
                 b._buildInfo = hud.m_buildHud != null ? hud.m_buildHud.transform.Find("SelectedInfo") as RectTransform : null;
                 b._footer = HudKit.NewText(b._template, go.transform, "footer", TextAlignmentOptions.MidlineLeft, HudKit.Muted, 15f);
+                L10n.Changed += b.OnLanguage;
             }
             catch (System.Exception e)
             {
-                _failed = true;
+                _failed.Set();
                 Plugin.Log.LogError($"Build materials disabled for this session: {e}");
             }
         }
 
         private void OnDestroy()
         {
+            L10n.Changed -= OnLanguage;
             if (_instance == this)
                 _instance = null;
         }
 
+        // Other Materials are matched by their names in the game's language: look them up again.
+        private void OnLanguage() => _otherFrom = null;
+
         private void Update()
         {
-            if (_failed)
+            if (_failed.IsSet)
                 return;
             try
             {
@@ -185,7 +217,7 @@ namespace KroolWorldUI.Features
             }
             catch (System.Exception e)
             {
-                _failed = true;
+                _failed.Set();
                 Plugin.Log.LogError($"Build materials disabled for this session after an error: {e}");
                 Destroy(gameObject);
             }
@@ -196,7 +228,7 @@ namespace KroolWorldUI.Features
             var player = Player.m_localPlayer;
             bool building = player != null && player.InPlaceMode();
             bool preview = SettingsWindow.IsOpen && SettingsWindow.Previewing;
-            bool wanted = BuildMaterials.Enabled.Value && player != null && (building || preview)
+            bool wanted = BuildMaterials.Enabled.Value && HudKit.Allowed && player != null && (building || preview)
                           && !InventoryGui.IsVisible() && !Minimap.IsOpen() && !Menu.IsVisible();
             if (!wanted)
             {
@@ -209,7 +241,10 @@ namespace KroolWorldUI.Features
                 _nextRefresh = Time.unscaledTime + RefreshSeconds;
                 Refresh(player, building ? player.GetSelectedPiece() : null);
             }
-            _group.alpha = _rows.Count > 0 && _rows[0].Root.activeSelf ? 1f : 0f;
+            _group.alpha = _rows.Count > 0 && _rows[0].Root.activeSelf ? BuildMaterials.Opacity.Value : 0f;
+            float size = BuildMaterials.Size.Value;
+            if (!Mathf.Approximately(_rect.localScale.x, size))
+                _rect.localScale = new Vector3(size, size, 1f);
             Place();
         }
 
@@ -232,14 +267,14 @@ namespace KroolWorldUI.Features
                     hasCost = true;
                     canBuild = Mathf.Min(canBuild, have / req.m_amount);
                     var color = have >= req.m_amount ? HudKit.Parchment : HudKit.Warn;
-                    SetRow(shown++, shared, $"{have}<size=75%><color=#{Hex(HudKit.Muted)}>  /{req.m_amount}</color></size>", color);
+                    SetRow(shown++, shared, $"{have}<size=75%><color=#{HudKit.Hex(HudKit.Muted)}>  /{req.m_amount}</color></size>", color);
                 }
             }
 
             Resolve();
-            // With a costed piece selected, its cost is the whole list (Cost Only). The hoe and
-            // cultivator build terrain and crops; wood and stone counts are noise there.
-            bool listMaterials = !UsingTerrainTool(player) && !(hasCost && BuildMaterials.CostOnly.Value);
+            // With a costed piece selected, its cost is the whole list unless Common With Cost is on.
+            // The hoe and cultivator build terrain and crops; wood and stone counts are noise there.
+            bool listMaterials = !UsingTerrainTool(player) && !(hasCost && !BuildMaterials.CommonWithCost.Value);
             if (_common != null && listMaterials)
             {
                 for (int i = 0; i < _common.Length; i++)
@@ -277,16 +312,33 @@ namespace KroolWorldUI.Features
             if (footer)
             {
                 _footer.text = canBuild > 0
-                    ? $"Enough for <color=#{Hex(HudKit.Gold)}>{canBuild}</color>"
-                    : $"<color=#{Hex(HudKit.Warn)}>Not enough</color>";
+                    ? L10n.T("enough_for", $"<color=#{HudKit.Hex(HudKit.Gold)}>{canBuild}</color>")
+                    : $"<color=#{HudKit.Hex(HudKit.Warn)}>{L10n.T("not_enough")}</color>";
             }
+
+            // As wide as the longest name and count need (names run long in some languages).
+            float countColumn = MinCountWidth, nameColumn = 0f;
+            for (int i = 0; i < shown; i++)
+            {
+                var row = _rows[i];
+                countColumn = Mathf.Max(countColumn, Mathf.Ceil(row.Count.GetPreferredValues(row.Count.text).x) + 4f);
+                nameColumn = Mathf.Max(nameColumn, Mathf.Ceil(row.Name.GetPreferredValues(row.Name.text).x));
+            }
+            float width = Pad * 2f + RowHeight + 2f + nameColumn + 8f + countColumn;
+            if (footer)
+                width = Mathf.Max(width, Pad * 2f + 4f + Mathf.Ceil(_footer.GetPreferredValues(_footer.text).x) + 8f);
+            width = Mathf.Clamp(width, Width, MaxWidth);
 
             int lines = shown + (footer ? 1 : 0);
             for (int i = 0; i < shown; i++)
+            {
                 Lay((RectTransform)_rows[i].Root.transform, i);
+                _rows[i].Name.rectTransform.offsetMax = new Vector2(-(countColumn + 2f), 0f);
+                _rows[i].Count.rectTransform.sizeDelta = new Vector2(countColumn, 0f);
+            }
             if (footer)
                 Lay(_footer.rectTransform, shown);
-            _rect.sizeDelta = new Vector2(Width, RowHeight * Mathf.Max(1, lines) + Pad * 2f);
+            _rect.sizeDelta = new Vector2(width, RowHeight * Mathf.Max(1, lines) + Pad * 2f);
         }
 
         /// <summary>Line i from the top, inside the padding.</summary>
@@ -349,8 +401,18 @@ namespace KroolWorldUI.Features
         private void Resolve()
         {
             string other = BuildMaterials.OtherMaterials.Value ?? "";
-            if ((_common != null && other == _otherFrom) || ObjectDB.instance == null || ObjectDB.instance.m_items.Count == 0)
+            if (ObjectDB.instance == null || ObjectDB.instance.m_items.Count == 0)
                 return;
+            // While the list is being typed, wait until it has been still for a moment.
+            if (other != _otherTyped)
+            {
+                _otherTyped = other;
+                _otherTypedAt = Time.unscaledTime;
+            }
+            bool otherReady = other != _otherFrom && Time.unscaledTime - _otherTypedAt >= TypingPause;
+            if (_common != null && !otherReady)
+                return;
+
             var byPrefab = new Dictionary<string, ItemDrop.ItemData.SharedData>();
             var byShown = new Dictionary<string, ItemDrop.ItemData.SharedData>();
             foreach (var prefab in ObjectDB.instance.m_items)
@@ -359,6 +421,10 @@ namespace KroolWorldUI.Features
                 if (shared == null)
                     continue;
                 byPrefab[Key(prefab.name)] = shared;
+                // "$item_deerhide" also matches "Deer Hide" typed in English while playing in another language.
+                string token = shared.m_name ?? "";
+                if (token.StartsWith("$item_"))
+                    byPrefab.TryAdd(Key(token.Substring(6)), shared);
                 string shownName = Key(Localization.instance != null ? Localization.instance.Localize(shared.m_name) : shared.m_name);
                 if (!byShown.ContainsKey(shownName))
                     byShown[shownName] = shared;
@@ -375,6 +441,8 @@ namespace KroolWorldUI.Features
                 }
             }
 
+            if (!otherReady && _otherFrom != null)
+                return;
             _otherFrom = other;
             _other.Clear();
             foreach (var part in other.Split(','))
@@ -409,29 +477,29 @@ namespace KroolWorldUI.Features
 
         private static string Key(string s) => new string((s ?? "").Where(c => !char.IsWhiteSpace(c)).ToArray()).ToLowerInvariant();
 
-        private static string Hex(Color c) => ColorUtility.ToHtmlStringRGB(c);
-
-        /// <summary>Right of the build menu's selected-piece box, or the custom anchor.</summary>
+        /// <summary>Right of the build menu's selected-piece box, or the custom anchor, plus the offsets.</summary>
         private void Place()
         {
+            var offset = new Vector2(BuildMaterials.OffsetX.Value, BuildMaterials.OffsetY.Value);
+            var root = _rect.parent as RectTransform;
             bool beside = BuildMaterials.Placement.Value == BuildMaterials.Place.BesideBuildInfo;
-            if (beside && _buildInfo != null && _buildInfo.gameObject.activeInHierarchy)
+            if (beside && root != null && _buildInfo != null && _buildInfo.gameObject.activeInHierarchy)
             {
+                // Worked out in the HUD's own space, so it holds for any canvas mode and GUI scale.
                 _buildInfo.GetWorldCorners(_corners);
-                float right = _corners[2].x, left = _corners[0].x, bottom = _corners[0].y;
-                float gap = Gap * _rect.lossyScale.x;
-                float width = _rect.rect.width * _rect.lossyScale.x;
+                Vector3 boxMin = root.InverseTransformPoint(_corners[0]);
+                Vector3 boxMax = root.InverseTransformPoint(_corners[2]);
+                float width = _rect.rect.width * _rect.localScale.x;
                 // Not enough room on the right (narrow screens): sit left of the box instead.
-                float x = right + gap + width <= Screen.width ? right + gap : left - gap - width;
-                _rect.anchorMin = _rect.anchorMax = Vector2.zero;
-                _rect.position = new Vector3(x, bottom, _rect.position.z);
+                float x = boxMax.x + Gap + width <= root.rect.xMax ? boxMax.x + Gap : boxMin.x - Gap - width;
+                _rect.localPosition = new Vector3(x + offset.x, boxMin.y + offset.y, 0f);
                 return;
             }
             // Custom, or the build menu is not up (Preview on HUD): bottom center, right of middle.
             var anchor = beside ? new Vector2(0.5f, 0f) : new Vector2(BuildMaterials.AnchorX.Value, BuildMaterials.AnchorY.Value);
             _rect.anchorMin = anchor;
             _rect.anchorMax = anchor;
-            _rect.anchoredPosition = beside ? new Vector2(270f, 95f) : Vector2.zero;
+            _rect.anchoredPosition = (beside ? new Vector2(270f, 95f) : Vector2.zero) + offset;
         }
     }
 }

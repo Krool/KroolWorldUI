@@ -1,0 +1,55 @@
+# Krool World UI: Ukrainian (українська), on-screen text.
+
+dir_n = Пн
+dir_ne = ПнСх
+dir_e = Сх
+dir_se = ПдСх
+dir_s = Пд
+dir_sw = ПдЗх
+dir_w = Зх
+dir_nw = ПнЗх
+unit_m = $1 м
+unit_km = $1 км
+compass_more = +$1 ще
+
+dusk_in = Сутінки за $1
+dawn_in = Світанок за $1
+
+character_save_in = Персонаж збережеться за
+saving = Збереження...
+
+rested_in = Бадьорість за $1
+seconds_short = $1 с
+
+enough_for = Вистачить на $1
+not_enough = Не вистачає
+
+food_running_low = Закінчується
+food_can_eat_again = Можна їсти знову
+food_can_eat = можна їсти
+food_none = Немає їжі
+food_slot_empty = Слот їжі порожній ($1)
+dismiss_hint = [$1] сховати
+
+xp_gain = +$1% $2
+
+repaired_items = Полагоджено предметів: $1
+
+win_search = Пошук налаштувань
+win_expand_all = Розгорнути все
+win_collapse_all = Згорнути все
+win_no_results = Нічого не знайдено.
+win_preview = Перегляд на HUD
+win_preview_ingame = Перегляд на HUD (лише в грі)
+win_preview_desc = Показує всі елементи одразу із прикладами значень, щоб було видно, де кожен із них, поки ви його налаштовуєте. У грі кожен з’являється лише тоді, коли потрібен.
+win_describe_hint = Наведіть на налаштування або виберіть його, щоб побачити опис.
+win_key_hint = Стрілки: вибір і зміна, Enter: вибрати, Esc: закрити
+win_pad_hint = A вибрати, B закрити, X перегляд, Y скинути, LB/RB розділ
+win_changed = Змінено: $1
+win_reset = Скинути
+win_reset_all = Скинути все
+win_press_key = Натисніть клавішу. Esc: скасувати, Backspace: очистити.
+win_none = Немає
+win_default = Типово: $1
+win_range = Діапазон: $1
+win_options = Варіанти: $1

@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.14.0
+
+- **Every language Valheim offers.** All text on screen and in the settings window follows the game's language setting. Where the game already has the words (World save in, Repaired, Day), its own translation is used. Numbers use your language's format.
+- **Controller and Steam Deck.** Open the settings from the pause menu (Krool World UI, under Settings). The window works with the D-pad, A, B, X, Y and the bumpers, and with the keyboard (arrows, Enter, Esc).
+- **Settings window, rebuilt.** Search; settings grouped under sub-headings; settings that don't apply right now greyed out with the reason; click a slider's number to type a value; arrows on choices; a color picker; descriptions in a panel that also works with touch. Text stays sharp at any resolution and the window follows the game's GUI scale. It can be resized and remembers where you put it. Clicks no longer reach the inventory behind it.
+- **New settings:** opacity and size for every element; offsets everywhere (compass X too); hide key for everything the mod draws; one volume for all its sounds; colorblind-friendly warning colors; skills to leave out (Run, Jump); friend names on the compass always; day/night bar placement (under the compass, or anywhere); a final-minute food reminder; a controller button to dismiss the no-food message; buffs per row; character save countdown on/off; auto repair for worn and held items only.
+- **No Map worlds:** the compass shows no pins, tombstone, bed or bosses there, and Bench Pins adds none. The day/night bar stays on screen without a minimap.
+- Compass: height arrows no longer point the wrong way between dungeons and the surface; narrows itself on small screens instead of running under the minimap. Compass Offset Y now moves up with + like every other offset; saved values are converted.
+- Text boxes (build materials, food reminder, save countdown, rested countdown) widen to fit longer words, and the day/night bar's text no longer overlaps.
+- Fixes: a low disk space warning on a server no longer starts a false save countdown; a server save warning no longer carries over to the next world; a feature that hit an error tries again after you log back in instead of staying off until restart; removing a bench removes its pin even after you changed the pin icon, never touches a friend's shared pin, and never leaves two pins on one base; small memory leaks on logout.
+- Build materials: Cost Only became Common With Cost (off), which reads the right way round.
 ## 0.13.0
 
 - Build materials: with a piece selected, the panel lists only what that piece costs. Your common materials show when nothing is selected. New setting Cost Only (on) to go back to listing both.

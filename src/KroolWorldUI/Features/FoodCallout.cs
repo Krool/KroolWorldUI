@@ -16,17 +16,22 @@ namespace KroolWorldUI.Features
     internal static class FoodCallout
     {
         internal enum EmptyWhen { NoFood, AnySlotEmpty }
+        internal enum PadButton { None, LeftStickClick, RightStickClick, Back }
 
         internal static ConfigEntry<bool> Enabled;
         internal static ConfigEntry<bool> RunningOut;
         internal static ConfigEntry<float> ThresholdMinutes;
+        internal static ConfigEntry<bool> FinalMinute;
         internal static ConfigEntry<bool> CanEatAgain;
+        internal static ConfigEntry<float> ShowSeconds;
         internal static ConfigEntry<bool> NoFood;
         internal static ConfigEntry<EmptyWhen> NoFoodWhen;
         internal static ConfigEntry<KeyboardShortcut> DismissKey;
-        internal static ConfigEntry<float> ShowSeconds;
+        internal static ConfigEntry<PadButton> DismissButton;
         internal static ConfigEntry<bool> Sound;
         internal static ConfigEntry<float> SoundVolume;
+        internal static ConfigEntry<float> Size;
+        internal static ConfigEntry<float> Opacity;
         internal static ConfigEntry<float> AnchorX;
         internal static ConfigEntry<float> AnchorY;
 
@@ -35,34 +40,81 @@ namespace KroolWorldUI.Features
         internal static void BindConfig(ConfigFile config)
         {
             Enabled = config.Bind(Section, "Enabled", true,
-                "Food reminders on the HUD. The switches below pick which ones.");
+                "Food reminders in a small box at the top of the screen.");
+
+            const string reminders = "Reminders";
             RunningOut = config.Bind(Section, "RunningOut", true,
-                "Remind when a food has less than Threshold Minutes left.");
+                ConfigText.Desc("Remind when a food is about to run out.", group: reminders));
             ThresholdMinutes = config.Bind(Section, "ThresholdMinutes", 4f,
-                new ConfigDescription("Running-out reminder: minutes left that trigger it.",
-                    new AcceptableValueRange<float>(1f, 15f)));
+                ConfigText.Desc("Remind when a food has this many minutes left.", new AcceptableValueRange<float>(1f, 15f),
+                    reminders, () => RunningOut.Value, "Running Out is on", 0.5f));
+            FinalMinute = config.Bind(Section, "FinalMinute", false,
+                ConfigText.Desc("A second reminder with one minute left.", group: reminders,
+                    when: () => RunningOut.Value, whenText: "Running Out is on"));
             CanEatAgain = config.Bind(Section, "CanEatAgain", false,
-                "Remind when a food can be eaten again (the game allows it once half its time has passed).");
-            NoFood = config.Bind(Section, "NoFoodMessage", true,
-                "Keep a message up while you have no food, until you eat or press Dismiss Key. " +
-                "Shows on a new character after the arrival, and after respawning.");
-            NoFoodWhen = config.Bind(Section, "NoFoodWhen", EmptyWhen.NoFood,
-                "No Food: only when all your food is gone. Any Slot Empty: whenever a food slot is free.");
-            DismissKey = config.Bind(Section, "DismissKey", new KeyboardShortcut(KeyCode.Backspace),
-                "Hides the no-food message until you next eat.");
+                ConfigText.Desc("Remind when a food can be eaten again, half way through its time.", group: reminders));
             ShowSeconds = config.Bind(Section, "ShowSeconds", 6f,
-                new ConfigDescription("How long a reminder stays on screen.", new AcceptableValueRange<float>(2f, 20f)));
-            Sound = config.Bind(Section, "Sound", true, "Play a soft chime with each reminder.");
+                ConfigText.Desc("Seconds a reminder stays on screen.", new AcceptableValueRange<float>(2f, 20f), reminders,
+                    () => RunningOut.Value || CanEatAgain.Value, "Running Out or Can Eat Again is on", 0.5f));
+
+            const string none = "No food";
+            NoFood = config.Bind(Section, "NoFoodMessage", true,
+                ConfigText.Desc("Keep a message up while you have no food, until you eat or dismiss it. " +
+                                "Also after you respawn.", group: none));
+            NoFoodWhen = config.Bind(Section, "NoFoodWhen", EmptyWhen.NoFood,
+                ConfigText.Desc("No Food: when all your food is gone. Any Slot Empty: whenever a food slot is free.",
+                    group: none, when: () => NoFood.Value, whenText: "No Food Message is on"));
+            DismissKey = config.Bind(Section, "DismissKey", new KeyboardShortcut(KeyCode.Backspace),
+                ConfigText.Desc("Hides the no-food message until you next eat.", group: none,
+                    when: () => NoFood.Value, whenText: "No Food Message is on"));
+            DismissButton = config.Bind(Section, "DismissButton", PadButton.None,
+                ConfigText.Desc("Controller button that hides the no-food message. Each also does something in " +
+                                "the game (map, run, crouch), so pick the one you use least.", group: none,
+                    when: () => NoFood.Value, whenText: "No Food Message is on"));
+
+            const string sound = "Sound";
+            Sound = config.Bind(Section, "Sound", true, ConfigText.Desc("A soft chime with each reminder.", group: sound));
             SoundVolume = config.Bind(Section, "SoundVolume", 0.35f,
-                new ConfigDescription("Chime volume (also follows the game's sound settings).",
-                    new AcceptableValueRange<float>(0.05f, 1f)));
+                ConfigText.Desc("Chime volume, on top of the game's own volume.", new AcceptableValueRange<float>(0.05f, 1f),
+                    sound, () => Sound.Value, "Sound is on", 0.05f));
+
+            const string look = "Look";
+            Size = config.Bind(Section, "Size", 1f,
+                ConfigText.Desc("1 is the normal size.", new AcceptableValueRange<float>(0.75f, 1.5f), look, step: 0.05f));
+            Opacity = config.Bind(Section, "Opacity", 1f,
+                ConfigText.Desc("1 is solid; lower shows the game through it.", new AcceptableValueRange<float>(0.2f, 1f), look, step: 0.05f));
+
+            const string placement = "Placement";
             AnchorX = config.Bind(Section, "AnchorX", 0.5f,
-                new ConfigDescription("Horizontal position of the reminder's center (0 = left, 1 = right).",
-                    new AcceptableValueRange<float>(0f, 1f)));
+                ConfigText.Desc("Center of the box. 0 is the left of the screen, 1 the right.",
+                    new AcceptableValueRange<float>(0f, 1f), placement, step: 0.01f));
             AnchorY = config.Bind(Section, "AnchorY", 0.84f,
-                new ConfigDescription("Vertical position of the reminder's top edge (0 = bottom, 1 = top). " +
-                                      "It moves down on its own to clear the raid banner.",
-                    new AcceptableValueRange<float>(0f, 1f)));
+                ConfigText.Desc("Top of the box. 0 is the bottom of the screen, 1 the top. Moves down by itself " +
+                                "to clear the raid banner.", new AcceptableValueRange<float>(0f, 1f), placement, step: 0.01f));
+        }
+
+        /// <summary>The ZInput name of the dismiss button, or null.</summary>
+        internal static string DismissButtonName()
+        {
+            switch (DismissButton.Value)
+            {
+                case PadButton.LeftStickClick: return "JoyLStick";
+                case PadButton.RightStickClick: return "JoyRStick";
+                case PadButton.Back: return "JoyBack";
+                default: return null;
+            }
+        }
+
+        /// <summary>The button as the game writes it in its own hints ("RS").</summary>
+        internal static string DismissButtonLabel()
+        {
+            switch (DismissButton.Value)
+            {
+                case PadButton.LeftStickClick: return L10n.Game("$button_ls", "LS");
+                case PadButton.RightStickClick: return L10n.Game("$button_rs", "RS");
+                case PadButton.Back: return L10n.Game("$button_back", "Back");
+                default: return null;
+            }
         }
 
         [HarmonyPatch(typeof(Hud), "Update")]
@@ -80,7 +132,8 @@ namespace KroolWorldUI.Features
     {
         private const float RowHeight = 30f;
         private const float Pad = 6f;
-        private const float Width = 290f;
+        private const float Width = 290f;      // narrowest; grows to fit long names
+        private const float MaxWidth = 460f;
         private const float TimeWidth = 92f;
         private const float FadeSeconds = 0.6f;
         private const float LoginGraceSeconds = 10f;
@@ -93,7 +146,7 @@ namespace KroolWorldUI.Features
         private static Color Muted => HudKit.Muted;
 
         private static FoodCalloutHud _instance;
-        private static bool _failed;
+        private static readonly HudKit.FailFlag _failed = new HudKit.FailFlag();
         private static AudioClip _chime;
 
         private RectTransform _rect;
@@ -128,13 +181,16 @@ namespace KroolWorldUI.Features
         private readonly Dictionary<string, bool> _armedLow = new Dictionary<string, bool>();
         // Per food: true once seen while it could not be eaten again, so the next "can eat" fires.
         private readonly Dictionary<string, bool> _armedEat = new Dictionary<string, bool>();
+        // Per food: true once seen with more than a minute left, for the final-minute reminder.
+        private readonly Dictionary<string, bool> _armedFinal = new Dictionary<string, bool>();
+        private const float FinalSeconds = 60f;
         private readonly HashSet<string> _seen = new HashSet<string>();
         private readonly HashSet<string> _present = new HashSet<string>();
         private readonly Vector3[] _corners = new Vector3[4];
 
         internal static void Ensure()
         {
-            if (_instance != null || _failed)
+            if (_instance != null || _failed.IsSet)
                 return;
             var hud = Hud.instance;
             if (hud == null || hud.m_rootObject == null || hud.m_healthText == null || Player.m_localPlayer == null)
@@ -145,7 +201,7 @@ namespace KroolWorldUI.Features
             }
             catch (System.Exception e)
             {
-                _failed = true;
+                _failed.Set();
                 Plugin.Log.LogError($"Food reminder disabled for this session: {e}");
             }
         }
@@ -185,7 +241,7 @@ namespace KroolWorldUI.Features
         internal static void Preview(bool on, bool playSound)
         {
             var f = _instance;
-            if (f == null || _failed)
+            if (f == null || _failed.IsSet)
                 return;
             f._previewing = on;
             if (!on)
@@ -196,18 +252,18 @@ namespace KroolWorldUI.Features
             if (f._rows.Exists(r => r.Kind == Kind.Sample))
                 return;
             if (FoodCallout.RunningOut.Value)
-                f.SampleRow("_s1", "Running low", f.TimeText(239f), Warn);
+                f.SampleRow("_s1", L10n.T("food_running_low"), f.TimeText(239f), Warn);
             if (FoodCallout.CanEatAgain.Value)
-                f.SampleRow("_s2", "Can eat again", f.TimeText(1199f), Ready);
+                f.SampleRow("_s2", L10n.T("food_can_eat_again"), f.TimeText(1199f), Ready);
             if (FoodCallout.NoFood.Value)
-                f.SampleRow("_s3", "No food", f.DismissHint(), Muted);
+                f.SampleRow("_s3", L10n.T("food_none"), f.DismissHint(), Muted);
             if (playSound)
                 f.PlayChime();
         }
 
         private void Update()
         {
-            if (_failed)
+            if (_failed.IsSet)
                 return;
             try
             {
@@ -215,7 +271,7 @@ namespace KroolWorldUI.Features
             }
             catch (System.Exception e)
             {
-                _failed = true;
+                _failed.Set();
                 Plugin.Log.LogError($"Food reminder disabled for this session after an error: {e}");
                 Destroy(gameObject);
             }
@@ -224,7 +280,7 @@ namespace KroolWorldUI.Features
         private void Tick()
         {
             var player = Player.m_localPlayer;
-            if (!FoodCallout.Enabled.Value || player == null)
+            if (!FoodCallout.Enabled.Value || !HudKit.Allowed || player == null)
             {
                 _group.alpha = 0f;
                 return;
@@ -266,9 +322,14 @@ namespace KroolWorldUI.Features
             bool wanted = _rows.Count > 0;
             if (InventoryGui.IsVisible() || Minimap.IsOpen() || Menu.IsVisible())
                 wanted = false;
-            _group.alpha = wanted ? 1f : 0f;
+            _group.alpha = wanted ? FoodCallout.Opacity.Value : 0f;
             if (wanted)
+            {
+                float size = FoodCallout.Size.Value;
+                if (!Mathf.Approximately(_rect.localScale.x, size))
+                    _rect.localScale = new Vector3(size, size, 1f);
                 Place();
+            }
         }
 
         private void CheckFoods(List<Player.Food> foods, ref bool fired)
@@ -294,6 +355,18 @@ namespace KroolWorldUI.Features
                 else if (FoodCallout.RunningOut.Value && ((_armedLow.TryGetValue(key, out bool armed) && armed) || (firstSight && atLogin)))
                 {
                     _armedLow[key] = false;
+                    Show(food, Kind.RunningOut);
+                    fired = true;
+                }
+
+                // The last minute, once more (when the first reminder came well before it).
+                bool last = food.m_time < FinalSeconds;
+                if (!last)
+                    _armedFinal[key] = true;
+                else if (FoodCallout.RunningOut.Value && FoodCallout.FinalMinute.Value && threshold > FinalSeconds + 15f
+                         && _armedFinal.TryGetValue(key, out bool armedF) && armedF)
+                {
+                    _armedFinal[key] = false;
                     Show(food, Kind.RunningOut);
                     fired = true;
                 }
@@ -324,6 +397,7 @@ namespace KroolWorldUI.Features
             {
                 _seen.RemoveWhere(k => !present.Contains(k));
                 Forget(_armedLow, present);
+                Forget(_armedFinal, present);
                 Forget(_armedEat, present);
             }
         }
@@ -359,7 +433,10 @@ namespace KroolWorldUI.Features
 
             // Only a message you can see can be dismissed (it hides under the inventory and maps).
             var row = _rows.Find(r => r.Key == NoFoodKey);
-            if (row != null && _group.alpha > 0f && FoodCallout.DismissKey.Value.IsDown() && !TextFocus())
+            string pad = FoodCallout.DismissButtonName();
+            bool dismiss = (FoodCallout.DismissKey.Value.MainKey != KeyCode.None && FoodCallout.DismissKey.Value.IsDown())
+                           || (pad != null && ZInput.GetButtonDown(pad));
+            if (row != null && _group.alpha > 0f && dismiss && !TextFocus())
                 _noFoodDismissed = true;
 
             bool want = FoodCallout.NoFood.Value && empty && !_noFoodDismissed
@@ -372,7 +449,7 @@ namespace KroolWorldUI.Features
                 return;
             }
 
-            string label = foods.Count == 0 ? "No food" : $"Food slot empty ({foods.Count}/3)";
+            string label = foods.Count == 0 ? L10n.T("food_none") : L10n.T("food_slot_empty", $"{foods.Count}/3");
             if (row == null)
             {
                 row = NewRow(NoFoodKey, Kind.NoFood);
@@ -383,14 +460,24 @@ namespace KroolWorldUI.Features
                 row.Time.color = Muted;
                 fired = true;
             }
-            row.Name.text = label;
-            row.Time.text = DismissHint();
+            string hint = DismissHint();
+            if (row.Name.text != label || row.Time.text != hint)
+            {
+                row.Name.text = label;
+                row.Time.text = hint;
+                Relayout();
+            }
         }
 
+        /// <summary>"[Backspace] hide", or the controller button while a controller is in use.</summary>
         private string DismissHint()
         {
-            var key = FoodCallout.DismissKey.Value;
-            return key.MainKey == KeyCode.None ? "" : $"<size=75%>[{key}] hide</size>";
+            string button;
+            if (ZInput.IsGamepadActive())
+                button = FoodCallout.DismissButtonLabel();
+            else
+                button = FoodCallout.DismissKey.Value.MainKey == KeyCode.None ? null : FoodCallout.DismissKey.Value.ToString();
+            return string.IsNullOrEmpty(button) ? "" : $"<size=75%>{L10n.T("dismiss_hint", button)}</size>";
         }
 
         private static bool TextFocus()
@@ -424,10 +511,11 @@ namespace KroolWorldUI.Features
             row.Icon.enabled = row.Icon.sprite != null;
             string name = FoodName(food);
             if (kind == Kind.CanEat)
-                name += $" <size=80%><color=#{ColorUtility.ToHtmlStringRGB(Muted)}>can eat</color></size>";
+                name += $" <size=80%><color=#{HudKit.Hex(Muted)}>{L10n.T("food_can_eat")}</color></size>";
             row.Name.text = name;
             row.Time.color = kind == Kind.CanEat ? Ready : Warn;
             row.Time.text = TimeText(food.m_time);
+            Relayout();
         }
 
         private void SampleRow(string key, string name, string time, Color timeColor)
@@ -438,6 +526,7 @@ namespace KroolWorldUI.Features
             row.Name.text = name;
             row.Time.text = time;
             row.Time.color = timeColor;
+            Relayout(); // sized to the sample text, which NewRow had not set yet
         }
 
         private Row NewRow(string key, Kind kind)
@@ -488,13 +577,24 @@ namespace KroolWorldUI.Features
             ordered.AddRange(_rows.FindAll(r => !r.Persistent));
             _rows.Clear();
             _rows.AddRange(ordered);
+            // Columns sized to the longest name and time (or hint) shown, so translations fit.
+            float timeColumn = TimeWidth, nameColumn = 0f;
+            foreach (var row in _rows)
+            {
+                timeColumn = Mathf.Max(timeColumn, Mathf.Ceil(row.Time.GetPreferredValues(row.Time.text).x) + 4f);
+                nameColumn = Mathf.Max(nameColumn, Mathf.Ceil(row.Name.GetPreferredValues(row.Name.text).x));
+            }
+            float width = Mathf.Clamp(Pad * 2f + RowHeight + 2f + nameColumn + 6f + timeColumn + 2f, Width, MaxWidth);
             for (int i = 0; i < _rows.Count; i++)
             {
-                var rt = _rows[i].Rect;
+                var row = _rows[i];
+                var rt = row.Rect;
                 rt.offsetMin = new Vector2(Pad, -Pad - RowHeight * (i + 1));
                 rt.offsetMax = new Vector2(-Pad, -Pad - RowHeight * i);
+                row.Time.rectTransform.sizeDelta = new Vector2(timeColumn, 0f);
+                row.Name.rectTransform.offsetMax = new Vector2(-(timeColumn + 6f), 0f);
             }
-            _rect.sizeDelta = new Vector2(Width, RowHeight * Mathf.Max(1, _rows.Count) + Pad * 2f);
+            _rect.sizeDelta = new Vector2(width, RowHeight * Mathf.Max(1, _rows.Count) + Pad * 2f);
         }
 
         private void RemoveRows(System.Predicate<Row> match)
@@ -556,7 +656,7 @@ namespace KroolWorldUI.Features
                 return;
             if (_chime == null) // explicit: ??= skips Unity's destroyed-object check
                 _chime = BuildChime();
-            _audio.PlayOneShot(_chime, FoodCallout.SoundVolume.Value);
+            _audio.PlayOneShot(_chime, General.Vol(FoodCallout.SoundVolume.Value));
         }
 
         /// <summary>Two soft rising notes (E5 then A5), about 0.35 s.</summary>

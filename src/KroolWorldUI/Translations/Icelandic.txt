@@ -1,0 +1,55 @@
+# Krool World UI: Icelandic (Íslenska) on-screen text.
+
+dir_n = N
+dir_ne = NA
+dir_e = A
+dir_se = SA
+dir_s = S
+dir_sw = SV
+dir_w = V
+dir_nw = NV
+unit_m = $1 m
+unit_km = $1 km
+compass_more = +$1 í viðbót
+
+dusk_in = Rökkur eftir $1
+dawn_in = Dögun eftir $1
+
+character_save_in = Persóna vistast eftir
+saving = Vistar...
+
+rested_in = Útvíld/ur/t eftir $1
+seconds_short = $1s
+
+enough_for = Nóg fyrir $1
+not_enough = Ekki nóg
+
+food_running_low = Að klárast
+food_can_eat_again = Má borða aftur
+food_can_eat = má borða
+food_none = Enginn matur
+food_slot_empty = Matarhólf autt ($1)
+dismiss_hint = [$1] fela
+
+xp_gain = +$1% $2
+
+repaired_items = $1 hlutir lagaðir
+
+win_search = Leita í stillingum
+win_expand_all = Opna allt
+win_collapse_all = Loka öllu
+win_no_results = Engar stillingar passa.
+win_preview = Forskoðun á HUD
+win_preview_ingame = Forskoðun á HUD (aðeins í leik)
+win_preview_desc = Sýnir öll atriði í einu með sýnigildum, svo þú sjáir hvar hvert þeirra er á meðan þú stillir. Í leik birtist hvert aðeins þegar það á við.
+win_describe_hint = Bentu á stillingu, eða veldu hana, til að sjá hvað hún gerir.
+win_key_hint = Örvar færa og breyta, Enter velur, Esc lokar
+win_pad_hint = A velja, B loka, X forskoða, Y endurstilla, LB/RB hluti
+win_changed = $1 breytt
+win_reset = Endurstilla
+win_reset_all = Endurstilla allt
+win_press_key = Ýttu á lykil. Esc hættir við, Backspace hreinsar.
+win_none = Ekkert
+win_default = Sjálfgefið: $1
+win_range = Bil: $1
+win_options = Valkostir: $1

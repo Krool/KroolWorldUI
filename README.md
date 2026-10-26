@@ -3,7 +3,9 @@
 Quality-of-life HUD additions for Valheim: skill XP, carry weight, build materials, food timers, a compass, a day/night bar, and a few countdowns the game doesn't show.
 
 - No new items, mechanics or balance changes.
-- Every feature can be switched off or adjusted in game with **F7**.
+- Every feature can be switched off or adjusted in game with **F7**, or from the pause menu.
+- Mouse, keyboard or controller, including the Steam Deck.
+- In your language: it follows the game's language setting, in every language Valheim offers.
 - Client-side. The server and other players don't need it.
 - Display only, except two features you can turn off: Bench Pins adds a map pin when you build a workbench, and Auto Repair repairs your gear when you open a crafting station.
 
@@ -63,6 +65,7 @@ Earn XP and a tile for that skill appears at the bottom right, above the key hin
 - The dark part of the bar is where you started; the light part is what you've earned since.
 - Up to 4 tiles side by side. A tile fades after 3 seconds without XP.
 - A blue `+0.8% Swords` floats over your character. Can be set to level-ups only, or off.
+- Skills you don't care about (Run, Jump) can be left out by name.
 - Tiles or wide rows, size, level number, color and placement are all settings.
 - Hidden while the inventory, map or menu is open.
 
@@ -81,8 +84,9 @@ A vertical bar left of the food icons, with your weight over your max on top.
 
 With the hammer out, a panel beside the build menu's piece box.
 
-- With a piece selected: each material it costs, how many you have (`Wood 245 /2`, red if short), and **Enough for 12**.
+- With a piece selected: only what it costs, how many you have (`Wood 245 /2`, red if short), and **Enough for 12**.
 - With nothing selected: your common building materials. Wood, Stone, Core Wood and Fine Wood once you've found them; Resin, nails, Black Marble and later materials only while carried.
+- The panel widens for long material names.
 - Each material's rule is a setting, and you can add others by name (`Copper, Deer Hide`).
 - Counts your inventory only, like the game does when placing.
 
@@ -106,7 +110,8 @@ A toast at the top of the screen with the food's icon, name and time left.
 |---|---|---|
 | Running out | On | A food drops under 4 minutes (adjustable) |
 | Can eat again | Off | A food passes half its time, when the game lets you eat it again |
-| No food | On | While you have no food, until you eat or press Backspace |
+| No food | On | While you have no food, until you eat or dismiss it (Backspace, or a controller button you pick) |
+| Final minute | Off | A second reminder with one minute left |
 
 - Each reminder shows once per food and fades after 6 seconds.
 - A soft chime with each, which can be turned down or off.
@@ -119,8 +124,9 @@ A strip at the top center for calling out directions: "trolls at 210".
 
 - Heading in degrees under the center mark, optionally with the direction (212 SW).
 - Shows 120 degrees by default.
-- Friends in their colors. A friend behind you waits at the edge with an arrow.
+- Friends in their colors, with their names when you look at them or always. A friend behind you waits at the edge with an arrow.
 - Your map pins, bed, tombstone and bosses within 300 m, and map pings at any distance.
+- On a No Map world it shows only your heading and friends in sight, never pins.
 - Look at a marker to see its name and distance. Or show distance under every marker.
 - Overlapping markers merge with a count, and at most 12 show at once.
 - Up and down arrows on markers 10 m or more above or below you.
@@ -129,7 +135,7 @@ A strip at the top center for calling out directions: "trolls at 210".
 ## Buff icons
 
 - The game's buff icons at 90% size (set 1 for the game's size).
-- Wrap to a new row before reaching the compass.
+- Wrap to a new row before reaching the compass, or after a number you choose.
 
 ## Day/night bar
 
@@ -140,6 +146,7 @@ A bar on top of the minimap covering the whole day, with a marker for now.
 - **Dusk in 6:40** by day, **Dawn in 2:10** by night. Turns orange in the last minute before dark.
 - The day number, and an optional 24-hour clock.
 - Uses the game's clock, synced from the server.
+- Without a minimap (No Map worlds) it stays in the same corner. It can also sit under the compass or anywhere you like.
 
 ## Rested countdown
 
@@ -154,7 +161,7 @@ While Resting, **Rested in 14s** counts down above the Resting buff, with a chim
 The auto-save every 30 minutes can freeze a big world for a moment. A box counts down **World save in 5** before it, then **Saving...**
 
 - Exact in single player and as host. On a dedicated server it uses the server's 30-second save warning.
-- Your character's own save shows as **Character save in 5**.
+- On a server, your character's own save shows as **Character save in 5**. Can be turned off.
 - A tick each second, which can be turned off. Start time and position are adjustable.
 
 ## Bench pins
@@ -173,18 +180,25 @@ Opening a crafting station repairs every item it can, as if you'd pressed its re
 
 - Same rules as the button: station type and level decide what gets fixed.
 - Same Crafting XP as repairing by hand.
+- Can be limited to what you're wearing and holding.
 - One sound and one message (**Repaired 4 items**). The message can be turned off.
 
 ## Settings window
 
 ![The F7 settings window](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/settings.png)
 
-Press **F7** in game.
+Press **F7** in game, or pick **Krool World UI** in the pause menu.
 
-- One section per feature, each with an On/Off switch.
-- Hover a setting for what it does, its default and its range.
+- One section per feature, each with an On/Off switch. Search finds any setting.
+- Mouse, keyboard (arrows, Enter, Esc) or controller (D-pad, A, B; bumpers jump between sections).
+- Point at or select a setting to see what it does, its default and its range.
+- Settings that don't apply right now are greyed out, with the reason.
+- Click a slider's number to type an exact value. Colors have a picker.
 - **Reset** next to anything changed, **Reset all** per section.
 - **Preview on HUD** shows sample versions of everything so you can place and size them.
+- Text stays sharp at any resolution, and the window follows the game's GUI scale. You can resize it.
+
+The **General** section has a key to hide everything the mod draws, one volume for all its sounds, and colorblind-friendly warning colors.
 
 The same settings are in `BepInEx/config/krool.kroolworldui.cfg`. Colors there are hex `RRGGBBAA`.
 
@@ -198,190 +212,221 @@ Generated from the mod's code, so it matches the F7 window.
 
 | Setting | Default | Range or choices | What it does |
 |---|---|---|---|
-| Settings Key | F7 | Any key | Key that opens this settings window. |
+| Settings Key | F7 | Any key | Opens this window. On a controller, use Krool World UI in the pause menu. |
+| Window Scale | 1 | 0.75 to 1.5 | Size of this window. It also follows the game's GUI scale. |
+| Hide Key | Not set | Any key | Hides everything this mod draws until pressed again. Unset by default. |
+| Volume | 1 | 0 to 1 | Volume of all the mod's sounds, on top of each feature's own volume. 0 mutes them. |
+| Colorblind Friendly | Off |  | Warning colors that stay distinct with red-green color blindness: orange-red and pink instead of orange and red, sky blue instead of green. |
 
 **Skill XP Bars**
 
 | Setting | Default | Range or choices | What it does |
 |---|---|---|---|
 | Enabled | On |  | Show a skill on the HUD while you gain XP in it. |
-| Style | Tiles | Tiles, Rows | Tiles: the skill icon with its XP bar underneath, side by side. Rows: a wide bar with the icon on the left, stacked. |
-| Placement | Bottom Right | Bottom Right, Below Stamina, Right Side, Custom | Bottom Right: above the key hints, growing left. Below Stamina: centered under the stamina bar. Right Side: right edge of the screen, below the minimap. Custom: placed by Anchor X and Anchor Y. |
-| Tile Size | 64 | 40 to 128 | Tiles: width in HUD pixels. The tile is a third taller than it is wide. |
-| Tile Level | Off |  | Tiles: show the skill level in the tile's corner. |
-| Labels | Name And Level | Name And Level, Icon Only | Rows: Name And Level shows the skill name and level on the bar. Icon Only: just the icon and the bar. |
-| Show Gain Text | On |  | Rows with Name And Level: show the XP gained since the bar appeared, as a percent of a level. |
-| Bar Width | 220 | 100 to 500 | Rows: width of one bar in HUD pixels. |
-| Bar Height | 22 | 12 to 48 | Rows: height of one bar in HUD pixels. |
-| Bar Color | `DBA847FF` | Hex RRGGBBAA (AA = opacity) | Bar color. Progress you had is a darker shade, new XP a lighter one. |
-| Hold Seconds | 3 | 0.5 to 30 | Seconds a bar stays fully visible after the last XP gain. |
+| Style | Tiles | Tiles, Rows | Tiles: the skill icon over its XP bar, side by side. Rows: a wide bar with the icon at the left, stacked. |
+| Max Bars | 4 | 1 to 10 | Most skills shown at once, fewer if they do not fit. Past this the oldest is replaced. |
+| Hidden Skills |  |  | Skills never shown, separated by commas: Run, Jump, Sneak. Names as the game shows them, or English names, which work in every language. |
+| Tile Size | 64 | 40 to 128 | Tile width in HUD pixels. A tile is a third taller than wide. Used when Style is Tiles. |
+| Tile Level | Off |  | The skill level in the tile's corner. Used when Style is Tiles. |
+| Labels | Name And Level | Name And Level, Icon Only | Name And Level: the skill name and level on the bar. Icon Only: just the icon and bar. Used when Style is Rows. |
+| Show Gain Text | On |  | The XP gained since the bar appeared, as a percent of a level. Used when Style is Rows and Labels is Name And Level. |
+| Bar Width | 220 | 100 to 500 | Row width in HUD pixels. Used when Style is Rows. |
+| Bar Height | 22 | 12 to 48 | Row height in HUD pixels. Used when Style is Rows. |
+| Bar Color | `DBA847FF` | Hex RRGGBBAA (AA = opacity) | Bar color. XP you had shows darker, new XP lighter. |
+| Opacity | 1 | 0.2 to 1 | 1 is solid; lower shows the game through it. |
+| Hold Seconds | 3 | 0.5 to 30 | Seconds a skill stays after its last XP. |
 | Fade Seconds | 0.6 | 0 to 5 | Seconds the fade-out takes. |
-| Max Bars | 4 | 1 to 10 | Most skills shown at once (fewer if they would not fit on screen). The stalest one is reused past this. |
-| Offset X | 0 | -400 to 400 | Nudge left (-) or right (+), in HUD pixels. |
-| Offset Y | 0 | -400 to 400 | Nudge down (-) or up (+), in HUD pixels. |
-| Anchor X | 0.5 | 0 to 1 | Custom placement: horizontal center (0 = left of screen, 1 = right). |
-| Anchor Y | 0.3 | 0 to 1 | Custom placement: top edge (0 = bottom of screen, 1 = top). |
-| Floating Text | Every Gain | Off, Every Gain, Level Up Only | Float each XP gain over your character like a damage number, seen only by you. Level Up Only: just new levels. |
-| Floating Text Color | `73B8FFFF` | Hex RRGGBBAA (AA = opacity) | Color of the floating XP text. |
+| Floating Text | Every Gain | Off, Every Gain, Level Up Only | XP over your character, like a damage number. Only you see it. Every Gain, Level Up Only, or Off. |
+| Floating Text Color | `73B8FFFF` | Hex RRGGBBAA (AA = opacity) | Color of the floating XP text. Used when Floating Text is not Off. |
+| Placement | Bottom Right | Bottom Right, Below Stamina, Right Side, Custom | Bottom Right: above the key hints. Below Stamina: under the stamina bar. Right Side: below the minimap. Custom: at Anchor X and Anchor Y. |
+| Anchor X | 0.5 | 0 to 1 | Center. 0 is the left of the screen, 1 the right. Used when Placement is Custom. |
+| Anchor Y | 0.3 | 0 to 1 | Top edge. 0 is the bottom of the screen, 1 the top. Used when Placement is Custom. |
+| Offset X | 0 | -400 to 400 | Move left (-) or right (+), in HUD pixels. |
+| Offset Y | 0 | -400 to 400 | Move down (-) or up (+), in HUD pixels. |
 
 **Weight**
 
 | Setting | Default | Range or choices | What it does |
 |---|---|---|---|
-| Enabled | On |  | Show your carry weight on the HUD, left of the food icons. |
-| Show | Always | Always, Near Limit, When Changed | Always. Near Limit: only at or above Near Limit Percent. When Changed: for a few seconds after your weight changes. |
-| Near Limit Percent | 80 | 10 to 100 | Percent of max weight where the bar turns to the near-limit color (and where it appears, in Near Limit mode). |
-| Changed Seconds | 3 | 1 to 15 | When Changed mode: seconds the bar stays after a change. |
-| Colors | Thresholds | Thresholds, Gradient, Single | Thresholds: fill color, near-limit color past Near Limit Percent, over color when overweight. Gradient: blends from fill to near-limit to over as you fill up. Single: always the fill color. |
+| Enabled | On |  | Your carry weight as a bar left of the food icons. |
+| Show | Always | Always, Near Limit, When Changed | Always: always on screen. Near Limit: at or past Near Limit Percent. When Changed: for a few seconds after your weight changes. |
+| Near Limit Percent | 80 | 50 to 100 | Percent of your max weight where the bar turns the near-limit color, and where Near Limit shows it. |
+| Changed Seconds | 3 | 1 to 15 | Seconds the bar stays after your weight changes. Used when Show is When Changed. |
+| Colors | Thresholds | Thresholds, Gradient, Single | Thresholds: fill color, then near-limit past Near Limit Percent, then over when overweight. Gradient: blends through the three. Single: always the fill color. |
 | Fill Color | `FAC761FF` | Hex RRGGBBAA (AA = opacity) | Bar color under the limit. |
-| Near Limit Color | `FF8C1FFF` | Hex RRGGBBAA (AA = opacity) | Bar color near the limit. |
-| Over Color | `DB291FFF` | Hex RRGGBBAA (AA = opacity) | Bar color when overweight. |
-| Text | Current And Max | Current And Max, Current, Percent, None | Numbers above the bar: current over max, current only, percent, or none. |
-| Text Size | 16 | 10 to 28 | Font size of the numbers. |
+| Near Limit Color | `FF8C1FFF` | Hex RRGGBBAA (AA = opacity) | Bar color near the limit. Used when Colors is not Single. |
+| Over Color | `DB291FFF` | Hex RRGGBBAA (AA = opacity) | Bar color when overweight. It also flashes. Used when Colors is not Single. |
+| Text | Current And Max | Current And Max, Current, Percent, None | Numbers above the bar: weight over max, weight only, percent, or none. |
+| Text Size | 16 | 10 to 28 | Font size of the numbers. Used when Text is not None. |
 | Bar Length | 110 | 40 to 220 | Bar length in HUD pixels at the normal 300 max weight. |
-| Bar Thickness | 16 | 6 to 32 | Bar thickness in HUD pixels (the health bar is 32). |
-| Scale With Max Weight | On |  | Grow the bar with your max weight: a Megingjord (+150) makes it 50% longer. |
-| Offset X | 0 | -200 to 200 | Nudge left (-) or right (+), in HUD pixels. |
-| Offset Y | 0 | -200 to 300 | Nudge down (-) or up (+), in HUD pixels. |
+| Bar Thickness | 16 | 6 to 32 | Bar thickness in HUD pixels. The health bar is 32. |
+| Scale With Max Weight | On |  | Grow the bar with your max weight: a Megingjord (+150) makes it half again as long. |
+| Opacity | 1 | 0.2 to 1 | 1 is solid; lower shows the game through it. |
+| Offset X | 0 | -300 to 300 | Move left (-) or right (+), in HUD pixels. |
+| Offset Y | 0 | -300 to 300 | Move down (-) or up (+), in HUD pixels. |
 
 **Food Decay**
 
 | Setting | Default | Range or choices | What it does |
 |---|---|---|---|
-| Enabled | On |  | Extend the health, stamina and eitr bars with faint segments showing the max your foods have lost as they wear off: what eating fresh food would give back. |
+| Enabled | On |  | A faint segment past the end of the health, stamina and eitr bars: the max your food has lost as it wears off, which fresh food would give back. |
 | Health | On |  | Segment on the health bar. |
-| Health Color | `BF2E2473` | Hex RRGGBBAA (AA = opacity) | Color of the lost-health segment. Lower the last two digits to make it fainter. |
-| Stamina | On |  | Segment on the stamina bar. Like the bar itself, it shows only while your stamina is not full. |
-| Stamina Color | `EBB83373` | Hex RRGGBBAA (AA = opacity) | Color of the lost-stamina segment. |
-| Eitr | On |  | Segment on the eitr bar (eitr foods only). Shows only while your eitr is not full. |
-| Eitr Color | `9961E673` | Hex RRGGBBAA (AA = opacity) | Color of the lost-eitr segment. |
+| Health Color | `BF2E2473` | Hex RRGGBBAA (AA = opacity) | Color of the health segment. Used when Health is on. |
+| Stamina | On |  | Segment on the stamina bar. Like the bar, it shows while stamina is not full. |
+| Stamina Color | `EBB83373` | Hex RRGGBBAA (AA = opacity) | Color of the stamina segment. Used when Stamina is on. |
+| Eitr | On |  | Segment on the eitr bar, for eitr foods. Like the bar, it shows while eitr is not full. |
+| Eitr Color | `9961E673` | Hex RRGGBBAA (AA = opacity) | Color of the eitr segment. Used when Eitr is on. |
 
 **Food Reminder**
 
 | Setting | Default | Range or choices | What it does |
 |---|---|---|---|
-| Enabled | On |  | Food reminders on the HUD. The switches below pick which ones. |
-| Running Out | On |  | Remind when a food has less than Threshold Minutes left. |
-| Threshold Minutes | 4 | 1 to 15 | Running-out reminder: minutes left that trigger it. |
-| Can Eat Again | Off |  | Remind when a food can be eaten again (the game allows it once half its time has passed). |
-| No Food Message | On |  | Keep a message up while you have no food, until you eat or press Dismiss Key. Shows on a new character after the arrival, and after respawning. |
-| No Food When | No Food | No Food, Any Slot Empty | No Food: only when all your food is gone. Any Slot Empty: whenever a food slot is free. |
-| Dismiss Key | Backspace | Any key | Hides the no-food message until you next eat. |
-| Show Seconds | 6 | 2 to 20 | How long a reminder stays on screen. |
-| Sound | On |  | Play a soft chime with each reminder. |
-| Sound Volume | 0.35 | 0.05 to 1 | Chime volume (also follows the game's sound settings). |
-| Anchor X | 0.5 | 0 to 1 | Horizontal position of the reminder's center (0 = left, 1 = right). |
-| Anchor Y | 0.84 | 0 to 1 | Vertical position of the reminder's top edge (0 = bottom, 1 = top). It moves down on its own to clear the raid banner. |
+| Enabled | On |  | Food reminders in a small box at the top of the screen. |
+| Running Out | On |  | Remind when a food is about to run out. |
+| Threshold Minutes | 4 | 1 to 15 | Remind when a food has this many minutes left. Used when Running Out is on. |
+| Final Minute | Off |  | A second reminder with one minute left. Used when Running Out is on. |
+| Can Eat Again | Off |  | Remind when a food can be eaten again, half way through its time. |
+| Show Seconds | 6 | 2 to 20 | Seconds a reminder stays on screen. Used when Running Out or Can Eat Again is on. |
+| No Food Message | On |  | Keep a message up while you have no food, until you eat or dismiss it. Also after you respawn. |
+| No Food When | No Food | No Food, Any Slot Empty | No Food: when all your food is gone. Any Slot Empty: whenever a food slot is free. Used when No Food Message is on. |
+| Dismiss Key | Backspace | Any key | Hides the no-food message until you next eat. Used when No Food Message is on. |
+| Dismiss Button | None | None, Left Stick Click, Right Stick Click, Back | Controller button that hides the no-food message. Each also does something in the game (map, run, crouch), so pick the one you use least. Used when No Food Message is on. |
+| Sound | On |  | A soft chime with each reminder. |
+| Sound Volume | 0.35 | 0.05 to 1 | Chime volume, on top of the game's own volume. Used when Sound is on. |
+| Size | 1 | 0.75 to 1.5 | 1 is the normal size. |
+| Opacity | 1 | 0.2 to 1 | 1 is solid; lower shows the game through it. |
+| Anchor X | 0.5 | 0 to 1 | Center of the box. 0 is the left of the screen, 1 the right. |
+| Anchor Y | 0.84 | 0 to 1 | Top of the box. 0 is the bottom of the screen, 1 the top. Moves down by itself to clear the raid banner. |
 
 **Build Materials**
 
 | Setting | Default | Range or choices | What it does |
 |---|---|---|---|
-| Enabled | On |  | While a build tool is out, count the materials you carry, so you can watch your wood and stone as you build. |
-| Selected Piece | On |  | List what the selected piece costs, each with how many you carry. Red when you are short. |
-| Cost Only | On |  | With a piece selected, list only what it costs. The materials below show when nothing is selected. Off: list them alongside the cost. |
-| Can Build Count | On |  | Show how many of the selected piece your materials cover. |
-| Placement | Beside Build Info | Beside Build Info, Custom | Beside Build Info: right of the selected-piece box at the bottom center. Custom: placed by Anchor X and Anchor Y. |
-| Anchor X | 0.8 | 0 to 1 | Custom placement: left edge (0 = left of screen, 1 = right). |
-| Anchor Y | 0.1 | 0 to 1 | Custom placement: bottom edge (0 = bottom of screen, 1 = top). |
-| Wood | When Known | Always, When Known, When Carried, Never | When to list Wood. When Known: once your character has picked one up. When Carried: only while you have some. |
-| Stone | When Known | Always, When Known, When Carried, Never | When to list Stone. When Known: once your character has picked one up. When Carried: only while you have some. |
-| Core Wood | When Known | Always, When Known, When Carried, Never | When to list Core Wood. When Known: once your character has picked one up. When Carried: only while you have some. |
-| Fine Wood | When Known | Always, When Known, When Carried, Never | When to list Fine Wood. When Known: once your character has picked one up. When Carried: only while you have some. |
-| Resin | When Carried | Always, When Known, When Carried, Never | When to list Resin. When Known: once your character has picked one up. When Carried: only while you have some. |
-| Bronze Nails | When Carried | Always, When Known, When Carried, Never | When to list Bronze Nails. When Known: once your character has picked one up. When Carried: only while you have some. |
-| Iron Nails | When Carried | Always, When Known, When Carried, Never | When to list Iron Nails. When Known: once your character has picked one up. When Carried: only while you have some. |
-| Black Marble | When Carried | Always, When Known, When Carried, Never | When to list Black Marble. When Known: once your character has picked one up. When Carried: only while you have some. |
-| Yggdrasil Wood | When Carried | Always, When Known, When Carried, Never | When to list Yggdrasil Wood. When Known: once your character has picked one up. When Carried: only while you have some. |
-| Grausten | When Carried | Always, When Known, When Carried, Never | When to list Grausten. When Known: once your character has picked one up. When Carried: only while you have some. |
-| Ashwood | When Carried | Always, When Known, When Carried, Never | When to list Ashwood. When Known: once your character has picked one up. When Carried: only while you have some. |
-| Other Materials |  |  | More materials to list with the ones above, by the names the game shows, separated by commas (for example: Copper, Deer Hide). |
+| Enabled | On |  | With the hammer out, a panel beside the build menu counts the materials you carry. |
+| Selected Piece | On |  | List what the selected piece costs and how many you have. Red when short. |
+| Can Build Count | On |  | How many of the selected piece you can build. Used when Selected Piece is on. |
+| Common With Cost | Off |  | Also list the materials below while a piece is selected. Off: only its cost. Used when Selected Piece is on. |
+| Wood | When Known | Always, When Known, When Carried, Never | When to list Wood. When Known: once you have found one. When Carried: while you have some. |
+| Stone | When Known | Always, When Known, When Carried, Never | When to list Stone. When Known: once you have found one. When Carried: while you have some. |
+| Corewood | When Known | Always, When Known, When Carried, Never | When to list Corewood. When Known: once you have found one. When Carried: while you have some. |
+| Finewood | When Known | Always, When Known, When Carried, Never | When to list Finewood. When Known: once you have found one. When Carried: while you have some. |
+| Resin | When Carried | Always, When Known, When Carried, Never | When to list Resin. When Known: once you have found one. When Carried: while you have some. |
+| Bronze Nails | When Carried | Always, When Known, When Carried, Never | When to list Bronze Nails. When Known: once you have found one. When Carried: while you have some. |
+| Iron Nails | When Carried | Always, When Known, When Carried, Never | When to list Iron Nails. When Known: once you have found one. When Carried: while you have some. |
+| Black Marble | When Carried | Always, When Known, When Carried, Never | When to list Black Marble. When Known: once you have found one. When Carried: while you have some. |
+| Yggdrasil Wood | When Carried | Always, When Known, When Carried, Never | When to list Yggdrasil Wood. When Known: once you have found one. When Carried: while you have some. |
+| Grausten | When Carried | Always, When Known, When Carried, Never | When to list Grausten. When Known: once you have found one. When Carried: while you have some. |
+| Ashwood | When Carried | Always, When Known, When Carried, Never | When to list Ashwood. When Known: once you have found one. When Carried: while you have some. |
+| Other Materials |  |  | More materials to list, separated by commas: Copper, Deer Hide. Names as the game shows them, or item names (DeerHide), which work in every language. |
+| Size | 1 | 0.75 to 1.5 | Panel size. 1 is the normal size. |
+| Opacity | 1 | 0.2 to 1 | 1 is solid; lower shows the game through it. |
+| Placement | Beside Build Info | Beside Build Info, Custom | Beside Build Info: right of the piece box at the bottom of the screen. Custom: at Anchor X and Anchor Y. |
+| Anchor X | 0.8 | 0 to 1 | Left edge. 0 is the left of the screen, 1 the right. Used when Placement is Custom. |
+| Anchor Y | 0.1 | 0 to 1 | Bottom edge. 0 is the bottom of the screen, 1 the top. Used when Placement is Custom. |
+| Offset X | 0 | -400 to 400 | Move left (-) or right (+), in HUD pixels. |
+| Offset Y | 0 | -400 to 400 | Move down (-) or up (+), in HUD pixels. |
 
 **Day Night Bar**
 
 | Setting | Default | Range or choices | What it does |
 |---|---|---|---|
-| Enabled | On |  | A day and night bar above the minimap: where you are in the day, and how long until dusk or dawn. |
-| Countdown | On |  | Show the time left until dusk (by day) or dawn (by night). |
-| Day Number | On |  | Show the day number. |
-| Clock | Off |  | Show the time of day as a 24-hour clock: 06:00 is sunrise, 18:00 sunset. |
-| Dusk Warning Seconds | 60 | 0 to 300 | The dusk countdown turns orange this many seconds before night. 0 = never. |
+| Enabled | On |  | A day and night bar on the minimap: the time of day and how long until dusk or dawn. |
+| Countdown | On |  | Time left until dusk by day, or dawn by night. |
+| Dusk Warning Seconds | 60 | 0 to 300 | The dusk countdown turns orange this many seconds before night. 0 = never. Used when Countdown is on. |
+| Day Number | On |  | The day number. |
+| Clock | Off |  | The time as a 24-hour clock. 06:00 is sunrise, 18:00 sunset. |
 | Bar Height | 10 | 6 to 18 | Bar height in HUD pixels. |
+| Size | 1 | 0.75 to 1.5 | Text and icon size. |
+| Opacity | 1 | 0.2 to 1 | 1 is solid; lower shows the game through it. |
 | Day Color | `DBAD52D9` | Hex RRGGBBAA (AA = opacity) | Color of the day part. |
 | Night Color | `212B5CE6` | Hex RRGGBBAA (AA = opacity) | Color of the night part. |
+| Placement | Above Minimap | Above Minimap, Top Center, Custom | Above Minimap: along its top edge, or the top right corner without a minimap. Top Center: under the compass. Custom: at Anchor X and Anchor Y. |
+| Width | 220 | 120 to 600 | Bar width in HUD pixels. On the minimap it matches the minimap instead. |
+| Anchor X | 0.85 | 0 to 1 | Center of the bar. 0 is the left of the screen, 1 the right. Used when Placement is Custom. |
+| Anchor Y | 0.95 | 0 to 1 | Bottom of the bar. 0 is the bottom of the screen, 1 the top. Used when Placement is Custom. |
+| Offset X | 0 | -400 to 400 | Move left (-) or right (+), in HUD pixels. |
+| Offset Y | 0 | -400 to 400 | Move down (-) or up (+), in HUD pixels. |
 
 **Compass**
 
 | Setting | Default | Range or choices | What it does |
 |---|---|---|---|
-| Enabled | On |  | A compass strip at the top of the screen with your heading, friends and nearby map pins. |
-| Size | 1 | 0.6 to 2 | Overall size of the compass. |
-| Field Of View | 120 | 60 to 240 | How many degrees of the compass the strip shows. Narrower is easier to read. |
-| Width | 520 | 300 to 1000 | Strip width in HUD pixels. |
-| Opacity | 0.9 | 0.2 to 1 | Overall opacity of the compass. |
-| Offset Y | 0 | 0 to 300 | Nudge down from the top of the screen, in HUD pixels. |
-| Heading | On |  | Your exact heading under the center mark (0 = north, 90 = east), for call-outs. |
-| Heading Direction | Off |  | Add the compass direction after the heading: 212 SW. |
-| Focus Info | On |  | Name of the marker you are looking at, beside the heading. Stacked markers show how many are there. |
-| Distance | Focused | Focused, All Markers, Off | Focused: the distance of the marker you are looking at, beside its name. All Markers: also a small number under every marker. Off: no distances. |
-| Friends | On |  | Other players, each in their own color. Held at the strip's edge when they are behind you. Far-away players show only if they are visible on the map. |
+| Enabled | On |  | A compass strip at the top of the screen: your heading, friends and nearby map pins. |
+| Heading | On |  | Your heading under the center mark, for call-outs. 0 is north, 90 east. |
+| Heading Direction | Off |  | Add the direction after the number: 212 SW. Used when Heading is on. |
+| Focus Info | On |  | The name of the marker you look at, beside the heading. |
+| Distance | Focused | Focused, All Markers, Off | Focused: the distance of the marker you look at. All Markers: a distance under every marker. Off: none. |
+| Friends | On |  | Other players, each in their own color. Far-away players show if they share their position on the map. |
+| Friend Names | Focused | Focused, Always, Off | Focused: a friend's name when you look at them. Always: under every friend. Off: none. Used when Friends is on. |
+| Pings | On |  | Map pings from you and your friends, at any distance. |
 | Pins | On |  | Pins you placed on the map, bench pins included. |
-| Bed | On |  | Your bed (spawn point). |
+| Bed | On |  | Your bed. |
 | Tombstone | On |  | Where you died. |
 | Bosses | On |  | Boss altars and other boss locations on your map. |
-| Pings | On |  | Map pings from you and your friends, at any distance. |
-| Pin Range | 300 | 50 to 2000 | Pins farther than this (meters) are left off. Friends and pings ignore it. |
-| Max Markers | 12 | 3 to 24 | Most markers on the strip at once; pings and friends come first, then the nearest. |
-| Height Arrow Meters | 10 | 0 to 50 | A small up or down arrow on markers this far above or below you. 0 = off. |
-| Animations | On |  | Markers ease in and out, grow when you look at them, and pings pulse. Off: plain fades only. |
+| Pin Range | 300 | 50 to 2000 | Pins farther than this, in meters, are left off. Friends and pings ignore it. Used when Pins, Bed, Tombstone or Bosses is on. |
+| Height Arrow Meters | 10 | 0 to 50 | An up or down arrow on markers this many meters above or below you. 0 = off. |
+| Max Markers | 12 | 3 to 24 | Most markers at once. Pings and friends first, then the nearest. |
+| Size | 1 | 0.75 to 2 | Overall size. 1 is the normal size. |
+| Width | 520 | 300 to 1000 | Strip width in HUD pixels. Kept clear of the minimap on narrow screens. |
+| Field Of View | 120 | 60 to 240 | Degrees the strip covers. Narrower is easier to read. |
+| Opacity | 0.9 | 0.2 to 1 | 1 is solid; lower shows the game through it. |
+| Animations | On |  | Markers ease in, grow when you look at them, and pings pulse. Off: plain fades. |
+| Offset X | 0 | -600 to 600 | Move left (-) or right (+), in HUD pixels. |
+| Offset Y | 0 | -400 to 0 | Move down (-) or up (+) from the top of the screen, in HUD pixels. |
 
 **Buffs**
 
 | Setting | Default | Range or choices | What it does |
 |---|---|---|---|
 | Enabled | On |  | Resize the buff icons at the top right and keep them clear of the compass. |
-| Size | 0.9 | 0.5 to 1 | Buff icon size; 1 is the game's own (large) size. |
-| Make Room For Compass | On |  | Start a new row of buffs before they reach the compass, instead of running under it. |
+| Size | 0.9 | 0.5 to 1 | Buff icon size. 1 is the game's size. |
+| Per Row | 0 | 0 to 12 | Most buffs in one row before a new row starts. 0 = the game's 7. |
+| Make Room For Compass | On |  | Start a new row before the buffs reach the compass. Used when the compass is on. |
 
 **Rested Countdown**
 
 | Setting | Default | Range or choices | What it does |
 |---|---|---|---|
-| Enabled | On |  | While you are resting (sitting or under a roof, near a fire), counts down the seconds until you become Rested, above the Resting buff icon. |
+| Enabled | On |  | While you rest by a fire, count down the seconds until you are Rested, above the Resting icon. |
+| Text Size | 15 | 11 to 26 | Font size of the countdown. |
 | Sound | On |  | A soft chime when you become Rested. |
-| Sound Volume | 0.35 | 0.05 to 1 | Chime volume (also follows the game's sound settings). |
+| Sound Volume | 0.35 | 0.05 to 1 | Chime volume, on top of the game's own volume. Used when Sound is on. |
 
 **Save Countdown**
 
 | Setting | Default | Range or choices | What it does |
 |---|---|---|---|
-| Enabled | On |  | Counts down the last seconds before the auto-save, so its lag spike does not catch you mid-fight. Works in single player, as host, and on a dedicated server. |
-| Seconds | 5 | 3 to 30 | How many seconds before the save the countdown starts. |
-| Sound | On |  | A soft tick each second of the countdown. |
-| Sound Volume | 0.35 | 0.05 to 1 | Tick volume (also follows the game's sound settings). |
-| Anchor X | 0.5 | 0 to 1 | Horizontal position of the countdown's center (0 = left, 1 = right). |
-| Anchor Y | 0.72 | 0 to 1 | Vertical position of the countdown's center (0 = bottom, 1 = top). |
+| Enabled | On |  | Count down to the auto-save, so its lag spike does not catch you mid-fight. |
+| Seconds | 5 | 3 to 30 | Seconds before the save that the countdown starts. |
+| Character Save | On |  | On a server, also count down to your own character save, which has a smaller hitch. |
+| Sound | On |  | A soft tick each second. |
+| Sound Volume | 0.35 | 0.05 to 1 | Tick volume, on top of the game's own volume. Used when Sound is on. |
+| Size | 1 | 0.75 to 1.5 | 1 is the normal size. |
+| Opacity | 1 | 0.2 to 1 | 1 is solid; lower shows the game through it. |
+| Anchor X | 0.5 | 0 to 1 | Center of the box. 0 is the left of the screen, 1 the right. |
+| Anchor Y | 0.72 | 0 to 1 | Center of the box. 0 is the bottom of the screen, 1 the top. |
 
 **Bench Pins**
 
 | Setting | Default | Range or choices | What it does |
 |---|---|---|---|
-| Enabled | On |  | Adds a map pin when you build a workbench, so you can find your camps again. This adds a pin to your map like you would by hand. |
-| Pin Stations | Workbench Only | Workbench Only, All Crafting Stations | Workbench Only, or every crafting station (forge, stonecutter, artisan table, and so on). |
-| Icon | House | Fire, House, Hammer, Dot, Portal | Which map pin icon to use. |
-| Names | Random Name | Random Name, Station Name, No Name | Random Name: a Norse-sounding name from Name Prefixes + Name Suffixes. Station Name: "Workbench". No Name: just the icon. |
-| Skip Near Pin Meters | 50 | 0 to 200 | No new pin if one is already on your map this close (meters), so a base gets one pin, not one per bench. 0 = always pin. |
-| Remove With Bench | On |  | Taking the bench down with the hammer removes its pin, so a bench dropped to fix a boat leaves no trace. If another bench still stands within Skip Near Pin Meters, the pin moves to it instead. |
+| Enabled | On |  | Add a map pin when you build a workbench, so you can find your camps again. |
+| Pin Stations | Workbench Only | Workbench Only, All Crafting Stations | Workbench Only, or every crafting station: forge, stonecutter, artisan table and the rest. |
+| Skip Near Pin Meters | 50 | 0 to 200 | No new pin if one of your pins is this close, in meters, so a base gets one pin. 0 = always pin. |
+| Remove With Bench | On |  | Removing a bench with the hammer removes its pin, or moves it to another bench within Skip Near Pin Meters. |
 | Announce | On |  | Show the new pin's name in the top-left messages. |
-| Name Prefixes | Ulf, Hrafn, Jarn, Frost, Grim, Skjold, Bjorn, Eld, Svart, Thor, Odin, Rune, Troll, Mead, Ash, Ygg, Valk, Draugr, Fenris, Storm, Iron, Wolf, Raven, Boar, Elk, Ember, Hel, Njord, Sig, Hjalm, Gunn, Kald, Myrk, Vind, Stein, Gull, Sol, Eikthyr, Bonemass, Greyling, Freyr, Freya, Baldr, Tyr, Loki, Heimdal, Vidar, Skadi, Bragi, Idun, Frigg, Ullr, Mimir, Surt, Ymir, Jotun, Fafnir, Nidhogg, Sleipnir, Hugin, Munin, Geri, Freki, Moder, Yagluth, Fulling, Lox, Serpent, Neck, Blod, Dverg, Alf, Hvit, Raud, Gra, Kol, Haug, Skog, Fjall, Snae, Bear, Orn, Oak, Birch, Pine, Thunder, Bone, Copper, Silver, Amber, Horn, Tusk, Antler, Mist, Ice, Black, Gold, Saga, Skald, Wyrm |  | First halves of random names, separated by commas. |
-| Name Suffixes | heim, gard, vik, stad, borg, holt, fjord, hall, by, hold, keep, stead, haven, mark, fell, dal, ness, wall, rest, ford, hof, skali, rock, watch, hearth, thorp, tun, vang, berg, havn, sund, ey, lund, mire, moor, mere, strand, haug, stein, garth, helm, hollow, hill, crag, peak, spire, tower, gate, bridge, crossing, ridge, reach, rise, falls, wood, grove, glade, field, vale, marsh, fen, bay, port, harbor, shore, cove, isle, point, cliff, cairn, barrow, howe, mound, ring, forge, mill, lodge, camp, post, fort, bastion, bulwark, rampart, longhouse, steading, saeter, hus, bol, toft, rud, vin, akr, hagi, lid, bekk, foss, hammar, tind, vatn, grip |  | Second halves of random names, separated by commas. |
+| Icon | House | Fire, House, Hammer, Dot, Portal | Map pin icon. |
+| Names | Random Name | Random Name, Station Name, No Name | Random Name: a Norse-sounding name from the lists below. Station Name: "Workbench". No Name: just the icon. |
+| Name Prefixes | Ulf, Hrafn, Jarn, Frost, Grim, Skjold, Bjorn, Eld, Svart, Thor, Odin, Rune, Troll, Mead, Ash, Ygg, Valk, Draugr, Fenris, Storm, Iron, Wolf, Raven, Boar, Elk, Ember, Hel, Njord, Sig, Hjalm, Gunn, Kald, Myrk, Vind, Stein, Gull, Sol, Eikthyr, Bonemass, Greyling, Freyr, Freya, Baldr, Tyr, Loki, Heimdal, Vidar, Skadi, Bragi, Idun, Frigg, Ullr, Mimir, Surt, Ymir, Jotun, Fafnir, Nidhogg, Sleipnir, Hugin, Munin, Geri, Freki, Moder, Yagluth, Fulling, Lox, Serpent, Neck, Blod, Dverg, Alf, Hvit, Raud, Gra, Kol, Haug, Skog, Fjall, Snae, Bear, Orn, Oak, Birch, Pine, Thunder, Bone, Copper, Silver, Amber, Horn, Tusk, Antler, Mist, Ice, Black, Gold, Saga, Skald, Wyrm |  | First halves of random names, separated by commas. Used when Names is Random Name. |
+| Name Suffixes | heim, gard, vik, stad, borg, holt, fjord, hall, by, hold, keep, stead, haven, mark, fell, dal, ness, wall, rest, ford, hof, skali, rock, watch, hearth, thorp, tun, vang, berg, havn, sund, ey, lund, mire, moor, mere, strand, haug, stein, garth, helm, hollow, hill, crag, peak, spire, tower, gate, bridge, crossing, ridge, reach, rise, falls, wood, grove, glade, field, vale, marsh, fen, bay, port, harbor, shore, cove, isle, point, cliff, cairn, barrow, howe, mound, ring, forge, mill, lodge, camp, post, fort, bastion, bulwark, rampart, longhouse, steading, saeter, hus, bol, toft, rud, vin, akr, hagi, lid, bekk, foss, hammar, tind, vatn, grip |  | Second halves of random names, separated by commas. Used when Names is Random Name. |
 
 **Auto Repair**
 
 | Setting | Default | Range or choices | What it does |
 |---|---|---|---|
-| Enabled | On |  | Opening a workbench, forge or other crafting station repairs every item it can, like pressing its repair button once per item. |
-| Announce | On |  | Show how many items were repaired in the middle of the screen. |
+| Enabled | On |  | Opening a crafting station repairs every item it can, as if you pressed its repair button for each. |
+| Equipped Only | Off |  | Repair only what you are wearing and holding, not spare gear in your bags. |
+| Announce | On |  | Say how many items were repaired, in the middle of the screen. |
 
 <!-- settings:end -->
 

@@ -40,6 +40,8 @@ namespace KroolWorldUI.Features
         internal static ConfigEntry<float> AnchorY;
         internal static ConfigEntry<FloatMode> FloatingText;
         internal static ConfigEntry<Color> FloatingColor;
+        internal static ConfigEntry<string> HiddenSkills;
+        internal static ConfigEntry<float> Opacity;
 
         private const string Section = "Skill XP Bars";
 
@@ -48,50 +50,105 @@ namespace KroolWorldUI.Features
             Enabled = config.Bind(Section, "Enabled", true,
                 "Show a skill on the HUD while you gain XP in it.");
             Style = config.Bind(Section, "Style", BarStyle.Tiles,
-                "Tiles: the skill icon with its XP bar underneath, side by side. " +
-                "Rows: a wide bar with the icon on the left, stacked.");
+                "Tiles: the skill icon over its XP bar, side by side. Rows: a wide bar with the icon at the left, stacked.");
+            MaxBars = config.Bind(Section, "MaxBars", 4,
+                ConfigText.Desc("Most skills shown at once, fewer if they do not fit. Past this the oldest is replaced.",
+                    new AcceptableValueRange<int>(1, 10)));
+            HiddenSkills = config.Bind(Section, "HiddenSkills", "",
+                ConfigText.Desc("Skills never shown, separated by commas: Run, Jump, Sneak. Names as the game shows " +
+                                "them, or English names, which work in every language."));
+
+            const string tiles = "Tiles";
+            System.Func<bool> isTiles = () => Style.Value == BarStyle.Tiles;
+            TileSize = config.Bind(Section, "TileSize", 64f,
+                ConfigText.Desc("Tile width in HUD pixels. A tile is a third taller than wide.",
+                    new AcceptableValueRange<float>(40f, 128f), tiles, isTiles, "Style is Tiles"));
+            TileLevel = config.Bind(Section, "TileLevel", false,
+                ConfigText.Desc("The skill level in the tile's corner.", group: tiles, when: isTiles, whenText: "Style is Tiles"));
+
+            const string rows = "Rows";
+            System.Func<bool> isRows = () => Style.Value == BarStyle.Rows;
+            Labels = config.Bind(Section, "Labels", LabelStyle.NameAndLevel,
+                ConfigText.Desc("Name And Level: the skill name and level on the bar. Icon Only: just the icon and bar.",
+                    group: rows, when: isRows, whenText: "Style is Rows"));
+            ShowGainText = config.Bind(Section, "ShowGainText", true,
+                ConfigText.Desc("The XP gained since the bar appeared, as a percent of a level.", group: rows,
+                    when: () => isRows() && Labels.Value == LabelStyle.NameAndLevel,
+                    whenText: "Style is Rows and Labels is Name And Level"));
+            BarWidth = config.Bind(Section, "BarWidth", 220f,
+                ConfigText.Desc("Row width in HUD pixels.", new AcceptableValueRange<float>(100f, 500f), rows, isRows,
+                    "Style is Rows"));
+            BarHeight = config.Bind(Section, "BarHeight", 22f,
+                ConfigText.Desc("Row height in HUD pixels.", new AcceptableValueRange<float>(12f, 48f), rows, isRows,
+                    "Style is Rows"));
+
+            const string look = "Look";
+            BarColor = config.Bind(Section, "BarColor", new Color(0.86f, 0.66f, 0.28f, 1f),
+                ConfigText.Desc("Bar color. XP you had shows darker, new XP lighter.", group: look));
+            Opacity = config.Bind(Section, "Opacity", 1f,
+                ConfigText.Desc("1 is solid; lower shows the game through it.", new AcceptableValueRange<float>(0.2f, 1f), look, step: 0.05f));
+            HoldSeconds = config.Bind(Section, "HoldSeconds", 3f,
+                ConfigText.Desc("Seconds a skill stays after its last XP.", new AcceptableValueRange<float>(0.5f, 30f), look,
+                    step: 0.5f));
+            FadeSeconds = config.Bind(Section, "FadeSeconds", 0.6f,
+                ConfigText.Desc("Seconds the fade-out takes.", new AcceptableValueRange<float>(0f, 5f), look, step: 0.1f));
+
+            const string floating = "Floating text";
+            FloatingText = config.Bind(Section, "FloatingText", FloatMode.EveryGain,
+                ConfigText.Desc("XP over your character, like a damage number. Only you see it. Every Gain, Level Up " +
+                                "Only, or Off.", group: floating));
+            FloatingColor = config.Bind(Section, "FloatingTextColor", new Color(0.45f, 0.72f, 1f, 1f),
+                ConfigText.Desc("Color of the floating XP text.", group: floating,
+                    when: () => FloatingText.Value != FloatMode.Off, whenText: "Floating Text is not Off"));
+
+            const string placement = "Placement";
             // "Placement", not "Position": 0.3.0-0.3.2 saved a Position that would hide the new default.
             Position = config.Bind(Section, "Placement", Placement.BottomRight,
-                "Bottom Right: above the key hints, growing left. Below Stamina: centered under the stamina bar. " +
-                "Right Side: right edge of the screen, below the minimap. Custom: placed by Anchor X and Anchor Y.");
-            TileSize = config.Bind(Section, "TileSize", 64f,
-                new ConfigDescription("Tiles: width in HUD pixels. The tile is a third taller than it is wide.",
-                    new AcceptableValueRange<float>(40f, 128f)));
-            TileLevel = config.Bind(Section, "TileLevel", false,
-                "Tiles: show the skill level in the tile's corner.");
-            Labels = config.Bind(Section, "Labels", LabelStyle.NameAndLevel,
-                "Rows: Name And Level shows the skill name and level on the bar. Icon Only: just the icon and the bar.");
-            ShowGainText = config.Bind(Section, "ShowGainText", true,
-                "Rows with Name And Level: show the XP gained since the bar appeared, as a percent of a level.");
-            BarWidth = config.Bind(Section, "BarWidth", 220f,
-                new ConfigDescription("Rows: width of one bar in HUD pixels.", new AcceptableValueRange<float>(100f, 500f)));
-            BarHeight = config.Bind(Section, "BarHeight", 22f,
-                new ConfigDescription("Rows: height of one bar in HUD pixels.", new AcceptableValueRange<float>(12f, 48f)));
-            BarColor = config.Bind(Section, "BarColor", new Color(0.86f, 0.66f, 0.28f, 1f),
-                "Bar color. Progress you had is a darker shade, new XP a lighter one.");
-            HoldSeconds = config.Bind(Section, "HoldSeconds", 3f,
-                new ConfigDescription("Seconds a bar stays fully visible after the last XP gain.",
-                    new AcceptableValueRange<float>(0.5f, 30f)));
-            FadeSeconds = config.Bind(Section, "FadeSeconds", 0.6f,
-                new ConfigDescription("Seconds the fade-out takes.", new AcceptableValueRange<float>(0f, 5f)));
-            MaxBars = config.Bind(Section, "MaxBars", 4,
-                new ConfigDescription("Most skills shown at once (fewer if they would not fit on screen). " +
-                                      "The stalest one is reused past this.",
-                    new AcceptableValueRange<int>(1, 10)));
-            OffsetX = config.Bind(Section, "OffsetX", 0f,
-                new ConfigDescription("Nudge left (-) or right (+), in HUD pixels.", new AcceptableValueRange<float>(-400f, 400f)));
-            OffsetY = config.Bind(Section, "OffsetY", 0f,
-                new ConfigDescription("Nudge down (-) or up (+), in HUD pixels.", new AcceptableValueRange<float>(-400f, 400f)));
+                ConfigText.Desc("Bottom Right: above the key hints. Below Stamina: under the stamina bar. Right Side: " +
+                                "below the minimap. Custom: at Anchor X and Anchor Y.", group: placement));
+            System.Func<bool> custom = () => Position.Value == Placement.Custom;
             AnchorX = config.Bind(Section, "AnchorX", 0.5f,
-                new ConfigDescription("Custom placement: horizontal center (0 = left of screen, 1 = right).",
-                    new AcceptableValueRange<float>(0f, 1f)));
+                ConfigText.Desc("Center. 0 is the left of the screen, 1 the right.", new AcceptableValueRange<float>(0f, 1f),
+                    placement, custom, "Placement is Custom", 0.01f));
             AnchorY = config.Bind(Section, "AnchorY", 0.3f,
-                new ConfigDescription("Custom placement: top edge (0 = bottom of screen, 1 = top).",
-                    new AcceptableValueRange<float>(0f, 1f)));
-            FloatingText = config.Bind(Section, "FloatingText", FloatMode.EveryGain,
-                "Float each XP gain over your character like a damage number, seen only by you. Level Up Only: just new levels.");
-            FloatingColor = config.Bind(Section, "FloatingTextColor", new Color(0.45f, 0.72f, 1f, 1f),
-                "Color of the floating XP text.");
+                ConfigText.Desc("Top edge. 0 is the bottom of the screen, 1 the top.", new AcceptableValueRange<float>(0f, 1f),
+                    placement, custom, "Placement is Custom", 0.01f));
+            OffsetX = config.Bind(Section, "OffsetX", 0f,
+                ConfigText.Desc("Move left (-) or right (+), in HUD pixels.", new AcceptableValueRange<float>(-400f, 400f), placement));
+            OffsetY = config.Bind(Section, "OffsetY", 0f,
+                ConfigText.Desc("Move down (-) or up (+), in HUD pixels.", new AcceptableValueRange<float>(-400f, 400f), placement));
+        }
+
+        private static string _hiddenFrom;
+        private static readonly HashSet<string> _hidden = new HashSet<string>();
+
+        /// <summary>Hidden Skills, matched on the shown name or the English skill id, ignoring case and spaces.</summary>
+        internal static bool IsHidden(Skills.SkillType type)
+        {
+            string list = HiddenSkills.Value ?? "";
+            if (list.Length == 0)
+                return false;
+            if (list != _hiddenFrom)
+            {
+                _hiddenFrom = list;
+                _hidden.Clear();
+                foreach (var part in list.Split(','))
+                {
+                    string k = Key(part);
+                    if (k.Length > 0)
+                        _hidden.Add(k);
+                }
+            }
+            return _hidden.Contains(Key(type.ToString())) || _hidden.Contains(Key(SkillName(type)));
+        }
+
+        private static string Key(string s)
+        {
+            var sb = new System.Text.StringBuilder();
+            foreach (char c in s ?? "")
+                if (!char.IsWhiteSpace(c))
+                    sb.Append(char.ToLowerInvariant(c));
+            return sb.ToString();
         }
 
         internal static bool IsLocalPlayer(Skills skills)
@@ -155,7 +212,7 @@ namespace KroolWorldUI.Features
 
             private static void Postfix(Skills __instance, Skills.SkillType __0, Snapshot __state)
             {
-                if (!IsLocalPlayer(__instance))
+                if (!IsLocalPlayer(__instance) || IsHidden(__0))
                     return;
                 var skill = FindExisting(__instance, __0);
                 if (skill == null)
@@ -205,7 +262,7 @@ namespace KroolWorldUI.Features
 
         private static readonly System.Reflection.MethodInfo AddText = AccessTools.Method(typeof(DamageText), "AddInworldText");
         private static readonly System.Reflection.FieldInfo WorldTexts = AccessTools.Field(typeof(DamageText), "m_worldTexts");
-        private static bool _broken;
+        private static readonly HudKit.FailFlag _broken = new HudKit.FailFlag();
         private static Player _owner;
 
         private class Pending
@@ -218,7 +275,7 @@ namespace KroolWorldUI.Features
 
         internal static void OnXpGained(Skills.Skill skill, SkillXpBars.Snapshot before)
         {
-            if (_broken)
+            if (_broken.IsSet)
                 return;
             var type = skill.m_info.m_skill;
             bool leveled = before.Exists && Mathf.Floor(skill.m_level) > Mathf.Floor(before.Level);
@@ -263,12 +320,12 @@ namespace KroolWorldUI.Features
             float gain = p.Gain;
             p.Gain = 0f;
             p.LastShown = Time.time;
-            Show($"+{gain * 100f:0.#}% {SkillXpBars.SkillName(type)}", big: false);
+            Show(L10n.T("xp_gain", L10n.Num(gain * 100f, "0.#"), SkillXpBars.SkillName(type)), big: false);
         }
 
         internal static void FlushAll()
         {
-            if (_broken || _pending.Count == 0)
+            if (_broken.IsSet || _pending.Count == 0)
                 return;
             // A new character or a respawn must not get the last one's leftover gains.
             if (Player.m_localPlayer != _owner)
@@ -295,7 +352,7 @@ namespace KroolWorldUI.Features
                 }
                 catch (System.Exception e)
                 {
-                    _broken = true;
+                    _broken.Set();
                     Plugin.Log.LogError($"Skill floating text disabled for this session after an error: {e}");
                 }
             }
@@ -306,11 +363,11 @@ namespace KroolWorldUI.Features
             var dt = DamageText.instance;
             var player = Player.m_localPlayer;
             var cam = Utils.GetMainCamera();
-            if (_broken || dt == null || player == null || cam == null || Hud.IsUserHidden())
+            if (_broken.IsSet || dt == null || player == null || cam == null || !HudKit.Allowed)
                 return;
             if (AddText == null || WorldTexts == null)
             {
-                _broken = true;
+                _broken.Set();
                 Plugin.Log.LogWarning("DamageText layout changed; skill floating text disabled.");
                 return;
             }
@@ -321,7 +378,7 @@ namespace KroolWorldUI.Features
             catch (System.Exception e)
             {
                 // Once, not on every XP tick.
-                _broken = true;
+                _broken.Set();
                 Plugin.Log.LogError($"Skill floating text disabled for this session after an error: {e}");
             }
         }
@@ -359,9 +416,9 @@ namespace KroolWorldUI.Features
         private static readonly Color Parchment = new Color(0.92f, 0.87f, 0.78f, 1f);
 
         private static SkillXpBarStack _instance;
-        private static bool _updateFailed;
+        private static readonly HudKit.FailFlag _updateFailed = new HudKit.FailFlag();
 
-        internal static bool Failed => _updateFailed;
+        internal static bool Failed => _updateFailed.IsSet;
 
         private class Bar
         {
@@ -484,7 +541,7 @@ namespace KroolWorldUI.Features
         internal void Preview(Skills skills)
         {
             var list = new List<Skills.Skill>(skills.GetSkillList());
-            list.RemoveAll(s => s?.m_info == null);
+            list.RemoveAll(s => s?.m_info == null || SkillXpBars.IsHidden(s.m_info.m_skill));
             list.Sort((a, b) => b.m_level.CompareTo(a.m_level));
             int count = Mathf.Min(Capacity, list.Count);
             for (int i = 0; i < count; i++)
@@ -545,7 +602,7 @@ namespace KroolWorldUI.Features
 
         private void Update()
         {
-            if (_bars.Count == 0 || _updateFailed)
+            if (_bars.Count == 0 || _updateFailed.IsSet)
                 return; // idle: no per-frame work
             try
             {
@@ -554,7 +611,7 @@ namespace KroolWorldUI.Features
             catch (System.Exception e)
             {
                 // One error, logged once; a broken bar must not spam the log every frame.
-                _updateFailed = true;
+                _updateFailed.Set();
                 Plugin.Log.LogError($"Skill XP bars disabled for this session after an error: {e}");
                 foreach (var bar in _bars)
                     if (bar.Root != null)
@@ -565,8 +622,8 @@ namespace KroolWorldUI.Features
 
         private void Tick()
         {
-            bool blocked = InventoryGui.IsVisible() || Minimap.IsOpen() || Menu.IsVisible();
-            _group.alpha = blocked ? 0f : 1f;
+            bool blocked = InventoryGui.IsVisible() || Minimap.IsOpen() || Menu.IsVisible() || !HudKit.Allowed;
+            _group.alpha = blocked ? 0f : SkillXpBars.Opacity.Value;
 
             float hold = SkillXpBars.HoldSeconds.Value;
             float fade = SkillXpBars.FadeSeconds.Value;
@@ -979,7 +1036,7 @@ namespace KroolWorldUI.Features
             {
                 float gained = levelsGained + pct - bar.StartPercent;
                 string hex = ColorUtility.ToHtmlStringRGB(bar.GainImage.color);
-                levelText = $"<size=85%><color=#{hex}>+{gained * 100f:0.#}%</color></size>  {levelText}";
+                levelText = $"<size=85%><color=#{hex}>+{L10n.Num(gained * 100f, "0.#")}%</color></size>  {levelText}";
             }
             if (bar.Level.text != levelText)
             {

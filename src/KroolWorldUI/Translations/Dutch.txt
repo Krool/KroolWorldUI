@@ -1,0 +1,55 @@
+# Krool World UI: Dutch (Nederlands) on-screen text.
+
+dir_n = N
+dir_ne = NO
+dir_e = O
+dir_se = ZO
+dir_s = Z
+dir_sw = ZW
+dir_w = W
+dir_nw = NW
+unit_m = $1 m
+unit_km = $1 km
+compass_more = +$1 meer
+
+dusk_in = Schemer over $1
+dawn_in = Dageraad over $1
+
+character_save_in = Personage opslaan over
+saving = Opslaan...
+
+rested_in = Uitgerust over $1
+seconds_short = $1s
+
+enough_for = Genoeg voor $1
+not_enough = Niet genoeg
+
+food_running_low = Raakt op
+food_can_eat_again = Weer eetbaar
+food_can_eat = eetbaar
+food_none = Geen voedsel
+food_slot_empty = Voedselslot leeg ($1)
+dismiss_hint = [$1] verbergen
+
+xp_gain = +$1% $2
+
+repaired_items = $1 voorwerpen gerepareerd
+
+win_search = Instellingen zoeken
+win_expand_all = Alles uitklappen
+win_collapse_all = Alles inklappen
+win_no_results = Geen instellingen gevonden.
+win_preview = Voorbeeld op HUD
+win_preview_ingame = Voorbeeld op HUD (alleen in spel)
+win_preview_desc = Toont alle elementen tegelijk met voorbeeldwaarden, zodat je ziet waar ze staan terwijl je ze aanpast. Tijdens het spelen verschijnt elk alleen wanneer het van toepassing is.
+win_describe_hint = Wijs een instelling aan of selecteer hem om te zien wat hij doet.
+win_key_hint = Pijlen bewegen en wijzigen, Enter selecteert, Esc sluit
+win_pad_hint = A selecteren, B sluiten, X voorbeeld, Y resetten, LB/RB sectie
+win_changed = $1 gewijzigd
+win_reset = Resetten
+win_reset_all = Alles resetten
+win_press_key = Druk op een toets. Esc annuleert, Backspace wist.
+win_none = Geen
+win_default = Standaard: $1
+win_range = Bereik: $1
+win_options = Opties: $1

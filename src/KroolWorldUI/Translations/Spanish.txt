@@ -1,0 +1,55 @@
+# Krool World UI: texto en pantalla, español (Spanish).
+
+dir_n = N
+dir_ne = NE
+dir_e = E
+dir_se = SE
+dir_s = S
+dir_sw = SO
+dir_w = O
+dir_nw = NO
+unit_m = $1 m
+unit_km = $1 km
+compass_more = +$1 más
+
+dusk_in = Anochece en $1
+dawn_in = Amanece en $1
+
+character_save_in = Guardado del personaje en
+saving = Guardando...
+
+rested_in = Con energía en $1
+seconds_short = $1 s
+
+enough_for = Da para $1
+not_enough = No alcanza
+
+food_running_low = Se acaba
+food_can_eat_again = Ya puedes volver a comer
+food_can_eat = puedes comer
+food_none = Sin comida
+food_slot_empty = Hueco de comida libre ($1)
+dismiss_hint = [$1] ocultar
+
+xp_gain = +$1 % $2
+
+repaired_items = $1 objetos reparados
+
+win_search = Buscar ajustes
+win_expand_all = Expandir todo
+win_collapse_all = Contraer todo
+win_no_results = Ningún ajuste coincide.
+win_preview = Vista previa en el HUD
+win_preview_ingame = Vista previa en el HUD (solo en partida)
+win_preview_desc = Muestra todos los elementos a la vez con valores de ejemplo, para ver dónde queda cada uno mientras lo ajustas. Al jugar, cada uno solo aparece cuando corresponde.
+win_describe_hint = Señala o selecciona un ajuste para ver qué hace.
+win_key_hint = Flechas: mover y cambiar, Intro: seleccionar, Esc: cerrar
+win_pad_hint = A seleccionar, B cerrar, X vista previa, Y restablecer, LB/RB sección
+win_changed = $1 cambiados
+win_reset = Restablecer
+win_reset_all = Restablecer todo
+win_press_key = Pulsa una tecla. Esc cancela, Retroceso borra.
+win_none = Ninguna
+win_default = Por defecto: $1
+win_range = Rango: $1
+win_options = Opciones: $1

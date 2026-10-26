@@ -1,0 +1,55 @@
+# Krool World UI: Russian (русский), on-screen text.
+
+dir_n = С
+dir_ne = СВ
+dir_e = В
+dir_se = ЮВ
+dir_s = Ю
+dir_sw = ЮЗ
+dir_w = З
+dir_nw = СЗ
+unit_m = $1 м
+unit_km = $1 км
+compass_more = +$1 еще
+
+dusk_in = Сумерки через $1
+dawn_in = Рассвет через $1
+
+character_save_in = Сохранение персонажа через
+saving = Сохранение...
+
+rested_in = Бодрость через $1
+seconds_short = $1 с
+
+enough_for = Хватит на $1
+not_enough = Не хватает
+
+food_running_low = Заканчивается
+food_can_eat_again = Можно есть снова
+food_can_eat = можно есть
+food_none = Нет еды
+food_slot_empty = Слот еды пуст ($1)
+dismiss_hint = [$1] скрыть
+
+xp_gain = +$1% $2
+
+repaired_items = Починено предметов: $1
+
+win_search = Поиск настроек
+win_expand_all = Развернуть все
+win_collapse_all = Свернуть все
+win_no_results = Ничего не найдено.
+win_preview = Предпросмотр на HUD
+win_preview_ingame = Предпросмотр на HUD (только в игре)
+win_preview_desc = Показывает все элементы сразу с примерными значениями, чтобы было видно, где каждый находится, пока вы его настраиваете. В игре каждый появляется только когда нужен.
+win_describe_hint = Наведите на настройку или выберите ее, чтобы увидеть описание.
+win_key_hint = Стрелки: выбор и изменение, Enter: выбрать, Esc: закрыть
+win_pad_hint = A выбрать, B закрыть, X предпросмотр, Y сброс, LB/RB раздел
+win_changed = Изменено: $1
+win_reset = Сброс
+win_reset_all = Сбросить все
+win_press_key = Нажмите клавишу. Esc: отмена, Backspace: очистить.
+win_none = Нет
+win_default = По умолчанию: $1
+win_range = Диапазон: $1
+win_options = Варианты: $1

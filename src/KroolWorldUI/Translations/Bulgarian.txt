@@ -1,0 +1,55 @@
+# Krool World UI: Bulgarian (български), on-screen text.
+
+dir_n = С
+dir_ne = СИ
+dir_e = И
+dir_se = ЮИ
+dir_s = Ю
+dir_sw = ЮЗ
+dir_w = З
+dir_nw = СЗ
+unit_m = $1 м
+unit_km = $1 км
+compass_more = +$1 още
+
+dusk_in = Здрач след $1
+dawn_in = Зазоряване след $1
+
+character_save_in = Запазване на героя след
+saving = Запазване...
+
+rested_in = Отпочинал след $1
+seconds_short = $1 с
+
+enough_for = Стига за $1
+not_enough = Не стига
+
+food_running_low = Свършва
+food_can_eat_again = Може да ядеш пак
+food_can_eat = може да ядеш
+food_none = Няма храна
+food_slot_empty = Празен слот за храна ($1)
+dismiss_hint = [$1] скрий
+
+xp_gain = +$1% $2
+
+repaired_items = Поправени предмети: $1
+
+win_search = Търсене в настройките
+win_expand_all = Разгъни всички
+win_collapse_all = Свий всички
+win_no_results = Няма съвпадения.
+win_preview = Преглед на HUD
+win_preview_ingame = Преглед на HUD (само в игра)
+win_preview_desc = Показва всички елементи наведнъж с примерни стойности, за да виждаш къде е всеки, докато го нагласяш. В игра всеки се показва само когато е нужен.
+win_describe_hint = Посочи или избери настройка, за да видиш какво прави.
+win_key_hint = Стрелки: избор и промяна, Enter: избери, Esc: затвори
+win_pad_hint = A избери, B затвори, X преглед, Y нулирай, LB/RB раздел
+win_changed = Променени: $1
+win_reset = Нулирай
+win_reset_all = Нулирай всички
+win_press_key = Натисни клавиш. Esc отказва, Backspace изчиства.
+win_none = Без
+win_default = По подразбиране: $1
+win_range = Обхват: $1
+win_options = Избори: $1

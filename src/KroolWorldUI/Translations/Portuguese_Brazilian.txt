@@ -1,0 +1,55 @@
+# Krool World UI: texto na tela, português do Brasil (Portuguese_Brazilian).
+
+dir_n = N
+dir_ne = NE
+dir_e = L
+dir_se = SE
+dir_s = S
+dir_sw = SO
+dir_w = O
+dir_nw = NO
+unit_m = $1 m
+unit_km = $1 km
+compass_more = +$1 outros
+
+dusk_in = Anoitece em $1
+dawn_in = Amanhece em $1
+
+character_save_in = Personagem salvo em
+saving = Salvando...
+
+rested_in = Descansado em $1
+seconds_short = $1 s
+
+enough_for = Dá para $1
+not_enough = Não dá
+
+food_running_low = Acabando
+food_can_eat_again = Pode comer de novo
+food_can_eat = pode comer
+food_none = Sem comida
+food_slot_empty = Espaço de comida livre ($1)
+dismiss_hint = [$1] ocultar
+
+xp_gain = +$1% $2
+
+repaired_items = $1 itens consertados
+
+win_search = Buscar configurações
+win_expand_all = Expandir tudo
+win_collapse_all = Recolher tudo
+win_no_results = Nenhuma configuração encontrada.
+win_preview = Pré-visualizar no HUD
+win_preview_ingame = Pré-visualizar no HUD (só no jogo)
+win_preview_desc = Mostra todos os elementos de uma vez com valores de exemplo, para você ver onde cada um fica enquanto ajusta. Jogando, cada um só aparece quando se aplica.
+win_describe_hint = Aponte para uma configuração, ou selecione-a, para ver o que ela faz.
+win_key_hint = Setas: mover e alterar, Enter: selecionar, Esc: fechar
+win_pad_hint = A selecionar, B fechar, X pré-visualizar, Y redefinir, LB/RB seção
+win_changed = $1 alteradas
+win_reset = Redefinir
+win_reset_all = Redefinir tudo
+win_press_key = Pressione uma tecla. Esc cancela, Backspace limpa.
+win_none = Nenhuma
+win_default = Padrão: $1
+win_range = Intervalo: $1
+win_options = Opções: $1

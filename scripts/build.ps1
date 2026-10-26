@@ -29,6 +29,8 @@ if ($pluginSrc -notmatch "Version = `"$([regex]::Escape($version))`"") {
 # README settings tables come from the code. Run before the plugin build: it builds the plugin as
 # a project reference without the package version, and the build below replaces that DLL.
 & (Join-Path $PSScriptRoot "settings-doc.ps1") -ValheimDir $ValheimDir
+# Every language against the (just regenerated) English text: missing lines show in English.
+& (Join-Path $PSScriptRoot "check-translations.ps1")
 
 & $dotnet build $proj -c $Configuration -nologo -clp:NoSummary -p:Version=$version -p:ValheimDir="$ValheimDir"
 if ($LASTEXITCODE -ne 0) { throw "Build failed" }

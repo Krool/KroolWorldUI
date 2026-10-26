@@ -15,6 +15,7 @@ namespace KroolWorldUI.Features
     internal static class AutoRepair
     {
         internal static ConfigEntry<bool> Enabled;
+        internal static ConfigEntry<bool> EquippedOnly;
         internal static ConfigEntry<bool> Announce;
 
         private const string Section = "Auto Repair";
@@ -25,10 +26,11 @@ namespace KroolWorldUI.Features
         internal static void BindConfig(ConfigFile config)
         {
             Enabled = config.Bind(Section, "Enabled", true,
-                "Opening a workbench, forge or other crafting station repairs every item it can, " +
-                "like pressing its repair button once per item.");
+                "Opening a crafting station repairs every item it can, as if you pressed its repair button for each.");
+            EquippedOnly = config.Bind(Section, "EquippedOnly", false,
+                "Repair only what you are wearing and holding, not spare gear in your bags.");
             Announce = config.Bind(Section, "Announce", true,
-                "Show how many items were repaired in the middle of the screen.");
+                "Say how many items were repaired, in the middle of the screen.");
         }
 
         [HarmonyPatch(typeof(InventoryGui), nameof(InventoryGui.Show))]
@@ -66,7 +68,7 @@ namespace KroolWorldUI.Features
             string onlyName = null;
             foreach (var item in worn)
             {
-                if (!_canRepair(gui, item))
+                if ((EquippedOnly.Value && !item.m_equipped) || !_canRepair(gui, item))
                     continue;
                 float max = item.GetMaxDurability();
                 player.RaiseSkill(Skills.SkillType.Crafting, 1f - item.m_durability / max);
@@ -81,7 +83,7 @@ namespace KroolWorldUI.Features
             if (Announce.Value)
                 player.Message(MessageHud.MessageType.Center, repaired == 1
                     ? Localization.instance.Localize("$msg_repaired", onlyName)
-                    : $"Repaired {repaired} items");
+                    : L10n.T("repaired_items", repaired.ToString()));
         }
     }
 }

@@ -30,6 +30,7 @@ namespace KroolWorldUI.Features
         internal static ConfigEntry<float> BarLength;
         internal static ConfigEntry<float> BarThickness;
         internal static ConfigEntry<bool> ScaleWithMaxWeight;
+        internal static ConfigEntry<float> Opacity;
         internal static ConfigEntry<float> OffsetX;
         internal static ConfigEntry<float> OffsetY;
 
@@ -40,6 +41,14 @@ namespace KroolWorldUI.Features
 
         private static readonly Color DefaultFill = new Color(0.98f, 0.78f, 0.38f, 1f);
         private static readonly Color OldDefaultFill = new Color(0.80f, 0.62f, 0.30f, 1f);
+        internal static readonly Color DefaultNear = new Color(1f, 0.55f, 0.12f, 1f);
+        internal static readonly Color DefaultOver = new Color(0.86f, 0.16f, 0.12f, 1f);
+
+        /// <summary>Near-limit color; the colorblind-safe one while General > Colorblind Friendly is on and this is unchanged.</summary>
+        internal static Color Near => General.Colorblind && Approximately(NearColor.Value, DefaultNear) ? Features.HudKit.Warn : NearColor.Value;
+
+        /// <summary>Overweight color; the colorblind-safe one while General > Colorblind Friendly is on and this is unchanged.</summary>
+        internal static Color Over => General.Colorblind && Approximately(OverColor.Value, DefaultOver) ? Features.HudKit.Bad : OverColor.Value;
 
         private static bool Approximately(Color a, Color b) =>
             Mathf.Abs(a.r - b.r) < 0.005f && Mathf.Abs(a.g - b.g) < 0.005f &&
@@ -48,40 +57,56 @@ namespace KroolWorldUI.Features
         internal static void BindConfig(ConfigFile config)
         {
             Enabled = config.Bind(Section, "Enabled", true,
-                "Show your carry weight on the HUD, left of the food icons.");
+                "Your carry weight as a bar left of the food icons.");
             Mode = config.Bind(Section, "Show", ShowMode.Always,
-                "Always. Near Limit: only at or above Near Limit Percent. When Changed: for a few seconds after your weight changes.");
+                "Always: always on screen. Near Limit: at or past Near Limit Percent. When Changed: for a few " +
+                "seconds after your weight changes.");
             NearLimitPercent = config.Bind(Section, "NearLimitPercent", 80f,
-                new ConfigDescription("Percent of max weight where the bar turns to the near-limit color (and where it appears, in Near Limit mode).",
-                    new AcceptableValueRange<float>(10f, 100f)));
+                ConfigText.Desc("Percent of your max weight where the bar turns the near-limit color, and where " +
+                                "Near Limit shows it.", new AcceptableValueRange<float>(50f, 100f)));
             ChangedSeconds = config.Bind(Section, "ChangedSeconds", 3f,
-                new ConfigDescription("When Changed mode: seconds the bar stays after a change.",
-                    new AcceptableValueRange<float>(1f, 15f)));
+                ConfigText.Desc("Seconds the bar stays after your weight changes.", new AcceptableValueRange<float>(1f, 15f),
+                    when: () => Mode.Value == ShowMode.WhenChanged, whenText: "Show is When Changed", step: 0.5f));
+
+            const string colors = "Colors";
             Colors = config.Bind(Section, "Colors", ColorMode.Thresholds,
-                "Thresholds: fill color, near-limit color past Near Limit Percent, over color when overweight. " +
-                "Gradient: blends from fill to near-limit to over as you fill up. Single: always the fill color.");
-            FillColor = config.Bind(Section, "FillColor", DefaultFill, "Bar color under the limit.");
+                ConfigText.Desc("Thresholds: fill color, then near-limit past Near Limit Percent, then over when " +
+                                "overweight. Gradient: blends through the three. Single: always the fill color.", group: colors));
+            FillColor = config.Bind(Section, "FillColor", DefaultFill, ConfigText.Desc("Bar color under the limit.", group: colors));
             // 0.9.3 brightened the default for contrast; move anyone still on the old default along.
             if (Approximately(FillColor.Value, OldDefaultFill))
                 FillColor.Value = DefaultFill;
-            NearColor = config.Bind(Section, "NearLimitColor", new Color(1f, 0.55f, 0.12f, 1f), "Bar color near the limit.");
-            OverColor = config.Bind(Section, "OverColor", new Color(0.86f, 0.16f, 0.12f, 1f), "Bar color when overweight.");
+            NearColor = config.Bind(Section, "NearLimitColor", DefaultNear,
+                ConfigText.Desc("Bar color near the limit.", group: colors,
+                    when: () => Colors.Value != ColorMode.Single, whenText: "Colors is not Single"));
+            OverColor = config.Bind(Section, "OverColor", DefaultOver,
+                ConfigText.Desc("Bar color when overweight. It also flashes.", group: colors,
+                    when: () => Colors.Value != ColorMode.Single, whenText: "Colors is not Single"));
+
+            const string text = "Text";
             Text = config.Bind(Section, "Text", TextMode.CurrentAndMax,
-                "Numbers above the bar: current over max, current only, percent, or none.");
+                ConfigText.Desc("Numbers above the bar: weight over max, weight only, percent, or none.", group: text));
             TextSize = config.Bind(Section, "TextSize", 16f,
-                new ConfigDescription("Font size of the numbers.", new AcceptableValueRange<float>(10f, 28f)));
+                ConfigText.Desc("Font size of the numbers.", new AcceptableValueRange<float>(10f, 28f), text,
+                    () => Text.Value != TextMode.None, "Text is not None"));
+
+            const string size = "Size";
             BarLength = config.Bind(Section, "BarLength", 110f,
-                new ConfigDescription("Bar length in HUD pixels at the normal 300 max weight.",
-                    new AcceptableValueRange<float>(40f, 220f)));
+                ConfigText.Desc("Bar length in HUD pixels at the normal 300 max weight.",
+                    new AcceptableValueRange<float>(40f, 220f), size));
             BarThickness = config.Bind(Section, "BarThickness", 16f,
-                new ConfigDescription("Bar thickness in HUD pixels (the health bar is 32).",
-                    new AcceptableValueRange<float>(6f, 32f)));
+                ConfigText.Desc("Bar thickness in HUD pixels. The health bar is 32.",
+                    new AcceptableValueRange<float>(6f, 32f), size));
             ScaleWithMaxWeight = config.Bind(Section, "ScaleWithMaxWeight", true,
-                "Grow the bar with your max weight: a Megingjord (+150) makes it 50% longer.");
+                ConfigText.Desc("Grow the bar with your max weight: a Megingjord (+150) makes it half again as long.", group: size));
+            Opacity = config.Bind(Section, "Opacity", 1f,
+                ConfigText.Desc("1 is solid; lower shows the game through it.", new AcceptableValueRange<float>(0.2f, 1f), size, step: 0.05f));
+
+            const string placement = "Placement";
             OffsetX = config.Bind(Section, "OffsetX", 0f,
-                new ConfigDescription("Nudge left (-) or right (+), in HUD pixels.", new AcceptableValueRange<float>(-200f, 200f)));
+                ConfigText.Desc("Move left (-) or right (+), in HUD pixels.", new AcceptableValueRange<float>(-300f, 300f), placement));
             OffsetY = config.Bind(Section, "OffsetY", 0f,
-                new ConfigDescription("Nudge down (-) or up (+), in HUD pixels.", new AcceptableValueRange<float>(-200f, 300f)));
+                ConfigText.Desc("Move down (-) or up (+), in HUD pixels.", new AcceptableValueRange<float>(-300f, 300f), placement));
         }
 
         // Hud.Update runs every frame in game; cheap check that builds the widget once the HUD,
@@ -107,7 +132,7 @@ namespace KroolWorldUI.Features
         private static readonly Color Muted = new Color(0.82f, 0.77f, 0.68f, 1f);
 
         private static WeightHud _instance;
-        private static bool _failed;
+        private static readonly HudKit.FailFlag _failed = new HudKit.FailFlag();
 
         private RectTransform _rect;      // our root: a point in the health panel at the fork's center
         private CanvasGroup _group;
@@ -115,6 +140,7 @@ namespace KroolWorldUI.Features
         private RectTransform _bar;       // clone of the health bar root, rotated like it
         private GuiBar _fill;
         private TMP_Text _text;
+        private Material _textMaterial;
         private Transform _fork;
         private Transform _food0;
 
@@ -128,7 +154,7 @@ namespace KroolWorldUI.Features
 
         internal static void Ensure()
         {
-            if (_instance != null || _failed)
+            if (_instance != null || _failed.IsSet)
                 return;
             var hud = Hud.instance;
             var inv = InventoryGui.instance;
@@ -141,7 +167,7 @@ namespace KroolWorldUI.Features
             }
             catch (System.Exception e)
             {
-                _failed = true;
+                _failed.Set();
                 Plugin.Log.LogError($"Weight bar disabled for this session: {e}");
             }
         }
@@ -228,7 +254,8 @@ namespace KroolWorldUI.Features
             w._text.rectTransform.pivot = new Vector2(0.5f, 0f);
             w._text.rectTransform.sizeDelta = new Vector2(80f, 50f);
             // Black outline so the numbers read on any ground (fontMaterial gives this text its own copy).
-            w._text.fontMaterial.EnableKeyword("OUTLINE_ON");
+            w._textMaterial = w._text.fontMaterial;
+            w._textMaterial.EnableKeyword("OUTLINE_ON");
             w._text.outlineWidth = 0.25f;
             w._text.outlineColor = new Color32(0, 0, 0, 255);
 
@@ -238,13 +265,14 @@ namespace KroolWorldUI.Features
 
         private void OnDestroy()
         {
+            HudKit.Free(_textMaterial);
             if (_instance == this)
                 _instance = null;
         }
 
         private void Update()
         {
-            if (_failed)
+            if (_failed.IsSet)
                 return;
             try
             {
@@ -252,7 +280,7 @@ namespace KroolWorldUI.Features
             }
             catch (System.Exception e)
             {
-                _failed = true;
+                _failed.Set();
                 Plugin.Log.LogError($"Weight bar disabled for this session after an error: {e}");
                 Destroy(gameObject);
             }
@@ -261,7 +289,7 @@ namespace KroolWorldUI.Features
         private void Tick()
         {
             var player = Player.m_localPlayer;
-            if (!WeightDisplay.Enabled.Value || player == null)
+            if (!WeightDisplay.Enabled.Value || !HudKit.Allowed || player == null)
             {
                 _group.alpha = 0f;
                 return;
@@ -296,7 +324,8 @@ namespace KroolWorldUI.Features
             if (SettingsWindow.IsOpen)
                 wanted = true; // visible while tuning it
 
-            _group.alpha = Mathf.MoveTowards(_group.alpha, wanted ? 1f : 0f, Time.deltaTime * 4f);
+            float opacity = WeightDisplay.Opacity.Value;
+            _group.alpha = Mathf.MoveTowards(_group.alpha, wanted ? opacity : 0f, Time.deltaTime * 4f);
             if (_group.alpha <= 0f && !wanted)
                 return;
 
@@ -311,8 +340,8 @@ namespace KroolWorldUI.Features
         private static Color BarColor(float ratio, bool over, bool near)
         {
             var fill = WeightDisplay.FillColor.Value;
-            var warn = WeightDisplay.NearColor.Value;
-            var bad = WeightDisplay.OverColor.Value;
+            var warn = WeightDisplay.Near;
+            var bad = WeightDisplay.Over;
             switch (WeightDisplay.Colors.Value)
             {
                 case WeightDisplay.ColorMode.Single:
@@ -332,7 +361,7 @@ namespace KroolWorldUI.Features
         private void UpdateText(float ratio, bool over, bool near)
         {
             string current = over || near
-                ? $"<color=#{ColorUtility.ToHtmlStringRGB(over ? WeightDisplay.OverColor.Value : WeightDisplay.NearColor.Value)}>{_weight}</color>"
+                ? $"<color=#{ColorUtility.ToHtmlStringRGB(over ? WeightDisplay.Over : WeightDisplay.Near)}>{_weight}</color>"
                 : _weight.ToString();
             string label;
             switch (WeightDisplay.Text.Value)

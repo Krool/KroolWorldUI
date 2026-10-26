@@ -1,0 +1,55 @@
+# Krool World UI: Danish (Dansk) on-screen text.
+
+dir_n = N
+dir_ne = NØ
+dir_e = Ø
+dir_se = SØ
+dir_s = S
+dir_sw = SV
+dir_w = V
+dir_nw = NV
+unit_m = $1 m
+unit_km = $1 km
+compass_more = +$1 mere
+
+dusk_in = Skumring om $1
+dawn_in = Daggry om $1
+
+character_save_in = Karakteren gemmes om
+saving = Gemmer...
+
+rested_in = Udhvilet om $1
+seconds_short = $1s
+
+enough_for = Nok til $1
+not_enough = Ikke nok
+
+food_running_low = Slipper snart op
+food_can_eat_again = Kan spise igen
+food_can_eat = kan spises
+food_none = Ingen mad
+food_slot_empty = Madplads tom ($1)
+dismiss_hint = [$1] skjul
+
+xp_gain = +$1% $2
+
+repaired_items = Reparerede $1 genstande
+
+win_search = Søg i indstillinger
+win_expand_all = Fold alle ud
+win_collapse_all = Fold alle sammen
+win_no_results = Ingen indstillinger matcher.
+win_preview = Forhåndsvis på HUD
+win_preview_ingame = Forhåndsvis på HUD (kun i spillet)
+win_preview_desc = Viser alle elementer på én gang med eksempelværdier, så du kan se hvor de sidder, mens du justerer. Under spil vises hvert kun, når det er relevant.
+win_describe_hint = Peg på en indstilling, eller vælg den, for at se hvad den gør.
+win_key_hint = Pile flytter og ændrer, Enter vælger, Esc lukker
+win_pad_hint = A vælg, B luk, X forhåndsvis, Y nulstil, LB/RB afsnit
+win_changed = $1 ændret
+win_reset = Nulstil
+win_reset_all = Nulstil alle
+win_press_key = Tryk på en tast. Esc annullerer, Backspace rydder.
+win_none = Ingen
+win_default = Standard: $1
+win_range = Område: $1
+win_options = Valg: $1

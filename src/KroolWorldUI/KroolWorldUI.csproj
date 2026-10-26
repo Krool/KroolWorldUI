@@ -26,6 +26,11 @@
     <ManagedDir>$(ValheimDir)\valheim_Data\Managed</ManagedDir>
   </PropertyGroup>
 
+  <!-- HUD text per language, named like Valheim's languages; read by L10n. -->
+  <ItemGroup>
+    <EmbeddedResource Include="Translations\*.txt" Exclude="Translations\English.settings.txt" LogicalName="KroolWorldUI.Translations.%(Filename).txt" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="BepInEx.Core" Version="5.4.21" PrivateAssets="all" />
   </ItemGroup>

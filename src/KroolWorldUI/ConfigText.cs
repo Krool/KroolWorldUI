@@ -10,7 +10,8 @@ namespace KroolWorldUI
     /// <summary>
     /// How config entries read to players. Shared by the F7 window (labels, tooltips) and
     /// tools\SettingsDoc (the README settings tables), so both always say the same thing.
-    /// Plain managed code only: SettingsDoc runs it outside Unity.
+    /// Plain managed code only: SettingsDoc runs it outside Unity. English here; the window
+    /// translates through L10n.
     /// </summary>
     internal static class ConfigText
     {
@@ -20,8 +21,46 @@ namespace KroolWorldUI
             internal static readonly Hidden Tag = new Hidden();
         }
 
+        /// <summary>
+        /// Extra layout for one setting, as a ConfigDescription tag:
+        /// Group starts a sub-heading in its section when it differs from the row above;
+        /// When greys the row out unless it returns true (WhenText says why, for tooltips and docs);
+        /// Step is the slider/arrow step (0 = picked from the range).
+        /// </summary>
+        internal sealed class Meta
+        {
+            public string Label;   // shown name, when the spaced key is not right ("Corewood", as the game spells it)
+            public string Group;
+            public Func<bool> When;
+            public string WhenText;
+            public float Step;
+        }
+
+        internal static ConfigDescription Desc(string text, AcceptableValueBase range = null, string group = null,
+            Func<bool> when = null, string whenText = null, float step = 0f, string label = null)
+        {
+            return new ConfigDescription(text, range,
+                new Meta { Group = group, When = when, WhenText = whenText, Step = step, Label = label });
+        }
+
+        /// <summary>The setting's name as players see it: its Label, or the key spaced out.</summary>
+        internal static string Name(ConfigEntryBase entry) => MetaOf(entry)?.Label ?? Pretty(entry.Definition.Key);
+
+        internal static Meta MetaOf(ConfigEntryBase entry) =>
+            entry.Description?.Tags?.OfType<Meta>().FirstOrDefault();
+
         internal static bool IsHidden(ConfigEntryBase entry) =>
             entry.Description?.Tags?.Any(t => t is Hidden) == true;
+
+        /// <summary>False when the setting it depends on makes it irrelevant.</summary>
+        internal static bool IsActive(ConfigEntryBase entry)
+        {
+            var when = MetaOf(entry)?.When;
+            if (when == null)
+                return true;
+            try { return when(); }
+            catch { return true; }
+        }
 
         /// <summary>"NearLimitPercent" -> "Near Limit Percent".</summary>
         internal static string Pretty(string key) =>
@@ -57,17 +96,12 @@ namespace KroolWorldUI
             return "";
         }
 
-        /// <summary>Hover text: the description, then the default and the allowed values.</summary>
-        internal static string Tooltip(ConfigEntryBase entry)
+        /// <summary>The description, plus when it applies if it depends on another setting.</summary>
+        internal static string Describe(ConfigEntryBase entry)
         {
             string text = entry.Description?.Description ?? "";
-            text += $"\n\nDefault: {Value(entry.DefaultValue)}";
-            string options = Options(entry);
-            if (entry.Description?.AcceptableValues != null)
-                text += $"    Range: {options}";
-            else if (entry.SettingType == typeof(Color))
-                text += "    (hex RRGGBBAA, AA = opacity)";
-            return text.Trim();
+            string when = MetaOf(entry)?.WhenText;
+            return string.IsNullOrEmpty(when) ? text : $"{text} Used when {when}.";
         }
 
         /// <summary>RRGGBBAA, the form BepInEx writes colors in.</summary>

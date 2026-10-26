@@ -17,6 +17,7 @@ namespace KroolWorldUI.Features
         internal static ConfigEntry<bool> Enabled;
         internal static ConfigEntry<float> Size;
         internal static ConfigEntry<bool> MakeRoomForCompass;
+        internal static ConfigEntry<int> PerRow;
 
         private const string Section = "Buffs";
         private const float CompassGap = 12f;   // HUD pixels kept clear left of the buffs
@@ -30,13 +31,16 @@ namespace KroolWorldUI.Features
             Enabled = config.Bind(Section, "Enabled", true,
                 "Resize the buff icons at the top right and keep them clear of the compass.");
             Size = config.Bind(Section, "Size", 0.9f,
-                new ConfigDescription("Buff icon size; 1 is the game's own (large) size.",
-                    new AcceptableValueRange<float>(0.5f, 1f)));
+                ConfigText.Desc("Buff icon size. 1 is the game's size.", new AcceptableValueRange<float>(0.5f, 1f), step: 0.05f));
             // 0.12.0 shipped 0.7; anyone still on it moves to the new default.
             if (Mathf.Abs(Size.Value - 0.7f) < 0.001f)
                 Size.Value = 0.9f;
+            PerRow = config.Bind(Section, "PerRow", 0,
+                ConfigText.Desc("Most buffs in one row before a new row starts. 0 = the game's 7.",
+                    new AcceptableValueRange<int>(0, 12)));
             MakeRoomForCompass = config.Bind(Section, "MakeRoomForCompass", true,
-                "Start a new row of buffs before they reach the compass, instead of running under it.");
+                ConfigText.Desc("Start a new row before the buffs reach the compass.",
+                    when: () => Compass.Enabled.Value, whenText: "the compass is on"));
         }
 
         [HarmonyPatch(typeof(Hud), "UpdateStatusEffects")]
@@ -65,7 +69,7 @@ namespace KroolWorldUI.Features
             bool on = Enabled.Value;
             float scale = on ? Size.Value : 1f;
             float spacing = hud.m_statusEffectSpacing * scale;
-            int perRow = Mathf.Max(1, hud.m_effectsPerRow);
+            int perRow = Mathf.Max(1, on && PerRow.Value > 0 ? PerRow.Value : hud.m_effectsPerRow);
             if (on && MakeRoomForCompass.Value)
                 perRow = Mathf.Min(perRow, FitBesideCompass(hud, spacing, scale));
 

@@ -1,0 +1,55 @@
+# Krool World UI: Swedish (Svenska) on-screen text.
+
+dir_n = N
+dir_ne = NO
+dir_e = O
+dir_se = SO
+dir_s = S
+dir_sw = SV
+dir_w = V
+dir_nw = NV
+unit_m = $1 m
+unit_km = $1 km
+compass_more = +$1 till
+
+dusk_in = Skymning om $1
+dawn_in = Gryning om $1
+
+character_save_in = Karaktären sparas om
+saving = Sparar...
+
+rested_in = Utvilad om $1
+seconds_short = $1s
+
+enough_for = Räcker till $1
+not_enough = Inte nog
+
+food_running_low = Tar snart slut
+food_can_eat_again = Kan äta igen
+food_can_eat = kan ätas
+food_none = Ingen mat
+food_slot_empty = Matplats tom ($1)
+dismiss_hint = [$1] dölj
+
+xp_gain = +$1% $2
+
+repaired_items = Reparerade $1 föremål
+
+win_search = Sök inställningar
+win_expand_all = Fäll ut alla
+win_collapse_all = Fäll ihop alla
+win_no_results = Inga inställningar matchar.
+win_preview = Förhandsvisa på HUD
+win_preview_ingame = Förhandsvisa på HUD (bara i spelet)
+win_preview_desc = Visar alla element samtidigt med exempelvärden, så att du ser var de hamnar medan du justerar. Under spel visas varje del bara när den gäller.
+win_describe_hint = Peka på en inställning, eller välj den, för att se vad den gör.
+win_key_hint = Pilar flyttar och ändrar, Enter väljer, Esc stänger
+win_pad_hint = A välj, B stäng, X förhandsvisa, Y återställ, LB/RB avsnitt
+win_changed = $1 ändrade
+win_reset = Återställ
+win_reset_all = Återställ alla
+win_press_key = Tryck på en tangent. Esc avbryter, Backsteg rensar.
+win_none = Ingen
+win_default = Standard: $1
+win_range = Intervall: $1
+win_options = Alternativ: $1

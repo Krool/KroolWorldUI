@@ -1,0 +1,55 @@
+# Krool World UI: Korean on-screen text. Translated from English.txt.
+
+dir_n = 북
+dir_ne = 북동
+dir_e = 동
+dir_se = 남동
+dir_s = 남
+dir_sw = 남서
+dir_w = 서
+dir_nw = 북서
+unit_m = $1 m
+unit_km = $1 km
+compass_more = +$1개
+
+dusk_in = 해질녘까지 $1
+dawn_in = 새벽까지 $1
+
+character_save_in = 캐릭터 저장
+saving = 저장 중...
+
+rested_in = $1 후 휴식함
+seconds_short = $1초
+
+enough_for = $1개 가능
+not_enough = 부족
+
+food_running_low = 곧 소진
+food_can_eat_again = 다시 먹기 가능
+food_can_eat = 먹기 가능
+food_none = 식량 없음
+food_slot_empty = 식량 칸 비어 있음 ($1)
+dismiss_hint = [$1] 숨기기
+
+xp_gain = +$1% $2
+
+repaired_items = 아이템 $1개 수리 완료
+
+win_search = 설정 검색
+win_expand_all = 모두 펼치기
+win_collapse_all = 모두 접기
+win_no_results = 일치하는 설정이 없습니다.
+win_preview = HUD에서 미리보기
+win_preview_ingame = HUD에서 미리보기 (게임 중에만)
+win_preview_desc = 모든 요소를 예시 값으로 한꺼번에 보여 주므로, 조정하면서 각 요소의 위치를 확인할 수 있습니다. 플레이 중에는 해당될 때만 표시됩니다.
+win_describe_hint = 설정을 가리키거나 선택하면 설명이 표시됩니다.
+win_key_hint = 방향키로 이동 및 변경, Enter로 선택, Esc로 닫기
+win_pad_hint = A 선택, B 닫기, X 미리보기, Y 초기화, LB/RB 섹션
+win_changed = $1개 변경됨
+win_reset = 초기화
+win_reset_all = 모두 초기화
+win_press_key = 키를 누르세요. Esc는 취소, Backspace는 지우기.
+win_none = 없음
+win_default = 기본값: $1
+win_range = 범위: $1
+win_options = 선택지: $1

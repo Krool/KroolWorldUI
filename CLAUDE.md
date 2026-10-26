@@ -52,12 +52,27 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
 ## Layout
 
 - `src/KroolWorldUI/Plugin.cs` - entry point; each feature exposes `BindConfig` and Harmony patches.
-- `src/KroolWorldUI/SettingsWindow.cs` - built-in F7 settings window (IMGUI). It renders every
-  config entry generically in collapsible sections, so a new feature only needs `config.Bind` (with
-  an `AcceptableValueRange` for a slider) plus a line in `Plugin.BindAll`. A section's `Enabled`
-  bool becomes its header On/Off; the description is the hover tooltip, so write it for players and
-  use the window's spaced names ("Near Limit Percent"). Tag window-only state with
-  `ConfigText.Hidden.Tag`. No dependency on ConfigurationManager (Azumatt's is deprecated).
+- `src/KroolWorldUI/SettingsWindow.cs` - built-in F7 settings window (IMGUI; also opened from the
+  pause menu by `MenuButton.cs`). It renders every config entry generically in collapsible
+  sections, in Bind order, so a new feature only needs `config.Bind` (with an
+  `AcceptableValueRange` for a slider) plus a line in `Plugin.BindAll`. Use `ConfigText.Desc(...)`
+  for the extras: `group` (sub-heading), `when`/`whenText` (greyed out unless; keep whenText in
+  setting-name words, it is shown and translated), `step`. A section's `Enabled` bool becomes its
+  header On/Off; the description shows in the window's description panel, so write it for players
+  and use the window's spaced names ("Near Limit Percent"). Tag window-only state with
+  `ConfigText.Hidden.Tag`. Sizes go through `P()` (no GUI.matrix scaling, so text stays sharp).
+  Mouse, keyboard and controller (ZInput) all drive one focus model. No ConfigurationManager.
+- `src/KroolWorldUI/L10n.cs` + `Translations/` - every player-visible string goes through
+  `L10n.T(key, args)` (HUD and window chrome, keys in `English.txt`), `L10n.Game(token, fallback)`
+  for words the game already translates, or `L10n.W` (settings window text, keys generated into
+  `English.settings.txt` by SettingsDoc on every build; never hand-edit it). Other languages are
+  `<ValheimLanguage>.txt` / `.settings.txt` with the same keys; a missing key falls back to English.
+  **When you change English text, update every language's line for that key in the same change**
+  (or delete it there so it falls back), and add new keys to all languages. Numbers on the HUD use
+  `L10n.Num` (the language's decimal separator). HUD text boxes must size to their text.
+- `General.cs` - the General section (settings key, window scale, hide key, volume, colorblind
+  colors) and `Migrate()`: bump `CurrentConfigVersion` and add a step for any setting whose meaning
+  changes, instead of breaking saved configs.
 - `tools/SettingsDoc` - rewrites the README settings tables (between the `settings:begin/end`
   markers) from `Plugin.BindAll`; `build.ps1` runs it via `scripts/settings-doc.ps1`, and
   `release.ps1` commits README.md. Never hand-edit those tables.

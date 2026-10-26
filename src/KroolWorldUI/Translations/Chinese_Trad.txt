@@ -1,0 +1,55 @@
+# Krool World UI: Chinese (Traditional) on-screen text. Translated from English.txt.
+
+dir_n = 北
+dir_ne = 東北
+dir_e = 東
+dir_se = 東南
+dir_s = 南
+dir_sw = 西南
+dir_w = 西
+dir_nw = 西北
+unit_m = $1 m
+unit_km = $1 km
+compass_more = +$1 個
+
+dusk_in = 距黃昏 $1
+dawn_in = 距黎明 $1
+
+character_save_in = 角色儲存倒數：
+saving = 儲存中…
+
+rested_in = $1 後精神煥發
+seconds_short = $1秒
+
+enough_for = 夠建 $1 個
+not_enough = 不足
+
+food_running_low = 即將耗盡
+food_can_eat_again = 可再次進食
+food_can_eat = 可進食
+food_none = 沒有食物
+food_slot_empty = 食物欄位空缺（$1）
+dismiss_hint = [$1] 隱藏
+
+xp_gain = +$1% $2
+
+repaired_items = 已修理 $1 件物品
+
+win_search = 搜尋設定
+win_expand_all = 全部展開
+win_collapse_all = 全部收合
+win_no_results = 沒有符合的設定。
+win_preview = 在HUD上預覽
+win_preview_ingame = 在HUD上預覽（僅限遊戲中）
+win_preview_desc = 以範例數值同時顯示所有元素，方便調整時查看各自的位置。遊戲中每個元素只在適用時顯示。
+win_describe_hint = 指向或選取某項設定，查看其作用。
+win_key_hint = 方向鍵移動和調整，Enter 選取，Esc 關閉
+win_pad_hint = A 選取，B 關閉，X 預覽，Y 重設，LB/RB 切換分區
+win_changed = 已變更 $1 項
+win_reset = 重設
+win_reset_all = 全部重設
+win_press_key = 請按一個鍵。Esc 取消，Backspace 清除。
+win_none = 無
+win_default = 預設：$1
+win_range = 範圍：$1
+win_options = 選項：$1

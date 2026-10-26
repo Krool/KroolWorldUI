@@ -1,0 +1,68 @@
+# Krool World UI: on-screen text. The source every other language is translated from.
+# key = text. $1, $2 are filled in by the mod (a number, a name, a key). Rich text tags like
+# <color> are added around the $ values by the code, so keep each $ value as one word.
+# Keep translations short: most of these sit in small HUD boxes. A line left out falls back
+# to English.
+
+# Compass. Directions are abbreviations, one to three letters.
+dir_n = N
+dir_ne = NE
+dir_e = E
+dir_se = SE
+dir_s = S
+dir_sw = SW
+dir_w = W
+dir_nw = NW
+unit_m = $1 m
+unit_km = $1 km
+compass_more = +$1 more
+
+# Day/night bar. $1 is a time like 6:40.
+dusk_in = Dusk in $1
+dawn_in = Dawn in $1
+
+# Save countdown. "World save in" comes from the game itself.
+character_save_in = Character save in
+saving = Saving...
+
+# Rested countdown. $1 is the time, made from seconds_short ("14s").
+rested_in = Rested in $1
+seconds_short = $1s
+
+# Build materials. $1 is a number of pieces.
+enough_for = Enough for $1
+not_enough = Not enough
+
+# Food reminders.
+food_running_low = Running low
+food_can_eat_again = Can eat again
+food_can_eat = can eat
+food_none = No food
+food_slot_empty = Food slot empty ($1)
+dismiss_hint = [$1] hide
+
+# Skill XP floating text. $1 is the gain (0.8), $2 the skill name.
+xp_gain = +$1% $2
+
+# Auto repair. $1 is a number of items (2 or more).
+repaired_items = Repaired $1 items
+
+# Settings window.
+win_search = Search settings
+win_expand_all = Expand all
+win_collapse_all = Collapse all
+win_no_results = No settings match.
+win_preview = Preview on HUD
+win_preview_ingame = Preview on HUD (in game only)
+win_preview_desc = Shows every element at once with sample values, so you can see where each one sits while you adjust it. In play, each one only shows when it applies.
+win_describe_hint = Point at a setting, or select it, to see what it does.
+win_key_hint = Arrows move and change, Enter selects, Esc closes
+win_pad_hint = A select, B close, X preview, Y reset, LB/RB section
+win_changed = $1 changed
+win_reset = Reset
+win_reset_all = Reset all
+win_press_key = Press a key. Esc cancels, Backspace clears.
+win_none = None
+win_default = Default: $1
+win_range = Range: $1
+win_options = Options: $1

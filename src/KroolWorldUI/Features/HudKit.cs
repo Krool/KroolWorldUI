@@ -12,9 +12,67 @@ namespace KroolWorldUI.Features
     {
         internal static readonly Color Parchment = new Color(0.92f, 0.87f, 0.78f, 1f);
         internal static readonly Color Gold = new Color(0.87f, 0.70f, 0.36f, 1f);
-        internal static readonly Color Warn = new Color(1f, 0.69f, 0.25f, 1f);
-        internal static readonly Color Ready = new Color(0.62f, 0.86f, 0.45f, 1f);
         internal static readonly Color Muted = new Color(0.72f, 0.66f, 0.56f, 1f);
+
+        // Warning and "ready" colors. The colorblind set (General > Colorblind Friendly) swaps the
+        // orange/green pair, which deuteranopes and protanopes confuse with the gold, for
+        // Okabe-Ito vermillion and sky blue.
+        private static readonly Color WarnNormal = new Color(1f, 0.69f, 0.25f, 1f);
+        private static readonly Color ReadyNormal = new Color(0.62f, 0.86f, 0.45f, 1f);
+        private static readonly Color BadNormal = new Color(0.95f, 0.3f, 0.22f, 1f);
+        private static readonly Color WarnSafe = new Color(0.94f, 0.47f, 0.26f, 1f);
+        private static readonly Color ReadySafe = new Color(0.45f, 0.75f, 0.98f, 1f);
+        private static readonly Color BadSafe = new Color(0.98f, 0.38f, 0.75f, 1f);
+
+        internal static Color Warn => General.Colorblind ? WarnSafe : WarnNormal;
+        internal static Color Ready => General.Colorblind ? ReadySafe : ReadyNormal;
+        internal static Color Bad => General.Colorblind ? BadSafe : BadNormal;
+
+        internal static string Hex(Color c) => ColorUtility.ToHtmlStringRGB(c);
+
+        /// <summary>
+        /// Whether a feature's element may draw at all: off while General > Hide Key has hidden
+        /// the mod's HUD, and while the game's own HUD is hidden (Ctrl+F3 or the photo mode).
+        /// </summary>
+        internal static bool Allowed => !General.HiddenByKey && !Hud.IsUserHidden();
+
+        /// <summary>Width that fits <paramref name="text"/> at the text's current size, plus padding, at least min.</summary>
+        internal static float FitWidth(TMP_Text text, string sample, float min, float pad) =>
+            Mathf.Max(min, Mathf.Ceil(text.GetPreferredValues(sample).x) + pad);
+
+        /// <summary>
+        /// "This feature broke; stop trying" for one HUD. A HUD is built per session (it is rebuilt
+        /// after each logout), so a feature that failed once gets a fresh try next session instead
+        /// of staying off until the game restarts.
+        /// </summary>
+        internal sealed class FailFlag
+        {
+            private bool _set;
+            private object _hud; // object, not Hud: SettingsDoc loads these types outside the game
+
+            public bool IsSet
+            {
+                get
+                {
+                    if (_set && !ReferenceEquals(_hud, Hud.instance))
+                        _set = false;
+                    return _set;
+                }
+            }
+
+            public void Set()
+            {
+                _set = true;
+                _hud = Hud.instance;
+            }
+        }
+
+        /// <summary>Destroys a runtime texture or material; Unity does not free them with their objects.</summary>
+        internal static void Free(Object o)
+        {
+            if (o != null)
+                Object.Destroy(o);
+        }
 
         /// <summary>Dark translucent panel with a thin gold frame, stretched over its parent.</summary>
         internal static Image ToastBackground(Transform parent)

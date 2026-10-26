@@ -14,6 +14,7 @@ namespace KroolWorldUI.Features
     internal static class RestedCountdown
     {
         internal static ConfigEntry<bool> Enabled;
+        internal static ConfigEntry<float> TextSize;
         internal static ConfigEntry<bool> Sound;
         internal static ConfigEntry<float> SoundVolume;
 
@@ -22,12 +23,13 @@ namespace KroolWorldUI.Features
         internal static void BindConfig(ConfigFile config)
         {
             Enabled = config.Bind(Section, "Enabled", true,
-                "While you are resting (sitting or under a roof, near a fire), counts down the seconds until " +
-                "you become Rested, above the Resting buff icon.");
+                "While you rest by a fire, count down the seconds until you are Rested, above the Resting icon.");
+            TextSize = config.Bind(Section, "TextSize", 15f,
+                ConfigText.Desc("Font size of the countdown.", new AcceptableValueRange<float>(11f, 26f)));
             Sound = config.Bind(Section, "Sound", true, "A soft chime when you become Rested.");
             SoundVolume = config.Bind(Section, "SoundVolume", 0.35f,
-                new ConfigDescription("Chime volume (also follows the game's sound settings).",
-                    new AcceptableValueRange<float>(0.05f, 1f)));
+                ConfigText.Desc("Chime volume, on top of the game's own volume.", new AcceptableValueRange<float>(0.05f, 1f),
+                    when: () => Sound.Value, whenText: "Sound is on", step: 0.05f));
         }
 
         [HarmonyPatch(typeof(Hud), "Update")]
@@ -47,7 +49,7 @@ namespace KroolWorldUI.Features
         private const float PreviewGap = 2f;
 
         private static RestedCountdownHud _instance;
-        private static bool _failed;
+        private static readonly HudKit.FailFlag _failed = new HudKit.FailFlag();
         private static AudioClip _chime;
 
         // Built on first use, not in a static initializer: tools\SettingsDoc runs BindConfig outside the game.
@@ -65,7 +67,7 @@ namespace KroolWorldUI.Features
 
         internal static void Ensure()
         {
-            if (_instance != null || _failed)
+            if (_instance != null || _failed.IsSet)
                 return;
             var hud = Hud.instance;
             if (hud == null || hud.m_statusEffectListRoot == null || hud.m_statusEffectTemplate == null ||
@@ -95,7 +97,7 @@ namespace KroolWorldUI.Features
             }
             catch (System.Exception e)
             {
-                _failed = true;
+                _failed.Set();
                 Plugin.Log.LogError($"Rested countdown disabled for this session: {e}");
             }
         }
@@ -110,7 +112,7 @@ namespace KroolWorldUI.Features
         internal static void Preview(bool on)
         {
             var c = _instance;
-            if (c == null || _failed || c._previewing == on)
+            if (c == null || _failed.IsSet || c._previewing == on)
                 return;
             c._previewing = on;
             c._previewStart = Time.unscaledTime;
@@ -119,7 +121,7 @@ namespace KroolWorldUI.Features
 
         private void Update()
         {
-            if (_failed)
+            if (_failed.IsSet)
                 return;
             try
             {
@@ -127,7 +129,7 @@ namespace KroolWorldUI.Features
             }
             catch (System.Exception e)
             {
-                _failed = true;
+                _failed.Set();
                 Plugin.Log.LogError($"Rested countdown disabled for this session after an error: {e}");
                 Destroy(gameObject);
             }
@@ -137,7 +139,7 @@ namespace KroolWorldUI.Features
         {
             var player = Player.m_localPlayer;
             var hud = Hud.instance;
-            if (!RestedCountdown.Enabled.Value || player == null || hud == null)
+            if (!RestedCountdown.Enabled.Value || !HudKit.Allowed || player == null || hud == null)
             {
                 _group.alpha = 0f;
                 _counting = false;
@@ -167,7 +169,17 @@ namespace KroolWorldUI.Features
             {
                 _counting = true;
                 int secs = Mathf.CeilToInt(remaining);
-                _text.text = $"<size=85%>Rested in</size> <color=#{ColorUtility.ToHtmlStringRGB(HudKit.Gold)}>{secs}s</color>";
+                string text = $"<size=85%>{L10n.T("rested_in", $"<color=#{HudKit.Hex(HudKit.Gold)}>{L10n.T("seconds_short", secs.ToString())}</color>")}</size>";
+                if (_text.text != text)
+                {
+                    _text.text = text;
+                    _rect.sizeDelta = new Vector2(HudKit.FitWidth(_text, text, 40f, 6f), _rect.sizeDelta.y);
+                }
+                if (!Mathf.Approximately(_text.fontSize, RestedCountdown.TextSize.Value))
+                {
+                    _text.fontSize = RestedCountdown.TextSize.Value;
+                    _rect.sizeDelta = new Vector2(HudKit.FitWidth(_text, text, 40f, 6f), _text.fontSize + 6f);
+                }
             }
             else if (_counting)
             {
@@ -210,6 +222,14 @@ namespace KroolWorldUI.Features
             if (label != null && label.gameObject.activeInHierarchy && !string.IsNullOrEmpty(label.text))
                 top = Mathf.Max(top, label.transform.TransformPoint(label.bounds.max).y);
             float gap = 2f * _rect.lossyScale.y;
+            // Keep the whole text on screen when the Resting icon is the rightmost one.
+            var screen = hud.m_rootObject.transform as RectTransform;
+            if (screen != null)
+            {
+                screen.GetWorldCorners(Corners);
+                float half = _rect.rect.width * 0.5f * _rect.lossyScale.x;
+                x = Mathf.Min(x, Corners[2].x - half - 4f * _rect.lossyScale.x);
+            }
             _rect.position = new Vector3(x, top + gap, _rect.position.z);
         }
 
@@ -220,7 +240,7 @@ namespace KroolWorldUI.Features
             if (_chime == null)
                 _chime = HudKit.Tone("KroolWorldUI_RestedChime", 0.6f,
                     new HudKit.Note(523.25f, 0f, 0.5f, 7f), new HudKit.Note(659.25f, 0.12f, 0.45f, 7f));
-            _audio.PlayOneShot(_chime, RestedCountdown.SoundVolume.Value);
+            _audio.PlayOneShot(_chime, General.Vol(RestedCountdown.SoundVolume.Value));
         }
     }
 }

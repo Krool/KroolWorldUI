@@ -19,8 +19,11 @@ namespace KroolWorldUI.Features
     {
         internal static ConfigEntry<bool> Enabled;
         internal static ConfigEntry<int> Seconds;
+        internal static ConfigEntry<bool> CharacterSave;
         internal static ConfigEntry<bool> Sound;
         internal static ConfigEntry<float> SoundVolume;
+        internal static ConfigEntry<float> Size;
+        internal static ConfigEntry<float> Opacity;
         internal static ConfigEntry<float> AnchorX;
         internal static ConfigEntry<float> AnchorY;
 
@@ -30,21 +33,31 @@ namespace KroolWorldUI.Features
         internal static void BindConfig(ConfigFile config)
         {
             Enabled = config.Bind(Section, "Enabled", true,
-                "Counts down the last seconds before the auto-save, so its lag spike does not catch you " +
-                "mid-fight. Works in single player, as host, and on a dedicated server.");
+                "Count down to the auto-save, so its lag spike does not catch you mid-fight.");
             Seconds = config.Bind(Section, "Seconds", 5,
-                new ConfigDescription("How many seconds before the save the countdown starts.",
-                    new AcceptableValueRange<int>(3, 30)));
-            Sound = config.Bind(Section, "Sound", true, "A soft tick each second of the countdown.");
+                ConfigText.Desc("Seconds before the save that the countdown starts.", new AcceptableValueRange<int>(3, 30)));
+            CharacterSave = config.Bind(Section, "CharacterSave", true,
+                "On a server, also count down to your own character save, which has a smaller hitch.");
+
+            const string sound = "Sound";
+            Sound = config.Bind(Section, "Sound", true, ConfigText.Desc("A soft tick each second.", group: sound));
             SoundVolume = config.Bind(Section, "SoundVolume", 0.35f,
-                new ConfigDescription("Tick volume (also follows the game's sound settings).",
-                    new AcceptableValueRange<float>(0.05f, 1f)));
+                ConfigText.Desc("Tick volume, on top of the game's own volume.", new AcceptableValueRange<float>(0.05f, 1f),
+                    sound, () => Sound.Value, "Sound is on", 0.05f));
+
+            const string look = "Look";
+            Size = config.Bind(Section, "Size", 1f,
+                ConfigText.Desc("1 is the normal size.", new AcceptableValueRange<float>(0.75f, 1.5f), look, step: 0.05f));
+            Opacity = config.Bind(Section, "Opacity", 1f,
+                ConfigText.Desc("1 is solid; lower shows the game through it.", new AcceptableValueRange<float>(0.2f, 1f), look, step: 0.05f));
+
+            const string placement = "Placement";
             AnchorX = config.Bind(Section, "AnchorX", 0.5f,
-                new ConfigDescription("Horizontal position of the countdown's center (0 = left, 1 = right).",
-                    new AcceptableValueRange<float>(0f, 1f)));
+                ConfigText.Desc("Center of the box. 0 is the left of the screen, 1 the right.",
+                    new AcceptableValueRange<float>(0f, 1f), placement, step: 0.01f));
             AnchorY = config.Bind(Section, "AnchorY", 0.72f,
-                new ConfigDescription("Vertical position of the countdown's center (0 = bottom, 1 = top).",
-                    new AcceptableValueRange<float>(0f, 1f)));
+                ConfigText.Desc("Center of the box. 0 is the bottom of the screen, 1 the top.",
+                    new AcceptableValueRange<float>(0f, 1f), placement, step: 0.01f));
         }
 
         [HarmonyPatch(typeof(Hud), "Update")]
@@ -66,7 +79,8 @@ namespace KroolWorldUI.Features
             {
                 try
                 {
-                    if (text == null || !text.StartsWith(WarningToken))
+                    // Exactly the warning: "$msg_worldsavewarningonserver" (low disk space) shares the prefix.
+                    if (text == null || !(text == WarningToken || text.StartsWith(WarningToken + " ")))
                         return;
                     string rest = text.Substring(WarningToken.Length).Trim().TrimEnd('s');
                     if (!float.TryParse(rest, NumberStyles.Float, CultureInfo.InvariantCulture, out float secs))
@@ -92,7 +106,7 @@ namespace KroolWorldUI.Features
         internal static float ServerSaveAt;
 
         private static SaveCountdownHud _instance;
-        private static bool _failed;
+        private static readonly HudKit.FailFlag _failed = new HudKit.FailFlag();
         private static AudioClip _tick, _lastTick;
 
         private RectTransform _rect;
@@ -106,13 +120,14 @@ namespace KroolWorldUI.Features
 
         internal static void Ensure()
         {
-            if (_instance != null || _failed)
+            if (_instance != null || _failed.IsSet)
                 return;
             var hud = Hud.instance;
             if (hud == null || hud.m_rootObject == null || hud.m_healthText == null || Player.m_localPlayer == null)
                 return;
             try
             {
+                ServerSaveAt = 0f; // a warning from the last world must not carry into this one
                 var go = new GameObject("KroolWorldUI_SaveCountdown", typeof(RectTransform), typeof(CanvasGroup));
                 go.transform.SetParent(hud.m_rootObject.transform, false);
                 var c = go.AddComponent<SaveCountdownHud>();
@@ -131,7 +146,7 @@ namespace KroolWorldUI.Features
             }
             catch (System.Exception e)
             {
-                _failed = true;
+                _failed.Set();
                 Plugin.Log.LogError($"Save countdown disabled for this session: {e}");
             }
         }
@@ -146,7 +161,7 @@ namespace KroolWorldUI.Features
         internal static void Preview(bool on)
         {
             var c = _instance;
-            if (c == null || _failed || c._previewing == on)
+            if (c == null || _failed.IsSet || c._previewing == on)
                 return;
             c._previewing = on;
             c._previewStart = Time.unscaledTime;
@@ -156,7 +171,7 @@ namespace KroolWorldUI.Features
 
         private void Update()
         {
-            if (_failed)
+            if (_failed.IsSet)
                 return;
             try
             {
@@ -164,7 +179,7 @@ namespace KroolWorldUI.Features
             }
             catch (System.Exception e)
             {
-                _failed = true;
+                _failed.Set();
                 Plugin.Log.LogError($"Save countdown disabled for this session after an error: {e}");
                 Destroy(gameObject);
             }
@@ -172,7 +187,7 @@ namespace KroolWorldUI.Features
 
         private void Tick()
         {
-            if (!SaveCountdown.Enabled.Value || Player.m_localPlayer == null)
+            if (!SaveCountdown.Enabled.Value || !HudKit.Allowed || Player.m_localPlayer == null)
             {
                 _group.alpha = 0f;
                 _shown = -1;
@@ -189,7 +204,7 @@ namespace KroolWorldUI.Features
                 float cycle = lead + PreviewSaving;
                 float t = now - _previewStart;
                 remaining = lead - t % cycle;
-                label = "World save";
+                label = WorldLabel;
                 sound &= t < cycle;
             }
             else
@@ -207,8 +222,8 @@ namespace KroolWorldUI.Features
                         PlayTick(secs == 1);
                 }
                 var color = secs <= 2 ? HudKit.Warn : HudKit.Gold;
-                _text.text = $"<size=75%><color=#{ColorUtility.ToHtmlStringRGB(HudKit.Parchment)}>{label} in</color></size>  " +
-                             $"<color=#{ColorUtility.ToHtmlStringRGB(color)}><size=130%><mspace=0.6em>{secs}</mspace></size></color>";
+                SetText($"<size=75%><color=#{HudKit.Hex(HudKit.Parchment)}>{label}</color></size>  " +
+                        $"<color=#{HudKit.Hex(color)}><size=130%><mspace=0.6em>{secs}</mspace></size></color>");
                 _savingUntil = 0f;
             }
             else if (_shown > 0)
@@ -216,33 +231,52 @@ namespace KroolWorldUI.Features
                 // Hit zero, or the timer reset because the save just ran.
                 _shown = -1;
                 _savingUntil = now + (_previewing ? PreviewSaving : SavingSeconds);
-                _text.text = $"<color=#{ColorUtility.ToHtmlStringRGB(HudKit.Gold)}>Saving...</color>";
+                SetText($"<color=#{HudKit.Hex(HudKit.Gold)}>{L10n.T("saving")}</color>");
             }
 
             bool visible = _shown > 0 || now < _savingUntil;
-            _group.alpha = visible ? 1f : 0f;
+            _group.alpha = visible ? SaveCountdown.Opacity.Value : 0f;
             if (visible)
             {
                 var anchor = new Vector2(SaveCountdown.AnchorX.Value, SaveCountdown.AnchorY.Value);
                 _rect.anchorMin = anchor;
                 _rect.anchorMax = anchor;
                 _rect.anchoredPosition = Vector2.zero;
+                float size = SaveCountdown.Size.Value;
+                if (!Mathf.Approximately(_rect.localScale.x, size))
+                    _rect.localScale = new Vector3(size, size, 1f);
             }
+        }
+
+        // "World save in" is the game's own line, already in every language.
+        private static string WorldLabel => L10n.Game("$msg_worldsavewarning", "World save in");
+
+        /// <summary>Sets the text and widens the box to fit it (longer in some languages).</summary>
+        private void SetText(string text)
+        {
+            if (_text.text == text)
+                return;
+            _text.text = text;
+            _rect.sizeDelta = new Vector2(HudKit.FitWidth(_text, text, Width, 28f), Height);
         }
 
         /// <summary>Seconds to the sooner of the local save timer and the server's announced save.</summary>
         private static void NextSave(float now, out float remaining, out string label)
         {
             remaining = float.MaxValue;
-            label = "World save";
+            label = WorldLabel;
             var game = Game.instance;
             var net = ZNet.instance;
             if (game != null && net != null)
             {
-                remaining = Game.m_saveInterval - game.m_saveTimer;
                 // A client's own timer saves only its character; the server saves the world.
-                if (!net.IsServer())
-                    label = "Character save";
+                bool server = net.IsServer();
+                if (server || SaveCountdown.CharacterSave.Value)
+                {
+                    remaining = Game.m_saveInterval - game.m_saveTimer;
+                    if (!server)
+                        label = L10n.T("character_save_in");
+                }
             }
             if (ServerSaveAt > 0f)
             {
@@ -252,7 +286,7 @@ namespace KroolWorldUI.Features
                 else if (server <= remaining + 0.5f)
                 {
                     remaining = server;
-                    label = "World save";
+                    label = WorldLabel;
                 }
             }
         }
@@ -267,7 +301,7 @@ namespace KroolWorldUI.Features
             if (_lastTick == null)
                 _lastTick = HudKit.Tone("KroolWorldUI_SaveTickLast", 0.3f,
                     new HudKit.Note(784f, 0f, 0.12f, 28f), new HudKit.Note(1046.5f, 0.1f, 0.2f, 18f));
-            _audio.PlayOneShot(last ? _lastTick : _tick, SaveCountdown.SoundVolume.Value);
+            _audio.PlayOneShot(last ? _lastTick : _tick, General.Vol(SaveCountdown.SoundVolume.Value));
         }
     }
 }

@@ -1,0 +1,55 @@
+# Krool World UI: Serbian (srpski, latinica), on-screen text.
+
+dir_n = S
+dir_ne = SI
+dir_e = I
+dir_se = JI
+dir_s = J
+dir_sw = JZ
+dir_w = Z
+dir_nw = SZ
+unit_m = $1 m
+unit_km = $1 km
+compass_more = +$1 još
+
+dusk_in = Sumrak za $1
+dawn_in = Zora za $1
+
+character_save_in = Čuvanje karaktera za
+saving = Čuvanje...
+
+rested_in = Odmoran za $1
+seconds_short = $1 s
+
+enough_for = Dovoljno za $1
+not_enough = Nedovoljno
+
+food_running_low = Ističe
+food_can_eat_again = Možeš opet da jedeš
+food_can_eat = možeš da jedeš
+food_none = Nema hrane
+food_slot_empty = Prazan slot za hranu ($1)
+dismiss_hint = [$1] skloni
+
+xp_gain = +$1% $2
+
+repaired_items = Popravljeno predmeta: $1
+
+win_search = Pretraži podešavanja
+win_expand_all = Proširi sve
+win_collapse_all = Skupi sve
+win_no_results = Nema takvih podešavanja.
+win_preview = Pregled na HUD-u
+win_preview_ingame = Pregled na HUD-u (samo u igri)
+win_preview_desc = Prikazuje sve elemente odjednom sa primer vrednostima, da vidiš gde je koji dok ga podešavaš. U igri se svaki pojavi samo kad je potreban.
+win_describe_hint = Pokaži ili izaberi podešavanje da vidiš šta radi.
+win_key_hint = Strelice: izbor i promena, Enter: izaberi, Esc: zatvori
+win_pad_hint = A izaberi, B zatvori, X pregled, Y resetuj, LB/RB odeljak
+win_changed = Promenjeno: $1
+win_reset = Resetuj
+win_reset_all = Resetuj sve
+win_press_key = Pritisni taster. Esc otkazuje, Backspace briše.
+win_none = Ništa
+win_default = Podrazumevano: $1
+win_range = Opseg: $1
+win_options = Opcije: $1

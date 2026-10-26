@@ -15,74 +15,99 @@ namespace KroolWorldUI.Features
     internal static class Compass
     {
         internal enum DistanceMode { Focused, AllMarkers, Off }
+        internal enum NameMode { Focused, Always, Off }
 
         internal static ConfigEntry<bool> Enabled;
-        internal static ConfigEntry<float> Size;
-        internal static ConfigEntry<float> FieldOfView;
-        internal static ConfigEntry<float> Width;
-        internal static ConfigEntry<float> Opacity;
-        internal static ConfigEntry<float> OffsetY;
         internal static ConfigEntry<bool> Heading;
         internal static ConfigEntry<bool> HeadingDirection;
         internal static ConfigEntry<bool> FocusInfo;
         internal static ConfigEntry<DistanceMode> Distance;
         internal static ConfigEntry<bool> Friends;
+        internal static ConfigEntry<NameMode> FriendNames;
+        internal static ConfigEntry<bool> Pings;
         internal static ConfigEntry<bool> Pins;
         internal static ConfigEntry<bool> Bed;
         internal static ConfigEntry<bool> Tombstone;
         internal static ConfigEntry<bool> Bosses;
-        internal static ConfigEntry<bool> Pings;
         internal static ConfigEntry<float> PinRange;
-        internal static ConfigEntry<int> MaxMarkers;
         internal static ConfigEntry<float> HeightArrowMeters;
+        internal static ConfigEntry<int> MaxMarkers;
+        internal static ConfigEntry<float> Size;
+        internal static ConfigEntry<float> Width;
+        internal static ConfigEntry<float> FieldOfView;
+        internal static ConfigEntry<float> Opacity;
         internal static ConfigEntry<bool> Animations;
+        internal static ConfigEntry<float> OffsetX;
+        internal static ConfigEntry<float> OffsetY;
 
         private const string Section = "Compass";
 
         internal static void BindConfig(ConfigFile config)
         {
             Enabled = config.Bind(Section, "Enabled", true,
-                "A compass strip at the top of the screen with your heading, friends and nearby map pins.");
-            Size = config.Bind(Section, "Size", 1f,
-                new ConfigDescription("Overall size of the compass.", new AcceptableValueRange<float>(0.6f, 2f)));
-            FieldOfView = config.Bind(Section, "FieldOfView", 120f,
-                new ConfigDescription("How many degrees of the compass the strip shows. Narrower is easier to read.",
-                    new AcceptableValueRange<float>(60f, 240f)));
-            Width = config.Bind(Section, "Width", 520f,
-                new ConfigDescription("Strip width in HUD pixels.", new AcceptableValueRange<float>(300f, 1000f)));
-            Opacity = config.Bind(Section, "Opacity", 0.9f,
-                new ConfigDescription("Overall opacity of the compass.", new AcceptableValueRange<float>(0.2f, 1f)));
-            OffsetY = config.Bind(Section, "OffsetY", 0f,
-                new ConfigDescription("Nudge down from the top of the screen, in HUD pixels.",
-                    new AcceptableValueRange<float>(0f, 300f)));
+                "A compass strip at the top of the screen: your heading, friends and nearby map pins.");
+
+            const string readout = "Readout";
             Heading = config.Bind(Section, "Heading", true,
-                "Your exact heading under the center mark (0 = north, 90 = east), for call-outs.");
+                ConfigText.Desc("Your heading under the center mark, for call-outs. 0 is north, 90 east.", group: readout));
             HeadingDirection = config.Bind(Section, "HeadingDirection", false,
-                "Add the compass direction after the heading: 212 SW.");
+                ConfigText.Desc("Add the direction after the number: 212 SW.", group: readout,
+                    when: () => Heading.Value, whenText: "Heading is on"));
             FocusInfo = config.Bind(Section, "FocusInfo", true,
-                "Name of the marker you are looking at, beside the heading. Stacked markers show how many are there.");
+                ConfigText.Desc("The name of the marker you look at, beside the heading.", group: readout));
             Distance = config.Bind(Section, "Distance", DistanceMode.Focused,
-                "Focused: the distance of the marker you are looking at, beside its name. All Markers: also a small " +
-                "number under every marker. Off: no distances.");
+                ConfigText.Desc("Focused: the distance of the marker you look at. All Markers: a distance under " +
+                                "every marker. Off: none.", group: readout));
+
+            const string markers = "Markers";
             Friends = config.Bind(Section, "Friends", true,
-                "Other players, each in their own color. Held at the strip's edge when they are behind you. " +
-                "Far-away players show only if they are visible on the map.");
-            Pins = config.Bind(Section, "Pins", true, "Pins you placed on the map, bench pins included.");
-            Bed = config.Bind(Section, "Bed", true, "Your bed (spawn point).");
-            Tombstone = config.Bind(Section, "Tombstone", true, "Where you died.");
-            Bosses = config.Bind(Section, "Bosses", true, "Boss altars and other boss locations on your map.");
-            Pings = config.Bind(Section, "Pings", true, "Map pings from you and your friends, at any distance.");
+                ConfigText.Desc("Other players, each in their own color. Far-away players show if they share " +
+                                "their position on the map.", group: markers));
+            FriendNames = config.Bind(Section, "FriendNames", NameMode.Focused,
+                ConfigText.Desc("Focused: a friend's name when you look at them. Always: under every friend. Off: none.",
+                    group: markers, when: () => Friends.Value, whenText: "Friends is on"));
+            Pings = config.Bind(Section, "Pings", true,
+                ConfigText.Desc("Map pings from you and your friends, at any distance.", group: markers));
+            Pins = config.Bind(Section, "Pins", true,
+                ConfigText.Desc("Pins you placed on the map, bench pins included.", group: markers));
+            Bed = config.Bind(Section, "Bed", true, ConfigText.Desc("Your bed.", group: markers));
+            Tombstone = config.Bind(Section, "Tombstone", true, ConfigText.Desc("Where you died.", group: markers));
+            Bosses = config.Bind(Section, "Bosses", true,
+                ConfigText.Desc("Boss altars and other boss locations on your map.", group: markers));
             PinRange = config.Bind(Section, "PinRange", 300f,
-                new ConfigDescription("Pins farther than this (meters) are left off. Friends and pings ignore it.",
-                    new AcceptableValueRange<float>(50f, 2000f)));
-            MaxMarkers = config.Bind(Section, "MaxMarkers", 12,
-                new ConfigDescription("Most markers on the strip at once; pings and friends come first, then the nearest.",
-                    new AcceptableValueRange<int>(3, 24)));
+                ConfigText.Desc("Pins farther than this, in meters, are left off. Friends and pings ignore it.",
+                    new AcceptableValueRange<float>(50f, 2000f), markers,
+                    () => Pins.Value || Bed.Value || Tombstone.Value || Bosses.Value,
+                    "Pins, Bed, Tombstone or Bosses is on", 10f));
             HeightArrowMeters = config.Bind(Section, "HeightArrowMeters", 10f,
-                new ConfigDescription("A small up or down arrow on markers this far above or below you. 0 = off.",
-                    new AcceptableValueRange<float>(0f, 50f)));
+                ConfigText.Desc("An up or down arrow on markers this many meters above or below you. 0 = off.",
+                    new AcceptableValueRange<float>(0f, 50f), markers));
+            MaxMarkers = config.Bind(Section, "MaxMarkers", 12,
+                ConfigText.Desc("Most markers at once. Pings and friends first, then the nearest.",
+                    new AcceptableValueRange<int>(3, 24), markers));
+
+            const string look = "Look";
+            Size = config.Bind(Section, "Size", 1f,
+                ConfigText.Desc("Overall size. 1 is the normal size.", new AcceptableValueRange<float>(0.75f, 2f), look, step: 0.05f));
+            Width = config.Bind(Section, "Width", 520f,
+                ConfigText.Desc("Strip width in HUD pixels. Kept clear of the minimap on narrow screens.",
+                    new AcceptableValueRange<float>(300f, 1000f), look, step: 10f));
+            FieldOfView = config.Bind(Section, "FieldOfView", 120f,
+                ConfigText.Desc("Degrees the strip covers. Narrower is easier to read.",
+                    new AcceptableValueRange<float>(60f, 240f), look, step: 5f));
+            Opacity = config.Bind(Section, "Opacity", 0.9f,
+                ConfigText.Desc("1 is solid; lower shows the game through it.", new AcceptableValueRange<float>(0.2f, 1f), look, step: 0.05f));
             Animations = config.Bind(Section, "Animations", true,
-                "Markers ease in and out, grow when you look at them, and pings pulse. Off: plain fades only.");
+                ConfigText.Desc("Markers ease in, grow when you look at them, and pings pulse. Off: plain fades.",
+                    group: look));
+
+            const string placement = "Placement";
+            OffsetX = config.Bind(Section, "OffsetX", 0f,
+                ConfigText.Desc("Move left (-) or right (+), in HUD pixels.",
+                    new AcceptableValueRange<float>(-600f, 600f), placement));
+            OffsetY = config.Bind(Section, "OffsetY", 0f,
+                ConfigText.Desc("Move down (-) or up (+) from the top of the screen, in HUD pixels.",
+                    new AcceptableValueRange<float>(-400f, 0f), placement));
         }
 
         [HarmonyPatch(typeof(Hud), "Update")]
@@ -100,7 +125,8 @@ namespace KroolWorldUI.Features
     {
         // Layout, top to bottom, in HUD pixels at Size 1.
         private const float MarkerRowPlain = 24f;      // icons
-        private const float MarkerRowDistance = 34f;   // icons with a distance under each
+        private const float MarkerRowDistance = 34f;   // icons with one line under each (distance or name)
+        private const float MarkerRowTwoLines = 44f;   // icons with a name and a distance under each
         private const float LabelRow = 18f;      // N, NE, 15, 30...
         private const float TickRow = 7f;
         private const float PointerSize = 9f;
@@ -119,8 +145,9 @@ namespace KroolWorldUI.Features
         };
 
         private static CompassHud _instance;
-        private static bool _failed;
+        private static readonly HudKit.FailFlag _failed = new HudKit.FailFlag();
         private static Sprite _triangle, _ring;
+        private static Texture2D _band;
         private static AccessTools.FieldRef<Minimap, List<Minimap.PinData>> _pins;
         private static readonly Vector3[] Corners = new Vector3[4];
 
@@ -193,7 +220,7 @@ namespace KroolWorldUI.Features
 
         internal static void Ensure()
         {
-            if (_instance != null || _failed)
+            if (_instance != null || _failed.IsSet)
                 return;
             var hud = Hud.instance;
             if (hud == null || hud.m_rootObject == null || hud.m_healthText == null || Player.m_localPlayer == null)
@@ -204,7 +231,7 @@ namespace KroolWorldUI.Features
             }
             catch (System.Exception e)
             {
-                _failed = true;
+                _failed.Set();
                 Plugin.Log.LogError($"Compass disabled for this session: {e}");
             }
         }
@@ -240,7 +267,9 @@ namespace KroolWorldUI.Features
 
             c._strip.sizeDelta = new Vector2(0f, LabelRow + TickRow);
             var raw = band.GetComponent<RawImage>();
-            raw.texture = BandTexture();
+            if (_band == null)
+                _band = BandTexture();
+            raw.texture = _band;
             raw.raycastTarget = false;
 
             for (int i = 0; i < c._ticks.Length; i++)
@@ -264,12 +293,13 @@ namespace KroolWorldUI.Features
                 var rt = label.rectTransform;
                 rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0f);
                 rt.pivot = new Vector2(0.5f, 0f);
-                rt.sizeDelta = new Vector2(40f, LabelRow);
+                rt.sizeDelta = new Vector2(48f, LabelRow);
                 rt.anchoredPosition = new Vector2(0f, TickRow);
-                label.text = Name(deg);
                 c._labels[i] = label;
                 c._labelBase[i] = label.color.a;
             }
+            c.SetLabels();
+            L10n.Changed += c.SetLabels;
 
             // Center mark: a small triangle under the scale pointing up at the current heading.
             var pointer = HudKit.NewImage("pointer", go.transform, HudKit.Gold);
@@ -345,7 +375,7 @@ namespace KroolWorldUI.Features
             var drt = dist.rectTransform;
             drt.anchorMin = drt.anchorMax = new Vector2(0.5f, 0f);
             drt.pivot = new Vector2(0.5f, 1f);
-            drt.sizeDelta = new Vector2(48f, 11f);
+            drt.sizeDelta = new Vector2(90f, 11f);
             drt.anchoredPosition = new Vector2(0f, 0f);
 
             return new View { Rect = rt, Icon = icon, Ring = ring, Arrow = arrow, Chevron = chevron, Count = count, CountRect = crt, Dist = dist };
@@ -353,8 +383,18 @@ namespace KroolWorldUI.Features
 
         private void OnDestroy()
         {
+            L10n.Changed -= SetLabels;
             if (_instance == this)
                 _instance = null;
+        }
+
+        /// <summary>Scale labels in the game's language; again whenever it changes.</summary>
+        private void SetLabels()
+        {
+            for (int i = 0; i < _labels.Length; i++)
+                if (_labels[i] != null)
+                    _labels[i].text = Name(i * 15);
+            _headingWidth = 0f; // direction names changed width
         }
 
         /// <summary>
@@ -375,7 +415,7 @@ namespace KroolWorldUI.Features
 
         private void Update()
         {
-            if (_failed)
+            if (_failed.IsSet)
                 return;
             try
             {
@@ -383,7 +423,7 @@ namespace KroolWorldUI.Features
             }
             catch (System.Exception e)
             {
-                _failed = true;
+                _failed.Set();
                 Plugin.Log.LogError($"Compass disabled for this session after an error: {e}");
                 Destroy(gameObject);
             }
@@ -394,7 +434,7 @@ namespace KroolWorldUI.Features
             float dt = Mathf.Min(Time.unscaledDeltaTime, MaxDt);
             var player = Player.m_localPlayer;
             var cam = GameCamera.instance;
-            bool show = Compass.Enabled.Value && player != null && !player.IsDead() && cam != null
+            bool show = Compass.Enabled.Value && HudKit.Allowed && player != null && !player.IsDead() && cam != null
                         && !Minimap.IsOpen() && !Menu.IsVisible();
             _shown = Mathf.MoveTowards(_shown, show ? 1f : 0f, dt / 0.18f);
             _group.alpha = Compass.Opacity.Value * Ease(_shown);
@@ -402,11 +442,11 @@ namespace KroolWorldUI.Features
                 return;
 
             float size = Compass.Size.Value;
-            float width = Compass.Width.Value;
+            float width = FitWidth(Compass.Width.Value, size);
             float fov = Compass.FieldOfView.Value;
             float half = fov * 0.5f;
             float pxPerDeg = width / fov;
-            Layout(Compass.Distance.Value == Compass.DistanceMode.AllMarkers ? MarkerRowDistance : MarkerRowPlain, width);
+            Layout(MarkerRow, width);
             _rect.localScale = new Vector3(size, size, 1f);
 
             // Glide down under a boss bar or raid banner instead of jumping.
@@ -417,7 +457,7 @@ namespace KroolWorldUI.Features
                 _offsetSet = true;
             }
             _offset = Mathf.SmoothDamp(_offset, topTarget, ref _offsetVel, 0.15f, Mathf.Infinity, dt);
-            _rect.anchoredPosition = new Vector2(0f, _offset);
+            _rect.anchoredPosition = new Vector2(Compass.OffsetX.Value, _offset);
 
             var fwd = cam.transform.forward;
             float heading = Mathf.Repeat(Mathf.Atan2(fwd.x, fwd.z) * Mathf.Rad2Deg, 360f);
@@ -443,6 +483,42 @@ namespace KroolWorldUI.Features
         }
 
         private static float Ease(float t) => t * t * (3f - 2f * t);
+
+        /// <summary>Room for the icons and the labels under them: every distance, friends' names, or both.</summary>
+        private static float MarkerRow
+        {
+            get
+            {
+                bool dist = Compass.Distance.Value == Compass.DistanceMode.AllMarkers;
+                bool names = Compass.Friends.Value && Compass.FriendNames.Value == Compass.NameMode.Always;
+                return dist && names ? MarkerRowTwoLines : dist || names ? MarkerRowDistance : MarkerRowPlain;
+            }
+        }
+
+        /// <summary>
+        /// The configured width, narrowed so the strip never runs under the minimap or off a small
+        /// screen (Steam Deck, a high GUI scale): it keeps a minimap's width clear on each side.
+        /// </summary>
+        private float FitWidth(float width, float size)
+        {
+            var parent = _rect.parent as RectTransform;
+            if (parent == null || size <= 0f)
+                return width;
+            float clear = 0f;
+            var map = Minimap.instance;
+            if (map != null && map.m_smallRoot != null && map.m_smallRoot.activeInHierarchy)
+            {
+                ((RectTransform)map.m_smallRoot.transform).GetWorldCorners(Corners);
+                var leftLocal = parent.InverseTransformPoint(Corners[0]);
+                clear = Mathf.Max(0f, parent.rect.xMax - leftLocal.x) + 16f;
+            }
+            else
+            {
+                clear = 24f;
+            }
+            float room = (parent.rect.width - 2f * clear - 2f * Mathf.Abs(Compass.OffsetX.Value)) / size;
+            return Mathf.Max(200f, Mathf.Min(width, room));
+        }
 
         /// <summary>Positions a scale element by its angle from the heading, fading near the ends.</summary>
         private static void PlaceScale(Graphic g, float delta, float half, float pxPerDeg, float alpha, float scale)
@@ -487,7 +563,9 @@ namespace KroolWorldUI.Features
                     });
                 }
             }
-            if (map == null)
+            // A No Map world (or a player who turned their map off) takes map knowledge away: no
+            // pins, tombstone, bed, bosses or far players. The heading and friends in sight stay.
+            if (map == null || Game.m_noMap)
                 return;
 
             float range = Compass.PinRange.Value;
@@ -575,8 +653,9 @@ namespace KroolWorldUI.Features
             });
             int max = Compass.MaxMarkers.Value;
             bool allDistances = Compass.Distance.Value == Compass.DistanceMode.AllMarkers;
-            // Distance numbers are wider than icons; give them room so they never overlap.
-            float fold = allDistances ? 34f : IconSize * 0.75f;
+            bool friendNames = Compass.FriendNames.Value == Compass.NameMode.Always;
+            // Labels under markers are wider than icons; give them room so they never overlap.
+            float fold = friendNames ? 46f : allDistances ? 34f : IconSize * 0.75f;
             int kept = 0;
             for (int i = 0; i < _candidates.Count; i++)
             {
@@ -636,7 +715,9 @@ namespace KroolWorldUI.Features
 
                 float dy = t.Pos.y - origin.y;
                 bool up = dy > 0f;
-                float arrowTarget = heightArrow > 0f && Mathf.Abs(dy) >= heightArrow ? 1f : 0f;
+                // Dungeon interiors sit thousands of meters up; height means nothing across that line.
+                bool sameSpace = Character.InInterior(t.Pos) == Character.InInterior(origin);
+                float arrowTarget = heightArrow > 0f && sameSpace && Mathf.Abs(dy) >= heightArrow ? 1f : 0f;
                 v.ArrowAlpha = Mathf.MoveTowards(v.ArrowAlpha, arrowTarget, dt / 0.2f);
                 v.Arrow.rectTransform.localEulerAngles = new Vector3(0f, 0f, up ? 0f : 180f);
 
@@ -648,6 +729,12 @@ namespace KroolWorldUI.Features
                 crt.localEulerAngles = new Vector3(0f, 0f, right ? -90f : 90f);
 
                 string d = allDistances ? FormatDistance(t.Distance) : "";
+                bool named = friendNames && t.Friend;
+                if (named)
+                    d = d.Length > 0 ? $"{t.Name}\n{d}" : t.Name;
+                var distColor = named ? t.Color : HudKit.Muted;
+                if (v.Dist.color.r != distColor.r || v.Dist.color.g != distColor.g || v.Dist.color.b != distColor.b)
+                    v.Dist.color = new Color(distColor.r, distColor.g, distColor.b, v.Dist.color.a);
                 if (d != v.ShownDist)
                 {
                     v.ShownDist = d;
@@ -777,7 +864,11 @@ namespace KroolWorldUI.Features
             if (withDirection != _headingMeasuredWithDirection || _headingWidth <= 0f)
             {
                 _headingMeasuredWithDirection = withDirection;
-                _headingWidth = _heading.GetPreferredValues(withDirection ? "000 <size=80%>NW</size>" : "000").x;
+                _headingWidth = _heading.GetPreferredValues("000").x;
+                if (withDirection)
+                    foreach (var wind in WindKeys)
+                        _headingWidth = Mathf.Max(_headingWidth,
+                            _heading.GetPreferredValues($"000 <size=80%>{L10n.T(wind)}</size>").x);
             }
             float headingWidth = headingOn ? _headingWidth : 0f;
             var mode = Compass.Distance.Value;
@@ -792,9 +883,10 @@ namespace KroolWorldUI.Features
                         _focusAlpha = 0.35f;   // quick hand-off between two markers
                 }
                 string muted = ColorUtility.ToHtmlStringRGB(HudKit.Muted);
-                string name = Compass.FocusInfo.Value ? focus.Name : null;
+                bool nameOn = Compass.FocusInfo.Value && !(focus.Friend && Compass.FriendNames.Value == Compass.NameMode.Off);
+                string name = nameOn ? focus.Name : null;
                 string dist = mode != Compass.DistanceMode.Off ? FormatDistance(focus.Distance) : null;
-                string more = Compass.FocusInfo.Value && focus.Count > 1 ? $"+{focus.Count - 1} more" : null;
+                string more = Compass.FocusInfo.Value && focus.Count > 1 ? L10n.T("compass_more", (focus.Count - 1).ToString()) : null;
                 var parts = new List<string>(3);
                 if (!string.IsNullOrEmpty(name))
                     parts.Add(name);
@@ -829,7 +921,7 @@ namespace KroolWorldUI.Features
         /// </summary>
         private float TopOffset(float size)
         {
-            float y = -8f - Compass.OffsetY.Value;
+            float y = -8f + Compass.OffsetY.Value;
             var parent = _rect.parent as RectTransform;
             if (parent == null)
                 return y;
@@ -890,30 +982,17 @@ namespace KroolWorldUI.Features
         internal static string FormatDistance(float meters)
         {
             if (meters >= 1000f)
-                return (meters / 1000f).ToString("0.0", System.Globalization.CultureInfo.InvariantCulture) + " km";
+                return L10n.T("unit_km", L10n.Num(meters / 1000f, "0.0"));
             float step = meters >= 200f ? 10f : meters >= 50f ? 5f : 1f;
-            return $"{Mathf.RoundToInt(meters / step) * (int)step} m";
+            return L10n.T("unit_m", (Mathf.RoundToInt(meters / step) * (int)step).ToString());
         }
 
-        private static string Name(int deg)
-        {
-            switch (deg)
-            {
-                case 0: return "N";
-                case 45: return "NE";
-                case 90: return "E";
-                case 135: return "SE";
-                case 180: return "S";
-                case 225: return "SW";
-                case 270: return "W";
-                case 315: return "NW";
-                default: return deg.ToString();
-            }
-        }
+        private static readonly string[] WindKeys =
+            { "dir_n", "dir_ne", "dir_e", "dir_se", "dir_s", "dir_sw", "dir_w", "dir_nw" };
 
-        private static readonly string[] Winds = { "N", "NE", "E", "SE", "S", "SW", "W", "NW" };
+        private static string Name(int deg) => deg % 45 == 0 ? L10n.T(WindKeys[deg / 45]) : deg.ToString();
 
-        private static string Direction(int deg) => Winds[Mathf.RoundToInt(deg / 45f) % 8];
+        private static string Direction(int deg) => L10n.T(WindKeys[Mathf.RoundToInt(deg / 45f) % 8]);
 
         private static string PinName(Minimap.PinData pin)
         {

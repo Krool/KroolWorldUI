@@ -80,26 +80,27 @@ namespace KroolWorldUI.Features
         internal static void BindConfig(ConfigFile config)
         {
             Enabled = config.Bind(Section, "Enabled", true,
-                "Adds a map pin when you build a workbench, so you can find your camps again. " +
-                "This adds a pin to your map like you would by hand.");
+                "Add a map pin when you build a workbench, so you can find your camps again.");
             PinStations = config.Bind(Section, "PinStations", Stations.WorkbenchOnly,
-                "Workbench Only, or every crafting station (forge, stonecutter, artisan table, and so on).");
-            Icon = config.Bind(Section, "Icon", PinIcon.House, "Which map pin icon to use.");
-            Names = config.Bind(Section, "Names", Naming.RandomName,
-                "Random Name: a Norse-sounding name from Name Prefixes + Name Suffixes. " +
-                "Station Name: \"Workbench\". No Name: just the icon.");
+                "Workbench Only, or every crafting station: forge, stonecutter, artisan table and the rest.");
             SkipNearPinMeters = config.Bind(Section, "SkipNearPinMeters", 50f,
-                new ConfigDescription("No new pin if one is already on your map this close (meters), " +
-                                      "so a base gets one pin, not one per bench. 0 = always pin.",
-                    new AcceptableValueRange<float>(0f, 200f)));
+                ConfigText.Desc("No new pin if one of your pins is this close, in meters, so a base gets one pin. " +
+                                "0 = always pin.", new AcceptableValueRange<float>(0f, 200f), step: 5f));
             RemoveWithBench = config.Bind(Section, "RemoveWithBench", true,
-                "Taking the bench down with the hammer removes its pin, so a bench dropped to fix a boat " +
-                "leaves no trace. If another bench still stands within Skip Near Pin Meters, the pin moves to it instead.");
+                "Removing a bench with the hammer removes its pin, or moves it to another bench within Skip Near Pin Meters.");
             Announce = config.Bind(Section, "Announce", true, "Show the new pin's name in the top-left messages.");
+
+            const string pin = "Pin";
+            Icon = config.Bind(Section, "Icon", PinIcon.House, ConfigText.Desc("Map pin icon.", group: pin));
+            Names = config.Bind(Section, "Names", Naming.RandomName,
+                ConfigText.Desc("Random Name: a Norse-sounding name from the lists below. Station Name: \"Workbench\". " +
+                                "No Name: just the icon.", group: pin));
             NamePrefixes = config.Bind(Section, "NamePrefixes", DefaultPrefixes,
-                "First halves of random names, separated by commas.");
+                ConfigText.Desc("First halves of random names, separated by commas.", group: pin,
+                    when: () => Names.Value == Naming.RandomName, whenText: "Names is Random Name"));
             NameSuffixes = config.Bind(Section, "NameSuffixes", DefaultSuffixes,
-                "Second halves of random names, separated by commas.");
+                ConfigText.Desc("Second halves of random names, separated by commas.", group: pin,
+                    when: () => Names.Value == Naming.RandomName, whenText: "Names is Random Name"));
             if (NamePrefixes.Value == OldPrefixes)
                 NamePrefixes.Value = DefaultPrefixes;
             if (NameSuffixes.Value == OldSuffixes)
@@ -113,7 +114,9 @@ namespace KroolWorldUI.Features
             {
                 try
                 {
-                    if (!Enabled.Value || __instance != Player.m_localPlayer || piece == null || Minimap.instance == null)
+                    // No pins on a No Map world: they could not be seen, and would be stale later.
+                    if (!Enabled.Value || Game.m_noMap || __instance != Player.m_localPlayer || piece == null
+                        || Minimap.instance == null)
                         return;
                     var station = piece.GetComponentInChildren<CraftingStation>(true);
                     if (!Pinned(station))
@@ -180,9 +183,11 @@ namespace KroolWorldUI.Features
         {
             var map = Minimap.instance;
             var pos = station.transform.position;
-            var type = PinType();
-            var pin = Pins(map).FirstOrDefault(p => p.m_save && p.m_type == type &&
-                                                    Utils.DistanceXZ(p.m_pos, pos) < PinMatchMeters);
+            // Any of the five pickable icons (Icon may have changed since), and only your own pins:
+            // a shared-map pin from a friend (m_ownerID set) is theirs.
+            var pin = Pins(map).FirstOrDefault(p => p.m_save && p.m_ownerID == 0L && IsIconPin(p.m_type) &&
+                                                    Utils.DistanceXZ(p.m_pos, pos) < PinMatchMeters &&
+                                                    CouldBeOurs(p.m_name, station));
             if (pin == null)
                 return;
 
@@ -202,9 +207,38 @@ namespace KroolWorldUI.Features
             }
 
             map.RemovePin(pin);
-            if (other != null)
-                map.AddPin(other.transform.position, pin.m_type, pin.m_name, save: true, isChecked: pin.m_checked);
+            if (other == null)
+                return;
+            // Moving it next to a pin that is already there would give one base two pins.
+            var to = other.transform.position;
+            if (Pins(map).Any(p => p.m_save && Utils.DistanceXZ(p.m_pos, to) < near))
+                return;
+            map.AddPin(to, pin.m_type, pin.m_name, save: true, isChecked: pin.m_checked);
         }
+
+        /// <summary>
+        /// A name this mod could have given the pin: none, the station's name (as a token or as
+        /// shown), or a prefix + suffix from the current lists. A pin you placed and named yourself
+        /// on the bench is not one of those, so it is never removed.
+        /// </summary>
+        private static bool CouldBeOurs(string name, CraftingStation station)
+        {
+            if (string.IsNullOrEmpty(name))
+                return true;
+            if (name == station.m_name || name == Localization.instance.Localize(station.m_name))
+                return true;
+            var prefixes = Split(NamePrefixes.Value, DefaultPrefixes);
+            var suffixes = Split(NameSuffixes.Value, DefaultSuffixes);
+            foreach (var pre in prefixes)
+                if (name.StartsWith(pre, System.StringComparison.Ordinal)
+                    && suffixes.Contains(name.Substring(pre.Length)))
+                    return true;
+            return false;
+        }
+
+        private static bool IsIconPin(Minimap.PinType t) =>
+            t == Minimap.PinType.Icon0 || t == Minimap.PinType.Icon1 || t == Minimap.PinType.Icon2
+            || t == Minimap.PinType.Icon3 || t == Minimap.PinType.Icon4;
 
         private static void AddPin(CraftingStation station, Vector3 pos)
         {
@@ -218,14 +252,16 @@ namespace KroolWorldUI.Features
             string name;
             switch (Names.Value)
             {
-                case Naming.StationName: name = stationName; break;
+                // The token, not the translation: the map translates pin names as it draws them,
+                // so the pin follows a later language change.
+                case Naming.StationName: name = station.m_name; break;
                 case Naming.NoName: name = ""; break;
                 default: name = RandomName(pins); break;
             }
             var pin = map.AddPin(pos, PinType(), name, save: true, isChecked: false);
             if (Announce.Value)
                 Player.m_localPlayer.Message(MessageHud.MessageType.TopLeft,
-                    $"$msg_pin_added: {(name.Length > 0 ? name : stationName)}", 0, pin?.m_icon);
+                    $"$msg_pin_added: {(name.Length > 0 ? Localization.instance.Localize(name) : stationName)}", 0, pin?.m_icon);
         }
 
         /// <summary>Prefix + suffix, avoiding names already on the map when it can.</summary>

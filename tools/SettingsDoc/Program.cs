@@ -55,10 +55,13 @@ internal static class SettingsDoc
                 {
                     string def = ConfigText.Value(e.DefaultValue);
                     if (e.SettingType == typeof(UnityEngine.Color)) def = $"`{def}`";
-                    md.Append($"| {ConfigText.Pretty(e.Definition.Key)} | {def} | {Cell(ConfigText.Options(e))} | {Cell(e.Description?.Description)} |\n");
+                    md.Append($"| {ConfigText.Name(e)} | {def} | {Cell(ConfigText.Options(e))} | {Cell(ConfigText.Describe(e))} |\n");
                 }
             }
             md.Append('\n').Append(End);
+
+            WriteSettingsSource(config, Path.Combine(Path.GetDirectoryName(Path.GetFullPath(readmePath)),
+                "src", "KroolWorldUI", "Translations", "English.settings.txt"));
 
             string readme = File.ReadAllText(readmePath);
             int a = readme.IndexOf("<!-- settings:begin", StringComparison.Ordinal);
@@ -85,4 +88,55 @@ internal static class SettingsDoc
     }
 
     private static string Cell(string text) => (text ?? "").Replace("|", "\\|").Replace("\r", "").Replace("\n", " ");
+
+    private static string Slug(string s) => new string((s ?? "").Where(char.IsLetterOrDigit).ToArray());
+
+    /// <summary>
+    /// The English of every section, setting name, description, "used when" note, sub-heading and
+    /// choice the F7 window shows, keyed the way SettingsWindow looks them up. Translators work
+    /// from this file; it is regenerated on every build, so it never drifts from the code.
+    /// </summary>
+    private static void WriteSettingsSource(ConfigFile config, string path)
+    {
+        var lines = new System.Collections.Generic.List<string>
+        {
+            "# Krool World UI: settings window text, generated from the code by tools/SettingsDoc on every build.",
+            "# Do not edit: change the config.Bind text instead. Translate into <Language>.settings.txt with the same keys.",
+            "# Keep setting names short (they sit in a fixed-width column); descriptions can be a sentence or two.",
+        };
+        var seen = new System.Collections.Generic.HashSet<string>();
+        void Add(string key, string text)
+        {
+            if (string.IsNullOrEmpty(text) || !seen.Add(key))
+                return;
+            lines.Add($"{key} = {text.Replace("\r", "").Replace("\n", "\\n")}");
+        }
+        foreach (var section in config.Keys.GroupBy(k => k.Section))
+        {
+            var entries = section.Select(d => config[d]).Where(e => !ConfigText.IsHidden(e)).ToList();
+            if (entries.Count == 0) continue;
+            lines.Add("");
+            lines.Add($"# {section.Key}");
+            Add($"sec_{Slug(section.Key)}", section.Key);
+            foreach (var e in entries)
+            {
+                string key = $"s_{Slug(e.Definition.Section)}_{e.Definition.Key}";
+                var meta = ConfigText.MetaOf(e);
+                if (meta?.Group != null)
+                    Add($"grp_{Slug(meta.Group)}", meta.Group);
+                Add(key, ConfigText.Name(e));
+                Add(key + "_d", e.Description?.Description);
+                if (!string.IsNullOrEmpty(meta?.WhenText))
+                    Add(key + "_w", $"Used when {meta.WhenText}.");
+                if (e.SettingType.IsEnum)
+                    foreach (var name in Enum.GetNames(e.SettingType))
+                        Add($"enum_{e.SettingType.DeclaringType?.Name}{e.SettingType.Name}_{name}", ConfigText.Pretty(name));
+            }
+        }
+        string text = string.Join("\n", lines) + "\n";
+        if (File.Exists(path) && File.ReadAllText(path) == text)
+            return;
+        File.WriteAllText(path, text, new UTF8Encoding(false));
+        Console.WriteLine("Settings translation source updated.");
+    }
 }

@@ -1,0 +1,55 @@
+# Krool World UI: Macedonian (македонски), on-screen text.
+
+dir_n = С
+dir_ne = СИ
+dir_e = И
+dir_se = ЈИ
+dir_s = Ј
+dir_sw = ЈЗ
+dir_w = З
+dir_nw = СЗ
+unit_m = $1 м
+unit_km = $1 км
+compass_more = +$1 уште
+
+dusk_in = Самрак за $1
+dawn_in = Зори за $1
+
+character_save_in = Зачувување на карактерот за
+saving = Зачувување...
+
+rested_in = Одморен за $1
+seconds_short = $1 с
+
+enough_for = Доволно за $1
+not_enough = Недоволно
+
+food_running_low = Истекува
+food_can_eat_again = Може пак да јадеш
+food_can_eat = може да јадеш
+food_none = Нема храна
+food_slot_empty = Празен слот за храна ($1)
+dismiss_hint = [$1] сокриј
+
+xp_gain = +$1% $2
+
+repaired_items = Поправени предмети: $1
+
+win_search = Барај поставки
+win_expand_all = Отвори ги сите
+win_collapse_all = Затвори ги сите
+win_no_results = Нема такви поставки.
+win_preview = Преглед на HUD
+win_preview_ingame = Преглед на HUD (само во игра)
+win_preview_desc = Ги прикажува сите елементи одеднаш со примерни вредности, за да видиш каде е секој додека го местиш. Во игра секој се појавува само кога е потребен.
+win_describe_hint = Посочи или избери поставка за да видиш што прави.
+win_key_hint = Стрелки: избор и промена, Enter: избери, Esc: затвори
+win_pad_hint = A избери, B затвори, X преглед, Y ресетирај, LB/RB дел
+win_changed = Променети: $1
+win_reset = Ресетирај
+win_reset_all = Ресетирај ги сите
+win_press_key = Притисни тастер. Esc откажува, Backspace брише.
+win_none = Нема
+win_default = Стандардно: $1
+win_range = Опсег: $1
+win_options = Опции: $1

@@ -1,0 +1,55 @@
+# Krool World UI: Japanese on-screen text. Translated from English.txt.
+
+dir_n = 北
+dir_ne = 北東
+dir_e = 東
+dir_se = 南東
+dir_s = 南
+dir_sw = 南西
+dir_w = 西
+dir_nw = 北西
+unit_m = $1 m
+unit_km = $1 km
+compass_more = +$1件
+
+dusk_in = 日没まで $1
+dawn_in = 夜明けまで $1
+
+character_save_in = キャラクターセーブまで後
+saving = セーブ中…
+
+rested_in = 休息済みまで後 $1
+seconds_short = $1秒
+
+enough_for = $1個分
+not_enough = 不足
+
+food_running_low = もうすぐ切れる
+food_can_eat_again = また食べられる
+food_can_eat = 食べられる
+food_none = 食料なし
+food_slot_empty = 食料枠が空き（$1）
+dismiss_hint = [$1] 隠す
+
+xp_gain = +$1% $2
+
+repaired_items = $1個のアイテムを修理した
+
+win_search = 設定を検索
+win_expand_all = すべて展開
+win_collapse_all = すべて折りたたむ
+win_no_results = 該当する設定はありません。
+win_preview = HUDでプレビュー
+win_preview_ingame = HUDでプレビュー（ゲーム中のみ）
+win_preview_desc = すべての要素をサンプル値で同時に表示するので、調整しながら位置を確認できます。プレイ中は、それぞれ必要なときだけ表示されます。
+win_describe_hint = 設定にカーソルを合わせるか選択すると、説明が表示されます。
+win_key_hint = 矢印キーで移動・変更、Enterで選択、Escで閉じる
+win_pad_hint = A 選択、B 閉じる、X プレビュー、Y リセット、LB/RB セクション
+win_changed = $1件変更
+win_reset = リセット
+win_reset_all = すべてリセット
+win_press_key = キーを押してください。Escでキャンセル、Backspaceで解除。
+win_none = なし
+win_default = デフォルト：$1
+win_range = 範囲：$1
+win_options = 選択肢：$1
