@@ -10,9 +10,9 @@ namespace KroolWorldUI.Features
 {
     /// <summary>
     /// While a build tool is out (hammer, hoe, cultivator), a small panel beside the build menu's
-    /// selected-piece box counts the materials you carry: what the selected piece costs, the
-    /// common building materials (each with its own When setting), and how many of the piece you
-    /// can afford. Counts use the same inventory count the game checks when you place. Read-only.
+    /// selected-piece box counts the materials you carry: what the selected piece costs and how
+    /// many of it you can afford, or with nothing selected, the common building materials (each
+    /// with its own When setting). Counts use the same inventory count the game checks when you place. Read-only.
     /// </summary>
     internal static class BuildMaterials
     {
@@ -46,6 +46,7 @@ namespace KroolWorldUI.Features
 
         internal static ConfigEntry<bool> Enabled;
         internal static ConfigEntry<bool> SelectedPiece;
+        internal static ConfigEntry<bool> CostOnly;
         internal static ConfigEntry<Show>[] MaterialShow;
         internal static ConfigEntry<string> OtherMaterials;
         internal static ConfigEntry<bool> CanBuildCount;
@@ -62,6 +63,9 @@ namespace KroolWorldUI.Features
                 "stone as you build.");
             SelectedPiece = config.Bind(Section, "SelectedPiece", true,
                 "List what the selected piece costs, each with how many you carry. Red when you are short.");
+            CostOnly = config.Bind(Section, "CostOnly", true,
+                "With a piece selected, list only what it costs. The materials below show when nothing " +
+                "is selected. Off: list them alongside the cost.");
             CanBuildCount = config.Bind(Section, "CanBuildCount", true,
                 "Show how many of the selected piece your materials cover.");
             Placement = config.Bind(Section, "Placement", Place.BesideBuildInfo,
@@ -83,7 +87,7 @@ namespace KroolWorldUI.Features
                     "When Carried: only while you have some.");
             }
             OtherMaterials = config.Bind(Section, "OtherMaterials", "",
-                "More materials to always list, by the names the game shows, separated by commas " +
+                "More materials to list with the ones above, by the names the game shows, separated by commas " +
                 "(for example: Copper, Deer Hide).");
         }
 
@@ -233,8 +237,9 @@ namespace KroolWorldUI.Features
             }
 
             Resolve();
-            // The hoe and cultivator build terrain and crops; wood and stone counts are noise there.
-            bool listMaterials = !UsingTerrainTool(player);
+            // With a costed piece selected, its cost is the whole list (Cost Only). The hoe and
+            // cultivator build terrain and crops; wood and stone counts are noise there.
+            bool listMaterials = !UsingTerrainTool(player) && !(hasCost && BuildMaterials.CostOnly.Value);
             if (_common != null && listMaterials)
             {
                 for (int i = 0; i < _common.Length; i++)
