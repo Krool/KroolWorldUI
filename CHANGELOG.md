@@ -11,6 +11,7 @@
 - Text boxes (build materials, food reminder, save countdown, rested countdown) widen to fit longer words, and the day/night bar's text no longer overlaps.
 - Fixes: a low disk space warning on a server no longer starts a false save countdown; a server save warning no longer carries over to the next world; a feature that hit an error tries again after you log back in instead of staying off until restart; removing a bench removes its pin even after you changed the pin icon, never touches a friend's shared pin, and never leaves two pins on one base; small memory leaks on logout.
 - Build materials: Cost Only became Common With Cost (off), which reads the right way round.
+
 ## 0.13.0
 
 - Build materials: with a piece selected, the panel lists only what that piece costs. Your common materials show when nothing is selected. New setting Cost Only (on) to go back to listing both.

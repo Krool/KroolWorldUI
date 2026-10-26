@@ -1,8 +1,8 @@
 {
   "name": "Krool_World_UI",
-  "version_number": "0.13.0",
+  "version_number": "0.14.0",
   "website_url": "https://github.com/Krool/KroolWorldUI",
-  "description": "HUD/UI: compass, skill XP bars, carry weight / encumbrance bar, food timers, health and stamina lost to food decay, build materials, day/night bar and clock, autosave and rested countdowns, workbench map pins, auto repair. Client-side; F7 settings.",
+  "description": "HUD/UI: compass, skill XP bars, carry weight bar, food timers, food decay on health/stamina, build materials, day/night bar and clock, save and rested countdowns, workbench map pins, auto repair. Client-side, every game language, controller-ready.",
   "dependencies": [
     "denikson-BepInExPack_Valheim-5.4.2351"
   ]
