@@ -1,61 +1,56 @@
 ![Krool World UI](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/banner.png)
 
-**Quality-of-life HUD additions for Valheim.** Small touches that show what the game keeps hidden: how close a skill is to its next level, how much you are carrying, how much wood and stone you have while building, how much health and stamina your food has lost, when to eat, which way you are facing, how long until nightfall, how long until you are rested, and when the auto-save lag spike is coming. It can also pin your workbenches on the map with Norse-sounding names and repair your gear the moment you open a bench.
+Quality-of-life HUD additions for Valheim: skill XP, carry weight, build materials, food timers, a compass, a day/night bar, and a few countdowns the game doesn't show.
 
-- **Quality of life, nothing more.** No new items, no balance changes, no new mechanics. It shows you information and saves you a few clicks; the game plays the same.
-- **Everything is adjustable, in game.** Press **F7** for the settings window: every feature has its own On/Off switch, and every size, color, position, range and threshold is a setting there, with a live preview on the HUD. No config files to edit, no other mods needed. Don't like a feature? Switch it off.
-- **Client-side only.** The server and other players do not need it, and players with and without it can play together.
-- **Read-only, with two exceptions.** It reads game state for display. The only things it ever changes are ones you would do by hand: **Bench Pins** adds a pin to your own map when you build a workbench, and **Auto Repair** presses a bench's repair button for you. Both can be turned off. It never touches the world.
+- No new items, mechanics or balance changes.
+- Every feature can be switched off or adjusted in game with **F7**.
+- Client-side. The server and other players don't need it.
+- Display only, except two features you can turn off: Bench Pins adds a map pin when you build a workbench, and Auto Repair repairs your gear when you open a crafting station.
 
-**Where everything sits.** This screenshot uses **Preview on HUD**, a setup switch in the F7 window that shows every element at once with sample values, so you can see where each one goes while you adjust it. In normal play each one appears only when it matters: the food toast when a food is running out, the save countdown just before an auto-save, the rested timer while you rest, the materials panel with the hammer out.
+All elements at once, using the F7 window's **Preview on HUD** setup view. In play, each one only shows when it applies.
 
 ![Preview on HUD: every element shown at once next to the F7 settings window](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/preview-all.jpg)
 
-**Compass:** your heading at the top of the screen, for calling out directions to friends.
+**Compass.** Your heading, friends and nearby map pins.
 
 ![Compass turning from south to north](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/compass.gif)
 
-**Day/night bar:** the whole day above the minimap, where you are in it, and the time until dusk or dawn.
+**Day/night bar.** Time of day and the time until dusk or dawn.
 
 ![Day/night bar](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/daynight.png)
 
-**Skill XP:** a tile for each skill you are training at the bottom right, filling toward the next level, with a `+0.8% Swords` popup as you earn XP.
+**Skill XP.** A tile per skill with an XP bar toward the next level.
 
 ![Skill XP tiles](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/skills.png)
 
-**Carry weight:** a bar beside your food that fills as you pick things up and turns red past your limit.
+**Carry weight.** Fills as you pick things up, red when over.
 
 ![Weight bar](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/weight.gif)
 
-**Food reminders:** a toast at the top when a food is about to run out, with its time left.
+**Food reminders.** A toast when a food is running out.
 
 ![Food reminder](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/food-reminder.gif)
 
-**Build materials:** with the hammer out, what you carry, what the piece costs and how many you can build.
-
-![Build materials](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/build-materials.png)
-
-**Rested countdown:** the seconds until Rested, above the Resting buff.
+**Rested countdown.** Seconds until Rested, above the Resting buff.
 
 ![Rested countdown](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/rested.png)
 
-## At a glance
+## Features
 
-| Feature | What you get | On by default |
-|---|---|---|
-| **Skill XP bars** | A skill icon with an XP bar that fills as you earn XP, plus a floating `+0.8% Swords` | Yes |
-| **Carry weight** | A vertical weight bar beside your food, styled like the health bar | Yes |
-| **Build materials** | While the hammer is out: the wood, stone and other building materials you carry, what the selected piece costs, and how many you can build | Yes |
-| **Food decay** | Faint segments past the end of the health, stamina and eitr bars: the max your food has lost as it wears off | Yes |
-| **Food reminders** | A toast when food runs low, a message while you have none, and an optional "can eat again" | Yes ("can eat again" off) |
-| **Compass** | A strip at the top of the screen: your heading for call-outs, friends, and map pins nearby | Yes |
-| **Buff icons** | The game's buff icons at 90% size, wrapping into a new row before they reach the compass | Yes |
-| **Day/night bar** | A bar above the minimap: night and day with moon and sun, where you are now, and the time until dusk or dawn | Yes |
-| **Rested countdown** | While you rest by a fire, the seconds until you are Rested, above the Resting buff | Yes |
-| **Save countdown** | A clear 5-second countdown before the auto-save, so its lag spike never catches you mid-fight | Yes |
-| **Auto repair** | Open a workbench or forge and everything it can fix is repaired, no clicking the hammer | Yes |
-| **Bench pins** | A map pin with a random Norse name (Hrafnvik, Trollhaven, Odinheim) when you build a workbench | Yes |
-| **Settings window** | Every option in game, with a live preview | Press **F7** |
+| Feature | What it does |
+|---|---|
+| Skill XP bars | Skill tiles with XP bars, and a `+0.8% Swords` popup as you earn XP |
+| Carry weight | Weight bar beside your food |
+| Build materials | With the hammer out: what the selected piece costs, what you have, how many you can build |
+| Food decay | Shows how much max health, stamina and eitr your food has lost as it wears off |
+| Food reminders | Running out, no food, and optionally "can eat again" (off by default) |
+| Compass | Heading, friends, pins and pings at the top of the screen |
+| Buff icons | Buff icons at 90% size, wrapped before they reach the compass |
+| Day/night bar | Day and night above the minimap, with time to dusk or dawn |
+| Rested countdown | Seconds until Rested while you rest |
+| Save countdown | 5-second warning before the auto-save lag spike |
+| Auto repair | Opening a crafting station repairs everything it can |
+| Bench pins | A map pin with a Norse name when you build a workbench |
 
 ---
 
@@ -63,158 +58,122 @@
 
 ![Skill XP tiles](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/skills.png)
 
-Swing an axe and a Woodcutting tile appears at the bottom right of the screen, just above the key hints: the skill's icon, with its XP bar underneath.
+Earn XP and a tile for that skill appears at the bottom right, above the key hints.
 
-- **See every gain.** The darker part of the bar is where you were when the tile appeared. The lighter part is what you have earned since, so each swing visibly adds to it, carrying over through a level-up.
-- **Lines up neatly.** Each skill gets its own tile, side by side (up to 4). After 3 seconds without XP a tile fades out and the others slide over.
-- **Stays clear of the game's own UI.** It sits above the attack, block and build key hints, and only ever moves up to make room, so it does not hop when you equip something.
-- **Floating text.** A blue `+0.8% Swords` floats up over your character like a damage number. Only you see it. Quick gains are added together. Set it to **Level Up Only** or **Off** if you prefer.
-- **Your layout:**
-  - Style: **Tiles** (icon over bar, default) or **Rows** (a wide bar with the skill name, level and `+12%` gained on it).
-  - Tile size, an optional level number in the tile's corner, bar color.
-  - Placement: **Bottom Right**, **Below Stamina**, **Right Side** (clear of the minimap), or **Custom**, plus nudge offsets.
-- Hides while the inventory, the big map or the menu is open.
+- The dark part of the bar is where you started; the light part is what you've earned since.
+- Up to 4 tiles side by side. A tile fades after 3 seconds without XP.
+- A blue `+0.8% Swords` floats over your character. Can be set to level-ups only, or off.
+- Tiles or wide rows, size, level number, color and placement are all settings.
+- Hidden while the inventory, map or menu is open.
 
 ## Carry weight
 
 ![Weight bar filling and turning red when over the limit](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/weight.gif)
 
-Your weight, always on screen, without opening the inventory. It sits left of the food icons and is built like the health bar beside it: a weight icon next to the fork, a bar rising above it, and your weight over your max on top.
+A vertical bar left of the food icons, with your weight over your max on top.
 
-- **Exact numbers.** Matches the inventory screen, including your strength belt and the extra slots and backpacks from other mods.
-- **Grows with you.** The bar is 110 pixels tall at the normal 300 max and grows with your capacity: a Megingjord (+150) makes it half again as tall. You can turn the growth off.
-- **Reads at a glance:**
-  - **Thresholds** (default): your fill color, orange from 80% full, red when over.
-  - **Gradient**: blends through the three as you fill up.
-  - **Single**: one color.
-  - Over capacity it flashes, like the inventory does. All three colors can be changed.
-- **Text:** weight over max (default), weight only, percent, or none, at any size.
-- **When to show it:** **Always**, **Near Limit** (only when you are close to full), or **When Changed** (a few seconds after you pick up or drop something).
-- Bar length, thickness and position are adjustable.
+- Same number as the inventory screen, including Megingjord and backpack mods.
+- Grows taller as your max weight goes up (can be turned off).
+- Orange from 80%, red and flashing when over. Gradient or single color also available.
+- Show it always, only near the limit, or for a few seconds after your weight changes.
 
 ## Build materials
 
-![Build materials panel](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/build-materials.png)
+With the hammer out, a panel beside the build menu's piece box.
 
-Take out the hammer (or the hoe or cultivator) and a small panel appears right of the build menu's piece box, counting what you carry as you build.
-
-- **What the selected piece costs,** each material with how many you have: `Wood 245 /2`. Red when you are short.
-- **Your building materials, sensibly:**
-  - **Wood, Stone, Core Wood, Fine Wood** once your character has found them, so a new character is not shown materials it has never seen.
-  - **Resin, Bronze Nails, Iron Nails, Black Marble, Yggdrasil Wood, Grausten, Ashwood** only while you carry some, so a late-game panel stays short.
-  - Each material has its own setting in **F7**: **Always**, **When Known**, **When Carried** or **Never**. Add anything else by the name the game shows (`Copper, Deer Hide`).
-- With the **hoe** or **cultivator** out, it lists only what the selected piece costs.
-- **Enough for 12:** how many of the selected piece your materials cover, or **Not enough**.
-- Counts what the game itself counts when you place a piece: your inventory, not chests or backpacks.
-- Updates five times a second while you build. Hides with the inventory, the big map and the menu.
-- Sits left of the piece box instead on narrow screens, or anywhere with **Custom** placement.
+- With a piece selected: each material it costs, how many you have (`Wood 245 /2`, red if short), and **Enough for 12**.
+- With nothing selected: your common building materials. Wood, Stone, Core Wood and Fine Wood once you've found them; Resin, nails, Black Marble and later materials only while carried.
+- Each material's rule is a setting, and you can add others by name (`Copper, Deer Hide`).
+- Counts your inventory only, like the game does when placing.
 
 ## Food decay
 
 ![Weight bar, food timers and health bar](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/vitals.png)
 
-Valheim quietly shrinks each food's bonuses as it wears off: health, stamina and eitr alike. A food at half its time gives only about 81% of each, and the drop speeds up near the end.
+Food bonuses shrink as the food wears off. At half its time a food gives about 81% of its health, stamina and eitr.
 
-- Each bar continues past its end in a **faint segment**: red on health, gold on stamina, purple on eitr. That is the max you have lost this way.
-- It is exactly what eating fresh food would give back, so you can tell when a top-up is worth it before a fight or a long run.
-- The stamina and eitr bars only show while not full, and their segments come and go with them.
+- A faint segment past the end of each bar shows what you've lost: red on health, gold on stamina, purple on eitr.
+- That's exactly what eating fresh food would give back.
 - Each bar has its own switch and color.
 
 ## Food reminders
 
 ![Food running low toast](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/food-reminder.gif)
 
-A small toast at the top of the screen with the food's icon, its name and the time left. Each kind has its own switch:
+A toast at the top of the screen with the food's icon, name and time left.
 
 | Reminder | Default | When |
 |---|---|---|
-| **Running out** | On | A food drops under 4 minutes (adjustable) |
-| **Can eat again** | Off | A food passes half its time, the point where the game lets you eat it again |
-| **No food** | On | Stays up while you have no food, until you eat or press **Backspace** |
+| Running out | On | A food drops under 4 minutes (adjustable) |
+| Can eat again | Off | A food passes half its time, when the game lets you eat it again |
+| No food | On | While you have no food, until you eat or press Backspace |
 
-- The no-food message waits until a new character has arrived, and shows again after you respawn. Set it to **Any Slot Empty** to be told whenever a food slot is free.
-- A soft two-note chime plays with each reminder. It follows the game's sound volume, and can be turned down or off.
-- Timed reminders show once per food and fade after 6 seconds. They do not repeat until you have eaten that food again.
-- The countdown uses fixed-width digits, so it holds still.
-- Moves down to clear the raid banner, and hides while the inventory, the big map or the menu is open.
+- Each reminder shows once per food and fades after 6 seconds.
+- A soft chime with each, which can be turned down or off.
 
 ## Compass
 
 ![Compass with a bench pin](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/compass.png)
 
-A compass strip at the top center, like PUBG's, built for calling things out to friends: **"trolls at 210"**.
+A strip at the top center for calling out directions: "trolls at 210".
 
-- **Your heading** under the center mark: 0 is north (up on the map), 90 east. Optionally with the direction: **212 SW**.
-- **A narrow window** (120 degrees by default) that fades at both ends. N, E, S, W are large, NE and the rest smaller, a number every 15 degrees, and labels swell slightly as they pass the center.
-- **Friends** in their own colors. Behind you, they wait at the strip's edge with a small chevron pointing the way to turn. Far-away friends show if they are visible on the map.
-- **Map pins within 300 meters:** your pins (bench pins too), bed, tombstone and bosses, each kind with its own switch. **Map pings** show at any distance and send out a slow ripple.
-- **Look at a marker** and it grows a little while its name and distance ease in beside your heading: **Hrafnvik  120 m**. Only that one, so the strip stays clean. Prefer numbers everywhere? Set Distance to **All Markers** for a small distance under every icon.
-- **Busy areas stay readable:** overlapping markers fold into one with a count (**+2 more** when you look at it), and at most 12 show at once, pings and friends first, then the nearest.
-- **Nothing pops:** markers ease in and out, pins fade near the range limit, distances round to steady steps (5 m past 50 m, 10 m past 200 m, km past 1000). The strip glides down under a boss bar or raid banner, and fades out with the map open.
-- **Up and down arrows** on markers 10 or more meters above or below you.
-- Size, width, window, range, opacity and marker cap are adjustable, and Animations can be turned off for plain fades.
+- Heading in degrees under the center mark, optionally with the direction (212 SW).
+- Shows 120 degrees by default.
+- Friends in their colors. A friend behind you waits at the edge with an arrow.
+- Your map pins, bed, tombstone and bosses within 300 m, and map pings at any distance.
+- Look at a marker to see its name and distance. Or show distance under every marker.
+- Overlapping markers merge with a count, and at most 12 show at once.
+- Up and down arrows on markers 10 m or more above or below you.
+- Moves down under a boss bar or raid banner.
 
 ## Buff icons
 
-The game's buff icons (Rested, Wet, mead cooldowns and the rest) are large and grow toward the center of the screen, where the compass sits.
-
-- **90% size** by default, with their timers. Set it back to 100% for the game's own size.
-- **They wrap before the compass:** once a row reaches the compass, the next buff starts a new row underneath. Works at any screen size, compass width or size; with the compass off, the game's usual 7 per row applies.
-
+- The game's buff icons at 90% size (set 1 for the game's size).
+- Wrap to a new row before reaching the compass.
 
 ## Day/night bar
 
 ![Day/night bar](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/daynight.png)
 
-A slim bar along the top of the minimap shows the whole day, midnight to midnight: night at both ends with a moon, day in the middle with a sun, and a white marker for now.
+A bar on top of the minimap covering the whole day, with a marker for now.
 
-- **Dusk in 6:40** by day, **Dawn in 2:10** by night. In the last minute before dark (adjustable) the dusk countdown turns orange, so you can head home before the night spawns.
-- The day number, in your game's language, as the game shows it at sunrise.
-- An optional 24-hour clock (06:00 sunrise, 18:00 sunset).
-- Uses the game's own clock, synced from the server: a 20-minute day, about 14 minutes of daylight and 6 of night.
-- Hides with the minimap. Bar height and both colors are adjustable.
+- **Dusk in 6:40** by day, **Dawn in 2:10** by night. Turns orange in the last minute before dark.
+- The day number, and an optional 24-hour clock.
+- Uses the game's clock, synced from the server.
 
 ## Rested countdown
 
 ![Rested countdown above the Resting buff](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/rested.png)
 
-Sit or stand under a roof by a fire and the game starts **Resting**, but it never says how long until you are **Rested**. While you rest, a small **Rested in 14s** counts down just above the Resting buff icon.
-
-- The timing comes from the game's own Resting effect, so it is exact.
-- Step away from the fire and it disappears; the game starts the count over when you rest again.
-- A soft chime when it lands (can be turned off).
+While Resting, **Rested in 14s** counts down above the Resting buff, with a chime at the end (can be turned off). It reads the game's own timer.
 
 ## Save countdown
 
 ![Save countdown](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/save-countdown.png)
 
-Valheim auto-saves every 30 minutes, and on a big world the save freezes the game for a moment. On hardcore that hitch can be the difference in a fight. A few seconds before it, a box near the top of the screen counts down: **World save in 5, 4, 3, 2, 1**, then **Saving...**
+The auto-save every 30 minutes can freeze a big world for a moment. A box counts down **World save in 5** before it, then **Saving...**
 
-- **Exact in single player and as host:** it reads the game's own save timer.
-- **On a dedicated server:** it times the world save from the server's 30-second warning, which every player receives. Your own client also saves your character on its own timer; that shows as **Character save in 5**.
-- A soft tick each second, a brighter one on the last. It follows the game's sound volume and can be turned off.
-- Start time (3 to 30 seconds) and position are adjustable.
+- Exact in single player and as host. On a dedicated server it uses the server's 30-second save warning.
+- Your character's own save shows as **Character save in 5**.
+- A tick each second, which can be turned off. Start time and position are adjustable.
 
 ## Bench pins
 
-Build a workbench and a pin appears on your map, named like a Norse settlement: **Hrafnvik**, **Frostgard**, **Trollhaven**, **Eikthyrhold**, **Meadhall**.
+Building a workbench adds a map pin with a Norse name like **Hrafnvik** or **Trollhaven**.
 
-- **One pin per base.** No new pin if one is already within 50 meters (adjustable), so a base with several benches gets one pin.
-- **Pick the icon:** fire, house (default), hammer, dot or portal.
-- **Pick the name:** random (default), the station's name, or none.
-- **Make it yours:** the name bank is two editable lists, prefixes and suffixes, in **F7**. Add your clan's names.
-- Workbench only by default; switch to **All Crafting Stations** to also pin forges, stonecutters and the rest.
-- **Temporary benches leave no trace.** Take a bench down with the hammer (say, one you dropped to fix a boat) and its pin goes too. If another bench still stands nearby, the pin moves to it instead. Can be turned off.
-- **10,000 names:** 100 prefixes and 100 suffixes.
-- Pins are saved with your character like any pin you place. A bench lost to damage or decay keeps its pin.
+- No new pin within 50 m of an existing one, so one base gets one pin.
+- Choose the icon (fire, house, hammer, dot, portal) and the name (random, station name, or none).
+- 100 prefixes and 100 suffixes, both editable in F7.
+- Workbenches only by default; can include forges and other stations.
+- Removing the bench with the hammer removes its pin, or moves it to another bench nearby. Can be turned off.
 
 ## Auto repair
 
-Open a workbench, forge or any crafting station and every item it can fix is repaired at once, as if you had clicked its repair button once per item.
+Opening a crafting station repairs every item it can, as if you'd pressed its repair button for each.
 
-- **Same rules as the button:** a workbench fixes what a workbench can, a forge fixes metal, and items that need a higher station level stay worn. Free, as in the base game.
-- **Same reward:** you get the Crafting skill XP each repair would give.
-- One repair sound and one message (**Repaired 4 items**); the message can be turned off.
+- Same rules as the button: station type and level decide what gets fixed.
+- Same Crafting XP as repairing by hand.
+- One sound and one message (**Repaired 4 items**). The message can be turned off.
 
 ## Settings window
 
@@ -222,18 +181,16 @@ Open a workbench, forge or any crafting station and every item it can fix is rep
 
 Press **F7** in game.
 
-- **One section per feature,** each with its own On/Off on the header. Click a section's name to open or close it; the window remembers which are open.
-- **Hover any setting** to see what it does, its default and its range.
-- **Every option in one place:** sliders for sizes and timings, click-to-cycle buttons for choices, and a color swatch with an editable hex value.
-- **Reset** sits next to anything you changed, and **Reset all** on a section's header.
-- **Preview on HUD** shows sample skill tiles for your top skills, the food reminders, sample food decay segments and a looping save countdown (with sound on the first pass), so you can place and size things live.
-- **Esc** or **F7** closes it. While it is open your character ignores input, and the mouse wheel scrolls the window instead of zooming the camera.
+- One section per feature, each with an On/Off switch.
+- Hover a setting for what it does, its default and its range.
+- **Reset** next to anything changed, **Reset all** per section.
+- **Preview on HUD** shows sample versions of everything so you can place and size them.
 
-The same settings are in `BepInEx/config/krool.kroolworldui.cfg` (in r2modman: **Config editor**). Colors there are hex `RRGGBBAA`; the last two digits are opacity.
+The same settings are in `BepInEx/config/krool.kroolworldui.cfg`. Colors there are hex `RRGGBBAA`.
 
 ### Full settings list
 
-Generated from the mod's code on every build, so it always matches the F7 window.
+Generated from the mod's code, so it matches the F7 window.
 
 <!-- settings:begin (generated by tools/SettingsDoc; edit the config.Bind descriptions instead) -->
 
@@ -322,6 +279,7 @@ Generated from the mod's code on every build, so it always matches the F7 window
 |---|---|---|---|
 | Enabled | On |  | While a build tool is out, count the materials you carry, so you can watch your wood and stone as you build. |
 | Selected Piece | On |  | List what the selected piece costs, each with how many you carry. Red when you are short. |
+| Cost Only | On |  | With a piece selected, list only what it costs. The materials below show when nothing is selected. Off: list them alongside the cost. |
 | Can Build Count | On |  | Show how many of the selected piece your materials cover. |
 | Placement | Beside Build Info | Beside Build Info, Custom | Beside Build Info: right of the selected-piece box at the bottom center. Custom: placed by Anchor X and Anchor Y. |
 | Anchor X | 0.8 | 0 to 1 | Custom placement: left edge (0 = left of screen, 1 = right). |
@@ -337,7 +295,7 @@ Generated from the mod's code on every build, so it always matches the F7 window
 | Yggdrasil Wood | When Carried | Always, When Known, When Carried, Never | When to list Yggdrasil Wood. When Known: once your character has picked one up. When Carried: only while you have some. |
 | Grausten | When Carried | Always, When Known, When Carried, Never | When to list Grausten. When Known: once your character has picked one up. When Carried: only while you have some. |
 | Ashwood | When Carried | Always, When Known, When Carried, Never | When to list Ashwood. When Known: once your character has picked one up. When Carried: only while you have some. |
-| Other Materials |  |  | More materials to always list, by the names the game shows, separated by commas (for example: Copper, Deer Hide). |
+| Other Materials |  |  | More materials to list with the ones above, by the names the game shows, separated by commas (for example: Copper, Deer Hide). |
 
 **Day Night Bar**
 
@@ -431,15 +389,15 @@ Settings saved by an older version keep their values. Removed settings are ignor
 
 ## Install
 
-- **r2modman / Thunderstore Mod Manager:** search for **Krool World UI** and install. BepInEx comes with it.
-- **Manual:** install [BepInExPack Valheim](https://thunderstore.io/c/valheim/p/denikson/BepInExPack_Valheim/), then put `KroolWorldUI.dll` in `BepInEx/plugins`.
+- r2modman / Thunderstore Mod Manager: search for Krool World UI and install.
+- Manual: install [BepInExPack Valheim](https://thunderstore.io/c/valheim/p/denikson/BepInExPack_Valheim/), then put `KroolWorldUI.dll` in `BepInEx/plugins`.
 
 ## Compatibility and tips
 
 - Used in a modpack with EpicLoot, ExtraSlots, AdventureBackpacks, Quick Stack, MultiUserChest, PlantEverything and Warfare.
-- **Something overlaps?** Other mods like the bottom-left corner too. Every element has nudge offsets in **F7**, and **Preview on HUD** shows where things land.
-- **Floating text too busy** while running or sneaking? Set **FloatingText** to **Level Up Only**.
-- **Updated and the defaults look off?** Settings you saved earlier are kept. Use **Reset** in **F7** to take the new defaults.
+- If something overlaps another mod's HUD, move it with the offsets in F7. Preview on HUD shows where things land.
+- Too many XP popups while running or sneaking: set FloatingText to Level Up Only.
+- Updates keep your saved settings. Use Reset in F7 to take new defaults.
 
 Source, issues and changelog: [github.com/Krool/KroolWorldUI](https://github.com/Krool/KroolWorldUI). MIT licensed.
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.13.0
+
+- Build materials: with a piece selected, the panel lists only what that piece costs. Your common materials show when nothing is selected. New setting Cost Only (on) to go back to listing both.
+- Mod page: shorter, plainer text.
+
 ## 0.12.6
 
 - Mod page: a full-screen picture of every element at once (the F7 window's Preview on HUD), so you can see where each one sits. The skill XP clip is back to a still.
