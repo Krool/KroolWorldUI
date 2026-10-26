@@ -38,6 +38,14 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
   mod list) before a new package or version shows up; its cached list lags Thunderstore. Link
   the mod as `thunderstore.io/c/valheim/p/Krool/Krool_World_UI/` - the community-less
   `/package/...` URL lands on Risk of Rain 2 and 404s.
+- **release.ps1 commits only the version files, CHANGELOG and README.** Commit code changes
+  yourself before running it, or the tag ships without them (0.13.0 did).
+- **Every new or changed setting is designed for the F7 window, not just bound (owner, 2026-10-25).**
+  Check it works with mouse, keyboard and controller; place it in a sensible order within its
+  section, with grouping/gaps where that helps reading; pick the right control (slider for ranges,
+  click-to-type for exact numbers, toggle for bools, cycle for enums); grey out settings whose
+  parent setting makes them irrelevant; and keep its description current, brief and plain (no
+  AI-sounding phrasing). Same brevity rule for the mod page text.
 - **The Thunderstore token is `TCLI_AUTH_TOKEN` (user env var).** Never write it to a file or
   echo it; the owner sets it with `setx` in their own terminal.
 
