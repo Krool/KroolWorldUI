@@ -12,6 +12,7 @@ sheets.
 
 | File | Shows |
 |---|---|
+| `preview-all.jpg` | Full screen with Preview on HUD and the F7 window open: every element at once (captioned as a setup view in the README) |
 | `compass.gif` | Compass turning from south to north |
 | `compass.png` | Compass with a bench pin |
 | `weight.gif` | Weight bar filling and turning red past the limit |
