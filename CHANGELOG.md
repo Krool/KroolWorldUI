@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.12.6
+
+- Mod page: a full-screen picture of every element at once (the F7 window's Preview on HUD), so you can see where each one sits. The skill XP clip is back to a still.
+
 ## 0.12.5
 
 - Mod page: the day/night bar and the XP popups added to the pictures at the top.

@@ -7,6 +7,10 @@
 - **Client-side only.** The server and other players do not need it, and players with and without it can play together.
 - **Read-only, with two exceptions.** It reads game state for display. The only things it ever changes are ones you would do by hand: **Bench Pins** adds a pin to your own map when you build a workbench, and **Auto Repair** presses a bench's repair button for you. Both can be turned off. It never touches the world.
 
+**Where everything sits.** This screenshot uses **Preview on HUD**, a setup switch in the F7 window that shows every element at once with sample values, so you can see where each one goes while you adjust it. In normal play each one appears only when it matters: the food toast when a food is running out, the save countdown just before an auto-save, the rested timer while you rest, the materials panel with the hammer out.
+
+![Preview on HUD: every element shown at once next to the F7 settings window](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/preview-all.jpg)
+
 **Compass:** your heading at the top of the screen, for calling out directions to friends.
 
 ![Compass turning from south to north](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/compass.gif)
@@ -15,9 +19,9 @@
 
 ![Day/night bar](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/daynight.png)
 
-**Skill XP:** every bit of XP pops up as you earn it, and a tile at the bottom right fills toward the next level.
+**Skill XP:** a tile for each skill you are training at the bottom right, filling toward the next level, with a `+0.8% Swords` popup as you earn XP.
 
-![XP popups while chopping wood](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/xp.gif)
+![Skill XP tiles](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/skills.png)
 
 **Carry weight:** a bar beside your food that fills as you pick things up and turns red past your limit.
 
@@ -58,8 +62,6 @@
 ## Skill XP bars
 
 ![Skill XP tiles](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/skills.png)
-
-![XP popups while chopping wood](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/xp.gif)
 
 Swing an axe and a Woodcutting tile appears at the bottom right of the screen, just above the key hints: the skill's icon, with its XP bar underneath.
 

@@ -8,7 +8,7 @@ schemaVersion = "0.0.1"
 [package]
 namespace = "Krool"
 name = "Krool_World_UI"
-versionNumber = "0.12.5"
+versionNumber = "0.12.6"
 description = "HUD/UI: compass, skill XP bars, carry weight / encumbrance bar, food timers, health and stamina lost to food decay, build materials, day/night bar and clock, autosave and rested countdowns, workbench map pins, auto repair. Client-side; F7 settings."
 websiteUrl = "https://github.com/Krool/KroolWorldUI"
 containsNsfwContent = false
