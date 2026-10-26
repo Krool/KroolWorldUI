@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.12.5
+
+- Mod page: the day/night bar and the XP popups added to the pictures at the top.
+
 ## 0.12.4
 
 - Mod page: the preview pictures are a list, one feature per line with a caption, instead of a grid.

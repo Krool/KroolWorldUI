@@ -11,6 +11,14 @@
 
 ![Compass turning from south to north](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/compass.gif)
 
+**Day/night bar:** the whole day above the minimap, where you are in it, and the time until dusk or dawn.
+
+![Day/night bar](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/daynight.png)
+
+**Skill XP:** every bit of XP pops up as you earn it, and a tile at the bottom right fills toward the next level.
+
+![XP popups while chopping wood](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/xp.gif)
+
 **Carry weight:** a bar beside your food that fills as you pick things up and turns red past your limit.
 
 ![Weight bar](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/weight.gif)
@@ -50,6 +58,8 @@
 ## Skill XP bars
 
 ![Skill XP tiles](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/skills.png)
+
+![XP popups while chopping wood](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/screenshots/xp.gif)
 
 Swing an axe and a Woodcutting tile appears at the bottom right of the screen, just above the key hints: the skill's icon, with its XP bar underneath.
 

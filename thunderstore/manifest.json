@@ -1,6 +1,6 @@
 {
   "name": "Krool_World_UI",
-  "version_number": "0.12.4",
+  "version_number": "0.12.5",
   "website_url": "https://github.com/Krool/KroolWorldUI",
   "description": "HUD/UI: compass, skill XP bars, carry weight / encumbrance bar, food timers, health and stamina lost to food decay, build materials, day/night bar and clock, autosave and rested countdowns, workbench map pins, auto repair. Client-side; F7 settings.",
   "dependencies": [
