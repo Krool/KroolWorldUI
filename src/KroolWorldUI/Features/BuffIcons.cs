@@ -21,6 +21,7 @@ namespace KroolWorldUI.Features
 
         private const string Section = "Buffs";
         private const float CompassGap = 12f;   // HUD pixels kept clear left of the buffs
+        private const float RowGap = 6f;        // extra space between wrapped rows, at size 1
 
         // Built on first use, not in a static initializer: tools\SettingsDoc runs BindConfig outside the game.
         private static AccessTools.FieldRef<Hud, List<RectTransform>> _icons;
@@ -73,13 +74,21 @@ namespace KroolWorldUI.Features
             if (on && MakeRoomForCompass.Value)
                 perRow = Mathf.Min(perRow, FitBesideCompass(hud, spacing, scale));
 
+            // Wrapped rows sit a little further apart than the game's square grid, and while the
+            // rested countdown stands above an icon in a lower row, that row and the ones under it
+            // move down to make room for it.
+            float rowStep = spacing + RowGap * scale;
+            int roomRow = RestedCountdownHud.RoomIcon >= 0 ? RestedCountdownHud.RoomIcon / perRow : 0;
+            float room = roomRow > 0 ? RestedCountdownHud.RoomHeight : 0f;
+
             for (int i = 0; i < icons.Count; i++)
             {
                 var icon = icons[i];
                 if (icon == null)
                     continue;
                 int row = i / perRow, col = i % perRow;
-                var pos = new Vector2(-4f - col * spacing, -row * spacing);
+                float y = -row * rowStep - (room > 0f && row >= roomRow ? room : 0f);
+                var pos = new Vector2(-4f - col * spacing, y);
                 if (icon.anchoredPosition != pos)
                     icon.anchoredPosition = pos;
                 if (!Mathf.Approximately(icon.localScale.x, scale))

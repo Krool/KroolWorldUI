@@ -50,6 +50,11 @@ namespace KroolWorldUI.Features
 
         private static RestedCountdownHud _instance;
         private static readonly HudKit.FailFlag _failed = new HudKit.FailFlag();
+
+        // For BuffIcons: the buff icon the countdown stands above (-1 when hidden) and its height in
+        // the buff list's units, so a wrapped row under it can make room.
+        internal static int RoomIcon = -1;
+        internal static float RoomHeight;
         private static AudioClip _chime;
 
         // Built on first use, not in a static initializer: tools\SettingsDoc runs BindConfig outside the game.
@@ -105,7 +110,10 @@ namespace KroolWorldUI.Features
         private void OnDestroy()
         {
             if (_instance == this)
+            {
                 _instance = null;
+                RoomIcon = -1;
+            }
         }
 
         /// <summary>Settings-window preview: loops a short countdown, chiming on the first pass only.</summary>
@@ -143,6 +151,7 @@ namespace KroolWorldUI.Features
             {
                 _group.alpha = 0f;
                 _counting = false;
+                RoomIcon = -1;
                 return;
             }
 
@@ -192,6 +201,8 @@ namespace KroolWorldUI.Features
             _group.alpha = _counting ? 1f : 0f;
             if (_counting)
                 PlaceAbove(hud, player, cozy);
+            else
+                RoomIcon = -1;
         }
 
         /// <summary>
@@ -205,12 +216,17 @@ namespace KroolWorldUI.Features
             if (icons == null || icons.Count == 0)
             {
                 _rect.anchoredPosition = new Vector2(-4f, 40f);
+                RoomIcon = -1;
                 return;
             }
             _effects.Clear();
             player.GetSEMan().GetHUDStatusEffects(_effects);
             int index = target != null ? _effects.IndexOf(target) : -1;
-            var icon = icons[index >= 0 && index < icons.Count ? index : 0];
+            if (index < 0 || index >= icons.Count)
+                index = 0;
+            RoomIcon = index;
+            RoomHeight = _rect.sizeDelta.y + 2f;
+            var icon = icons[index];
             if (icon == null)
                 return;
 

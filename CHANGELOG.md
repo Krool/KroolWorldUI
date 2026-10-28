@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.15.1
+
+- **Buff rows** that wrap sit a little further apart, and while the rested countdown shows over a buff in a lower row, that row moves down to make room so the countdown no longer covers the row above.
+
 ## 0.15.0
 
 - **Crafting tabs.** Every crafting station (and hand crafting) gets a row of tabs above the recipe list: Weapons, Armor, Tools, Ammo, Food and meads, Materials, Other. Only the tabs a station has recipes for are shown (none when it has one kind), and each station remembers its tab. On a controller, the D-pad left and right switch tabs.
