@@ -96,7 +96,8 @@ With the hammer out, a panel beside the build menu's piece box.
 A row of tabs above the recipe list at every crafting station, and in hand crafting.
 
 - Tabs: All, Weapons, Armor, Tools, Ammo, Food and meads, Materials, Other. Point at one to see its name and how many recipes it holds.
-- Only the tabs a station has recipes for are shown, so a forge has no food tab. A station with only one kind of recipe, like the cooking station, shows no tabs. Each station remembers its tab until you log out.
+- Sorted the way a player thinks: pickaxes, scythes and the grappling hook are tools; dough, feasts and mead bases are food; siege ammo is ammo; tankards and fireworks are other.
+- Only the tabs a station has recipes for are shown, so a forge has no food tab. A station with only one kind of recipe, like the cauldron or mead cauldron, shows no tabs. Each station remembers its tab until you log out.
 - A button under the list sorts by the game's order, name, type or station level (newest unlocks first). Right-click steps back. What you can craft now stays on top (a setting).
 - Controller: the D-pad left and right switch tabs. The sort order is also in the settings window.
 - Works on the Upgrade tab too.

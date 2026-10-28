@@ -107,7 +107,10 @@ namespace KroolWorldUI.Features
         private static Action<InventoryGui, bool> _updatePanel;
         private static PropertyInfo _pRecipe, _pItem, _pElement, _pCanCraft;
 
-        private static bool Wanted => Enabled.Value && (Categories.Value || SortButton.Value || Sort.Value != SortOrder.Default);
+        private static bool Wanted => Enabled.Value && (Categories.Value || SortButton.Value || CurrentSort != SortOrder.Default);
+
+        // A hand-edited number outside the list reads as Default instead of breaking the feature.
+        private static SortOrder CurrentSort => Enum.IsDefined(typeof(SortOrder), Sort.Value) ? Sort.Value : SortOrder.Default;
 
         // ------------------------------------------------------------------ patches
 
@@ -159,8 +162,18 @@ namespace KroolWorldUI.Features
         {
             private static void Postfix()
             {
-                if (_sortText != null && (ZInput.IsGamepadActive() && _bar != null) != _padLabel)
-                    UpdateSortLabel();
+                if (Failed.IsSet || _sortText == null)
+                    return;
+                try
+                {
+                    if ((ZInput.IsGamepadActive() && _bar != null) != _padLabel)
+                        UpdateSortLabel();
+                }
+                catch (Exception e)
+                {
+                    Failed.Set();
+                    Plugin.Log.LogError($"Crafting tabs (label): {e}");
+                }
             }
         }
 
@@ -202,21 +215,26 @@ namespace KroolWorldUI.Features
             if (_counts[(int)_current] == 0)
                 _current = Category.All;
 
+            // Decide and sort first, destroy last: a throw before this point leaves the game's list whole.
+            var dropped = new List<GameObject>();
             if (_current != Category.All)
             {
                 for (int i = rows.Count - 1; i >= 0; i--)
                 {
                     if (CategoryOf(RecipeOf(rows[i])) == _current)
                         continue;
-                    var element = ElementOf(rows[i]);
-                    element.SetActive(false); // Destroy waits for the end of the frame
-                    UnityEngine.Object.Destroy(element);
+                    dropped.Add(ElementOf(rows[i]));
                     rows.RemoveAt(i);
                 }
             }
-            if (Sort.Value != SortOrder.Default)
+            if (CurrentSort != SortOrder.Default)
                 SortRows(rows);
 
+            foreach (var element in dropped)
+            {
+                element.SetActive(false); // Destroy waits for the end of the frame
+                UnityEngine.Object.Destroy(element);
+            }
             list.Clear();
             foreach (var row in rows)
                 list.Add(row);
@@ -234,7 +252,7 @@ namespace KroolWorldUI.Features
 
         private static void SortRows(List<object> rows)
         {
-            var order = Sort.Value;
+            var order = CurrentSort;
             bool craftableFirst = CraftableFirst.Value;
             var names = new Dictionary<Recipe, string>();
             // List.Sort is not stable; ties keep the game's order.
@@ -287,11 +305,26 @@ namespace KroolWorldUI.Features
             public int GetHashCode(object o) => System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(o);
         }
 
+        // Farming (scythe, snow shovel); cast so an older game without the name still loads.
+        private const Skills.SkillType Farming = (Skills.SkillType)106;
+
+        // Cooking stations whose "materials" are dough, feasts and mead bases: food to a player.
+        private static readonly HashSet<string> CookingStations =
+            new HashSet<string> { "$piece_cauldron", "$piece_meadcauldron", "$piece_preptable" };
+
         internal static Category CategoryOf(Recipe recipe)
         {
             var shared = recipe?.m_item?.m_itemData?.m_shared;
             if (shared == null)
                 return Category.Other;
+            // Vanilla items the game types oddly, by prefab name (the same in every language).
+            string prefab = recipe.m_item.name;
+            if (prefab.StartsWith("Tankard", StringComparison.Ordinal) || prefab.StartsWith("FireworksRocket", StringComparison.Ordinal))
+                return Category.Other;
+            if (prefab == "BombSiege" || prefab.StartsWith("Catapult_", StringComparison.OrdinalIgnoreCase))
+                return Category.Ammo;
+            if (prefab == "GrapplingHook")
+                return Category.Tools;
             switch (shared.m_itemType)
             {
                 case ItemDrop.ItemData.ItemType.OneHandedWeapon:
@@ -300,8 +333,9 @@ namespace KroolWorldUI.Features
                 case ItemDrop.ItemData.ItemType.Bow:
                 case ItemDrop.ItemData.ItemType.Shield:
                 case ItemDrop.ItemData.ItemType.Attach_Atgeir:
-                    // Pickaxes and fishing rods are weapons to the game; to a player they are tools.
+                    // Pickaxes, fishing rods, scythes and shovels are weapons to the game; to a player they are tools.
                     return shared.m_skillType == Skills.SkillType.Pickaxes || shared.m_skillType == Skills.SkillType.Fishing
+                        || shared.m_skillType == Farming
                         ? Category.Tools : Category.Weapons;
                 case ItemDrop.ItemData.ItemType.Helmet:
                 case ItemDrop.ItemData.ItemType.Chest:
@@ -320,7 +354,8 @@ namespace KroolWorldUI.Features
                 case ItemDrop.ItemData.ItemType.Consumable:
                     return Category.Food;
                 case ItemDrop.ItemData.ItemType.Material:
-                    return Category.Materials;
+                    var station = recipe.m_craftingStation;
+                    return station != null && CookingStations.Contains(station.m_name) ? Category.Food : Category.Materials;
                 default:
                     return Category.Other;
             }
@@ -339,6 +374,12 @@ namespace KroolWorldUI.Features
             _pItem = AccessTools.Property(pair, "ItemData");
             _pElement = AccessTools.Property(pair, "InterfaceElement");
             _pCanCraft = AccessTools.Property(pair, "CanCraft");
+            // A game update that renames any of these should stop us before we touch the list.
+            if (_available == null || _updatePanel == null || _pRecipe == null || _pItem == null || _pElement == null || _pCanCraft == null)
+            {
+                _available = null;
+                throw new MissingMemberException("InventoryGui recipe list layout changed");
+            }
         }
 
         private static Recipe RecipeOf(object row) => (Recipe)_pRecipe.GetValue(row);
@@ -381,7 +422,7 @@ namespace KroolWorldUI.Features
         private static void CycleSort(int direction)
         {
             int n = Enum.GetValues(typeof(SortOrder)).Length;
-            Sort.Value = (SortOrder)(((int)Sort.Value + direction + n) % n); // SettingChanged rebuilds the list
+            Sort.Value = (SortOrder)(((int)CurrentSort + direction + n) % n); // SettingChanged rebuilds the list
         }
 
         /// <summary>Rebuilds the list through the game, keeping the selected recipe if it is still listed.</summary>
@@ -445,7 +486,7 @@ namespace KroolWorldUI.Features
             _padLabel = ZInput.IsGamepadActive() && _bar != null;
             string text = _padLabel
                 ? L10n.T("craft_pad_hint", L10n.T(CategoryKeys[(int)_current]))
-                : L10n.T("craft_sort", L10n.T(SortKeys[(int)Sort.Value]));
+                : L10n.T("craft_sort", L10n.T(SortKeys[(int)CurrentSort]));
             if (_sortText.text != text)
                 _sortText.text = text;
         }
