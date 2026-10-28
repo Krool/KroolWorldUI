@@ -74,12 +74,11 @@ namespace KroolWorldUI.Features
             if (on && MakeRoomForCompass.Value)
                 perRow = Mathf.Min(perRow, FitBesideCompass(hud, spacing, scale));
 
-            // Wrapped rows sit a little further apart than the game's square grid, and while the
-            // rested countdown stands above an icon in a lower row, that row and the ones under it
-            // move down to make room for it.
-            float rowStep = spacing + RowGap * scale;
-            int roomRow = RestedCountdownHud.RoomIcon >= 0 ? RestedCountdownHud.RoomIcon / perRow : 0;
-            float room = roomRow > 0 ? RestedCountdownHud.RoomHeight : 0f;
+            // Wrapped rows sit further apart than the game's square grid: with the rested countdown
+            // on, by its height, so it fits above a Resting icon in a lower row without covering the
+            // row above. A fixed gap, so rows never move while you play.
+            float rowGap = RestedCountdown.Enabled.Value ? RestedCountdown.TextSize.Value + 6f : RowGap * scale;
+            float rowStep = spacing + rowGap;
 
             for (int i = 0; i < icons.Count; i++)
             {
@@ -87,8 +86,7 @@ namespace KroolWorldUI.Features
                 if (icon == null)
                     continue;
                 int row = i / perRow, col = i % perRow;
-                float y = -row * rowStep - (room > 0f && row >= roomRow ? room : 0f);
-                var pos = new Vector2(-4f - col * spacing, y);
+                var pos = new Vector2(-4f - col * spacing, -row * rowStep);
                 if (icon.anchoredPosition != pos)
                     icon.anchoredPosition = pos;
                 if (!Mathf.Approximately(icon.localScale.x, scale))

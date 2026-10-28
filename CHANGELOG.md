@@ -2,7 +2,7 @@
 
 ## 0.15.1
 
-- **Buff rows** that wrap sit a little further apart, and while the rested countdown shows over a buff in a lower row, that row moves down to make room so the countdown no longer covers the row above.
+- **Buff rows** that wrap sit further apart, leaving room for the rested countdown so it no longer covers the row above.
 
 ## 0.15.0
 
