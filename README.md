@@ -181,7 +181,7 @@ The auto-save every 30 minutes can freeze a big world for a moment. A box counts
 
 A short toast below the crosshair when a shot leaves you low: **Wood arrow  25 left**, then **10 left** in red.
 
-- Arrows, bolts and fishing bait. Counts every stack of that ammo in your inventory.
+- Arrows, bolts and fishing bait. Counts the equipped stack only, not spares in your bag.
 - Fires only from shooting, so picking up or moving ammo never sets it off.
 - Both counts are settings (0 turns one off), as are the tone, how long it stays and where it sits.
 

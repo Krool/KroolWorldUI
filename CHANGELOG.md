@@ -2,7 +2,7 @@
 
 ## 0.15.1
 
-- **Low ammo warning.** A short toast and tone when a shot leaves you with 25 arrows, bolts or bait, and again in red at 10. Both counts are settings.
+- **Low ammo warning.** A short toast and tone when a shot leaves your equipped stack of arrows, bolts or bait at 25, and again in red at 10. Both counts are settings.
 - **Buff rows** that wrap sit further apart, leaving room for the rested countdown so it no longer covers the row above.
 
 ## 0.15.0

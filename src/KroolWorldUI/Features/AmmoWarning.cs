@@ -10,7 +10,7 @@ namespace KroolWorldUI.Features
     /// A short toast when a shot leaves you with few arrows, bolts or bait: once at the first
     /// count, once more at the second. Fires from Attack.UseAmmo, which spends exactly one per
     /// shot, so the count after a shot lands on each threshold instead of skipping it, and
-    /// picking up or moving ammo never fires it. Read-only.
+    /// picking up or moving ammo never fires it. Counts the equipped stack, not spares. Read-only.
     /// </summary>
     internal static class AmmoWarning
     {
@@ -86,7 +86,8 @@ namespace KroolWorldUI.Features
                     var player = Player.m_localPlayer;
                     if (player == null || !ReferenceEquals(_character(__instance), player))
                         return;
-                    int left = player.GetInventory().CountItems(ammoItem.m_shared.m_name);
+                    // The equipped stack only, not spares in the bag: the warning means "restock or swap".
+                    int left = ammoItem.m_stack;
                     int first = FirstWarning.Value, second = SecondWarning.Value;
                     if (left <= 0 || (left != first && left != second))
                         return;
