@@ -179,7 +179,7 @@ The auto-save every 30 minutes can freeze a big world for a moment. A box counts
 
 ## Low ammo
 
-A short toast below the crosshair when a shot leaves you low: **Wood arrow  25 left**, then **10 left** in red.
+A short toast when a shot leaves you low, just above the ammo's slot if your HUD shows one (the hotbar or an ammo-slot mod), else low in the middle of the screen, never over your aim: **Wood arrow  25 left**, then **10 left** in red.
 
 - Arrows, bolts and fishing bait. Counts the equipped stack only, not spares in your bag.
 - Fires only from shooting, so picking up or moving ammo never sets it off.
@@ -450,7 +450,7 @@ Generated from the mod's code, so it matches the F7 window.
 | Size | 1 | 0.75 to 1.5 | 1 is the normal size. |
 | Opacity | 1 | 0.2 to 1 | 1 is solid; lower shows the game through it. |
 | Anchor X | 0.5 | 0 to 1 | Center of the box. 0 is the left of the screen, 1 the right. |
-| Anchor Y | 0.36 | 0 to 1 | Center of the box. 0 is the bottom of the screen, 1 the top. |
+| Anchor Y | 0.2 | 0 to 1 | Center of the box. 0 is the bottom of the screen, 1 the top. |
 
 **Bench Pins**
 

@@ -10,7 +10,8 @@ namespace KroolWorldUI.Features
     /// A short toast when a shot leaves you with few arrows, bolts or bait: once at the first
     /// count, once more at the second. Fires from Attack.UseAmmo, which spends exactly one per
     /// shot, so the count after a shot lands on each threshold instead of skipping it, and
-    /// picking up or moving ammo never fires it. Counts the equipped stack, not spares. Read-only.
+    /// picking up or moving ammo never fires it. Counts the equipped stack, not spares. Sits above the
+    /// ammo's slot when the HUD shows one, else at the anchor. Read-only.
     /// </summary>
     internal static class AmmoWarning
     {
@@ -57,7 +58,7 @@ namespace KroolWorldUI.Features
             AnchorX = config.Bind(Section, "AnchorX", 0.5f,
                 ConfigText.Desc("Center of the box. 0 is the left of the screen, 1 the right.",
                     new AcceptableValueRange<float>(0f, 1f), placement, step: 0.01f));
-            AnchorY = config.Bind(Section, "AnchorY", 0.36f,
+            AnchorY = config.Bind(Section, "AnchorY", 0.2f,
                 ConfigText.Desc("Center of the box. 0 is the bottom of the screen, 1 the top.",
                     new AcceptableValueRange<float>(0f, 1f), placement, step: 0.01f));
         }
@@ -120,6 +121,8 @@ namespace KroolWorldUI.Features
         private AudioSource _audio;
         private float _shownAt = -100f;
         private bool _previewing;
+        private RectTransform _slot;   // the ammo's slot on the HUD, when one shows it
+        private readonly Vector3[] _corners = new Vector3[4];
 
         internal static void Ensure()
         {
@@ -176,6 +179,7 @@ namespace KroolWorldUI.Features
             if (c == null || _failed.IsSet)
                 return;
             c.Fill(ammo, left, last);
+            c._slot = c.FindSlot(c._icon.sprite);
             c._shownAt = Time.time;
             if (AmmoWarning.Sound.Value)
                 c.PlayTone(last);
@@ -194,6 +198,7 @@ namespace KroolWorldUI.Features
                 var item = prefab != null ? prefab.GetComponent<ItemDrop>()?.m_itemData : null;
                 int count = AmmoWarning.FirstWarning.Value > 0 ? AmmoWarning.FirstWarning.Value : AmmoWarning.SecondWarning.Value;
                 c.Fill(item, Mathf.Max(1, count), AmmoWarning.FirstWarning.Value == 0);
+                c._slot = c.FindSlot(c._icon.sprite);
             }
             else
             {
@@ -251,14 +256,60 @@ namespace KroolWorldUI.Features
             _group.alpha = alpha * AmmoWarning.Opacity.Value;
             if (alpha > 0f)
             {
+                float size = AmmoWarning.Size.Value;
+                if (!Mathf.Approximately(_rect.localScale.x, size))
+                    _rect.localScale = new Vector3(size, size, 1f);
                 var anchor = new Vector2(AmmoWarning.AnchorX.Value, AmmoWarning.AnchorY.Value);
                 _rect.anchorMin = anchor;
                 _rect.anchorMax = anchor;
                 _rect.anchoredPosition = Vector2.zero;
-                float size = AmmoWarning.Size.Value;
-                if (!Mathf.Approximately(_rect.localScale.x, size))
-                    _rect.localScale = new Vector3(size, size, 1f);
+                if (_slot != null && _slot.gameObject.activeInHierarchy)
+                    PlaceBySlot();
             }
+        }
+
+        /// <summary>
+        /// The HUD image showing this ammo's icon (the hotbar, or an ammo-slot mod's panel), so the
+        /// warning can sit by it instead of over the crosshair. Searched once per warning.
+        /// </summary>
+        private RectTransform FindSlot(Sprite icon)
+        {
+            var hud = Hud.instance;
+            if (icon == null || hud == null || hud.m_rootObject == null)
+                return null;
+            RectTransform best = null;
+            foreach (var img in hud.m_rootObject.GetComponentsInChildren<Image>(false))
+            {
+                if (img.sprite != icon || img.transform.IsChildOf(transform))
+                    continue;
+                var rt = img.rectTransform;
+                // Prefer the slot itself (the icon's parent) over the bare icon, for its full size.
+                var slot = rt.parent as RectTransform;
+                best = slot != null && slot != hud.m_rootObject.transform ? slot : rt;
+                break;
+            }
+            return best;
+        }
+
+        /// <summary>Centered above the slot; below it when there is no room above (a top hotbar).</summary>
+        private void PlaceBySlot()
+        {
+            _slot.GetWorldCorners(_corners);
+            float x = (_corners[0].x + _corners[2].x) * 0.5f;
+            float slotTop = _corners[1].y, slotBottom = _corners[0].y;
+            float half = _rect.rect.height * 0.5f * _rect.lossyScale.y;
+            float gap = 8f * _rect.lossyScale.y;
+            float y = slotTop + gap + half;
+            if (_rect.parent is RectTransform screen)
+            {
+                screen.GetWorldCorners(_corners);
+                if (y + half > _corners[1].y)
+                    y = slotBottom - gap - half;
+                // Keep it on screen sideways.
+                float halfW = _rect.rect.width * 0.5f * _rect.lossyScale.x;
+                x = Mathf.Clamp(x, _corners[0].x + halfW, _corners[2].x - halfW);
+            }
+            _rect.position = new Vector3(x, y, _rect.position.z);
         }
 
         private void PlayTone(bool last)
