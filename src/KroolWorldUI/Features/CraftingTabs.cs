@@ -159,7 +159,7 @@ namespace KroolWorldUI.Features
         {
             private static void Postfix()
             {
-                if (_sortText != null && (ZInput.IsGamepadActive() && Categories.Value) != _padLabel)
+                if (_sortText != null && (ZInput.IsGamepadActive() && _bar != null) != _padLabel)
                     UpdateSortLabel();
             }
         }
@@ -179,8 +179,6 @@ namespace KroolWorldUI.Features
                 _session = gui;
                 _perStation.Clear(); // a new login: start from All everywhere
             }
-            EnsureLayout(gui);
-
             var list = (IList)_available.GetValue(gui);
             var rows = new List<object>(list.Count);
             foreach (var row in list)
@@ -192,8 +190,15 @@ namespace KroolWorldUI.Features
                 _counts[(int)CategoryOf(RecipeOf(row))]++;
             _counts[0] = rows.Count;
 
+            // Tabs only help when there are at least two kinds of thing to choose between.
+            int kinds = 0;
+            for (int i = 1; i < _counts.Length; i++)
+                if (_counts[i] > 0)
+                    kinds++;
+            EnsureLayout(gui, Categories.Value && kinds > 1);
+
             // The station's remembered tab, or All when it has nothing for that tab.
-            _current = Categories.Value && _perStation.TryGetValue(StationKey(), out var chosen) ? chosen : Category.All;
+            _current = _bar != null && _perStation.TryGetValue(StationKey(), out var chosen) ? chosen : Category.All;
             if (_counts[(int)_current] == 0)
                 _current = Category.All;
 
@@ -437,7 +442,7 @@ namespace KroolWorldUI.Features
         {
             if (_sortText == null)
                 return;
-            _padLabel = ZInput.IsGamepadActive() && Categories.Value;
+            _padLabel = ZInput.IsGamepadActive() && _bar != null;
             string text = _padLabel
                 ? L10n.T("craft_pad_hint", L10n.T(CategoryKeys[(int)_current]))
                 : L10n.T("craft_sort", L10n.T(SortKeys[(int)Sort.Value]));
@@ -458,9 +463,8 @@ namespace KroolWorldUI.Features
         /// whatever the anchors and pivot. Applied once per inventory screen; the screen is rebuilt
         /// after each logout.
         /// </summary>
-        private static void EnsureLayout(InventoryGui gui)
+        private static void EnsureLayout(InventoryGui gui, bool wantBar)
         {
-            bool wantBar = Categories.Value;
             bool wantSort = SortButton.Value;
             if (_gui == gui && _list != null && (_bar != null) == wantBar && (_sortRow != null) == wantSort)
                 return;
