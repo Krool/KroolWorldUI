@@ -267,6 +267,24 @@ s_BuildMaterials_OffsetX_d = Levo (-) ili desno (+), u HUD pikselima.
 s_BuildMaterials_OffsetY = Pomeraj Y
 s_BuildMaterials_OffsetY_d = Dole (-) ili gore (+), u HUD pikselima.
 
+# Crafting
+sec_Crafting = Izrada
+s_Crafting_Enabled = Uključeno
+s_Crafting_Enabled_d = Kartice kategorija i redosled sortiranja za listu izrade na svakoj stanici.
+s_Crafting_Categories = Kategorije
+s_Crafting_Categories_d = Red kartica iznad liste: oružje, oklop, alati, municija, hrana, materijali. Na kontroleru, D-pad levo i desno menja kartice.
+s_Crafting_Sort = Redosled
+s_Crafting_Sort_d = Podrazumevano: redosled igre. Ime: od A do Ž. Tip: grupisano kao kartice. Nivo stanice: prvo najnovija otključavanja.
+enum_CraftingTabsSortOrder_Default = Podrazumevano
+enum_CraftingTabsSortOrder_Name = Ime
+enum_CraftingTabsSortOrder_Type = Tip
+enum_CraftingTabsSortOrder_StationLevel = Nivo stanice
+s_Crafting_CraftableFirst = Prvo dostupno
+s_Crafting_CraftableFirst_d = Na vrh stavlja ono što odmah možeš da napraviš.
+s_Crafting_CraftableFirst_w = Važi kad „Redosled“ nije „Podrazumevano“.
+s_Crafting_SortButton = Dugme za redosled
+s_Crafting_SortButton_d = Dugme ispod liste koje menja redosled. Desni klik vraća nazad.
+
 # Day Night Bar
 sec_DayNightBar = Traka dana i noći
 s_DayNightBar_Enabled = Uključeno

@@ -267,6 +267,24 @@ s_BuildMaterials_OffsetX_d = გადაწევა მარცხნივ (
 s_BuildMaterials_OffsetY = წანაცვლება Y
 s_BuildMaterials_OffsetY_d = გადაწევა ქვემოთ (-) ან ზემოთ (+), HUD პიქსელებში.
 
+# Crafting
+sec_Crafting = კრაფტი
+s_Crafting_Enabled = ჩართული
+s_Crafting_Enabled_d = კატეგორიების ჩანართები და დალაგება კრაფტის სიისთვის ყველა დანადგართან.
+s_Crafting_Categories = კატეგორიები
+s_Crafting_Categories_d = ჩანართების რიგი სიის ზემოთ: იარაღი, აბჯარი, ხელსაწყოები, ტყვია-წამალი, საჭმელი, მასალები. კონტროლერზე D-pad მარცხნივ და მარჯვნივ ცვლის ჩანართს.
+s_Crafting_Sort = დალაგება
+s_Crafting_Sort_d = ნაგულისხმევი: თამაშის რიგი. სახელი: ანბანურად. ტიპი: დაჯგუფებული ჩანართების მსგავსად. დანადგარის დონე: ჯერ ბოლოს გახსნილი.
+enum_CraftingTabsSortOrder_Default = ნაგულისხმევი
+enum_CraftingTabsSortOrder_Name = სახელი
+enum_CraftingTabsSortOrder_Type = ტიპი
+enum_CraftingTabsSortOrder_StationLevel = დანადგარის დონე
+s_Crafting_CraftableFirst = ჯერ ხელმისაწვდომი
+s_Crafting_CraftableFirst_d = სიის თავში ის, რისი დაკრაფტვაც ახლავე შეგიძლია.
+s_Crafting_CraftableFirst_w = მოქმედებს, როცა „დალაგება“ არ არის „ნაგულისხმევი“.
+s_Crafting_SortButton = დალაგების ღილაკი
+s_Crafting_SortButton_d = ღილაკი სიის ქვემოთ, რომელიც ცვლის დალაგებას. მარჯვენა დაწკაპუნება წინაზე აბრუნებს.
+
 # Day Night Bar
 sec_DayNightBar = დღე-ღამის ზოლი
 s_DayNightBar_Enabled = ჩართული

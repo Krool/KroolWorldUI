@@ -1,6 +1,6 @@
 ![Krool World UI](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/banner.png)
 
-Quality-of-life HUD additions for Valheim: skill XP, carry weight, build materials, food timers, a compass, a day/night bar, and a few countdowns the game doesn't show.
+Quality-of-life HUD additions for Valheim: skill XP, carry weight, build materials, crafting tabs, food timers, a compass, a day/night bar, and a few countdowns the game doesn't show.
 
 - No new items, mechanics or balance changes.
 - Every feature can be switched off or adjusted in game with **F7**, or from the pause menu.
@@ -44,6 +44,7 @@ All elements at once, using the F7 window's **Preview on HUD** setup view. In pl
 | Skill XP bars | Skill tiles with XP bars, and a `+0.8% Swords` popup as you earn XP |
 | Carry weight | Weight bar beside your food |
 | Build materials | With the hammer out: what the selected piece costs, what you have, how many you can build |
+| Crafting tabs | Weapons, armor, tools, ammo, food and materials tabs on every crafting station, and a sort order |
 | Food decay | Shows how much max health, stamina and eitr your food has lost as it wears off |
 | Food reminders | Running out, no food, and optionally "can eat again" (off by default) |
 | Compass | Heading, friends, pins and pings at the top of the screen |
@@ -89,6 +90,16 @@ With the hammer out, a panel beside the build menu's piece box.
 - The panel widens for long material names.
 - Each material's rule is a setting, and you can add others by name (`Copper, Deer Hide`).
 - Counts your inventory only, like the game does when placing.
+
+## Crafting tabs
+
+A row of tabs above the recipe list at every crafting station, and in hand crafting.
+
+- Tabs: All, Weapons, Armor, Tools, Ammo, Food and meads, Materials, Other. Point at one to see its name and how many recipes it holds.
+- Tabs with nothing at this station are greyed out. Each station remembers its tab until you log out.
+- A button under the list sorts by the game's order, name, type or station level (newest unlocks first). Right-click steps back. What you can craft now stays on top (a setting).
+- Controller: the D-pad left and right switch tabs. The sort order is also in the settings window.
+- Works on the Upgrade tab too.
 
 ## Food decay
 
@@ -325,6 +336,16 @@ Generated from the mod's code, so it matches the F7 window.
 | Anchor Y | 0.1 | 0 to 1 | Bottom edge. 0 is the bottom of the screen, 1 the top. Used when Placement is Custom. |
 | Offset X | 0 | -400 to 400 | Move left (-) or right (+), in HUD pixels. |
 | Offset Y | 0 | -400 to 400 | Move down (-) or up (+), in HUD pixels. |
+
+**Crafting**
+
+| Setting | Default | Range or choices | What it does |
+|---|---|---|---|
+| Enabled | On |  | Category tabs and a sort order for the crafting list at every station. |
+| Categories | On |  | A row of tabs above the list: weapons, armor, tools, ammo, food, materials. On a controller, the D-pad left and right switch tabs. |
+| Sort | Default | Default, Name, Type, Station Level | Default: the game's order. Name: A to Z. Type: grouped like the tabs. Station Level: newest unlocks first. |
+| Craftable First | On |  | List what you can craft right now at the top. Used when Sort is not Default. |
+| Sort Button | On |  | A button under the list that changes the sort order. Right-click goes back. |
 
 **Day Night Bar**
 

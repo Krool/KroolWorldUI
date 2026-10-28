@@ -267,6 +267,24 @@ s_BuildMaterials_OffsetX_d = Flytta åt vänster (-) eller höger (+), i HUD-pix
 s_BuildMaterials_OffsetY = Förskjutning Y
 s_BuildMaterials_OffsetY_d = Flytta nedåt (-) eller uppåt (+), i HUD-pixlar.
 
+# Crafting
+sec_Crafting = Tillverkning
+s_Crafting_Enabled = Aktiverad
+s_Crafting_Enabled_d = Kategoriflikar och sorteringsordning för tillverkningslistan vid varje verkstad.
+s_Crafting_Categories = Kategorier
+s_Crafting_Categories_d = En rad flikar ovanför listan: vapen, skydd, verktyg, ammunition, mat, material. Med handkontroll byter styrkorset vänster och höger flik.
+s_Crafting_Sort = Sortering
+s_Crafting_Sort_d = Standard: spelets ordning. Namn: A till Ö. Typ: grupperat som flikarna. Verkstadsnivå: senast upplåsta först.
+enum_CraftingTabsSortOrder_Default = Standard
+enum_CraftingTabsSortOrder_Name = Namn
+enum_CraftingTabsSortOrder_Type = Typ
+enum_CraftingTabsSortOrder_StationLevel = Verkstadsnivå
+s_Crafting_CraftableFirst = Tillverkningsbart först
+s_Crafting_CraftableFirst_d = Visa det du kan tillverka just nu överst.
+s_Crafting_CraftableFirst_w = Används när Sortering inte är Standard.
+s_Crafting_SortButton = Sorteringsknapp
+s_Crafting_SortButton_d = En knapp under listan som byter sorteringsordning. Högerklick går tillbaka.
+
 # Day Night Bar
 sec_DayNightBar = Dag/natt-stapel
 s_DayNightBar_Enabled = Aktiverad

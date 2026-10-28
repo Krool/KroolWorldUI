@@ -267,6 +267,24 @@ s_BuildMaterials_OffsetX_d = 向左 (-) 或向右 (+) 移動，單位為HUD像�
 s_BuildMaterials_OffsetY = 偏移Y
 s_BuildMaterials_OffsetY_d = 向下 (-) 或向上 (+) 移動，單位為HUD像素。
 
+# Crafting
+sec_Crafting = 製作
+s_Crafting_Enabled = 啟用
+s_Crafting_Enabled_d = 為每個製作設施的製作列表加上類別分頁和排序方式。
+s_Crafting_Categories = 類別
+s_Crafting_Categories_d = 列表上方的一排分頁：武器、護甲、工具、彈藥、食物、材料。使用控制器時，以方向鍵左右切換分頁。
+s_Crafting_Sort = 排序
+s_Crafting_Sort_d = 預設：遊戲原本的順序。名稱：依名稱排序。類型：依分頁分組。設施等級：最新解鎖的在前。
+enum_CraftingTabsSortOrder_Default = 預設
+enum_CraftingTabsSortOrder_Name = 名稱
+enum_CraftingTabsSortOrder_Type = 類型
+enum_CraftingTabsSortOrder_StationLevel = 設施等級
+s_Crafting_CraftableFirst = 可製作優先
+s_Crafting_CraftableFirst_d = 把現在就能製作的物品排在最前面。
+s_Crafting_CraftableFirst_w = 排序不是「預設」時生效。
+s_Crafting_SortButton = 排序按鈕
+s_Crafting_SortButton_d = 列表下方用來切換排序方式的按鈕。按滑鼠右鍵可切回上一個。
+
 # Day Night Bar
 sec_DayNightBar = 晝夜條
 s_DayNightBar_Enabled = 啟用

@@ -267,6 +267,24 @@ s_BuildMaterials_OffsetX_d = HUD pikseli cinsinden sola (-) veya sağa (+) kayd�
 s_BuildMaterials_OffsetY = Kaydırma Y
 s_BuildMaterials_OffsetY_d = HUD pikseli cinsinden aşağı (-) veya yukarı (+) kaydır.
 
+# Crafting
+sec_Crafting = Atölye
+s_Crafting_Enabled = Etkin
+s_Crafting_Enabled_d = Her istasyonda üretim listesi için kategori sekmeleri ve sıralama.
+s_Crafting_Categories = Kategoriler
+s_Crafting_Categories_d = Listenin üstünde bir sekme satırı: silahlar, zırhlar, aletler, mühimmat, yiyecek, malzemeler. Oyun kumandasında yön tuşları sol ve sağ sekmeyi değiştirir.
+s_Crafting_Sort = Sıra
+s_Crafting_Sort_d = Varsayılan: oyunun sırası. İsim: A'dan Z'ye. Tür: sekmelerdeki gibi gruplu. İstasyon Seviyesi: en yeni açılanlar önce.
+enum_CraftingTabsSortOrder_Default = Varsayılan
+enum_CraftingTabsSortOrder_Name = İsim
+enum_CraftingTabsSortOrder_Type = Tür
+enum_CraftingTabsSortOrder_StationLevel = İstasyon Seviyesi
+s_Crafting_CraftableFirst = Üretilebilenler Önce
+s_Crafting_CraftableFirst_d = Şu anda üretebileceklerini listenin en üstünde gösterir.
+s_Crafting_CraftableFirst_w = Sıra Varsayılan değilse geçerlidir.
+s_Crafting_SortButton = Sıralama Düğmesi
+s_Crafting_SortButton_d = Listenin altında sıralamayı değiştiren bir düğme. Sağ tık bir önceki sıraya döner.
+
 # Day Night Bar
 sec_DayNightBar = Gün Gece Çubuğu
 s_DayNightBar_Enabled = Etkin

@@ -267,6 +267,24 @@ s_BuildMaterials_OffsetX_d = Déplace à gauche (-) ou à droite (+), en pixels 
 s_BuildMaterials_OffsetY = Décalage Y
 s_BuildMaterials_OffsetY_d = Déplace vers le bas (-) ou le haut (+), en pixels du HUD.
 
+# Crafting
+sec_Crafting = Fabrication
+s_Crafting_Enabled = Activé
+s_Crafting_Enabled_d = Des onglets de catégorie et un ordre de tri pour la liste de fabrication de chaque établi.
+s_Crafting_Categories = Catégories
+s_Crafting_Categories_d = Une rangée d'onglets au-dessus de la liste : armes, armures, outils, munitions, nourriture, matériaux. À la manette, gauche et droite sur la croix changent d'onglet.
+s_Crafting_Sort = Tri
+s_Crafting_Sort_d = Par défaut : l'ordre du jeu. Nom : de A à Z. Type : groupé comme les onglets. Niveau d'établi : les derniers déblocages d'abord.
+enum_CraftingTabsSortOrder_Default = Par défaut
+enum_CraftingTabsSortOrder_Name = Nom
+enum_CraftingTabsSortOrder_Type = Type
+enum_CraftingTabsSortOrder_StationLevel = Niveau d'établi
+s_Crafting_CraftableFirst = Fabricable d'abord
+s_Crafting_CraftableFirst_d = Place en haut de la liste ce que vous pouvez fabriquer tout de suite.
+s_Crafting_CraftableFirst_w = Utilisé quand Tri ne vaut pas Par défaut.
+s_Crafting_SortButton = Bouton de tri
+s_Crafting_SortButton_d = Un bouton sous la liste qui change l'ordre de tri. Le clic droit revient en arrière.
+
 # Day Night Bar
 sec_DayNightBar = Barre jour/nuit
 s_DayNightBar_Enabled = Activé

@@ -24,6 +24,21 @@ seconds_short = $1s
 enough_for = Reicht für $1
 not_enough = Nicht genug
 
+craft_all = Alle
+craft_weapons = Waffen
+craft_armor = Rüstung
+craft_tools = Werkzeug
+craft_ammo = Munition
+craft_food = Essen und Met
+craft_materials = Materialien
+craft_other = Verschiedenes
+craft_sort = Sortierung: $1
+craft_sort_default = Standard
+craft_sort_name = Name
+craft_sort_type = Typ
+craft_sort_level = Ausbaustufe
+craft_pad_hint = $1 (Steuerkreuz links/rechts)
+
 food_running_low = Läuft bald ab
 food_can_eat_again = Wieder essbar
 food_can_eat = essbar

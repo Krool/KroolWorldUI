@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.15.0
+
+- **Crafting tabs.** Every crafting station (and hand crafting) gets a row of tabs above the recipe list: Weapons, Armor, Tools, Ammo, Food and meads, Materials, Other. Empty tabs are greyed out, and each station remembers its tab. On a controller, the D-pad left and right switch tabs.
+- **Sort the crafting list** by the game's order, name, type or station level, with a button under the list (right-click goes back) or in the settings window. What you can craft now stays on top unless you turn that off.
+
 ## 0.14.0
 
 - **Every language Valheim offers.** All text on screen and in the settings window follows the game's language setting. Where the game already has the words (World save in, Repaired, Day), its own translation is used. Numbers use your language's format.

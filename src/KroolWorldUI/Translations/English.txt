@@ -33,6 +33,24 @@ seconds_short = $1s
 enough_for = Enough for $1
 not_enough = Not enough
 
+# Crafting tabs: hover names of the category tabs above the recipe list. One or two words.
+craft_all = All
+craft_weapons = Weapons
+craft_armor = Armor
+craft_tools = Tools
+craft_ammo = Ammo
+craft_food = Food and meads
+craft_materials = Materials
+craft_other = Other
+# The sort button under the list (about 25 letters fit). $1 is one of the orders below.
+craft_sort = Sort: $1
+craft_sort_default = Default
+craft_sort_name = Name
+craft_sort_type = Type
+craft_sort_level = Station level
+# Shown on the sort button while a controller is in use. $1 is the current tab's name.
+craft_pad_hint = $1 (D-pad left/right)
+
 # Food reminders.
 food_running_low = Running low
 food_can_eat_again = Can eat again

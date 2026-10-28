@@ -267,6 +267,24 @@ s_BuildMaterials_OffsetX_d = Nach links (-) oder rechts (+) verschieben, in HUD-
 s_BuildMaterials_OffsetY = Versatz Y
 s_BuildMaterials_OffsetY_d = Nach unten (-) oder oben (+) verschieben, in HUD-Pixeln.
 
+# Crafting
+sec_Crafting = Herstellung
+s_Crafting_Enabled = Aktiviert
+s_Crafting_Enabled_d = Kategorie-Reiter und eine Sortierung für die Herstellungsliste an jeder Werkstation.
+s_Crafting_Categories = Kategorien
+s_Crafting_Categories_d = Eine Reihe Reiter über der Liste: Waffen, Rüstung, Werkzeug, Munition, Essen, Materialien. Am Controller wechselt das Steuerkreuz links und rechts den Reiter.
+s_Crafting_Sort = Sortierung
+s_Crafting_Sort_d = Standard: die Reihenfolge des Spiels. Name: A bis Z. Typ: gruppiert wie die Reiter. Ausbaustufe: neueste Freischaltungen zuerst.
+enum_CraftingTabsSortOrder_Default = Standard
+enum_CraftingTabsSortOrder_Name = Name
+enum_CraftingTabsSortOrder_Type = Typ
+enum_CraftingTabsSortOrder_StationLevel = Ausbaustufe
+s_Crafting_CraftableFirst = Herstellbares zuerst
+s_Crafting_CraftableFirst_d = Was du gerade herstellen kannst, steht oben.
+s_Crafting_CraftableFirst_w = Gilt, wenn Sortierung nicht Standard ist.
+s_Crafting_SortButton = Sortierknopf
+s_Crafting_SortButton_d = Ein Knopf unter der Liste, der die Sortierung wechselt. Rechtsklick geht zurück.
+
 # Day Night Bar
 sec_DayNightBar = Tag-Nacht-Leiste
 s_DayNightBar_Enabled = Aktiviert

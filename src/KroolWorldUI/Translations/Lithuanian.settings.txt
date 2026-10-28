@@ -267,6 +267,24 @@ s_BuildMaterials_OffsetX_d = Kairėn (-) arba dešinėn (+), HUD pikseliais.
 s_BuildMaterials_OffsetY = Poslinkis Y
 s_BuildMaterials_OffsetY_d = Žemyn (-) arba aukštyn (+), HUD pikseliais.
 
+# Crafting
+sec_Crafting = Gaminimas
+s_Crafting_Enabled = Įjungta
+s_Crafting_Enabled_d = Kategorijų skirtukai ir rikiavimo tvarka gaminimo sąrašui kiekvienoje stotyje.
+s_Crafting_Categories = Kategorijos
+s_Crafting_Categories_d = Skirtukų eilė virš sąrašo: ginklai, šarvai, įrankiai, šaudmenys, maistas, medžiagos. Valdiklyje skirtukus perjungia D-pad kairėn ir dešinėn.
+s_Crafting_Sort = Rikiavimas
+s_Crafting_Sort_d = Numatyta: žaidimo tvarka. Pavadinimas: nuo A iki Z. Tipas: sugrupuota kaip skirtukai. Stoties lygis: naujausi atrakinimai pirmi.
+enum_CraftingTabsSortOrder_Default = Numatyta
+enum_CraftingTabsSortOrder_Name = Pavadinimas
+enum_CraftingTabsSortOrder_Type = Tipas
+enum_CraftingTabsSortOrder_StationLevel = Stoties lygis
+s_Crafting_CraftableFirst = Pagaminami pirmi
+s_Crafting_CraftableFirst_d = Tai, ką galite pagaminti dabar, rodoma sąrašo viršuje.
+s_Crafting_CraftableFirst_w = Galioja, kai Rikiavimas nėra Numatyta.
+s_Crafting_SortButton = Rikiavimo mygtukas
+s_Crafting_SortButton_d = Mygtukas po sąrašu, keičiantis rikiavimo tvarką. Dešinysis pelės klavišas grąžina atgal.
+
 # Day Night Bar
 sec_DayNightBar = Paros juosta
 s_DayNightBar_Enabled = Įjungta

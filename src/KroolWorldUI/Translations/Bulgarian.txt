@@ -24,6 +24,21 @@ seconds_short = $1 с
 enough_for = Стига за $1
 not_enough = Не стига
 
+craft_all = Всички
+craft_weapons = Оръжия
+craft_armor = Броня
+craft_tools = Сечива
+craft_ammo = Боеприпаси
+craft_food = Храна и медовини
+craft_materials = Материали
+craft_other = Разни
+craft_sort = Сортиране: $1
+craft_sort_default = По подразбиране
+craft_sort_name = Име
+craft_sort_type = Вид
+craft_sort_level = Ниво на пост
+craft_pad_hint = $1 (DPad наляво/надясно)
+
 food_running_low = Свършва
 food_can_eat_again = Може да ядеш пак
 food_can_eat = може да ядеш

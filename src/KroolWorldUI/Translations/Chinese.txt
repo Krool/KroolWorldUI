@@ -24,6 +24,21 @@ seconds_short = $1秒
 enough_for = 够建 $1 个
 not_enough = 不足
 
+craft_all = 全部
+craft_weapons = 武器
+craft_armor = 护甲
+craft_tools = 工具
+craft_ammo = 弹药
+craft_food = 食物和蜜酒
+craft_materials = 材料
+craft_other = 其他
+craft_sort = 排序：$1
+craft_sort_default = 默认
+craft_sort_name = 名称
+craft_sort_type = 类型
+craft_sort_level = 制作台等级
+craft_pad_hint = $1（方向键左/右）
+
 food_running_low = 即将耗尽
 food_can_eat_again = 可以再吃
 food_can_eat = 可以吃

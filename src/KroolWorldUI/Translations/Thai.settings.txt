@@ -267,6 +267,24 @@ s_BuildMaterials_OffsetX_d = เลื่อนซ้าย (-) หรือข�
 s_BuildMaterials_OffsetY = เลื่อน Y
 s_BuildMaterials_OffsetY_d = เลื่อนลง (-) หรือขึ้น (+) เป็นพิกเซล HUD
 
+# Crafting
+sec_Crafting = สร้าง/ทำ
+s_Crafting_Enabled = เปิดใช้
+s_Crafting_Enabled_d = แท็บหมวดหมู่และการเรียงลำดับสำหรับรายการสร้างที่โต๊ะสร้างทุกแบบ
+s_Crafting_Categories = หมวดหมู่
+s_Crafting_Categories_d = แถวแท็บเหนือรายการ: อาวุธ เกราะ เครื่องมือ กระสุน อาหาร วัสดุ ถ้าใช้คอนโทรลเลอร์ กด D-pad ซ้ายและขวาเพื่อสลับแท็บ
+s_Crafting_Sort = การเรียง
+s_Crafting_Sort_d = ค่าเริ่มต้น: ลำดับของเกม ชื่อ: ตามตัวอักษร ประเภท: จัดกลุ่มแบบเดียวกับแท็บ เลเวลโต๊ะสร้าง: ของที่ปลดล็อกล่าสุดขึ้นก่อน
+enum_CraftingTabsSortOrder_Default = ค่าเริ่มต้น
+enum_CraftingTabsSortOrder_Name = ชื่อ
+enum_CraftingTabsSortOrder_Type = ประเภท
+enum_CraftingTabsSortOrder_StationLevel = เลเวลโต๊ะสร้าง
+s_Crafting_CraftableFirst = ที่สร้างได้ขึ้นก่อน
+s_Crafting_CraftableFirst_d = แสดงของที่สร้างได้ตอนนี้ไว้บนสุดของรายการ
+s_Crafting_CraftableFirst_w = ใช้เมื่อ “การเรียง” ไม่ใช่ “ค่าเริ่มต้น”
+s_Crafting_SortButton = ปุ่มเรียง
+s_Crafting_SortButton_d = ปุ่มใต้รายการที่ใช้เปลี่ยนการเรียง คลิกขวาเพื่อย้อนกลับ
+
 # Day Night Bar
 sec_DayNightBar = แถบกลางวันกลางคืน
 s_DayNightBar_Enabled = เปิดใช้

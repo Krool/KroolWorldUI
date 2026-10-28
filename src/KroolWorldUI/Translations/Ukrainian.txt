@@ -24,6 +24,21 @@ seconds_short = $1 с
 enough_for = Вистачить на $1
 not_enough = Не вистачає
 
+craft_all = Усе
+craft_weapons = Зброя
+craft_armor = Обладунки
+craft_tools = Знаряддя
+craft_ammo = Боєприпаси
+craft_food = Їжа й медовиця
+craft_materials = Матеріали
+craft_other = Різне
+craft_sort = Порядок: $1
+craft_sort_default = Типово
+craft_sort_name = Назва
+craft_sort_type = Тип
+craft_sort_level = Рівень верстата
+craft_pad_hint = $1 (хрестовина ліворуч/праворуч)
+
 food_running_low = Закінчується
 food_can_eat_again = Можна їсти знову
 food_can_eat = можна їсти

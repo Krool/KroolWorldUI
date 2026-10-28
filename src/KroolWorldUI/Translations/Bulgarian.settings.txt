@@ -267,6 +267,24 @@ s_BuildMaterials_OffsetX_d = Наляво (-) или надясно (+), в пи
 s_BuildMaterials_OffsetY = Отместване Y
 s_BuildMaterials_OffsetY_d = Надолу (-) или нагоре (+), в пиксели на HUD.
 
+# Crafting
+sec_Crafting = Изработване
+s_Crafting_Enabled = Включено
+s_Crafting_Enabled_d = Раздели по категории и ред на сортиране за списъка за изработване на всеки пост.
+s_Crafting_Categories = Категории
+s_Crafting_Categories_d = Ред раздели над списъка: оръжия, броня, сечива, боеприпаси, храна, материали. С контролер DPad наляво и надясно сменя разделите.
+s_Crafting_Sort = Сортиране
+s_Crafting_Sort_d = По подразбиране: редът на играта. Име: от А до Я. Вид: групирано като разделите. Ниво на пост: първо най-новите отключени.
+enum_CraftingTabsSortOrder_Default = По подразбиране
+enum_CraftingTabsSortOrder_Name = Име
+enum_CraftingTabsSortOrder_Type = Вид
+enum_CraftingTabsSortOrder_StationLevel = Ниво на пост
+s_Crafting_CraftableFirst = Първо възможните
+s_Crafting_CraftableFirst_d = Показва най-отгоре това, което можеш да изработиш веднага.
+s_Crafting_CraftableFirst_w = Важи, когато „Сортиране“ не е „По подразбиране“.
+s_Crafting_SortButton = Бутон за сортиране
+s_Crafting_SortButton_d = Бутон под списъка, който сменя реда на сортиране. Десен клик връща назад.
+
 # Day Night Bar
 sec_DayNightBar = Лента ден и нощ
 s_DayNightBar_Enabled = Включено

@@ -267,6 +267,24 @@ s_BuildMaterials_OffsetX_d = Siirrä vasemmalle (-) tai oikealle (+) HUD-piksele
 s_BuildMaterials_OffsetY = Siirto Y
 s_BuildMaterials_OffsetY_d = Siirrä alas (-) tai ylös (+) HUD-pikseleinä.
 
+# Crafting
+sec_Crafting = Käsityöt
+s_Crafting_Enabled = Käytössä
+s_Crafting_Enabled_d = Luokkavälilehdet ja järjestys valmistuslistalle jokaisella asemalla.
+s_Crafting_Categories = Luokat
+s_Crafting_Categories_d = Välilehtirivi listan yläpuolella: aseet, panssarit, työkalut, ammukset, ruoka, materiaalit. Ohjaimella ristiohjain vasemmalle ja oikealle vaihtaa välilehteä.
+s_Crafting_Sort = Järjestys
+s_Crafting_Sort_d = Oletus: pelin oma järjestys. Nimi: aakkosjärjestys. Tyyppi: ryhmitelty kuten välilehdet. Aseman taso: uusimmat avaukset ensin.
+enum_CraftingTabsSortOrder_Default = Oletus
+enum_CraftingTabsSortOrder_Name = Nimi
+enum_CraftingTabsSortOrder_Type = Tyyppi
+enum_CraftingTabsSortOrder_StationLevel = Aseman taso
+s_Crafting_CraftableFirst = Valmistettavat ensin
+s_Crafting_CraftableFirst_d = Listan kärkeen se, minkä voit valmistaa juuri nyt.
+s_Crafting_CraftableFirst_w = Vaikuttaa, kun Järjestys ei ole Oletus.
+s_Crafting_SortButton = Järjestyspainike
+s_Crafting_SortButton_d = Listan alla oleva painike, joka vaihtaa järjestystä. Oikea napsautus palaa edelliseen.
+
 # Day Night Bar
 sec_DayNightBar = Vuorokausipalkki
 s_DayNightBar_Enabled = Käytössä

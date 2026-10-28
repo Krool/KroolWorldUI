@@ -267,6 +267,24 @@ s_BuildMaterials_OffsetX_d = HUD पिक्सेल में बाएँ (-
 s_BuildMaterials_OffsetY = ऑफ़सेट Y
 s_BuildMaterials_OffsetY_d = HUD पिक्सेल में नीचे (-) या ऊपर (+) खिसकाएँ।
 
+# Crafting
+sec_Crafting = क्राफ़्टिंग
+s_Crafting_Enabled = चालू
+s_Crafting_Enabled_d = हर स्टेशन पर क्राफ़्टिंग सूची के लिए कैटेगरी टैब और क्रम।
+s_Crafting_Categories = कैटेगरी
+s_Crafting_Categories_d = सूची के ऊपर टैब की एक पंक्ति: हथियार, कवच, औज़ार, गोला-बारूद, भोजन, सामग्री। कंट्रोलर पर D-pad बाएँ और दाएँ से टैब बदलते हैं।
+s_Crafting_Sort = क्रम
+s_Crafting_Sort_d = डिफ़ॉल्ट: गेम का अपना क्रम। नाम: A से Z। प्रकार: टैब की तरह समूहों में। स्टेशन लेवल: सबसे नए अनलॉक पहले।
+enum_CraftingTabsSortOrder_Default = डिफ़ॉल्ट
+enum_CraftingTabsSortOrder_Name = नाम
+enum_CraftingTabsSortOrder_Type = प्रकार
+enum_CraftingTabsSortOrder_StationLevel = स्टेशन लेवल
+s_Crafting_CraftableFirst = क्राफ़्ट योग्य पहले
+s_Crafting_CraftableFirst_d = जो आप अभी क्राफ़्ट कर सकते हैं, उसे सूची में सबसे ऊपर दिखाएँ।
+s_Crafting_CraftableFirst_w = तब लागू जब क्रम डिफ़ॉल्ट न हो।
+s_Crafting_SortButton = क्रम बटन
+s_Crafting_SortButton_d = सूची के नीचे एक बटन जो क्रम बदलता है। राइट-क्लिक से पिछला क्रम आता है।
+
 # Day Night Bar
 sec_DayNightBar = दिन-रात बार
 s_DayNightBar_Enabled = चालू

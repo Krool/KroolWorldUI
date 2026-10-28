@@ -52,6 +52,7 @@ namespace KroolWorldUI
             FoodDecay.BindConfig(config);
             FoodCallout.BindConfig(config);
             BuildMaterials.BindConfig(config);
+            CraftingTabs.BindConfig(config);
             DayNightBar.BindConfig(config);
             Compass.BindConfig(config);
             BuffIcons.BindConfig(config);

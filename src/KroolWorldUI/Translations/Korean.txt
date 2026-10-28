@@ -24,6 +24,21 @@ seconds_short = $1초
 enough_for = $1개 가능
 not_enough = 부족
 
+craft_all = 전체
+craft_weapons = 무기
+craft_armor = 방어구
+craft_tools = 도구
+craft_ammo = 탄약
+craft_food = 음식 및 벌꿀주
+craft_materials = 재료
+craft_other = 기타
+craft_sort = 정렬: $1
+craft_sort_default = 기본
+craft_sort_name = 이름
+craft_sort_type = 종류
+craft_sort_level = 작업대 레벨
+craft_pad_hint = $1 (방향 패드 좌/우)
+
 food_running_low = 곧 소진
 food_can_eat_again = 다시 먹기 가능
 food_can_eat = 먹기 가능

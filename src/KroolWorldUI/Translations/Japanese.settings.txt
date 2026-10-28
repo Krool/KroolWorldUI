@@ -267,6 +267,24 @@ s_BuildMaterials_OffsetX_d = 左 (-) または右 (+) へ移動（HUDピクセ�
 s_BuildMaterials_OffsetY = オフセットY
 s_BuildMaterials_OffsetY_d = 下 (-) または上 (+) へ移動（HUDピクセル）。
 
+# Crafting
+sec_Crafting = 作成
+s_Crafting_Enabled = 有効
+s_Crafting_Enabled_d = すべての作成設備で、作成リストにカテゴリータブと並び順を追加します。
+s_Crafting_Categories = カテゴリー
+s_Crafting_Categories_d = リストの上に並ぶタブ：武器、アーマー、道具、弾薬、食料、素材。コントローラーでは十字キーの左右でタブを切り替えます。
+s_Crafting_Sort = 並び替え
+s_Crafting_Sort_d = 標準：ゲーム本来の順番。名前：名前順。種類：タブと同じ分類でまとめる。設備レベル：新しく解放されたものが先。
+enum_CraftingTabsSortOrder_Default = 標準
+enum_CraftingTabsSortOrder_Name = 名前
+enum_CraftingTabsSortOrder_Type = 種類
+enum_CraftingTabsSortOrder_StationLevel = 設備レベル
+s_Crafting_CraftableFirst = 作成可能を優先
+s_Crafting_CraftableFirst_d = 今すぐ作成できるものをリストの上に表示します。
+s_Crafting_CraftableFirst_w = 「並び替え」が「標準」以外のとき有効。
+s_Crafting_SortButton = 並び替えボタン
+s_Crafting_SortButton_d = リストの下に並び順を切り替えるボタンを表示します。右クリックで前に戻ります。
+
 # Day Night Bar
 sec_DayNightBar = 昼夜バー
 s_DayNightBar_Enabled = 有効

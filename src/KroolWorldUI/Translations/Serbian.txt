@@ -24,6 +24,21 @@ seconds_short = $1 s
 enough_for = Dovoljno za $1
 not_enough = Nedovoljno
 
+craft_all = Sve
+craft_weapons = Oružje
+craft_armor = Oklop
+craft_tools = Alati
+craft_ammo = Municija
+craft_food = Hrana i medovina
+craft_materials = Materijali
+craft_other = Ostalo
+craft_sort = Redosled: $1
+craft_sort_default = Podrazumevano
+craft_sort_name = Ime
+craft_sort_type = Tip
+craft_sort_level = Nivo stanice
+craft_pad_hint = $1 (D-pad levo/desno)
+
 food_running_low = Ističe
 food_can_eat_again = Možeš opet da jedeš
 food_can_eat = možeš da jedeš

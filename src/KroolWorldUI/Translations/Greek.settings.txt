@@ -267,6 +267,24 @@ s_BuildMaterials_OffsetX_d = Μετακίνηση αριστερά (-) ή δεξ
 s_BuildMaterials_OffsetY = Μετατόπιση Y
 s_BuildMaterials_OffsetY_d = Μετακίνηση κάτω (-) ή πάνω (+), σε pixel του HUD.
 
+# Crafting
+sec_Crafting = Κατασκευή
+s_Crafting_Enabled = Ενεργό
+s_Crafting_Enabled_d = Καρτέλες κατηγοριών και σειρά ταξινόμησης για τη λίστα κατασκευής σε κάθε σταθμό.
+s_Crafting_Categories = Κατηγορίες
+s_Crafting_Categories_d = Μια σειρά από καρτέλες πάνω από τη λίστα: όπλα, πανοπλίες, εργαλεία, βλήματα, τροφή, υλικά. Με χειριστήριο, το D-pad αριστερά και δεξιά αλλάζει καρτέλα.
+s_Crafting_Sort = Σειρά
+s_Crafting_Sort_d = Προεπιλογή: η σειρά του παιχνιδιού. Όνομα: αλφαβητικά. Τύπος: σε ομάδες όπως οι καρτέλες. Επίπεδο σταθμού: πρώτα ό,τι ξεκλειδώθηκε πιο πρόσφατα.
+enum_CraftingTabsSortOrder_Default = Προεπιλογή
+enum_CraftingTabsSortOrder_Name = Όνομα
+enum_CraftingTabsSortOrder_Type = Τύπος
+enum_CraftingTabsSortOrder_StationLevel = Επίπεδο σταθμού
+s_Crafting_CraftableFirst = Πρώτα τα κατασκευάσιμα
+s_Crafting_CraftableFirst_d = Ό,τι μπορείς να κατασκευάσεις τώρα εμφανίζεται στην κορυφή της λίστας.
+s_Crafting_CraftableFirst_w = Ισχύει όταν η Σειρά δεν είναι Προεπιλογή.
+s_Crafting_SortButton = Κουμπί σειράς
+s_Crafting_SortButton_d = Ένα κουμπί κάτω από τη λίστα που αλλάζει τη σειρά. Το δεξί κλικ γυρίζει πίσω.
+
 # Day Night Bar
 sec_DayNightBar = Μπάρα ημέρας-νύχτας
 s_DayNightBar_Enabled = Ενεργό

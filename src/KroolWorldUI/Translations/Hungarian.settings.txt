@@ -267,6 +267,24 @@ s_BuildMaterials_OffsetX_d = Balra (-) vagy jobbra (+), HUD pixelben.
 s_BuildMaterials_OffsetY = Eltolás Y
 s_BuildMaterials_OffsetY_d = Le (-) vagy fel (+), HUD pixelben.
 
+# Crafting
+sec_Crafting = Barkácsolás
+s_Crafting_Enabled = Bekapcsolva
+s_Crafting_Enabled_d = Kategóriafülek és rendezés a barkácslistához minden állomáson.
+s_Crafting_Categories = Kategóriák
+s_Crafting_Categories_d = Fülsor a lista felett: fegyverek, páncél, eszközök, lőszer, élelem, anyagok. Kontrolleren a D-pad balra és jobbra vált a fülek között.
+s_Crafting_Sort = Rendezés
+s_Crafting_Sort_d = Alapértelmezett: a játék sorrendje. Név: A-tól Z-ig. Típus: a fülek szerint csoportosítva. Állomásszint: a legújabb feloldások elöl.
+enum_CraftingTabsSortOrder_Default = Alapértelmezett
+enum_CraftingTabsSortOrder_Name = Név
+enum_CraftingTabsSortOrder_Type = Típus
+enum_CraftingTabsSortOrder_StationLevel = Állomásszint
+s_Crafting_CraftableFirst = Elkészíthető elöl
+s_Crafting_CraftableFirst_d = Ami most elkészíthető, a lista tetejére kerül.
+s_Crafting_CraftableFirst_w = Csak ha Rendezés nem Alapértelmezett.
+s_Crafting_SortButton = Rendezés gomb
+s_Crafting_SortButton_d = Gomb a lista alatt, amely a rendezést váltja. Jobb klikk visszalép.
+
 # Day Night Bar
 sec_DayNightBar = Nappal-éjszaka sáv
 s_DayNightBar_Enabled = Bekapcsolva

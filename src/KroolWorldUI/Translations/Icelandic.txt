@@ -24,6 +24,21 @@ seconds_short = $1s
 enough_for = Nóg fyrir $1
 not_enough = Ekki nóg
 
+craft_all = Allt
+craft_weapons = Vopn
+craft_armor = Brynvörn
+craft_tools = Verkfæri
+craft_ammo = Skotfæri
+craft_food = Matur og mjöður
+craft_materials = Efni
+craft_other = Ýmislegt
+craft_sort = Röðun: $1
+craft_sort_default = Sjálfgefið
+craft_sort_name = Nafn
+craft_sort_type = Tegund
+craft_sort_level = Gæði vinnustöðvar
+craft_pad_hint = $1 (stýrikross vinstri/hægri)
+
 food_running_low = Að klárast
 food_can_eat_again = Má borða aftur
 food_can_eat = má borða

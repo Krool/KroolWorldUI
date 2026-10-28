@@ -269,6 +269,24 @@ s_BuildMaterials_OffsetX_d = Move left (-) or right (+), in HUD pixels.
 s_BuildMaterials_OffsetY = Offset Y
 s_BuildMaterials_OffsetY_d = Move down (-) or up (+), in HUD pixels.
 
+# Crafting
+sec_Crafting = Crafting
+s_Crafting_Enabled = Enabled
+s_Crafting_Enabled_d = Category tabs and a sort order for the crafting list at every station.
+s_Crafting_Categories = Categories
+s_Crafting_Categories_d = A row of tabs above the list: weapons, armor, tools, ammo, food, materials. On a controller, the D-pad left and right switch tabs.
+s_Crafting_Sort = Sort
+s_Crafting_Sort_d = Default: the game's order. Name: A to Z. Type: grouped like the tabs. Station Level: newest unlocks first.
+enum_CraftingTabsSortOrder_Default = Default
+enum_CraftingTabsSortOrder_Name = Name
+enum_CraftingTabsSortOrder_Type = Type
+enum_CraftingTabsSortOrder_StationLevel = Station Level
+s_Crafting_CraftableFirst = Craftable First
+s_Crafting_CraftableFirst_d = List what you can craft right now at the top.
+s_Crafting_CraftableFirst_w = Used when Sort is not Default.
+s_Crafting_SortButton = Sort Button
+s_Crafting_SortButton_d = A button under the list that changes the sort order. Right-click goes back.
+
 # Day Night Bar
 sec_DayNightBar = Day Night Bar
 s_DayNightBar_Enabled = Enabled

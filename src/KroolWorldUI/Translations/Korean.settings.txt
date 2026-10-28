@@ -267,6 +267,24 @@ s_BuildMaterials_OffsetX_d = 왼쪽(-) 또는 오른쪽(+)으로 이동(HUD 픽�
 s_BuildMaterials_OffsetY = 오프셋 Y
 s_BuildMaterials_OffsetY_d = 아래(-) 또는 위(+)로 이동(HUD 픽셀).
 
+# Crafting
+sec_Crafting = 제작
+s_Crafting_Enabled = 사용
+s_Crafting_Enabled_d = 모든 작업대의 제작 목록에 범주 탭과 정렬 순서를 추가합니다.
+s_Crafting_Categories = 범주
+s_Crafting_Categories_d = 목록 위에 있는 탭 줄: 무기, 방어구, 도구, 탄약, 음식, 재료. 컨트롤러에서는 방향 패드 좌우로 탭을 바꿉니다.
+s_Crafting_Sort = 정렬
+s_Crafting_Sort_d = 기본: 게임 원래 순서. 이름: 가나다순. 종류: 탭처럼 묶어서 정렬. 작업대 레벨: 최근에 해금된 것부터.
+enum_CraftingTabsSortOrder_Default = 기본
+enum_CraftingTabsSortOrder_Name = 이름
+enum_CraftingTabsSortOrder_Type = 종류
+enum_CraftingTabsSortOrder_StationLevel = 작업대 레벨
+s_Crafting_CraftableFirst = 제작 가능 우선
+s_Crafting_CraftableFirst_d = 지금 제작할 수 있는 것을 맨 위에 표시합니다.
+s_Crafting_CraftableFirst_w = '정렬' 설정이 '기본'이 아닐 때 사용.
+s_Crafting_SortButton = 정렬 버튼
+s_Crafting_SortButton_d = 목록 아래에서 정렬 순서를 바꾸는 버튼. 우클릭하면 이전 순서로 돌아갑니다.
+
 # Day Night Bar
 sec_DayNightBar = 낮밤 바
 s_DayNightBar_Enabled = 사용

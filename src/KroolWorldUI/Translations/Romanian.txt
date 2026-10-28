@@ -24,6 +24,21 @@ seconds_short = $1 s
 enough_for = Ajunge pentru $1
 not_enough = Nu ajunge
 
+craft_all = Toate
+craft_weapons = Arme
+craft_armor = Armură
+craft_tools = Unelte
+craft_ammo = Muniție
+craft_food = Mâncare și mied
+craft_materials = Materiale
+craft_other = Diverse
+craft_sort = Sortare: $1
+craft_sort_default = Implicit
+craft_sort_name = Nume
+craft_sort_type = Tip
+craft_sort_level = Nivel stație
+craft_pad_hint = $1 (D-pad stânga/dreapta)
+
 food_running_low = Pe terminate
 food_can_eat_again = Poți mânca iar
 food_can_eat = poți mânca

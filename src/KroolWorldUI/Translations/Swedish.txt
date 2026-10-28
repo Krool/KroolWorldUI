@@ -24,6 +24,21 @@ seconds_short = $1s
 enough_for = Räcker till $1
 not_enough = Inte nog
 
+craft_all = Alla
+craft_weapons = Vapen
+craft_armor = Skydd
+craft_tools = Verktyg
+craft_ammo = Ammunition
+craft_food = Mat och mjöd
+craft_materials = Material
+craft_other = Diverse
+craft_sort = Sortering: $1
+craft_sort_default = Standard
+craft_sort_name = Namn
+craft_sort_type = Typ
+craft_sort_level = Verkstadsnivå
+craft_pad_hint = $1 (styrkors vänster/höger)
+
 food_running_low = Tar snart slut
 food_can_eat_again = Kan äta igen
 food_can_eat = kan ätas

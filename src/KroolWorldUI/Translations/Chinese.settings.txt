@@ -267,6 +267,24 @@ s_BuildMaterials_OffsetX_d = 向左 (-) 或向右 (+) 移动，单位为HUD像�
 s_BuildMaterials_OffsetY = 偏移Y
 s_BuildMaterials_OffsetY_d = 向下 (-) 或向上 (+) 移动，单位为HUD像素。
 
+# Crafting
+sec_Crafting = 制作
+s_Crafting_Enabled = 启用
+s_Crafting_Enabled_d = 为每个制作台的制作列表加上分类标签页和排序方式。
+s_Crafting_Categories = 分类
+s_Crafting_Categories_d = 列表上方的一排标签页：武器、护甲、工具、弹药、食物、材料。使用手柄时，用方向键左右切换标签页。
+s_Crafting_Sort = 排序
+s_Crafting_Sort_d = 默认：游戏原有顺序。名称：按名称排序。类型：按标签页分组。制作台等级：最新解锁的在前。
+enum_CraftingTabsSortOrder_Default = 默认
+enum_CraftingTabsSortOrder_Name = 名称
+enum_CraftingTabsSortOrder_Type = 类型
+enum_CraftingTabsSortOrder_StationLevel = 制作台等级
+s_Crafting_CraftableFirst = 可制作优先
+s_Crafting_CraftableFirst_d = 把现在就能制作的物品排在最前面。
+s_Crafting_CraftableFirst_w = 排序不是“默认”时生效。
+s_Crafting_SortButton = 排序按钮
+s_Crafting_SortButton_d = 列表下方用于切换排序方式的按钮。右键点击可切回上一个。
+
 # Day Night Bar
 sec_DayNightBar = 昼夜条
 s_DayNightBar_Enabled = 启用

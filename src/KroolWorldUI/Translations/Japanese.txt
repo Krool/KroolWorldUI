@@ -24,6 +24,21 @@ seconds_short = $1秒
 enough_for = $1個分
 not_enough = 不足
 
+craft_all = すべて
+craft_weapons = 武器
+craft_armor = アーマー
+craft_tools = 道具
+craft_ammo = 弾薬
+craft_food = 食料・蜂蜜酒
+craft_materials = 素材
+craft_other = その他
+craft_sort = 並び替え：$1
+craft_sort_default = 標準
+craft_sort_name = 名前
+craft_sort_type = 種類
+craft_sort_level = 設備レベル
+craft_pad_hint = $1（十字キー左右）
+
 food_running_low = もうすぐ切れる
 food_can_eat_again = また食べられる
 food_can_eat = 食べられる

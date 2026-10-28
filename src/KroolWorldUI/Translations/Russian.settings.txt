@@ -267,6 +267,24 @@ s_BuildMaterials_OffsetX_d = Сдвиг влево (-) или вправо (+), 
 s_BuildMaterials_OffsetY = Сдвиг Y
 s_BuildMaterials_OffsetY_d = Сдвиг вниз (-) или вверх (+), в пикселях HUD.
 
+# Crafting
+sec_Crafting = Ремесло
+s_Crafting_Enabled = Включено
+s_Crafting_Enabled_d = Вкладки категорий и порядок сортировки для списка ремесла на любом станке.
+s_Crafting_Categories = Категории
+s_Crafting_Categories_d = Ряд вкладок над списком: оружие, броня, инструменты, боеприпасы, еда, материалы. На контроллере вкладки переключает крестовина влево и вправо.
+s_Crafting_Sort = Порядок
+s_Crafting_Sort_d = По умолчанию: порядок игры. Название: от А до Я. Тип: группами, как во вкладках. Уровень станка: сначала новые открытия.
+enum_CraftingTabsSortOrder_Default = По умолчанию
+enum_CraftingTabsSortOrder_Name = Название
+enum_CraftingTabsSortOrder_Type = Тип
+enum_CraftingTabsSortOrder_StationLevel = Уровень станка
+s_Crafting_CraftableFirst = Доступное сначала
+s_Crafting_CraftableFirst_d = Показывает вверху то, что можно создать прямо сейчас.
+s_Crafting_CraftableFirst_w = Используется, если «Порядок» не «По умолчанию».
+s_Crafting_SortButton = Кнопка сортировки
+s_Crafting_SortButton_d = Кнопка под списком, которая меняет порядок сортировки. Правый клик переключает обратно.
+
 # Day Night Bar
 sec_DayNightBar = Полоса дня и ночи
 s_DayNightBar_Enabled = Включено

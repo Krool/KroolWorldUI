@@ -267,6 +267,24 @@ s_BuildMaterials_OffsetX_d = W lewo (-) lub w prawo (+), w pikselach HUD.
 s_BuildMaterials_OffsetY = Przesunięcie Y
 s_BuildMaterials_OffsetY_d = W dół (-) lub w górę (+), w pikselach HUD.
 
+# Crafting
+sec_Crafting = Wytwarzanie
+s_Crafting_Enabled = Włączone
+s_Crafting_Enabled_d = Zakładki kategorii i kolejność sortowania listy wytwarzania na każdym stanowisku.
+s_Crafting_Categories = Kategorie
+s_Crafting_Categories_d = Rząd zakładek nad listą: broń, pancerz, narzędzia, amunicja, jedzenie, materiały. Na padzie krzyżak w lewo i w prawo przełącza zakładki.
+s_Crafting_Sort = Sortowanie
+s_Crafting_Sort_d = Domyślnie: kolejność z gry. Nazwa: od A do Z. Typ: grupami jak zakładki. Poziom stanowiska: najnowsze odblokowania na początku.
+enum_CraftingTabsSortOrder_Default = Domyślnie
+enum_CraftingTabsSortOrder_Name = Nazwa
+enum_CraftingTabsSortOrder_Type = Typ
+enum_CraftingTabsSortOrder_StationLevel = Poziom stanowiska
+s_Crafting_CraftableFirst = Najpierw dostępne
+s_Crafting_CraftableFirst_d = Na górze listy to, co możesz wytworzyć teraz.
+s_Crafting_CraftableFirst_w = Działa, gdy Sortowanie nie jest Domyślnie.
+s_Crafting_SortButton = Przycisk sortowania
+s_Crafting_SortButton_d = Przycisk pod listą, który zmienia kolejność sortowania. Prawy przycisk myszy cofa.
+
 # Day Night Bar
 sec_DayNightBar = Pasek dnia i nocy
 s_DayNightBar_Enabled = Włączone

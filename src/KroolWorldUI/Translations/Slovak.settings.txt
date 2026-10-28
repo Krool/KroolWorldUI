@@ -267,6 +267,24 @@ s_BuildMaterials_OffsetX_d = Doľava (-) alebo doprava (+), v pixeloch HUD.
 s_BuildMaterials_OffsetY = Posun Y
 s_BuildMaterials_OffsetY_d = Dole (-) alebo hore (+), v pixeloch HUD.
 
+# Crafting
+sec_Crafting = Výroba
+s_Crafting_Enabled = Zapnuté
+s_Crafting_Enabled_d = Záložky kategórií a poradie zoznamu výroby na každom pracovisku.
+s_Crafting_Categories = Kategórie
+s_Crafting_Categories_d = Rad záložiek nad zoznamom: zbrane, zbroj, nástroje, strelivo, jedlo, materiály. Na ovládači prepína záložky D-pad vľavo a vpravo.
+s_Crafting_Sort = Zoradenie
+s_Crafting_Sort_d = Predvolené: poradie z hry. Názov: od A po Z. Typ: zoskupené ako záložky. Úroveň pracoviska: najnovšie odomknuté navrchu.
+enum_CraftingTabsSortOrder_Default = Predvolené
+enum_CraftingTabsSortOrder_Name = Názov
+enum_CraftingTabsSortOrder_Type = Typ
+enum_CraftingTabsSortOrder_StationLevel = Úroveň pracoviska
+s_Crafting_CraftableFirst = Vyrobiteľné navrchu
+s_Crafting_CraftableFirst_d = To, čo môžeš vyrobiť hneď teraz, je na začiatku zoznamu.
+s_Crafting_CraftableFirst_w = Platí, keď Zoradenie nie je Predvolené.
+s_Crafting_SortButton = Tlačidlo zoradenia
+s_Crafting_SortButton_d = Tlačidlo pod zoznamom, ktoré mení poradie. Pravé tlačidlo myši vráti späť.
+
 # Day Night Bar
 sec_DayNightBar = Pruh dňa a noci
 s_DayNightBar_Enabled = Zapnuté

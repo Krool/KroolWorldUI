@@ -267,6 +267,24 @@ s_BuildMaterials_OffsetX_d = Færa til vinstri (-) eða hægri (+), í HUD-dílu
 s_BuildMaterials_OffsetY = Hliðrun Y
 s_BuildMaterials_OffsetY_d = Færa niður (-) eða upp (+), í HUD-dílum.
 
+# Crafting
+sec_Crafting = Smíði
+s_Crafting_Enabled = Virkt
+s_Crafting_Enabled_d = Flokkaflipar og röðun fyrir smíðalistann við hverja vinnustöð.
+s_Crafting_Categories = Flokkar
+s_Crafting_Categories_d = Röð flipa fyrir ofan listann: vopn, brynvörn, verkfæri, skotfæri, matur, efni. Á fjarstýringu skiptir stýrikrossinn um flipa með vinstri og hægri.
+s_Crafting_Sort = Röðun
+s_Crafting_Sort_d = Sjálfgefið: röð leiksins. Nafn: A til Ö. Tegund: flokkað eins og fliparnir. Gæði vinnustöðvar: nýjustu opnanir fyrst.
+enum_CraftingTabsSortOrder_Default = Sjálfgefið
+enum_CraftingTabsSortOrder_Name = Nafn
+enum_CraftingTabsSortOrder_Type = Tegund
+enum_CraftingTabsSortOrder_StationLevel = Gæði vinnustöðvar
+s_Crafting_CraftableFirst = Smíðanlegt fyrst
+s_Crafting_CraftableFirst_d = Sýna efst það sem þú getur smíðað núna.
+s_Crafting_CraftableFirst_w = Notað þegar Röðun er ekki Sjálfgefið.
+s_Crafting_SortButton = Röðunarhnappur
+s_Crafting_SortButton_d = Hnappur undir listanum sem breytir röðuninni. Hægrismellur fer til baka.
+
 # Day Night Bar
 sec_DayNightBar = Dægurstika
 s_DayNightBar_Enabled = Virkt

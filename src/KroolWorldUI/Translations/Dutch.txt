@@ -24,6 +24,21 @@ seconds_short = $1s
 enough_for = Genoeg voor $1
 not_enough = Niet genoeg
 
+craft_all = Alles
+craft_weapons = Wapens
+craft_armor = Harnas
+craft_tools = Gereedschap
+craft_ammo = Munitie
+craft_food = Voedsel en mede
+craft_materials = Materialen
+craft_other = Diversen
+craft_sort = Sortering: $1
+craft_sort_default = Standaard
+craft_sort_name = Naam
+craft_sort_type = Type
+craft_sort_level = Stationslevel
+craft_pad_hint = $1 (D-pad links/rechts)
+
 food_running_low = Raakt op
 food_can_eat_again = Weer eetbaar
 food_can_eat = eetbaar

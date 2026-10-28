@@ -24,6 +24,21 @@ seconds_short = $1 s
 enough_for = Dá para $1
 not_enough = Não dá
 
+craft_all = Tudo
+craft_weapons = Armas
+craft_armor = Armadura
+craft_tools = Ferramentas
+craft_ammo = Munição
+craft_food = Comida e hidroméis
+craft_materials = Materiais
+craft_other = Outros
+craft_sort = Ordem: $1
+craft_sort_default = Padrão
+craft_sort_name = Nome
+craft_sort_type = Tipo
+craft_sort_level = Nível da bancada
+craft_pad_hint = $1 (direcional esq./dir.)
+
 food_running_low = Acabando
 food_can_eat_again = Pode comer de novo
 food_can_eat = pode comer

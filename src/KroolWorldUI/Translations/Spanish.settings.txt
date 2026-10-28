@@ -267,6 +267,24 @@ s_BuildMaterials_OffsetX_d = Mueve a la izquierda (-) o a la derecha (+), en pí
 s_BuildMaterials_OffsetY = Desfase Y
 s_BuildMaterials_OffsetY_d = Mueve abajo (-) o arriba (+), en píxeles del HUD.
 
+# Crafting
+sec_Crafting = Elaboración
+s_Crafting_Enabled = Activado
+s_Crafting_Enabled_d = Pestañas de categoría y un orden para la lista de elaboración en cada estación de trabajo.
+s_Crafting_Categories = Categorías
+s_Crafting_Categories_d = Una fila de pestañas sobre la lista: armas, armaduras, herramientas, munición, comida, materiales. Con mando, izquierda y derecha en la cruceta cambian de pestaña.
+s_Crafting_Sort = Orden
+s_Crafting_Sort_d = Por defecto: el orden del juego. Nombre: de la A a la Z. Tipo: agrupado como las pestañas. Nivel de estación: lo último desbloqueado primero.
+enum_CraftingTabsSortOrder_Default = Por defecto
+enum_CraftingTabsSortOrder_Name = Nombre
+enum_CraftingTabsSortOrder_Type = Tipo
+enum_CraftingTabsSortOrder_StationLevel = Nivel de estación
+s_Crafting_CraftableFirst = Elaborable primero
+s_Crafting_CraftableFirst_d = Pone arriba lo que puedes elaborar ahora mismo.
+s_Crafting_CraftableFirst_w = Se usa si Orden no es Por defecto.
+s_Crafting_SortButton = Botón de orden
+s_Crafting_SortButton_d = Un botón bajo la lista que cambia el orden. El clic derecho vuelve atrás.
+
 # Day Night Bar
 sec_DayNightBar = Barra día/noche
 s_DayNightBar_Enabled = Activado

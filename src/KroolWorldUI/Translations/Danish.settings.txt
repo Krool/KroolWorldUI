@@ -267,6 +267,24 @@ s_BuildMaterials_OffsetX_d = Flyt til venstre (-) eller højre (+), i HUD-pixels
 s_BuildMaterials_OffsetY = Forskydning Y
 s_BuildMaterials_OffsetY_d = Flyt ned (-) eller op (+), i HUD-pixels.
 
+# Crafting
+sec_Crafting = Fremstilling
+s_Crafting_Enabled = Aktiveret
+s_Crafting_Enabled_d = Kategorifaner og en sorteringsrækkefølge for fremstillingslisten ved hver station.
+s_Crafting_Categories = Kategorier
+s_Crafting_Categories_d = En række faner over listen: våben, rustning, værktøj, ammunition, mad, materialer. På en controller skifter D-pad venstre og højre fane.
+s_Crafting_Sort = Sortering
+s_Crafting_Sort_d = Standard: spillets rækkefølge. Navn: A til Å. Type: grupperet som fanerne. Stationsniveau: nyeste oplåsninger først.
+enum_CraftingTabsSortOrder_Default = Standard
+enum_CraftingTabsSortOrder_Name = Navn
+enum_CraftingTabsSortOrder_Type = Type
+enum_CraftingTabsSortOrder_StationLevel = Stationsniveau
+s_Crafting_CraftableFirst = Kan fremstilles først
+s_Crafting_CraftableFirst_d = Vis det, du kan fremstille lige nu, øverst.
+s_Crafting_CraftableFirst_w = Bruges når Sortering ikke er Standard.
+s_Crafting_SortButton = Sorteringsknap
+s_Crafting_SortButton_d = En knap under listen, der skifter sorteringsrækkefølge. Højreklik går tilbage.
+
 # Day Night Bar
 sec_DayNightBar = Dag/nat-bjælke
 s_DayNightBar_Enabled = Aktiveret

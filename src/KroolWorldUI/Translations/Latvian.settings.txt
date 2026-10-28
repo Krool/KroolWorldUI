@@ -267,6 +267,24 @@ s_BuildMaterials_OffsetX_d = Pa kreisi (-) vai pa labi (+), HUD pikseļos.
 s_BuildMaterials_OffsetY = Nobīde Y
 s_BuildMaterials_OffsetY_d = Uz leju (-) vai uz augšu (+), HUD pikseļos.
 
+# Crafting
+sec_Crafting = Amatniecība
+s_Crafting_Enabled = Ieslēgts
+s_Crafting_Enabled_d = Kategoriju cilnes un kārtošanas secība amatniecības sarakstam pie katra darbu galda.
+s_Crafting_Categories = Kategorijas
+s_Crafting_Categories_d = Ciļņu rinda virs saraksta: ieroči, bruņas, rīki, munīcija, ēdiens, materiāli. Ar kontrolieri cilnes pārslēdz D-pad pa kreisi un pa labi.
+s_Crafting_Sort = Kārtošana
+s_Crafting_Sort_d = Noklusējums: spēles secība. Nosaukums: no A līdz Z. Tips: grupēts kā cilnes. Darbu galda pakāpe: jaunākie atbloķētie vispirms.
+enum_CraftingTabsSortOrder_Default = Noklusējums
+enum_CraftingTabsSortOrder_Name = Nosaukums
+enum_CraftingTabsSortOrder_Type = Tips
+enum_CraftingTabsSortOrder_StationLevel = Darbu galda pakāpe
+s_Crafting_CraftableFirst = Vispirms izgatavojamie
+s_Crafting_CraftableFirst_d = To, ko vari izgatavot tagad, rāda saraksta augšā.
+s_Crafting_CraftableFirst_w = Darbojas, ja Kārtošana nav Noklusējums.
+s_Crafting_SortButton = Kārtošanas poga
+s_Crafting_SortButton_d = Poga zem saraksta, kas maina kārtošanas secību. Labais klikšķis atgriež atpakaļ.
+
 # Day Night Bar
 sec_DayNightBar = Dienas un nakts josla
 s_DayNightBar_Enabled = Ieslēgts

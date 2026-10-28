@@ -24,6 +24,21 @@ seconds_short = $1s
 enough_for = Nok til $1
 not_enough = Ikke nok
 
+craft_all = Alt
+craft_weapons = Våpen
+craft_armor = Rustning
+craft_tools = Verktøy
+craft_ammo = Ammunisjon
+craft_food = Mat og mjød
+craft_materials = Materialer
+craft_other = Diverse
+craft_sort = Sortering: $1
+craft_sort_default = Standard
+craft_sort_name = Navn
+craft_sort_type = Type
+craft_sort_level = Stasjonsnivå
+craft_pad_hint = $1 (styrekors venstre/høyre)
+
 food_running_low = Går snart tom
 food_can_eat_again = Kan spise igjen
 food_can_eat = kan spises

@@ -267,6 +267,24 @@ s_BuildMaterials_OffsetX_d = Naar links (-) of rechts (+), in HUD-pixels.
 s_BuildMaterials_OffsetY = Verschuiving Y
 s_BuildMaterials_OffsetY_d = Naar beneden (-) of boven (+), in HUD-pixels.
 
+# Crafting
+sec_Crafting = Productie
+s_Crafting_Enabled = Ingeschakeld
+s_Crafting_Enabled_d = Categorietabbladen en een sorteervolgorde voor de productielijst bij elk werkstation.
+s_Crafting_Categories = Categorieën
+s_Crafting_Categories_d = Een rij tabbladen boven de lijst: wapens, harnas, gereedschap, munitie, voedsel, materialen. Op een controller wissel je van tabblad met de D-pad links en rechts.
+s_Crafting_Sort = Sortering
+s_Crafting_Sort_d = Standaard: de volgorde van het spel. Naam: A tot Z. Type: gegroepeerd zoals de tabbladen. Stationslevel: nieuwste ontgrendelingen eerst.
+enum_CraftingTabsSortOrder_Default = Standaard
+enum_CraftingTabsSortOrder_Name = Naam
+enum_CraftingTabsSortOrder_Type = Type
+enum_CraftingTabsSortOrder_StationLevel = Stationslevel
+s_Crafting_CraftableFirst = Maakbaar eerst
+s_Crafting_CraftableFirst_d = Wat je nu kunt maken staat bovenaan.
+s_Crafting_CraftableFirst_w = Gebruikt als Sortering niet Standaard is.
+s_Crafting_SortButton = Sorteerknop
+s_Crafting_SortButton_d = Een knop onder de lijst die de sorteervolgorde wisselt. Rechtsklik gaat terug.
+
 # Day Night Bar
 sec_DayNightBar = Dag-nachtbalk
 s_DayNightBar_Enabled = Ingeschakeld

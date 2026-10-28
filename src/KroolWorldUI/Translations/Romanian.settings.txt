@@ -267,6 +267,24 @@ s_BuildMaterials_OffsetX_d = Mută la stânga (-) sau la dreapta (+), în pixeli
 s_BuildMaterials_OffsetY = Decalaj Y
 s_BuildMaterials_OffsetY_d = Mută în jos (-) sau în sus (+), în pixeli HUD.
 
+# Crafting
+sec_Crafting = Artizanat
+s_Crafting_Enabled = Activat
+s_Crafting_Enabled_d = File de categorii și o ordine de sortare pentru lista de fabricare la fiecare stație.
+s_Crafting_Categories = Categorii
+s_Crafting_Categories_d = Un rând de file deasupra listei: arme, armuri, unelte, muniție, mâncare, materiale. Pe controller, stânga și dreapta pe D-pad schimbă fila.
+s_Crafting_Sort = Sortare
+s_Crafting_Sort_d = Implicit: ordinea jocului. Nume: de la A la Z. Tip: grupat ca filele. Nivel stație: cele mai noi deblocări primele.
+enum_CraftingTabsSortOrder_Default = Implicit
+enum_CraftingTabsSortOrder_Name = Nume
+enum_CraftingTabsSortOrder_Type = Tip
+enum_CraftingTabsSortOrder_StationLevel = Nivel stație
+s_Crafting_CraftableFirst = Fabricabile întâi
+s_Crafting_CraftableFirst_d = Pune în capul listei ce poți fabrica acum.
+s_Crafting_CraftableFirst_w = Folosit când Sortare nu este Implicit.
+s_Crafting_SortButton = Buton de sortare
+s_Crafting_SortButton_d = Un buton sub listă care schimbă ordinea de sortare. Clic dreapta revine.
+
 # Day Night Bar
 sec_DayNightBar = Bară zi/noapte
 s_DayNightBar_Enabled = Activat

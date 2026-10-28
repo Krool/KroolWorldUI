@@ -267,6 +267,24 @@ s_BuildMaterials_OffsetX_d = Лево (-) или десно (+), во HUD пик
 s_BuildMaterials_OffsetY = Поместување Y
 s_BuildMaterials_OffsetY_d = Долу (-) или горе (+), во HUD пиксели.
 
+# Crafting
+sec_Crafting = Изработка
+s_Crafting_Enabled = Вклучено
+s_Crafting_Enabled_d = Јазичиња по категории и редослед на сортирање за листата за изработка на секоја станица.
+s_Crafting_Categories = Категории
+s_Crafting_Categories_d = Ред јазичиња над листата: оружја, оклоп, алатки, муниција, храна, материјали. Со контролер, D-pad лево и десно ги менува јазичињата.
+s_Crafting_Sort = Редослед
+s_Crafting_Sort_d = Стандардно: редоследот на играта. Име: од А до Ш. Тип: групирано како јазичињата. Ниво на станица: прво најновите отклучени.
+enum_CraftingTabsSortOrder_Default = Стандардно
+enum_CraftingTabsSortOrder_Name = Име
+enum_CraftingTabsSortOrder_Type = Тип
+enum_CraftingTabsSortOrder_StationLevel = Ниво на станица
+s_Crafting_CraftableFirst = Прво достапното
+s_Crafting_CraftableFirst_d = Го става на врвот она што можеш да го направиш веднаш.
+s_Crafting_CraftableFirst_w = Важи кога „Редослед“ не е „Стандардно“.
+s_Crafting_SortButton = Копче за редослед
+s_Crafting_SortButton_d = Копче под листата што го менува редоследот. Десен клик враќа назад.
+
 # Day Night Bar
 sec_DayNightBar = Лента ден и ноќ
 s_DayNightBar_Enabled = Вклучено

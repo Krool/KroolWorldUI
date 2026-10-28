@@ -267,6 +267,24 @@ s_BuildMaterials_OffsetX_d = Move para a esquerda (-) ou para a direita (+), em 
 s_BuildMaterials_OffsetY = Deslocamento Y
 s_BuildMaterials_OffsetY_d = Move para baixo (-) ou para cima (+), em pixels do HUD.
 
+# Crafting
+sec_Crafting = Produção
+s_Crafting_Enabled = Ativado
+s_Crafting_Enabled_d = Abas de categoria e uma ordenação para a lista de produção em cada bancada.
+s_Crafting_Categories = Categorias
+s_Crafting_Categories_d = Uma fileira de abas acima da lista: armas, armaduras, ferramentas, munição, comida, materiais. No controle, esquerda e direita no direcional trocam de aba.
+s_Crafting_Sort = Ordem
+s_Crafting_Sort_d = Padrão: a ordem do jogo. Nome: de A a Z. Tipo: agrupado como as abas. Nível da bancada: os desbloqueios mais recentes primeiro.
+enum_CraftingTabsSortOrder_Default = Padrão
+enum_CraftingTabsSortOrder_Name = Nome
+enum_CraftingTabsSortOrder_Type = Tipo
+enum_CraftingTabsSortOrder_StationLevel = Nível da bancada
+s_Crafting_CraftableFirst = Produzíveis primeiro
+s_Crafting_CraftableFirst_d = Mostra no topo o que você pode produzir agora.
+s_Crafting_CraftableFirst_w = Usado quando Ordem não é Padrão.
+s_Crafting_SortButton = Botão de ordem
+s_Crafting_SortButton_d = Um botão abaixo da lista que muda a ordem. O clique direito volta.
+
 # Day Night Bar
 sec_DayNightBar = Barra dia/noite
 s_DayNightBar_Enabled = Ativado
