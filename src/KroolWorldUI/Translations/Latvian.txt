@@ -39,6 +39,8 @@ food_none = Nav ēdiena
 food_slot_empty = Tukša ēdiena vieta ($1)
 dismiss_hint = [$1] paslēpt
 xp_gain = +$1% $2
+ammo_left = Atlicis $1
+
 repaired_items = Salaboti priekšmeti: $1
 win_search = Meklēt uzstādījumus
 win_expand_all = Izvērst visu

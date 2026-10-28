@@ -430,6 +430,30 @@ s_SaveCountdown_AnchorX_d = 枠の中心。0が画面の左端、1が右端。
 s_SaveCountdown_AnchorY = アンカーY
 s_SaveCountdown_AnchorY_d = 枠の中心。0が画面の下端、1が上端。
 
+# Low Ammo
+sec_LowAmmo = 弾薬残りわずか
+s_LowAmmo_Enabled = 有効
+s_LowAmmo_Enabled_d = 射撃後に矢、ボルト、釣り餌が少なくなったら警告します。
+s_LowAmmo_FirstWarning = 1回目の警告
+s_LowAmmo_FirstWarning_d = 残りがこの数になったら警告します。0 = オフ。
+s_LowAmmo_SecondWarning = 2回目の警告
+s_LowAmmo_SecondWarning_d = 残りがこの数になったら、赤字で再度警告します。0 = オフ。
+s_LowAmmo_ShowSeconds = 表示秒数
+s_LowAmmo_ShowSeconds_d = 警告を画面に表示する秒数。
+s_LowAmmo_Sound = サウンド
+s_LowAmmo_Sound_d = 警告のたびに短い低音を鳴らします。
+s_LowAmmo_SoundVolume = サウンド音量
+s_LowAmmo_SoundVolume_d = 音量。ゲーム本体の音量に上乗せされます。
+s_LowAmmo_SoundVolume_w = 「サウンド」がオンのとき有効。
+s_LowAmmo_Size = サイズ
+s_LowAmmo_Size_d = 1が通常サイズ。
+s_LowAmmo_Opacity = 不透明度
+s_LowAmmo_Opacity_d = 1で不透明。下げるほど透けて見えます。
+s_LowAmmo_AnchorX = アンカーX
+s_LowAmmo_AnchorX_d = 枠の中心。0が画面の左端、1が右端。
+s_LowAmmo_AnchorY = アンカーY
+s_LowAmmo_AnchorY_d = 枠の中心。0が画面の下端、1が上端。
+
 # Bench Pins
 sec_BenchPins = 作業台ピン
 s_BenchPins_Enabled = 有効

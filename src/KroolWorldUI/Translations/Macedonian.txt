@@ -48,6 +48,8 @@ dismiss_hint = [$1] сокриј
 
 xp_gain = +$1% $2
 
+ammo_left = Остануваат $1
+
 repaired_items = Поправени предмети: $1
 
 win_search = Барај поставки

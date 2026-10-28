@@ -48,6 +48,8 @@ dismiss_hint = [$1] sakrij
 
 xp_gain = +$1% $2
 
+ammo_left = Još $1
+
 repaired_items = Popravljeno predmeta: $1
 
 win_search = Traži postavke

@@ -48,6 +48,8 @@ dismiss_hint = [$1] 隠す
 
 xp_gain = +$1% $2
 
+ammo_left = 残り$1
+
 repaired_items = $1個のアイテムを修理した
 
 win_search = 設定を検索

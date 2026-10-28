@@ -430,6 +430,30 @@ s_SaveCountdown_AnchorX_d = Lodziņa centrs. 0 ir ekrāna kreisā mala, 1 labā.
 s_SaveCountdown_AnchorY = Enkurs Y
 s_SaveCountdown_AnchorY_d = Lodziņa centrs. 0 ir ekrāna apakša, 1 augša.
 
+# Low Ammo
+sec_LowAmmo = Maz munīcijas
+s_LowAmmo_Enabled = Ieslēgts
+s_LowAmmo_Enabled_d = Brīdina, ja pēc šāviena paliek maz bultu, šaujamstrēlu vai ēsmas.
+s_LowAmmo_FirstWarning = Pirmais brīdinājums
+s_LowAmmo_FirstWarning_d = Brīdina, kad palicis tik daudz. 0 = izslēgts.
+s_LowAmmo_SecondWarning = Otrais brīdinājums
+s_LowAmmo_SecondWarning_d = Brīdina vēlreiz, sarkanā krāsā, kad palicis tik daudz. 0 = izslēgts.
+s_LowAmmo_ShowSeconds = Rādīšanas laiks
+s_LowAmmo_ShowSeconds_d = Sekundes, cik ilgi brīdinājums paliek ekrānā.
+s_LowAmmo_Sound = Skaņa
+s_LowAmmo_Sound_d = Īss zems signāls pie katra brīdinājuma.
+s_LowAmmo_SoundVolume = Skaņas skaļums
+s_LowAmmo_SoundVolume_d = Signāla skaļums papildus pašas spēles skaļumam.
+s_LowAmmo_SoundVolume_w = Darbojas, ja ieslēgts: Skaņa.
+s_LowAmmo_Size = Izmērs
+s_LowAmmo_Size_d = 1 ir parastais izmērs.
+s_LowAmmo_Opacity = Necaurredzamība
+s_LowAmmo_Opacity_d = 1 ir pilnīgi necaurredzams; mazāk ļauj redzēt spēli cauri.
+s_LowAmmo_AnchorX = Enkurs X
+s_LowAmmo_AnchorX_d = Lodziņa centrs. 0 ir ekrāna kreisā mala, 1 labā.
+s_LowAmmo_AnchorY = Enkurs Y
+s_LowAmmo_AnchorY_d = Lodziņa centrs. 0 ir ekrāna apakša, 1 augša.
+
 # Bench Pins
 sec_BenchPins = Galdu atzīmes
 s_BenchPins_Enabled = Ieslēgts

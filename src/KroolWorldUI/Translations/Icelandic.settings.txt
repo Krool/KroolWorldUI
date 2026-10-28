@@ -430,6 +430,30 @@ s_SaveCountdown_AnchorX_d = Miðja kassans. 0 er vinstri brún skjásins, 1 sú 
 s_SaveCountdown_AnchorY = Akkeri Y
 s_SaveCountdown_AnchorY_d = Miðja kassans. 0 er botn skjásins, 1 toppurinn.
 
+# Low Ammo
+sec_LowAmmo = Lítið skotfæri
+s_LowAmmo_Enabled = Virkt
+s_LowAmmo_Enabled_d = Varar við þegar skot skilur þig eftir með fáar örvar, bolta eða agn.
+s_LowAmmo_FirstWarning = Fyrsta viðvörun
+s_LowAmmo_FirstWarning_d = Varar við þegar svo mörg eru eftir. 0 = slökkt.
+s_LowAmmo_SecondWarning = Önnur viðvörun
+s_LowAmmo_SecondWarning_d = Varar aftur við, með rauðu, þegar svo mörg eru eftir. 0 = slökkt.
+s_LowAmmo_ShowSeconds = Sýningartími
+s_LowAmmo_ShowSeconds_d = Sekúndur sem viðvörunin er á skjánum.
+s_LowAmmo_Sound = Hljóð
+s_LowAmmo_Sound_d = Stuttur djúpur tónn með hverri viðvörun.
+s_LowAmmo_SoundVolume = Hljóðstyrkur
+s_LowAmmo_SoundVolume_d = Hljóðstyrkur tónsins, ofan á hljóðstyrk leiksins sjálfs.
+s_LowAmmo_SoundVolume_w = Notað þegar Hljóð er á.
+s_LowAmmo_Size = Stærð
+s_LowAmmo_Size_d = 1 er venjuleg stærð.
+s_LowAmmo_Opacity = Ógegnsæi
+s_LowAmmo_Opacity_d = 1 er heilt; lægra hleypir leiknum í gegn.
+s_LowAmmo_AnchorX = Akkeri X
+s_LowAmmo_AnchorX_d = Miðja kassans. 0 er vinstri brún skjásins, 1 sú hægri.
+s_LowAmmo_AnchorY = Akkeri Y
+s_LowAmmo_AnchorY_d = Miðja kassans. 0 er botn skjásins, 1 toppurinn.
+
 # Bench Pins
 sec_BenchPins = Stöðvapinnar
 s_BenchPins_Enabled = Virkt

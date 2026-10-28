@@ -48,6 +48,8 @@ dismiss_hint = [$1] skjul
 
 xp_gain = +$1% $2
 
+ammo_left = $1 tilbage
+
 repaired_items = Reparerede $1 genstande
 
 win_search = Søg i indstillinger

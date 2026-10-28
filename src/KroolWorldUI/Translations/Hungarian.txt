@@ -39,6 +39,8 @@ food_none = Nincs étel
 food_slot_empty = Üres ételhely ($1)
 dismiss_hint = [$1] elrejtés
 xp_gain = +$1% $2
+ammo_left = $1 maradt
+
 repaired_items = $1 tárgy megjavítva
 win_search = Beállítások keresése
 win_expand_all = Mind kinyit

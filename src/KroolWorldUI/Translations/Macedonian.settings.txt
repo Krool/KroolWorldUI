@@ -430,6 +430,30 @@ s_SaveCountdown_AnchorX_d = Средина на полето. 0 е левиот 
 s_SaveCountdown_AnchorY = Сидро Y
 s_SaveCountdown_AnchorY_d = Средина на полето. 0 е дното на екранот, 1 врвот.
 
+# Low Ammo
+sec_LowAmmo = Малку муниција
+s_LowAmmo_Enabled = Вклучено
+s_LowAmmo_Enabled_d = Предупредува кога по истрел ти остануваат малку стрели, болтови или мамка.
+s_LowAmmo_FirstWarning = Прво предупредување
+s_LowAmmo_FirstWarning_d = Предупредува кога останале толку. 0 = исклучено.
+s_LowAmmo_SecondWarning = Второ предупредување
+s_LowAmmo_SecondWarning_d = Предупредува повторно, со црвено, кога останале толку. 0 = исклучено.
+s_LowAmmo_ShowSeconds = Секунди приказ
+s_LowAmmo_ShowSeconds_d = Секунди колку предупредувањето останува на екранот.
+s_LowAmmo_Sound = Звук
+s_LowAmmo_Sound_d = Кус низок тон со секое предупредување.
+s_LowAmmo_SoundVolume = Јачина на звук
+s_LowAmmo_SoundVolume_d = Јачина на тонот, врз јачината на самата игра.
+s_LowAmmo_SoundVolume_w = Важи кога „Звук“ е вклучено.
+s_LowAmmo_Size = Големина
+s_LowAmmo_Size_d = 1 е нормалната големина.
+s_LowAmmo_Opacity = Непроѕирност
+s_LowAmmo_Opacity_d = 1 е полно; помалку ја пропушта играта.
+s_LowAmmo_AnchorX = Сидро X
+s_LowAmmo_AnchorX_d = Средина на полето. 0 е левиот раб на екранот, 1 десниот.
+s_LowAmmo_AnchorY = Сидро Y
+s_LowAmmo_AnchorY_d = Средина на полето. 0 е дното на екранот, 1 врвот.
+
 # Bench Pins
 sec_BenchPins = Ознаки за маси
 s_BenchPins_Enabled = Вклучено

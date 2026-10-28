@@ -48,6 +48,8 @@ dismiss_hint = [$1] fela
 
 xp_gain = +$1% $2
 
+ammo_left = $1 eftir
+
 repaired_items = $1 hlutir lagaðir
 
 win_search = Leita í stillingum

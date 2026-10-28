@@ -430,6 +430,30 @@ s_SaveCountdown_AnchorX_d = Centrul casetei. 0 e marginea stângă a ecranului, 
 s_SaveCountdown_AnchorY = Ancoră Y
 s_SaveCountdown_AnchorY_d = Centrul casetei. 0 e partea de jos a ecranului, 1 cea de sus.
 
+# Low Ammo
+sec_LowAmmo = Muniție puțină
+s_LowAmmo_Enabled = Activat
+s_LowAmmo_Enabled_d = Avertizează când după o tragere îți rămân puține săgeți, bolțuri sau momeli.
+s_LowAmmo_FirstWarning = Prima avertizare
+s_LowAmmo_FirstWarning_d = Avertizează când au rămas atâtea. 0 = oprit.
+s_LowAmmo_SecondWarning = A doua avertizare
+s_LowAmmo_SecondWarning_d = Avertizează din nou, cu roșu, când au rămas atâtea. 0 = oprit.
+s_LowAmmo_ShowSeconds = Durată (s)
+s_LowAmmo_ShowSeconds_d = Secundele cât rămâne avertizarea pe ecran.
+s_LowAmmo_Sound = Sunet
+s_LowAmmo_Sound_d = Un ton jos scurt la fiecare avertizare.
+s_LowAmmo_SoundVolume = Volum sunet
+s_LowAmmo_SoundVolume_d = Volumul tonului, peste volumul jocului.
+s_LowAmmo_SoundVolume_w = Folosit când Sunet este pornit.
+s_LowAmmo_Size = Mărime
+s_LowAmmo_Size_d = 1 e mărimea normală.
+s_LowAmmo_Opacity = Opacitate
+s_LowAmmo_Opacity_d = 1 e opac; mai puțin lasă jocul să se vadă prin el.
+s_LowAmmo_AnchorX = Ancoră X
+s_LowAmmo_AnchorX_d = Centrul casetei. 0 e marginea stângă a ecranului, 1 cea dreaptă.
+s_LowAmmo_AnchorY = Ancoră Y
+s_LowAmmo_AnchorY_d = Centrul casetei. 0 e partea de jos a ecranului, 1 cea de sus.
+
 # Bench Pins
 sec_BenchPins = Marcaje stații
 s_BenchPins_Enabled = Activat

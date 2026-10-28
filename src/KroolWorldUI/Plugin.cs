@@ -58,6 +58,7 @@ namespace KroolWorldUI
             BuffIcons.BindConfig(config);
             RestedCountdown.BindConfig(config);
             SaveCountdown.BindConfig(config);
+            AmmoWarning.BindConfig(config);
             BenchPins.BindConfig(config);
             AutoRepair.BindConfig(config);
             General.Migrate();

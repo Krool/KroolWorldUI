@@ -39,6 +39,8 @@ food_none = Yiyecek yok
 food_slot_empty = Yiyecek yuvası boş ($1)
 dismiss_hint = [$1] gizle
 xp_gain = +%$1 $2
+ammo_left = $1 kaldı
+
 repaired_items = $1 eşya onarıldı
 win_search = Ayarlarda ara
 win_expand_all = Tümünü aç

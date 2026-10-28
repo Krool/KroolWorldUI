@@ -430,6 +430,30 @@ s_SaveCountdown_AnchorX_d = Środek okienka. 0 to lewa krawędź ekranu, 1 prawa
 s_SaveCountdown_AnchorY = Kotwica Y
 s_SaveCountdown_AnchorY_d = Środek okienka. 0 to dół ekranu, 1 góra.
 
+# Low Ammo
+sec_LowAmmo = Mało amunicji
+s_LowAmmo_Enabled = Włączone
+s_LowAmmo_Enabled_d = Ostrzega, gdy po strzale zostaje ci mało strzał, bełtów lub przynęty.
+s_LowAmmo_FirstWarning = Pierwsze ostrzeżenie
+s_LowAmmo_FirstWarning_d = Ostrzega, gdy zostanie tyle. 0 = wyłączone.
+s_LowAmmo_SecondWarning = Drugie ostrzeżenie
+s_LowAmmo_SecondWarning_d = Ostrzega ponownie, na czerwono, gdy zostanie tyle. 0 = wyłączone.
+s_LowAmmo_ShowSeconds = Czas wyświetlania
+s_LowAmmo_ShowSeconds_d = Sekundy, przez które ostrzeżenie jest na ekranie.
+s_LowAmmo_Sound = Dźwięk
+s_LowAmmo_Sound_d = Krótki niski dźwięk przy każdym ostrzeżeniu.
+s_LowAmmo_SoundVolume = Głośność dźwięku
+s_LowAmmo_SoundVolume_d = Głośność dźwięku, ponad głośnością samej gry.
+s_LowAmmo_SoundVolume_w = Działa, gdy włączone: Dźwięk.
+s_LowAmmo_Size = Rozmiar
+s_LowAmmo_Size_d = 1 to normalny rozmiar.
+s_LowAmmo_Opacity = Krycie
+s_LowAmmo_Opacity_d = 1 to pełne krycie; niżej gra prześwituje.
+s_LowAmmo_AnchorX = Kotwica X
+s_LowAmmo_AnchorX_d = Środek okienka. 0 to lewa krawędź ekranu, 1 prawa.
+s_LowAmmo_AnchorY = Kotwica Y
+s_LowAmmo_AnchorY_d = Środek okienka. 0 to dół ekranu, 1 góra.
+
 # Bench Pins
 sec_BenchPins = Pinezki stołów
 s_BenchPins_Enabled = Włączone

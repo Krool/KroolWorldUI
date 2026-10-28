@@ -430,6 +430,30 @@ s_SaveCountdown_AnchorX_d = กึ่งกลางกล่อง 0 คือ�
 s_SaveCountdown_AnchorY = จุดยึด Y
 s_SaveCountdown_AnchorY_d = กึ่งกลางกล่อง 0 คือขอบล่างของจอ 1 คือขอบบน
 
+# Low Ammo
+sec_LowAmmo = กระสุนเหลือน้อย
+s_LowAmmo_Enabled = เปิดใช้
+s_LowAmmo_Enabled_d = เตือนเมื่อยิงแล้วเหลือลูกธนู ลูกดอก หรือเหยื่อน้อย
+s_LowAmmo_FirstWarning = คำเตือนครั้งแรก
+s_LowAmmo_FirstWarning_d = เตือนเมื่อเหลือเท่านี้ 0 = ปิด
+s_LowAmmo_SecondWarning = คำเตือนครั้งที่สอง
+s_LowAmmo_SecondWarning_d = เตือนอีกครั้งเป็นสีแดงเมื่อเหลือเท่านี้ 0 = ปิด
+s_LowAmmo_ShowSeconds = เวลาแสดง (วิ)
+s_LowAmmo_ShowSeconds_d = จำนวนวินาทีที่คำเตือนอยู่บนหน้าจอ
+s_LowAmmo_Sound = เสียง
+s_LowAmmo_Sound_d = เสียงต่ำสั้นๆ ทุกครั้งที่เตือน
+s_LowAmmo_SoundVolume = ระดับเสียง
+s_LowAmmo_SoundVolume_d = ความดังของเสียง เพิ่มจากความดังของเกม
+s_LowAmmo_SoundVolume_w = ใช้เมื่อเปิด “เสียง”
+s_LowAmmo_Size = ขนาด
+s_LowAmmo_Size_d = 1 คือขนาดปกติ
+s_LowAmmo_Opacity = ความทึบ
+s_LowAmmo_Opacity_d = 1 คือทึบเต็มที่ ค่าน้อยกว่าจะมองทะลุเห็นเกม
+s_LowAmmo_AnchorX = จุดยึด X
+s_LowAmmo_AnchorX_d = กึ่งกลางกล่อง 0 คือขอบซ้ายของจอ 1 คือขอบขวา
+s_LowAmmo_AnchorY = จุดยึด Y
+s_LowAmmo_AnchorY_d = กึ่งกลางกล่อง 0 คือขอบล่างของจอ 1 คือขอบบน
+
 # Bench Pins
 sec_BenchPins = หมุดโต๊ะงาน
 s_BenchPins_Enabled = เปิดใช้

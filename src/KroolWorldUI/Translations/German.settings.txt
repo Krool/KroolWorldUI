@@ -430,6 +430,30 @@ s_SaveCountdown_AnchorX_d = Mitte des Felds. 0 ist der linke Bildschirmrand, 1 d
 s_SaveCountdown_AnchorY = Anker Y
 s_SaveCountdown_AnchorY_d = Mitte des Felds. 0 ist der untere Bildschirmrand, 1 der obere.
 
+# Low Ammo
+sec_LowAmmo = Wenig Munition
+s_LowAmmo_Enabled = Aktiviert
+s_LowAmmo_Enabled_d = Warnt, wenn dir nach einem Schuss nur noch wenige Pfeile, Bolzen oder Köder bleiben.
+s_LowAmmo_FirstWarning = Erste Warnung
+s_LowAmmo_FirstWarning_d = Warnt, wenn so viele übrig sind. 0 = aus.
+s_LowAmmo_SecondWarning = Zweite Warnung
+s_LowAmmo_SecondWarning_d = Warnt erneut, in Rot, wenn so viele übrig sind. 0 = aus.
+s_LowAmmo_ShowSeconds = Anzeigedauer
+s_LowAmmo_ShowSeconds_d = Sekunden, die die Warnung sichtbar bleibt.
+s_LowAmmo_Sound = Ton
+s_LowAmmo_Sound_d = Ein kurzer tiefer Ton bei jeder Warnung.
+s_LowAmmo_SoundVolume = Tonlautstärke
+s_LowAmmo_SoundVolume_d = Lautstärke des Tons, zusätzlich zur Lautstärke des Spiels.
+s_LowAmmo_SoundVolume_w = Gilt, wenn Ton an ist.
+s_LowAmmo_Size = Größe
+s_LowAmmo_Size_d = 1 ist die normale Größe.
+s_LowAmmo_Opacity = Deckkraft
+s_LowAmmo_Opacity_d = 1 ist deckend; weniger lässt das Spiel durchscheinen.
+s_LowAmmo_AnchorX = Anker X
+s_LowAmmo_AnchorX_d = Mitte des Felds. 0 ist der linke Bildschirmrand, 1 der rechte.
+s_LowAmmo_AnchorY = Anker Y
+s_LowAmmo_AnchorY_d = Mitte des Felds. 0 ist der untere Bildschirmrand, 1 der obere.
+
 # Bench Pins
 sec_BenchPins = Werkbank-Markierungen
 s_BenchPins_Enabled = Aktiviert

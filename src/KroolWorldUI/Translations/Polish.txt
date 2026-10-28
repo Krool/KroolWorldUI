@@ -39,6 +39,8 @@ food_none = Brak jedzenia
 food_slot_empty = Wolny slot jedzenia ($1)
 dismiss_hint = [$1] ukryj
 xp_gain = +$1% $2
+ammo_left = Zostało $1
+
 repaired_items = Naprawiono przedmioty: $1
 win_search = Szukaj ustawień
 win_expand_all = Rozwiń wszystko

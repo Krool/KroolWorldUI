@@ -39,6 +39,8 @@ food_none = Ei ruokaa
 food_slot_empty = Ruokapaikka tyhjä ($1)
 dismiss_hint = [$1] piilota
 xp_gain = +$1 % $2
+ammo_left = $1 jäljellä
+
 repaired_items = Korjattu $1 esinettä
 win_search = Hae asetuksia
 win_expand_all = Avaa kaikki

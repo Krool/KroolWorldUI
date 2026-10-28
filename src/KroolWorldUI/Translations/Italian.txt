@@ -48,6 +48,8 @@ dismiss_hint = [$1] nascondi
 
 xp_gain = +$1% $2
 
+ammo_left = Ne restano $1
+
 repaired_items = $1 oggetti riparati
 
 win_search = Cerca impostazioni

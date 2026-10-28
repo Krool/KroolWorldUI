@@ -48,6 +48,8 @@ dismiss_hint = [$1] 隐藏
 
 xp_gain = +$1% $2
 
+ammo_left = 剩余 $1
+
 repaired_items = 已修复 $1 件物品
 
 win_search = 搜索设置

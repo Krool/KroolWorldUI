@@ -39,6 +39,8 @@ food_none = Χωρίς τροφή
 food_slot_empty = Κενή θέση τροφής ($1)
 dismiss_hint = [$1] απόκρυψη
 xp_gain = +$1% $2
+ammo_left = Απομένουν $1
+
 repaired_items = Επισκευάστηκαν $1 αντικείμενα
 win_search = Αναζήτηση ρυθμίσεων
 win_expand_all = Ανάπτυξη όλων

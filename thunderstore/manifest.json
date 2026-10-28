@@ -2,7 +2,7 @@
   "name": "Krool_World_UI",
   "version_number": "0.15.0",
   "website_url": "https://github.com/Krool/KroolWorldUI",
-  "description": "HUD/UI: compass, skill XP bars, carry weight bar, food timers and decay, build materials, crafting tabs and sorting, day/night bar and clock, save and rested countdowns, workbench pins, auto repair. Client-side, every language, controller-ready.",
+  "description": "HUD/UI: compass, skill XP bars, carry weight, food timers and decay, build materials, crafting tabs and sorting, day/night clock, save and rested countdowns, low ammo warning, bench pins, auto repair. Client-side, every language, controller-ready.",
   "dependencies": [
     "denikson-BepInExPack_Valheim-5.4.2351"
   ]

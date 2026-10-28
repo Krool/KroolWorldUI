@@ -171,12 +171,14 @@ namespace KroolWorldUI
                 FoodCalloutHud.Preview(true, playSound: !_previewWas && FoodCallout.Sound.Value);
                 SaveCountdownHud.Preview(true);
                 RestedCountdownHud.Preview(true);
+                AmmoWarningHud.Preview(true);
             }
             else if (_previewWas)
             {
                 FoodCalloutHud.Preview(false, playSound: false);
                 SaveCountdownHud.Preview(false);
                 RestedCountdownHud.Preview(false);
+                AmmoWarningHud.Preview(false);
             }
             _previewWas = active;
         }

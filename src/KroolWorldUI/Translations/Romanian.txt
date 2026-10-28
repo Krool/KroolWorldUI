@@ -48,6 +48,8 @@ dismiss_hint = [$1] ascunde
 
 xp_gain = +$1% $2
 
+ammo_left = $1 rămase
+
 repaired_items = $1 obiecte reparate
 
 win_search = Caută setări

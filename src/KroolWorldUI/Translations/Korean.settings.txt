@@ -430,6 +430,30 @@ s_SaveCountdown_AnchorX_d = 상자의 중앙. 0은 화면 왼쪽, 1은 오른쪽
 s_SaveCountdown_AnchorY = 기준점 Y
 s_SaveCountdown_AnchorY_d = 상자의 중앙. 0은 화면 아래, 1은 위.
 
+# Low Ammo
+sec_LowAmmo = 탄약 부족
+s_LowAmmo_Enabled = 사용
+s_LowAmmo_Enabled_d = 사격 후 화살, 볼트, 미끼가 얼마 남지 않으면 경고합니다.
+s_LowAmmo_FirstWarning = 첫 번째 경고
+s_LowAmmo_FirstWarning_d = 이만큼 남으면 경고합니다. 0 = 끔.
+s_LowAmmo_SecondWarning = 두 번째 경고
+s_LowAmmo_SecondWarning_d = 이만큼 남으면 빨간색으로 다시 경고합니다. 0 = 끔.
+s_LowAmmo_ShowSeconds = 표시 시간(초)
+s_LowAmmo_ShowSeconds_d = 경고가 화면에 머무는 시간(초).
+s_LowAmmo_Sound = 소리
+s_LowAmmo_Sound_d = 경고할 때마다 짧고 낮은 소리가 납니다.
+s_LowAmmo_SoundVolume = 소리 볼륨
+s_LowAmmo_SoundVolume_d = 소리 크기. 게임 자체 볼륨에 더해집니다.
+s_LowAmmo_SoundVolume_w = '소리' 설정이 켜져 있을 때 사용.
+s_LowAmmo_Size = 크기
+s_LowAmmo_Size_d = 1이 기본 크기.
+s_LowAmmo_Opacity = 불투명도
+s_LowAmmo_Opacity_d = 1은 불투명, 낮을수록 게임 화면이 비쳐 보입니다.
+s_LowAmmo_AnchorX = 기준점 X
+s_LowAmmo_AnchorX_d = 상자의 중앙. 0은 화면 왼쪽, 1은 오른쪽.
+s_LowAmmo_AnchorY = 기준점 Y
+s_LowAmmo_AnchorY_d = 상자의 중앙. 0은 화면 아래, 1은 위.
+
 # Bench Pins
 sec_BenchPins = 작업대 핀
 s_BenchPins_Enabled = 사용

@@ -430,6 +430,30 @@ s_SaveCountdown_AnchorX_d = Centro da caixa. 0 é a esquerda do ecrã, 1 a direi
 s_SaveCountdown_AnchorY = Âncora Y
 s_SaveCountdown_AnchorY_d = Centro da caixa. 0 é o fundo do ecrã, 1 o topo.
 
+# Low Ammo
+sec_LowAmmo = Pouca munição
+s_LowAmmo_Enabled = Ativado
+s_LowAmmo_Enabled_d = Avisa quando um disparo te deixa com poucas flechas, virotes ou iscos.
+s_LowAmmo_FirstWarning = Primeiro aviso
+s_LowAmmo_FirstWarning_d = Avisa quando restar esta quantidade. 0 = desligado.
+s_LowAmmo_SecondWarning = Segundo aviso
+s_LowAmmo_SecondWarning_d = Avisa de novo, a vermelho, quando restar esta quantidade. 0 = desligado.
+s_LowAmmo_ShowSeconds = Duração (s)
+s_LowAmmo_ShowSeconds_d = Segundos que o aviso fica no ecrã.
+s_LowAmmo_Sound = Som
+s_LowAmmo_Sound_d = Um tom grave curto a cada aviso.
+s_LowAmmo_SoundVolume = Volume do som
+s_LowAmmo_SoundVolume_d = Volume do tom, somado ao volume do próprio jogo.
+s_LowAmmo_SoundVolume_w = Usado quando Som está ligado.
+s_LowAmmo_Size = Tamanho
+s_LowAmmo_Size_d = 1 é o tamanho normal.
+s_LowAmmo_Opacity = Opacidade
+s_LowAmmo_Opacity_d = 1 é opaco; menos deixa ver o jogo através.
+s_LowAmmo_AnchorX = Âncora X
+s_LowAmmo_AnchorX_d = Centro da caixa. 0 é a esquerda do ecrã, 1 a direita.
+s_LowAmmo_AnchorY = Âncora Y
+s_LowAmmo_AnchorY_d = Centro da caixa. 0 é o fundo do ecrã, 1 o topo.
+
 # Bench Pins
 sec_BenchPins = Alfinetes de bancada
 s_BenchPins_Enabled = Ativado

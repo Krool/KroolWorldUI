@@ -430,6 +430,30 @@ s_SaveCountdown_AnchorX_d = Κέντρο του πλαισίου. 0 είναι �
 s_SaveCountdown_AnchorY = Άγκυρα Y
 s_SaveCountdown_AnchorY_d = Κέντρο του πλαισίου. 0 είναι το κάτω μέρος της οθόνης, 1 το πάνω.
 
+# Low Ammo
+sec_LowAmmo = Λίγα βέλη
+s_LowAmmo_Enabled = Ενεργό
+s_LowAmmo_Enabled_d = Προειδοποιεί όταν μετά από βολή σου μένουν λίγα βέλη, ακόντια ή δολώματα.
+s_LowAmmo_FirstWarning = Πρώτη προειδοποίηση
+s_LowAmmo_FirstWarning_d = Προειδοποιεί όταν απομένουν τόσα. 0 = off.
+s_LowAmmo_SecondWarning = Δεύτερη προειδοποίηση
+s_LowAmmo_SecondWarning_d = Προειδοποιεί ξανά, με κόκκινο, όταν απομένουν τόσα. 0 = off.
+s_LowAmmo_ShowSeconds = Διάρκεια (δ)
+s_LowAmmo_ShowSeconds_d = Δευτερόλεπτα που η προειδοποίηση μένει στην οθόνη.
+s_LowAmmo_Sound = Ήχος
+s_LowAmmo_Sound_d = Ένας σύντομος χαμηλός ήχος με κάθε προειδοποίηση.
+s_LowAmmo_SoundVolume = Ένταση ήχου
+s_LowAmmo_SoundVolume_d = Ένταση του ήχου, επιπλέον της έντασης του ίδιου του παιχνιδιού.
+s_LowAmmo_SoundVolume_w = Ισχύει όταν ο Ήχος είναι ενεργός.
+s_LowAmmo_Size = Μέγεθος
+s_LowAmmo_Size_d = Το 1 είναι το κανονικό μέγεθος.
+s_LowAmmo_Opacity = Αδιαφάνεια
+s_LowAmmo_Opacity_d = Το 1 είναι συμπαγές· χαμηλότερη τιμή αφήνει να φαίνεται το παιχνίδι από πίσω.
+s_LowAmmo_AnchorX = Άγκυρα X
+s_LowAmmo_AnchorX_d = Κέντρο του πλαισίου. 0 είναι η αριστερή άκρη της οθόνης, 1 η δεξιά.
+s_LowAmmo_AnchorY = Άγκυρα Y
+s_LowAmmo_AnchorY_d = Κέντρο του πλαισίου. 0 είναι το κάτω μέρος της οθόνης, 1 το πάνω.
+
 # Bench Pins
 sec_BenchPins = Καρφίτσες πάγκων
 s_BenchPins_Enabled = Ενεργό

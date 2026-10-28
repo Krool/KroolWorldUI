@@ -430,6 +430,30 @@ s_SaveCountdown_AnchorX_d = Rutans mitt. 0 är skärmens vänsterkant, 1 högerk
 s_SaveCountdown_AnchorY = Ankare Y
 s_SaveCountdown_AnchorY_d = Rutans mitt. 0 är skärmens nederkant, 1 överkanten.
 
+# Low Ammo
+sec_LowAmmo = Lite ammunition
+s_LowAmmo_Enabled = Aktiverad
+s_LowAmmo_Enabled_d = Varnar när ett skott lämnar dig med få pilar, bultar eller bete kvar.
+s_LowAmmo_FirstWarning = Första varningen
+s_LowAmmo_FirstWarning_d = Varnar när så många finns kvar. 0 = av.
+s_LowAmmo_SecondWarning = Andra varningen
+s_LowAmmo_SecondWarning_d = Varnar igen, i rött, när så många finns kvar. 0 = av.
+s_LowAmmo_ShowSeconds = Visningstid
+s_LowAmmo_ShowSeconds_d = Sekunder som varningen visas på skärmen.
+s_LowAmmo_Sound = Ljud
+s_LowAmmo_Sound_d = En kort djup ton vid varje varning.
+s_LowAmmo_SoundVolume = Ljudvolym
+s_LowAmmo_SoundVolume_d = Tonens volym, utöver spelets egen volym.
+s_LowAmmo_SoundVolume_w = Används när Ljud är på.
+s_LowAmmo_Size = Storlek
+s_LowAmmo_Size_d = 1 är normal storlek.
+s_LowAmmo_Opacity = Opacitet
+s_LowAmmo_Opacity_d = 1 är heltäckande; lägre låter spelet synas igenom.
+s_LowAmmo_AnchorX = Ankare X
+s_LowAmmo_AnchorX_d = Rutans mitt. 0 är skärmens vänsterkant, 1 högerkanten.
+s_LowAmmo_AnchorY = Ankare Y
+s_LowAmmo_AnchorY_d = Rutans mitt. 0 är skärmens nederkant, 1 överkanten.
+
 # Bench Pins
 sec_BenchPins = Bänknålar
 s_BenchPins_Enabled = Aktiverad

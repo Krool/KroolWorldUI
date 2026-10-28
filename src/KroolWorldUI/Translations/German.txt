@@ -48,6 +48,8 @@ dismiss_hint = [$1] ausblenden
 
 xp_gain = +$1% $2
 
+ammo_left = $1 übrig
+
 repaired_items = $1 Gegenstände repariert
 
 win_search = Einstellungen suchen

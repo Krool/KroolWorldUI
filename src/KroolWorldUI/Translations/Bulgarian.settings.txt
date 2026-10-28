@@ -430,6 +430,30 @@ s_SaveCountdown_AnchorX_d = Център на кутията. 0 е левият 
 s_SaveCountdown_AnchorY = Котва Y
 s_SaveCountdown_AnchorY_d = Център на кутията. 0 е долният край на екрана, 1 горният.
 
+# Low Ammo
+sec_LowAmmo = Малко боеприпаси
+s_LowAmmo_Enabled = Включено
+s_LowAmmo_Enabled_d = Предупреждава, когато след изстрел остават малко стрели, болтове или стръв.
+s_LowAmmo_FirstWarning = Първо предупреждение
+s_LowAmmo_FirstWarning_d = Предупреждава, когато остават толкова. 0 = изкл.
+s_LowAmmo_SecondWarning = Второ предупреждение
+s_LowAmmo_SecondWarning_d = Предупреждава отново, в червено, когато остават толкова. 0 = изкл.
+s_LowAmmo_ShowSeconds = Секунди показване
+s_LowAmmo_ShowSeconds_d = Секунди, през които предупреждението остава на екрана.
+s_LowAmmo_Sound = Звук
+s_LowAmmo_Sound_d = Кратък нисък тон при всяко предупреждение.
+s_LowAmmo_SoundVolume = Сила на звука
+s_LowAmmo_SoundVolume_d = Сила на тона, върху силата на звука на играта.
+s_LowAmmo_SoundVolume_w = Важи при включена настройка „Звук“.
+s_LowAmmo_Size = Размер
+s_LowAmmo_Size_d = 1 е нормалният размер.
+s_LowAmmo_Opacity = Непрозрачност
+s_LowAmmo_Opacity_d = 1 е плътно; по-малко пропуска играта отдолу.
+s_LowAmmo_AnchorX = Котва X
+s_LowAmmo_AnchorX_d = Център на кутията. 0 е левият край на екрана, 1 десният.
+s_LowAmmo_AnchorY = Котва Y
+s_LowAmmo_AnchorY_d = Център на кутията. 0 е долният край на екрана, 1 горният.
+
 # Bench Pins
 sec_BenchPins = Точки за маси
 s_BenchPins_Enabled = Включено

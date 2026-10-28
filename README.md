@@ -52,6 +52,7 @@ All elements at once, using the F7 window's **Preview on HUD** setup view. In pl
 | Day/night bar | Day and night above the minimap, with time to dusk or dawn |
 | Rested countdown | Seconds until Rested while you rest |
 | Save countdown | 5-second warning before the auto-save lag spike |
+| Low ammo | A warning when a shot leaves you with 25, then 10 arrows or bolts |
 | Auto repair | Opening a crafting station repairs everything it can |
 | Bench pins | A map pin with a Norse name when you build a workbench |
 
@@ -175,6 +176,14 @@ The auto-save every 30 minutes can freeze a big world for a moment. A box counts
 - Exact in single player and as host. On a dedicated server it uses the server's 30-second save warning.
 - On a server, your character's own save shows as **Character save in 5**. Can be turned off.
 - A tick each second, which can be turned off. Start time and position are adjustable.
+
+## Low ammo
+
+A short toast below the crosshair when a shot leaves you low: **Wood arrow  25 left**, then **10 left** in red.
+
+- Arrows, bolts and fishing bait. Counts every stack of that ammo in your inventory.
+- Fires only from shooting, so picking up or moving ammo never sets it off.
+- Both counts are settings (0 turns one off), as are the tone, how long it stays and where it sits.
 
 ## Bench pins
 
@@ -427,6 +436,21 @@ Generated from the mod's code, so it matches the F7 window.
 | Opacity | 1 | 0.2 to 1 | 1 is solid; lower shows the game through it. |
 | Anchor X | 0.5 | 0 to 1 | Center of the box. 0 is the left of the screen, 1 the right. |
 | Anchor Y | 0.72 | 0 to 1 | Center of the box. 0 is the bottom of the screen, 1 the top. |
+
+**Low Ammo**
+
+| Setting | Default | Range or choices | What it does |
+|---|---|---|---|
+| Enabled | On |  | Warn when a shot leaves you low on arrows, bolts or bait. |
+| First Warning | 25 | 0 to 100 | Warn when this many are left. 0 = off. |
+| Second Warning | 10 | 0 to 100 | Warn again, in red, when this many are left. 0 = off. |
+| Show Seconds | 3 | 1 to 10 | Seconds the warning stays on screen. |
+| Sound | On |  | A short low tone with each warning. |
+| Sound Volume | 0.35 | 0.05 to 1 | Tone volume, on top of the game's own volume. Used when Sound is on. |
+| Size | 1 | 0.75 to 1.5 | 1 is the normal size. |
+| Opacity | 1 | 0.2 to 1 | 1 is solid; lower shows the game through it. |
+| Anchor X | 0.5 | 0 to 1 | Center of the box. 0 is the left of the screen, 1 the right. |
+| Anchor Y | 0.36 | 0 to 1 | Center of the box. 0 is the bottom of the screen, 1 the top. |
 
 **Bench Pins**
 

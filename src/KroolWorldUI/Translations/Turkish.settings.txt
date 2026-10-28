@@ -430,6 +430,30 @@ s_SaveCountdown_AnchorX_d = Kutunun merkezi. 0 ekranın solu, 1 sağı.
 s_SaveCountdown_AnchorY = Çapa Y
 s_SaveCountdown_AnchorY_d = Kutunun merkezi. 0 ekranın altı, 1 üstü.
 
+# Low Ammo
+sec_LowAmmo = Az Cephane
+s_LowAmmo_Enabled = Etkin
+s_LowAmmo_Enabled_d = Bir atıştan sonra az ok, cıvata veya yem kaldığında uyarır.
+s_LowAmmo_FirstWarning = İlk Uyarı
+s_LowAmmo_FirstWarning_d = Bu kadar kaldığında uyarır. 0 = kapalı.
+s_LowAmmo_SecondWarning = İkinci Uyarı
+s_LowAmmo_SecondWarning_d = Bu kadar kaldığında kırmızıyla tekrar uyarır. 0 = kapalı.
+s_LowAmmo_ShowSeconds = Gösterim (sn)
+s_LowAmmo_ShowSeconds_d = Uyarının ekranda kaldığı saniye.
+s_LowAmmo_Sound = Ses
+s_LowAmmo_Sound_d = Her uyarıda kısa, alçak bir ses.
+s_LowAmmo_SoundVolume = Ses Düzeyi
+s_LowAmmo_SoundVolume_d = Sesin yüksekliği, oyunun kendi ses seviyesinin üstüne eklenir.
+s_LowAmmo_SoundVolume_w = Ses açıksa geçerlidir.
+s_LowAmmo_Size = Boyut
+s_LowAmmo_Size_d = 1 normal boyuttur.
+s_LowAmmo_Opacity = Opaklık
+s_LowAmmo_Opacity_d = 1 tam opak; daha düşük değerde oyun arkadan görünür.
+s_LowAmmo_AnchorX = Çapa X
+s_LowAmmo_AnchorX_d = Kutunun merkezi. 0 ekranın solu, 1 sağı.
+s_LowAmmo_AnchorY = Çapa Y
+s_LowAmmo_AnchorY_d = Kutunun merkezi. 0 ekranın altı, 1 üstü.
+
 # Bench Pins
 sec_BenchPins = Tezgâh İşaretleri
 s_BenchPins_Enabled = Etkin

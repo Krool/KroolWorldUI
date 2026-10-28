@@ -39,6 +39,8 @@ food_none = საჭმელი არ არის
 food_slot_empty = საჭმლის სლოტი ცარიელია ($1)
 dismiss_hint = [$1] დამალვა
 xp_gain = +$1% $2
+ammo_left = დარჩა $1
+
 repaired_items = შეკეთდა $1 ნივთი
 win_search = პარამეტრების ძებნა
 win_expand_all = ყველას გაშლა

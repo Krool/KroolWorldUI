@@ -432,6 +432,30 @@ s_SaveCountdown_AnchorX_d = Center of the box. 0 is the left of the screen, 1 th
 s_SaveCountdown_AnchorY = Anchor Y
 s_SaveCountdown_AnchorY_d = Center of the box. 0 is the bottom of the screen, 1 the top.
 
+# Low Ammo
+sec_LowAmmo = Low Ammo
+s_LowAmmo_Enabled = Enabled
+s_LowAmmo_Enabled_d = Warn when a shot leaves you low on arrows, bolts or bait.
+s_LowAmmo_FirstWarning = First Warning
+s_LowAmmo_FirstWarning_d = Warn when this many are left. 0 = off.
+s_LowAmmo_SecondWarning = Second Warning
+s_LowAmmo_SecondWarning_d = Warn again, in red, when this many are left. 0 = off.
+s_LowAmmo_ShowSeconds = Show Seconds
+s_LowAmmo_ShowSeconds_d = Seconds the warning stays on screen.
+s_LowAmmo_Sound = Sound
+s_LowAmmo_Sound_d = A short low tone with each warning.
+s_LowAmmo_SoundVolume = Sound Volume
+s_LowAmmo_SoundVolume_d = Tone volume, on top of the game's own volume.
+s_LowAmmo_SoundVolume_w = Used when Sound is on.
+s_LowAmmo_Size = Size
+s_LowAmmo_Size_d = 1 is the normal size.
+s_LowAmmo_Opacity = Opacity
+s_LowAmmo_Opacity_d = 1 is solid; lower shows the game through it.
+s_LowAmmo_AnchorX = Anchor X
+s_LowAmmo_AnchorX_d = Center of the box. 0 is the left of the screen, 1 the right.
+s_LowAmmo_AnchorY = Anchor Y
+s_LowAmmo_AnchorY_d = Center of the box. 0 is the bottom of the screen, 1 the top.
+
 # Bench Pins
 sec_BenchPins = Bench Pins
 s_BenchPins_Enabled = Enabled

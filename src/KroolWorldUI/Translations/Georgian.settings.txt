@@ -430,6 +430,30 @@ s_SaveCountdown_AnchorX_d = ყუთის ცენტრი. 0 ეკრა�
 s_SaveCountdown_AnchorY = ანკერი Y
 s_SaveCountdown_AnchorY_d = ყუთის ცენტრი. 0 ეკრანის ქვედა კიდეა, 1 ზედა.
 
+# Low Ammo
+sec_LowAmmo = ცოტა ჯერა
+s_LowAmmo_Enabled = ჩართული
+s_LowAmmo_Enabled_d = გაფრთხილება, როცა გასროლის შემდეგ ისრები, ბოლტები ან სატყუარა ცოტა დაგრჩა.
+s_LowAmmo_FirstWarning = პირველი გაფრთხილება
+s_LowAmmo_FirstWarning_d = გაფრთხილება, როცა ამდენი დარჩა. 0 = გამორთული.
+s_LowAmmo_SecondWarning = მეორე გაფრთხილება
+s_LowAmmo_SecondWarning_d = კვლავ გაფრთხილება წითლად, როცა ამდენი დარჩა. 0 = გამორთული.
+s_LowAmmo_ShowSeconds = ჩვენება (წმ)
+s_LowAmmo_ShowSeconds_d = წამები, რამდენ ხანსაც გაფრთხილება ეკრანზე რჩება.
+s_LowAmmo_Sound = ხმა
+s_LowAmmo_Sound_d = მოკლე დაბალი ტონი ყოველ გაფრთხილებაზე.
+s_LowAmmo_SoundVolume = ხმის დონე
+s_LowAmmo_SoundVolume_d = ტონის ხმა, თამაშის საკუთარი ხმის გარდა.
+s_LowAmmo_SoundVolume_w = მოქმედებს, როცა „ხმა“ ჩართულია.
+s_LowAmmo_Size = ზომა
+s_LowAmmo_Size_d = 1 ჩვეულებრივი ზომაა.
+s_LowAmmo_Opacity = გაუმჭვირვალობა
+s_LowAmmo_Opacity_d = 1 სრულად გაუმჭვირვალეა; ნაკლებზე თამაში გამოჩანს.
+s_LowAmmo_AnchorX = ანკერი X
+s_LowAmmo_AnchorX_d = ყუთის ცენტრი. 0 ეკრანის მარცხენა კიდეა, 1 მარჯვენა.
+s_LowAmmo_AnchorY = ანკერი Y
+s_LowAmmo_AnchorY_d = ყუთის ცენტრი. 0 ეკრანის ქვედა კიდეა, 1 ზედა.
+
 # Bench Pins
 sec_BenchPins = მაგიდის პინები
 s_BenchPins_Enabled = ჩართული

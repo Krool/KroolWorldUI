@@ -48,6 +48,8 @@ dismiss_hint = [$1] скрыть
 
 xp_gain = +$1% $2
 
+ammo_left = Осталось $1
+
 repaired_items = Починено предметов: $1
 
 win_search = Поиск настроек

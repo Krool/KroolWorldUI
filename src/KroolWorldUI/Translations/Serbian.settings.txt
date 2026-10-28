@@ -430,6 +430,30 @@ s_SaveCountdown_AnchorX_d = Sredina okvira. 0 je leva ivica ekrana, 1 desna.
 s_SaveCountdown_AnchorY = Sidro Y
 s_SaveCountdown_AnchorY_d = Sredina okvira. 0 je dno ekrana, 1 vrh.
 
+# Low Ammo
+sec_LowAmmo = Malo municije
+s_LowAmmo_Enabled = Uključeno
+s_LowAmmo_Enabled_d = Upozorava kad ti posle ispaljivanja ostane malo strela, zrna ili mamaca.
+s_LowAmmo_FirstWarning = Prvo upozorenje
+s_LowAmmo_FirstWarning_d = Upozorava kad ostane toliko. 0 = isključeno.
+s_LowAmmo_SecondWarning = Drugo upozorenje
+s_LowAmmo_SecondWarning_d = Upozorava ponovo, crveno, kad ostane toliko. 0 = isključeno.
+s_LowAmmo_ShowSeconds = Sekunde prikaza
+s_LowAmmo_ShowSeconds_d = Sekunde koliko upozorenje ostaje na ekranu.
+s_LowAmmo_Sound = Zvuk
+s_LowAmmo_Sound_d = Kratak dubok ton uz svako upozorenje.
+s_LowAmmo_SoundVolume = Jačina zvuka
+s_LowAmmo_SoundVolume_d = Jačina tona, povrh jačine same igre.
+s_LowAmmo_SoundVolume_w = Važi kad je „Zvuk“ uključen.
+s_LowAmmo_Size = Veličina
+s_LowAmmo_Size_d = 1 je normalna veličina.
+s_LowAmmo_Opacity = Neprozirnost
+s_LowAmmo_Opacity_d = 1 je puno; manje propušta igru ispod.
+s_LowAmmo_AnchorX = Sidro X
+s_LowAmmo_AnchorX_d = Sredina okvira. 0 je leva ivica ekrana, 1 desna.
+s_LowAmmo_AnchorY = Sidro Y
+s_LowAmmo_AnchorY_d = Sredina okvira. 0 je dno ekrana, 1 vrh.
+
 # Bench Pins
 sec_BenchPins = Oznake stolova
 s_BenchPins_Enabled = Uključeno

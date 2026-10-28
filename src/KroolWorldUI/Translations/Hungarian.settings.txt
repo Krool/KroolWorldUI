@@ -430,6 +430,30 @@ s_SaveCountdown_AnchorX_d = A doboz közepe. 0 a képernyő bal széle, 1 a jobb
 s_SaveCountdown_AnchorY = Horgony Y
 s_SaveCountdown_AnchorY_d = A doboz közepe. 0 a képernyő alja, 1 a teteje.
 
+# Low Ammo
+sec_LowAmmo = Kevés lőszer
+s_LowAmmo_Enabled = Bekapcsolva
+s_LowAmmo_Enabled_d = Figyelmeztet, ha egy lövés után kevés nyilad, nyílvessződ vagy csalid marad.
+s_LowAmmo_FirstWarning = Első figyelmeztetés
+s_LowAmmo_FirstWarning_d = Figyelmeztet, ha ennyi maradt. 0 = ki.
+s_LowAmmo_SecondWarning = Második figyelmeztetés
+s_LowAmmo_SecondWarning_d = Újra figyelmeztet, pirosan, ha ennyi maradt. 0 = ki.
+s_LowAmmo_ShowSeconds = Kijelzési idő
+s_LowAmmo_ShowSeconds_d = Hány másodpercig marad a képernyőn a figyelmeztetés.
+s_LowAmmo_Sound = Hang
+s_LowAmmo_Sound_d = Rövid mély hang minden figyelmeztetésnél.
+s_LowAmmo_SoundVolume = Hangerő
+s_LowAmmo_SoundVolume_d = A hang hangereje, a játék saját hangereje mellett.
+s_LowAmmo_SoundVolume_w = Csak ha be van kapcsolva: Hang.
+s_LowAmmo_Size = Méret
+s_LowAmmo_Size_d = 1 a normál méret.
+s_LowAmmo_Opacity = Átlátszatlanság
+s_LowAmmo_Opacity_d = 1 teljesen fedő; kisebb értéknél átlátszik a játék.
+s_LowAmmo_AnchorX = Horgony X
+s_LowAmmo_AnchorX_d = A doboz közepe. 0 a képernyő bal széle, 1 a jobb.
+s_LowAmmo_AnchorY = Horgony Y
+s_LowAmmo_AnchorY_d = A doboz közepe. 0 a képernyő alja, 1 a teteje.
+
 # Bench Pins
 sec_BenchPins = Asztaljelölések
 s_BenchPins_Enabled = Bekapcsolva

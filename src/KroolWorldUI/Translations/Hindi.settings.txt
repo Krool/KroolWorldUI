@@ -430,6 +430,30 @@ s_SaveCountdown_AnchorX_d = बॉक्स का केंद्र। 0 स�
 s_SaveCountdown_AnchorY = एंकर Y
 s_SaveCountdown_AnchorY_d = बॉक्स का केंद्र। 0 स्क्रीन का निचला किनारा है, 1 ऊपरी।
 
+# Low Ammo
+sec_LowAmmo = कम गोला-बारूद
+s_LowAmmo_Enabled = चालू
+s_LowAmmo_Enabled_d = गोली चलाने के बाद तीर, बोल्ट या चारा कम बचने पर चेतावनी देता है।
+s_LowAmmo_FirstWarning = पहली चेतावनी
+s_LowAmmo_FirstWarning_d = इतने बचने पर चेतावनी दें। 0 = बंद।
+s_LowAmmo_SecondWarning = दूसरी चेतावनी
+s_LowAmmo_SecondWarning_d = इतने बचने पर लाल रंग में फिर चेतावनी दें। 0 = बंद।
+s_LowAmmo_ShowSeconds = दिखने का समय (से)
+s_LowAmmo_ShowSeconds_d = चेतावनी स्क्रीन पर कितने सेकंड रहती है।
+s_LowAmmo_Sound = साउंड
+s_LowAmmo_Sound_d = हर चेतावनी के साथ एक छोटी धीमी ध्वनि।
+s_LowAmmo_SoundVolume = साउंड वॉल्यूम
+s_LowAmmo_SoundVolume_d = ध्वनि की आवाज़, खेल की अपनी आवाज़ के ऊपर।
+s_LowAmmo_SoundVolume_w = तब लागू जब साउंड चालू हो।
+s_LowAmmo_Size = आकार
+s_LowAmmo_Size_d = 1 सामान्य आकार है।
+s_LowAmmo_Opacity = अपारदर्शिता
+s_LowAmmo_Opacity_d = 1 पूरा ठोस है; कम करने पर पीछे गेम दिखता है।
+s_LowAmmo_AnchorX = एंकर X
+s_LowAmmo_AnchorX_d = बॉक्स का केंद्र। 0 स्क्रीन का बायाँ किनारा है, 1 दायाँ।
+s_LowAmmo_AnchorY = एंकर Y
+s_LowAmmo_AnchorY_d = बॉक्स का केंद्र। 0 स्क्रीन का निचला किनारा है, 1 ऊपरी।
+
 # Bench Pins
 sec_BenchPins = बेंच पिन
 s_BenchPins_Enabled = चालू

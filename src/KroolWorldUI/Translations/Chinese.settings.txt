@@ -430,6 +430,30 @@ s_SaveCountdown_AnchorX_d = 框的中心。0 为屏幕左侧，1 为右侧。
 s_SaveCountdown_AnchorY = 锚点Y
 s_SaveCountdown_AnchorY_d = 框的中心。0 为屏幕底部，1 为顶部。
 
+# Low Ammo
+sec_LowAmmo = 弹药不足
+s_LowAmmo_Enabled = 启用
+s_LowAmmo_Enabled_d = 射击后箭、弩箭或鱼饵所剩不多时发出警告。
+s_LowAmmo_FirstWarning = 第一次警告
+s_LowAmmo_FirstWarning_d = 剩余这么多时警告。0 = 关闭。
+s_LowAmmo_SecondWarning = 第二次警告
+s_LowAmmo_SecondWarning_d = 剩余这么多时再次以红色警告。0 = 关闭。
+s_LowAmmo_ShowSeconds = 显示秒数
+s_LowAmmo_ShowSeconds_d = 警告在屏幕上停留的秒数。
+s_LowAmmo_Sound = 音效
+s_LowAmmo_Sound_d = 每次警告时发出一声短促的低音。
+s_LowAmmo_SoundVolume = 音效音量
+s_LowAmmo_SoundVolume_d = 提示音音量,在游戏自身音量之上。
+s_LowAmmo_SoundVolume_w = “音效”开启时生效。
+s_LowAmmo_Size = 大小
+s_LowAmmo_Size_d = 1 为正常大小。
+s_LowAmmo_Opacity = 不透明度
+s_LowAmmo_Opacity_d = 1 为完全不透明，越低越透明。
+s_LowAmmo_AnchorX = 锚点X
+s_LowAmmo_AnchorX_d = 框的中心。0 为屏幕左侧，1 为右侧。
+s_LowAmmo_AnchorY = 锚点Y
+s_LowAmmo_AnchorY_d = 框的中心。0 为屏幕底部，1 为顶部。
+
 # Bench Pins
 sec_BenchPins = 工作台标记
 s_BenchPins_Enabled = 启用

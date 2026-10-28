@@ -430,6 +430,30 @@ s_SaveCountdown_AnchorX_d = Langelio centras. 0 yra kairysis ekrano kraštas, 1 
 s_SaveCountdown_AnchorY = Inkaras Y
 s_SaveCountdown_AnchorY_d = Langelio centras. 0 yra ekrano apačia, 1 viršus.
 
+# Low Ammo
+sec_LowAmmo = Mažai šovinių
+s_LowAmmo_Enabled = Įjungta
+s_LowAmmo_Enabled_d = Įspėja, kai po šūvio lieka mažai strėlių, arbaletų strėlių ar jaukų.
+s_LowAmmo_FirstWarning = Pirmas įspėjimas
+s_LowAmmo_FirstWarning_d = Įspėja, kai lieka tiek. 0 = išjungta.
+s_LowAmmo_SecondWarning = Antras įspėjimas
+s_LowAmmo_SecondWarning_d = Įspėja dar kartą, raudonai, kai lieka tiek. 0 = išjungta.
+s_LowAmmo_ShowSeconds = Rodymo trukmė
+s_LowAmmo_ShowSeconds_d = Sekundės, kiek įspėjimas lieka ekrane.
+s_LowAmmo_Sound = Garsas
+s_LowAmmo_Sound_d = Trumpas žemas garsas su kiekvienu įspėjimu.
+s_LowAmmo_SoundVolume = Garso garsumas
+s_LowAmmo_SoundVolume_d = Garso stiprumas, pridedamas prie paties žaidimo garso.
+s_LowAmmo_SoundVolume_w = Galioja, kai įjungta: Garsas.
+s_LowAmmo_Size = Dydis
+s_LowAmmo_Size_d = 1 yra įprastas dydis.
+s_LowAmmo_Opacity = Neskaidrumas
+s_LowAmmo_Opacity_d = 1 yra visiškai neskaidru; mažiau leidžia matyti žaidimą pro jį.
+s_LowAmmo_AnchorX = Inkaras X
+s_LowAmmo_AnchorX_d = Langelio centras. 0 yra kairysis ekrano kraštas, 1 dešinysis.
+s_LowAmmo_AnchorY = Inkaras Y
+s_LowAmmo_AnchorY_d = Langelio centras. 0 yra ekrano apačia, 1 viršus.
+
 # Bench Pins
 sec_BenchPins = Stalų žymekliai
 s_BenchPins_Enabled = Įjungta

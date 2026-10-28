@@ -430,6 +430,30 @@ s_SaveCountdown_AnchorX_d = Центр вікна. 0: лівий край екр
 s_SaveCountdown_AnchorY = Якір Y
 s_SaveCountdown_AnchorY_d = Центр вікна. 0: низ екрана, 1: верх.
 
+# Low Ammo
+sec_LowAmmo = Мало боєприпасів
+s_LowAmmo_Enabled = Увімкнено
+s_LowAmmo_Enabled_d = Попереджає, коли після пострілу лишається мало стріл, болтів або наживки.
+s_LowAmmo_FirstWarning = Перше попередження
+s_LowAmmo_FirstWarning_d = Попереджає, коли лишилося стільки. 0 = вимк.
+s_LowAmmo_SecondWarning = Друге попередження
+s_LowAmmo_SecondWarning_d = Попереджає знову, червоним, коли лишилося стільки. 0 = вимк.
+s_LowAmmo_ShowSeconds = Секунди показу
+s_LowAmmo_ShowSeconds_d = Скільки секунд попередження лишається на екрані.
+s_LowAmmo_Sound = Звук
+s_LowAmmo_Sound_d = Короткий низький звук при кожному попередженні.
+s_LowAmmo_SoundVolume = Гучність звуку
+s_LowAmmo_SoundVolume_d = Гучність сигналу, поверх гучності самої гри.
+s_LowAmmo_SoundVolume_w = Діє, якщо ввімкнено «Звук».
+s_LowAmmo_Size = Розмір
+s_LowAmmo_Size_d = 1: звичайний розмір.
+s_LowAmmo_Opacity = Непрозорість
+s_LowAmmo_Opacity_d = 1: суцільний колір; менше: крізь нього видно гру.
+s_LowAmmo_AnchorX = Якір X
+s_LowAmmo_AnchorX_d = Центр вікна. 0: лівий край екрана, 1: правий.
+s_LowAmmo_AnchorY = Якір Y
+s_LowAmmo_AnchorY_d = Центр вікна. 0: низ екрана, 1: верх.
+
 # Bench Pins
 sec_BenchPins = Позначки верстаків
 s_BenchPins_Enabled = Увімкнено

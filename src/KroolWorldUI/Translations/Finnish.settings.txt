@@ -430,6 +430,30 @@ s_SaveCountdown_AnchorX_d = Laatikon keskikohta. 0 on ruudun vasen reuna, 1 oike
 s_SaveCountdown_AnchorY = Ankkuri Y
 s_SaveCountdown_AnchorY_d = Laatikon keskikohta. 0 on ruudun alareuna, 1 yläreuna.
 
+# Low Ammo
+sec_LowAmmo = Vähän ammuksia
+s_LowAmmo_Enabled = Käytössä
+s_LowAmmo_Enabled_d = Varoittaa, kun laukauksen jälkeen nuolia, tikkoja tai syöttejä on vähän jäljellä.
+s_LowAmmo_FirstWarning = Ensimmäinen varoitus
+s_LowAmmo_FirstWarning_d = Varoittaa, kun näin monta on jäljellä. 0 = pois.
+s_LowAmmo_SecondWarning = Toinen varoitus
+s_LowAmmo_SecondWarning_d = Varoittaa uudelleen punaisella, kun näin monta on jäljellä. 0 = pois.
+s_LowAmmo_ShowSeconds = Näyttöaika (s)
+s_LowAmmo_ShowSeconds_d = Sekuntia, jonka varoitus pysyy näytöllä.
+s_LowAmmo_Sound = Ääni
+s_LowAmmo_Sound_d = Lyhyt matala ääni jokaisen varoituksen yhteydessä.
+s_LowAmmo_SoundVolume = Äänenvoimakkuus
+s_LowAmmo_SoundVolume_d = Äänen voimakkuus pelin oman äänenvoimakkuuden päälle.
+s_LowAmmo_SoundVolume_w = Vaikuttaa, kun Ääni on päällä.
+s_LowAmmo_Size = Koko
+s_LowAmmo_Size_d = 1 on normaali koko.
+s_LowAmmo_Opacity = Peittävyys
+s_LowAmmo_Opacity_d = 1 on täysin peittävä; pienempi näyttää pelin läpi.
+s_LowAmmo_AnchorX = Ankkuri X
+s_LowAmmo_AnchorX_d = Laatikon keskikohta. 0 on ruudun vasen reuna, 1 oikea.
+s_LowAmmo_AnchorY = Ankkuri Y
+s_LowAmmo_AnchorY_d = Laatikon keskikohta. 0 on ruudun alareuna, 1 yläreuna.
+
 # Bench Pins
 sec_BenchPins = Työpöytämerkit
 s_BenchPins_Enabled = Käytössä

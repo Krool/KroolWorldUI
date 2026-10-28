@@ -430,6 +430,30 @@ s_SaveCountdown_AnchorX_d = Midden van het vak. 0 is de linkerkant van het scher
 s_SaveCountdown_AnchorY = Anker Y
 s_SaveCountdown_AnchorY_d = Midden van het vak. 0 is de onderkant van het scherm, 1 de bovenkant.
 
+# Low Ammo
+sec_LowAmmo = Weinig munitie
+s_LowAmmo_Enabled = Ingeschakeld
+s_LowAmmo_Enabled_d = Waarschuwt als je na een schot bijna door je pijlen, bolten of aas heen bent.
+s_LowAmmo_FirstWarning = Eerste waarschuwing
+s_LowAmmo_FirstWarning_d = Waarschuwt als er zoveel over zijn. 0 = uit.
+s_LowAmmo_SecondWarning = Tweede waarschuwing
+s_LowAmmo_SecondWarning_d = Waarschuwt opnieuw, in rood, als er zoveel over zijn. 0 = uit.
+s_LowAmmo_ShowSeconds = Toonduur
+s_LowAmmo_ShowSeconds_d = Seconden dat de waarschuwing in beeld blijft.
+s_LowAmmo_Sound = Geluid
+s_LowAmmo_Sound_d = Een korte lage toon bij elke waarschuwing.
+s_LowAmmo_SoundVolume = Geluidsvolume
+s_LowAmmo_SoundVolume_d = Volume van de toon, bovenop het volume van het spel zelf.
+s_LowAmmo_SoundVolume_w = Gebruikt als Geluid aan staat.
+s_LowAmmo_Size = Grootte
+s_LowAmmo_Size_d = 1 is de normale grootte.
+s_LowAmmo_Opacity = Dekking
+s_LowAmmo_Opacity_d = 1 is ondoorzichtig; lager laat het spel erdoor zien.
+s_LowAmmo_AnchorX = Anker X
+s_LowAmmo_AnchorX_d = Midden van het vak. 0 is de linkerkant van het scherm, 1 de rechterkant.
+s_LowAmmo_AnchorY = Anker Y
+s_LowAmmo_AnchorY_d = Midden van het vak. 0 is de onderkant van het scherm, 1 de bovenkant.
+
 # Bench Pins
 sec_BenchPins = Werkbankmarkeringen
 s_BenchPins_Enabled = Ingeschakeld

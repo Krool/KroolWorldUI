@@ -430,6 +430,30 @@ s_SaveCountdown_AnchorX_d = Stred okna. 0 je ľavý okraj obrazovky, 1 pravý.
 s_SaveCountdown_AnchorY = Kotva Y
 s_SaveCountdown_AnchorY_d = Stred okna. 0 je spodok obrazovky, 1 vrch.
 
+# Low Ammo
+sec_LowAmmo = Málo munície
+s_LowAmmo_Enabled = Zapnuté
+s_LowAmmo_Enabled_d = Varuje, keď ti po výstrele zostáva málo šípov, šípok alebo návnad.
+s_LowAmmo_FirstWarning = Prvé varovanie
+s_LowAmmo_FirstWarning_d = Varuje, keď zostáva toľko. 0 = vypnuté.
+s_LowAmmo_SecondWarning = Druhé varovanie
+s_LowAmmo_SecondWarning_d = Varuje znova, červene, keď zostáva toľko. 0 = vypnuté.
+s_LowAmmo_ShowSeconds = Čas zobrazenia
+s_LowAmmo_ShowSeconds_d = Sekundy, po ktoré varovanie zostane na obrazovke.
+s_LowAmmo_Sound = Zvuk
+s_LowAmmo_Sound_d = Krátky nízky tón pri každom varovaní.
+s_LowAmmo_SoundVolume = Hlasitosť zvuku
+s_LowAmmo_SoundVolume_d = Hlasitosť tónu, navyše k hlasitosti hry.
+s_LowAmmo_SoundVolume_w = Platí, keď je zapnuté: Zvuk.
+s_LowAmmo_Size = Veľkosť
+s_LowAmmo_Size_d = 1 je bežná veľkosť.
+s_LowAmmo_Opacity = Krytie
+s_LowAmmo_Opacity_d = 1 je plné; menej nechá presvitať hru.
+s_LowAmmo_AnchorX = Kotva X
+s_LowAmmo_AnchorX_d = Stred okna. 0 je ľavý okraj obrazovky, 1 pravý.
+s_LowAmmo_AnchorY = Kotva Y
+s_LowAmmo_AnchorY_d = Stred okna. 0 je spodok obrazovky, 1 vrch.
+
 # Bench Pins
 sec_BenchPins = Značky stolov
 s_BenchPins_Enabled = Zapnuté

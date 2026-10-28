@@ -39,6 +39,8 @@ food_none = भोजन नहीं
 food_slot_empty = भोजन स्लॉट ख़ाली ($1)
 dismiss_hint = [$1] छिपाएँ
 xp_gain = +$1% $2
+ammo_left = $1 बचे
+
 repaired_items = $1 आइटम रिपेयर हुए
 win_search = सेटिंग्स खोजें
 win_expand_all = सब खोलें

@@ -39,6 +39,8 @@ food_none = Žiadne jedlo
 food_slot_empty = Voľné miesto na jedlo ($1)
 dismiss_hint = [$1] skryť
 xp_gain = +$1% $2
+ammo_left = Zostáva $1
+
 repaired_items = Opravené predmety: $1
 win_search = Hľadať nastavenia
 win_expand_all = Rozbaliť všetko

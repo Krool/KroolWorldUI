@@ -39,6 +39,8 @@ food_none = Nėra maisto
 food_slot_empty = Tuščia maisto vieta ($1)
 dismiss_hint = [$1] slėpti
 xp_gain = +$1% $2
+ammo_left = Liko $1
+
 repaired_items = Sutaisyta daiktų: $1
 win_search = Ieškoti nustatymų
 win_expand_all = Išskleisti viską

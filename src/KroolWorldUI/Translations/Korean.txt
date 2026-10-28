@@ -48,6 +48,8 @@ dismiss_hint = [$1] 숨기기
 
 xp_gain = +$1% $2
 
+ammo_left = $1 남음
+
 repaired_items = 아이템 $1개 수리 완료
 
 win_search = 설정 검색

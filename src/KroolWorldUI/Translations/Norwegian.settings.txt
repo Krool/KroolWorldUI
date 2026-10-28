@@ -430,6 +430,30 @@ s_SaveCountdown_AnchorX_d = Midten av boksen. 0 er venstre kant av skjermen, 1 h
 s_SaveCountdown_AnchorY = Anker Y
 s_SaveCountdown_AnchorY_d = Midten av boksen. 0 er bunnen av skjermen, 1 toppen.
 
+# Low Ammo
+sec_LowAmmo = Lite ammunisjon
+s_LowAmmo_Enabled = Aktivert
+s_LowAmmo_Enabled_d = Advarer når et skudd gir deg få piler, bolter eller agn igjen.
+s_LowAmmo_FirstWarning = Første advarsel
+s_LowAmmo_FirstWarning_d = Advarer når så mange er igjen. 0 = av.
+s_LowAmmo_SecondWarning = Andre advarsel
+s_LowAmmo_SecondWarning_d = Advarer igjen, i rødt, når så mange er igjen. 0 = av.
+s_LowAmmo_ShowSeconds = Visningstid
+s_LowAmmo_ShowSeconds_d = Sekunder advarselen blir stående på skjermen.
+s_LowAmmo_Sound = Lyd
+s_LowAmmo_Sound_d = En kort dyp tone ved hver advarsel.
+s_LowAmmo_SoundVolume = Lydvolum
+s_LowAmmo_SoundVolume_d = Tonens volum, oppå spillets eget volum.
+s_LowAmmo_SoundVolume_w = Brukes når Lyd er på.
+s_LowAmmo_Size = Størrelse
+s_LowAmmo_Size_d = 1 er normal størrelse.
+s_LowAmmo_Opacity = Opasitet
+s_LowAmmo_Opacity_d = 1 er heldekkende; lavere lar spillet synes gjennom.
+s_LowAmmo_AnchorX = Anker X
+s_LowAmmo_AnchorX_d = Midten av boksen. 0 er venstre kant av skjermen, 1 høyre.
+s_LowAmmo_AnchorY = Anker Y
+s_LowAmmo_AnchorY_d = Midten av boksen. 0 er bunnen av skjermen, 1 toppen.
+
 # Bench Pins
 sec_BenchPins = Benknåler
 s_BenchPins_Enabled = Aktivert
