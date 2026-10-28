@@ -74,8 +74,10 @@ namespace KroolWorldUI.Features
 
         private static InventoryGui _gui;          // the panel our layout was applied to
         private static InventoryGui _session;      // the panel the remembered tabs belong to (one per login)
-        private static RectTransform _list;        // the game's RecipeList (scroll view)
-        private static Vector2 _listPos, _listSize;
+        private static RectTransform _list;        // the game's scroll view (Recipes), stretched inside RecipeList
+        private static Vector2 _listMin, _listMax; // its original offsets
+        private static RectTransform _scroll;      // the list's scrollbar, when it shares the frame
+        private static Vector2 _scrollMin, _scrollMax;
         private static float _baseSize;
         private static float _shrink;              // how much the list was shortened
         private static GameObject _bar;
@@ -437,14 +439,16 @@ namespace KroolWorldUI.Features
 
         // ------------------------------------------------------------------ layout
 
-        private const float BarHeight = 28f;
+        private const float BarHeight = 30f;
         private const float SortHeight = 26f;
         private const float Gap = 4f;
 
         /// <summary>
         /// Shortens the game's recipe list to make room for the tab strip above it and the sort
         /// button below, measured from where the list actually is (another mod may have moved it).
-        /// Applied once per inventory screen; the screen is rebuilt after each logout.
+        /// The list is stretched inside its frame, so this works on offsets, which mean the same
+        /// whatever the anchors and pivot. Applied once per inventory screen; the screen is rebuilt
+        /// after each logout.
         /// </summary>
         private static void EnsureLayout(InventoryGui gui)
         {
@@ -458,22 +462,43 @@ namespace KroolWorldUI.Features
             _list = gui.m_recipeListRoot.parent as RectTransform;
             if (_list == null)
                 throw new InvalidOperationException("recipe list has no parent");
-            _listPos = _list.anchoredPosition;
-            _listSize = _list.sizeDelta;
+            var parent = _list.parent as RectTransform;
+            if (parent == null)
+                throw new InvalidOperationException("recipe list frame is not a RectTransform");
+            _listMin = _list.offsetMin;
+            _listMax = _list.offsetMax;
             _baseSize = _baseSizeRef(gui);
+
+            // The list's top and bottom edges in the frame's own space, before shrinking.
+            var frame = parent.rect;
+            float listTop = frame.yMin + _list.anchorMax.y * frame.height + _listMax.y;
+            float listBottom = frame.yMin + _list.anchorMin.y * frame.height + _listMin.y;
 
             float top = wantBar ? BarHeight + Gap : 0f;
             float bottom = wantSort ? SortHeight + Gap : 0f;
             _shrink = top + bottom;
-            _list.anchoredPosition = _listPos + new Vector2(0f, -top);
-            _list.sizeDelta = _listSize - new Vector2(0f, _shrink);
+            _list.offsetMax = _listMax - new Vector2(0f, top);
+            _list.offsetMin = _listMin + new Vector2(0f, bottom);
             _baseSizeRef(gui) = _baseSize - _shrink;
 
-            var parent = _list.parent;
+            _scroll = gui.m_recipeListScroll != null ? gui.m_recipeListScroll.transform as RectTransform : null;
+            if (_scroll != null && _scroll.parent == parent)
+            {
+                _scrollMin = _scroll.offsetMin;
+                _scrollMax = _scroll.offsetMax;
+                _scroll.offsetMax = _scrollMax - new Vector2(0f, top);
+                _scroll.offsetMin = _scrollMin + new Vector2(0f, bottom);
+            }
+            else
+            {
+                _scroll = null;
+            }
+
             if (wantBar)
-                BuildBar(gui, parent);
+                BuildBar(gui, Strip("KroolWorldUI_CraftTabs", parent, 1f, listTop - frame.yMax - BarHeight, BarHeight));
             if (wantSort)
-                BuildSortRow(gui, parent);
+                BuildSortRow(gui, Strip("KroolWorldUI_CraftSort", parent, 0f, listBottom - frame.yMin, SortHeight));
+            Plugin.Log.LogDebug($"Crafting tabs: frame {frame}, list {listBottom}..{listTop}, now {_list.rect}");
         }
 
         private static void RestoreLayout()
@@ -488,44 +513,50 @@ namespace KroolWorldUI.Features
             _sortText = null;
             if (_gui != null && _list != null)
             {
-                _list.anchoredPosition = _listPos;
-                _list.sizeDelta = _listSize;
+                _list.offsetMin = _listMin;
+                _list.offsetMax = _listMax;
+                if (_scroll != null)
+                {
+                    _scroll.offsetMin = _scrollMin;
+                    _scroll.offsetMax = _scrollMax;
+                }
                 _baseSizeRef(_gui) = _baseSize;
             }
             _gui = null;
             _list = null;
+            _scroll = null;
             foreach (var o in _owned)
                 HudKit.Free(o);
             _owned.Clear();
         }
 
-        /// <summary>A box at the list's left edge and width, top at <paramref name="y"/> below the list's original top.</summary>
-        private static RectTransform Box(string name, Transform parent, float y, float height)
+        /// <summary>
+        /// A strip the frame's full width, anchored to its top (<paramref name="edge"/> 1) or bottom
+        /// (0) edge, with its bottom <paramref name="y"/> from that edge.
+        /// </summary>
+        private static RectTransform Strip(string name, Transform parent, float edge, float y, float height)
         {
             var go = new GameObject(name, typeof(RectTransform));
             go.transform.SetParent(parent, false);
             var rt = (RectTransform)go.transform;
-            rt.anchorMin = _list.anchorMin;
-            rt.anchorMax = new Vector2(_list.anchorMin.x, _list.anchorMax.y);
-            rt.pivot = new Vector2(0f, 1f);
-            // The list's top-left corner in its own anchor space, whatever its pivot.
-            var topLeft = _listPos + new Vector2(-_list.pivot.x * _listSize.x, (1f - _list.pivot.y) * _listSize.y);
-            rt.anchoredPosition = topLeft + new Vector2(0f, -y);
-            rt.sizeDelta = new Vector2(_listSize.x, height);
+            rt.anchorMin = new Vector2(0f, edge);
+            rt.anchorMax = new Vector2(1f, edge);
+            rt.pivot = new Vector2(0.5f, 0.5f);
+            rt.offsetMin = new Vector2(0f, y);
+            rt.offsetMax = new Vector2(0f, y + height);
             return rt;
         }
 
-        private static void BuildBar(InventoryGui gui, Transform parent)
+        private static void BuildBar(InventoryGui gui, RectTransform bar)
         {
-            var bar = Box("KroolWorldUI_CraftTabs", parent, 0f, BarHeight);
             _bar = bar.gameObject;
             GetRecipeSprites(gui, out var bkg, out var selected);
             var tooltipPrefab = gui.m_craftButton != null ? gui.m_craftButton.GetComponent<UITooltip>()?.m_tooltipPrefab : null;
             var sfx = gui.m_tabCraft != null ? gui.m_tabCraft.GetComponent<ButtonSfx>() : null;
 
             int n = CategoryKeys.Length;
-            float gap = 2f;
-            float w = (_listSize.x - gap * (n - 1)) / n;
+            float gap = 1f;
+            float w = (((RectTransform)bar.parent).rect.width - gap * (n - 1)) / n;
             _slots = new Slot[n];
             for (int i = 0; i < n; i++)
             {
@@ -548,7 +579,8 @@ namespace KroolWorldUI.Features
                 var icon = HudKit.NewImage("icon", rt, Color.white);
                 icon.sprite = IconFor(cat);
                 icon.preserveAspect = true;
-                float side = Mathf.Min(w, BarHeight) - 6f;
+                // Item icons carry their own transparent margin, so they may reach past the slot a little.
+                float side = Mathf.Min(w, BarHeight) + 3f;
                 icon.rectTransform.sizeDelta = new Vector2(side, side);
 
                 var button = slotGo.GetComponent<Button>();
@@ -575,9 +607,8 @@ namespace KroolWorldUI.Features
             }
         }
 
-        private static void BuildSortRow(InventoryGui gui, Transform parent)
+        private static void BuildSortRow(InventoryGui gui, RectTransform row)
         {
-            var row = Box("KroolWorldUI_CraftSort", parent, _listSize.y - SortHeight, SortHeight);
             _sortRow = row.gameObject;
             GetRecipeSprites(gui, out var bkg, out _);
 
