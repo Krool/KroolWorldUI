@@ -16,7 +16,7 @@ namespace KroolWorldUI.Features
     /// A strip of item-type icons sits above the recipe list and a sort button below it; the list
     /// itself is the game's, filtered and reordered after InventoryGui.UpdateRecipeList builds it,
     /// so selecting, crafting and the Upgrade tab work as before. Categories with nothing in them
-    /// at this station are greyed out. The chosen category is remembered per station for the
+    /// at this station are hidden. The chosen category is remembered per station for the
     /// session. On a controller, the D-pad left/right changes category. Display only.
     /// </summary>
     internal static class CraftingTabs
@@ -405,22 +405,30 @@ namespace KroolWorldUI.Features
 
         private static void UpdateSlots()
         {
-            if (_slots == null)
+            if (_slots == null || _bar == null)
                 return;
+            // Only the tabs this station has something for, spread across the strip.
+            int shown = 0;
+            foreach (var slot in _slots)
+                if (_counts[(int)slot.Category] > 0)
+                    shown++;
+            const float gap = 1f;
+            float w = (((RectTransform)_bar.transform).rect.width - gap * (shown - 1)) / Mathf.Max(1, shown);
+            int k = 0;
             foreach (var slot in _slots)
             {
                 bool any = _counts[(int)slot.Category] > 0;
-                bool on = slot.Category == _current;
-                slot.Button.interactable = any;
-                slot.Selected.enabled = on;
-                var c = slot.Icon.color;
-                c.a = any ? 1f : 0.25f;
-                slot.Icon.color = c;
+                slot.Button.gameObject.SetActive(any);
+                if (!any)
+                    continue;
+                var rt = (RectTransform)slot.Button.transform;
+                rt.anchoredPosition = new Vector2(k++ * (w + gap), 0f);
+                rt.sizeDelta = new Vector2(w, BarHeight);
+                slot.Selected.enabled = slot.Category == _current;
                 if (slot.Tooltip != null)
                 {
-                    string name = L10n.T(CategoryKeys[(int)slot.Category]);
                     slot.Tooltip.m_topic = "";
-                    slot.Tooltip.m_text = any ? $"{name} ({_counts[(int)slot.Category]})" : name;
+                    slot.Tooltip.m_text = $"{L10n.T(CategoryKeys[(int)slot.Category])} ({_counts[(int)slot.Category]})";
                 }
             }
         }
