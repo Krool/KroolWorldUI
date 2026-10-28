@@ -1,6 +1,6 @@
 {
   "name": "Krool_World_UI",
-  "version_number": "0.15.0",
+  "version_number": "0.15.1",
   "website_url": "https://github.com/Krool/KroolWorldUI",
   "description": "HUD/UI: compass, skill XP bars, carry weight, food timers and decay, build materials, crafting tabs and sorting, day/night clock, save and rested countdowns, low ammo warning, bench pins, auto repair. Client-side, every language, controller-ready.",
   "dependencies": [
