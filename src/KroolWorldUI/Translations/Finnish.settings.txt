@@ -267,6 +267,44 @@ s_BuildMaterials_OffsetX_d = Siirrä vasemmalle (-) tai oikealle (+) HUD-piksele
 s_BuildMaterials_OffsetY = Siirto Y
 s_BuildMaterials_OffsetY_d = Siirrä alas (-) tai ylös (+) HUD-pikseleinä.
 
+# Build Support
+sec_BuildSupport = Rakenteiden tuki
+s_BuildSupport_Enabled = Käytössä
+s_BuildSupport_Enabled_d = Kun vasara on kädessä, varoittaa, jos asettamasi osa murtuisi, ja näyttää, mitä putoaisi, jos poistaisit osan.
+grp_Placing = Asettaminen
+s_BuildSupport_BreakWarning = Murtumisvaroitus
+s_BuildSupport_BreakWarning_d = Osa, joka murtuisi heti rakennettuna, vilkkuu punaisena, ja rakennusvalikon yläpuolelle tulee ilmoitus.
+s_BuildSupport_SupportColor = Tuen väri
+s_BuildSupport_SupportColor_d = Väritä asetettava osa sen saaman tuen mukaan vasaran väreillä: sininen maassa, sitten vihreästä punaiseen tuen heiketessä.
+grp_Removing = Purkaminen
+s_BuildSupport_FallPreview = Putoamisen esikatselu
+s_BuildSupport_FallPreview_d = Osoita vasaralla rakennettua osaa nähdäksesi, mitä putoaisi, jos poistaisit sen (punainen), ja mikä jäisi pystyyn vähemmällä tuella (oranssi).
+s_BuildSupport_ShowWhen = Näytä
+s_BuildSupport_ShowWhen_d = Näppäin pohjassa: niin kauan kuin Esikatselunäppäin on pohjassa. Aina: aina kun osoitat osaa. Ohjaimella näkyy aina.
+s_BuildSupport_ShowWhen_w = Vaikuttaa, kun Putoamisen esikatselu on päällä.
+enum_BuildSupportShowWhen_KeyHeld = Näppäin pohjassa
+enum_BuildSupportShowWhen_Always = Aina
+s_BuildSupport_PreviewKey = Esikatselunäppäin
+s_BuildSupport_PreviewKey_d = Pidä pohjassa nähdäksesi, mitä putoaisi.
+s_BuildSupport_PreviewKey_w = Vaikuttaa, kun Näytä on Näppäin pohjassa.
+s_BuildSupport_ShowWeaker = Näytä heikommat
+s_BuildSupport_ShowWeaker_d = Merkitse oranssilla myös osat, jotka pysyisivät pystyssä selvästi vähemmällä tuella.
+s_BuildSupport_ShowWeaker_w = Vaikuttaa, kun Putoamisen esikatselu on päällä.
+s_BuildSupport_Note = Ilmoitus
+s_BuildSupport_Note_d = Lyhyt ilmoitus rakennusvalikon yläpuolella: Murtuu tai kuinka monta osaa putoaisi.
+s_BuildSupport_Size = Koko
+s_BuildSupport_Size_d = 1 on normaali koko.
+s_BuildSupport_Size_w = Vaikuttaa, kun Ilmoitus on päällä.
+s_BuildSupport_Opacity = Peittävyys
+s_BuildSupport_Opacity_d = 1 on täysin peittävä; pienempi näyttää pelin läpi.
+s_BuildSupport_Opacity_w = Vaikuttaa, kun Ilmoitus on päällä.
+s_BuildSupport_OffsetX = Siirto X
+s_BuildSupport_OffsetX_d = Siirrä vasemmalle (-) tai oikealle (+) HUD-pikseleinä.
+s_BuildSupport_OffsetX_w = Vaikuttaa, kun Ilmoitus on päällä.
+s_BuildSupport_OffsetY = Siirto Y
+s_BuildSupport_OffsetY_d = Siirrä alas (-) tai ylös (+) HUD-pikseleinä.
+s_BuildSupport_OffsetY_w = Vaikuttaa, kun Ilmoitus on päällä.
+
 # Crafting
 sec_Crafting = Käsityöt
 s_Crafting_Enabled = Käytössä

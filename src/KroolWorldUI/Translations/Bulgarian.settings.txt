@@ -267,6 +267,44 @@ s_BuildMaterials_OffsetX_d = Наляво (-) или надясно (+), в пи
 s_BuildMaterials_OffsetY = Отместване Y
 s_BuildMaterials_OffsetY_d = Надолу (-) или нагоре (+), в пиксели на HUD.
 
+# Build Support
+sec_BuildSupport = Устойчивост
+s_BuildSupport_Enabled = Включено
+s_BuildSupport_Enabled_d = С чук в ръка предупреждава, когато постройка, която поставяш, би се счупила, и показва какво би паднало, ако махнеш една.
+grp_Placing = Поставяне
+s_BuildSupport_BreakWarning = Сигнал за счупване
+s_BuildSupport_BreakWarning_d = Постройка, която би се счупила веднага щом я построиш, мига в червено, с бележка над менюто за строеж.
+s_BuildSupport_SupportColor = Цвят на устойчивост
+s_BuildSupport_SupportColor_d = Оцветява постройката, която поставяш, според устойчивостта, която ще има, в цветовете на чука: синьо на земята, после от зелено към червено, докато устойчивостта спада.
+grp_Removing = Махане
+s_BuildSupport_FallPreview = Преглед на срутване
+s_BuildSupport_FallPreview_d = Насочи чука към готова постройка, за да видиш какво би паднало, ако я махнеш (червено), и какво би останало с по-малко устойчивост (оранжево).
+s_BuildSupport_ShowWhen = Показване
+s_BuildSupport_ShowWhen_d = Задържан клавиш: докато държиш „Клавиш за преглед“. Винаги: щом насочиш чука към постройка. С контролер се показва винаги.
+s_BuildSupport_ShowWhen_w = Важи при включена настройка „Преглед на срутване“.
+enum_BuildSupportShowWhen_KeyHeld = Задържан клавиш
+enum_BuildSupportShowWhen_Always = Винаги
+s_BuildSupport_PreviewKey = Клавиш за преглед
+s_BuildSupport_PreviewKey_d = Задръж, за да видиш какво би паднало.
+s_BuildSupport_PreviewKey_w = Важи, когато „Показване“ е „Задържан клавиш“.
+s_BuildSupport_ShowWeaker = Отслабени
+s_BuildSupport_ShowWeaker_d = Отбелязва в оранжево и постройките, които биха останали с осезаемо по-малко устойчивост.
+s_BuildSupport_ShowWeaker_w = Важи при включена настройка „Преглед на срутване“.
+s_BuildSupport_Note = Бележка
+s_BuildSupport_Note_d = Кратка бележка над менюто за строеж: „Ще се счупи“ или колко постройки биха паднали.
+s_BuildSupport_Size = Размер
+s_BuildSupport_Size_d = 1 е нормалният размер.
+s_BuildSupport_Size_w = Важи при включена настройка „Бележка“.
+s_BuildSupport_Opacity = Непрозрачност
+s_BuildSupport_Opacity_d = 1 е плътно; по-малко пропуска играта отдолу.
+s_BuildSupport_Opacity_w = Важи при включена настройка „Бележка“.
+s_BuildSupport_OffsetX = Отместване X
+s_BuildSupport_OffsetX_d = Наляво (-) или надясно (+), в пиксели на HUD.
+s_BuildSupport_OffsetX_w = Важи при включена настройка „Бележка“.
+s_BuildSupport_OffsetY = Отместване Y
+s_BuildSupport_OffsetY_d = Надолу (-) или нагоре (+), в пиксели на HUD.
+s_BuildSupport_OffsetY_w = Важи при включена настройка „Бележка“.
+
 # Crafting
 sec_Crafting = Изработване
 s_Crafting_Enabled = Включено

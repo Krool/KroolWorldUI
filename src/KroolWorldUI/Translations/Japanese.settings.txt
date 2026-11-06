@@ -267,6 +267,44 @@ s_BuildMaterials_OffsetX_d = 左 (-) または右 (+) へ移動（HUDピクセ�
 s_BuildMaterials_OffsetY = オフセットY
 s_BuildMaterials_OffsetY_d = 下 (-) または上 (+) へ移動（HUDピクセル）。
 
+# Build Support
+sec_BuildSupport = 建設の安定度
+s_BuildSupport_Enabled = 有効
+s_BuildSupport_Enabled_d = ハンマーを持っている間、置こうとしているアイテムが壊れるときに警告し、アイテムを解体したら何が落ちるかを表示します。
+grp_Placing = 設置
+s_BuildSupport_BreakWarning = 破損警告
+s_BuildSupport_BreakWarning_d = 建てた瞬間に壊れるアイテムは赤く点滅し、建設メニューの上に通知が出ます。
+s_BuildSupport_SupportColor = 安定度の色
+s_BuildSupport_SupportColor_d = 設置中のアイテムを、得られる安定度に応じてハンマーの色で表示します：地面の上は青、安定度が下がるにつれ緑から赤へ。
+grp_Removing = 解体
+s_BuildSupport_FallPreview = 崩落プレビュー
+s_BuildSupport_FallPreview_d = ハンマーを建てたアイテムに向けると、解体したら落ちるもの（赤）と、安定度が下がっても残るもの（オレンジ）が分かります。
+s_BuildSupport_ShowWhen = 表示条件
+s_BuildSupport_ShowWhen_d = キー長押し：「プレビューキー」を押している間。常時：アイテムに向けている間はいつでも。コントローラーでは常に表示されます。
+s_BuildSupport_ShowWhen_w = 「崩落プレビュー」がオンのとき有効。
+enum_BuildSupportShowWhen_KeyHeld = キー長押し
+enum_BuildSupportShowWhen_Always = 常時
+s_BuildSupport_PreviewKey = プレビューキー
+s_BuildSupport_PreviewKey_d = 押している間、何が落ちるかを表示します。
+s_BuildSupport_PreviewKey_w = 「表示条件」が「キー長押し」のとき有効。
+s_BuildSupport_ShowWeaker = 弱化表示
+s_BuildSupport_ShowWeaker_d = 安定度がはっきり下がっても残るアイテムも、オレンジで示します。
+s_BuildSupport_ShowWeaker_w = 「崩落プレビュー」がオンのとき有効。
+s_BuildSupport_Note = 通知
+s_BuildSupport_Note_d = 建設メニューの上に出る短い通知：「壊れます」、または落ちるアイテムの数。
+s_BuildSupport_Size = サイズ
+s_BuildSupport_Size_d = 1が通常サイズ。
+s_BuildSupport_Size_w = 「通知」がオンのとき有効。
+s_BuildSupport_Opacity = 不透明度
+s_BuildSupport_Opacity_d = 1で不透明。下げるほど透けて見えます。
+s_BuildSupport_Opacity_w = 「通知」がオンのとき有効。
+s_BuildSupport_OffsetX = オフセットX
+s_BuildSupport_OffsetX_d = 左 (-) または右 (+) へ移動（HUDピクセル）。
+s_BuildSupport_OffsetX_w = 「通知」がオンのとき有効。
+s_BuildSupport_OffsetY = オフセットY
+s_BuildSupport_OffsetY_d = 下 (-) または上 (+) へ移動（HUDピクセル）。
+s_BuildSupport_OffsetY_w = 「通知」がオンのとき有効。
+
 # Crafting
 sec_Crafting = 作成
 s_Crafting_Enabled = 有効

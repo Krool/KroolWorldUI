@@ -267,6 +267,44 @@ s_BuildMaterials_OffsetX_d = Mută la stânga (-) sau la dreapta (+), în pixeli
 s_BuildMaterials_OffsetY = Decalaj Y
 s_BuildMaterials_OffsetY_d = Mută în jos (-) sau în sus (+), în pixeli HUD.
 
+# Build Support
+sec_BuildSupport = Stabilitate
+s_BuildSupport_Enabled = Activat
+s_BuildSupport_Enabled_d = Cu ciocanul în mână, avertizează când o piesă pe care o plasezi s-ar rupe și arată ce ar cădea dacă ai scoate una.
+grp_Placing = Plasare
+s_BuildSupport_BreakWarning = Avertizare rupere
+s_BuildSupport_BreakWarning_d = O piesă care s-ar rupe imediat ce o construiești clipește roșu, cu o notă deasupra meniului de construcție.
+s_BuildSupport_SupportColor = Culoare stabilitate
+s_BuildSupport_SupportColor_d = Colorează piesa pe care o plasezi după stabilitatea pe care o va avea, în culorile ciocanului: albastru pe sol, apoi de la verde la roșu pe măsură ce stabilitatea scade.
+grp_Removing = Demontare
+s_BuildSupport_FallPreview = Previzualizare cădere
+s_BuildSupport_FallPreview_d = Îndreaptă ciocanul spre o piesă construită ca să vezi ce ar cădea dacă ai scoate-o (roșu) și ce ar rămâne în picioare cu mai puțină stabilitate (portocaliu).
+s_BuildSupport_ShowWhen = Afișare
+s_BuildSupport_ShowWhen_d = Tastă ținută: cât ții apăsată Tastă previzualizare. Mereu: oricând îndrepți ciocanul spre o piesă. Pe controller se afișează mereu.
+s_BuildSupport_ShowWhen_w = Folosit când Previzualizare cădere este pornit.
+enum_BuildSupportShowWhen_KeyHeld = Tastă ținută
+enum_BuildSupportShowWhen_Always = Mereu
+s_BuildSupport_PreviewKey = Tastă previzualizare
+s_BuildSupport_PreviewKey_d = Ține apăsat ca să vezi ce ar cădea.
+s_BuildSupport_PreviewKey_w = Folosit când Afișare este Tastă ținută.
+s_BuildSupport_ShowWeaker = Arată slăbite
+s_BuildSupport_ShowWeaker_d = Marchează cu portocaliu și piesele care ar rămâne în picioare cu vizibil mai puțină stabilitate.
+s_BuildSupport_ShowWeaker_w = Folosit când Previzualizare cădere este pornit.
+s_BuildSupport_Note = Notă
+s_BuildSupport_Note_d = O notă scurtă deasupra meniului de construcție: Se va rupe, sau câte piese ar cădea.
+s_BuildSupport_Size = Mărime
+s_BuildSupport_Size_d = 1 e mărimea normală.
+s_BuildSupport_Size_w = Folosit când Notă este pornit.
+s_BuildSupport_Opacity = Opacitate
+s_BuildSupport_Opacity_d = 1 e opac; mai puțin lasă jocul să se vadă prin el.
+s_BuildSupport_Opacity_w = Folosit când Notă este pornit.
+s_BuildSupport_OffsetX = Decalaj X
+s_BuildSupport_OffsetX_d = Mută la stânga (-) sau la dreapta (+), în pixeli HUD.
+s_BuildSupport_OffsetX_w = Folosit când Notă este pornit.
+s_BuildSupport_OffsetY = Decalaj Y
+s_BuildSupport_OffsetY_d = Mută în jos (-) sau în sus (+), în pixeli HUD.
+s_BuildSupport_OffsetY_w = Folosit când Notă este pornit.
+
 # Crafting
 sec_Crafting = Artizanat
 s_Crafting_Enabled = Activat

@@ -267,6 +267,44 @@ s_BuildMaterials_OffsetX_d = Færa til vinstri (-) eða hægri (+), í HUD-dílu
 s_BuildMaterials_OffsetY = Hliðrun Y
 s_BuildMaterials_OffsetY_d = Færa niður (-) eða upp (+), í HUD-dílum.
 
+# Build Support
+sec_BuildSupport = Stöðugleiki
+s_BuildSupport_Enabled = Virkt
+s_BuildSupport_Enabled_d = Með hamarinn á lofti varar við þegar hlutur sem þú setur myndi brotna, og sýnir hvað myndi falla ef þú fjarlægðir einn.
+grp_Placing = Við smíði
+s_BuildSupport_BreakWarning = Brotviðvörun
+s_BuildSupport_BreakWarning_d = Hlutur sem myndi brotna um leið og þú byggir hann blikkar rauður, með tilkynningu fyrir ofan byggingarvalmyndina.
+s_BuildSupport_SupportColor = Stöðugleikalitur
+s_BuildSupport_SupportColor_d = Litar hlutinn sem þú setur eftir stöðugleikanum sem hann fær, í litum hamarsins: blár á jörðinni, svo grænn yfir í rauðan eftir því sem stöðugleikinn minnkar.
+grp_Removing = Við niðurrif
+s_BuildSupport_FallPreview = Forskoðun falls
+s_BuildSupport_FallPreview_d = Beindu hamrinum að byggðum hlut til að sjá hvað myndi falla ef þú fjarlægðir hann (rautt) og hvað myndi standa með minni stöðugleika (appelsínugult).
+s_BuildSupport_ShowWhen = Sýna
+s_BuildSupport_ShowWhen_d = Lykli haldið: meðan þú heldur inni lyklinum (Forskoðunarlykill). Alltaf: hvenær sem þú bendir á hlut. Á fjarstýringu sést þetta alltaf.
+s_BuildSupport_ShowWhen_w = Notað þegar Forskoðun falls er á.
+enum_BuildSupportShowWhen_KeyHeld = Lykli haldið
+enum_BuildSupportShowWhen_Always = Alltaf
+s_BuildSupport_PreviewKey = Forskoðunarlykill
+s_BuildSupport_PreviewKey_d = Haltu inni til að sjá hvað myndi falla.
+s_BuildSupport_PreviewKey_w = Notað þegar Sýna er Lykli haldið.
+s_BuildSupport_ShowWeaker = Sýna veikari
+s_BuildSupport_ShowWeaker_d = Merkir líka með appelsínugulu hluti sem myndu standa með greinilega minni stöðugleika.
+s_BuildSupport_ShowWeaker_w = Notað þegar Forskoðun falls er á.
+s_BuildSupport_Note = Tilkynning
+s_BuildSupport_Note_d = Stutt tilkynning fyrir ofan byggingarvalmyndina: Brotnar, eða hve margir hlutir myndu falla.
+s_BuildSupport_Size = Stærð
+s_BuildSupport_Size_d = 1 er venjuleg stærð.
+s_BuildSupport_Size_w = Notað þegar Tilkynning er á.
+s_BuildSupport_Opacity = Ógegnsæi
+s_BuildSupport_Opacity_d = 1 er heilt; lægra hleypir leiknum í gegn.
+s_BuildSupport_Opacity_w = Notað þegar Tilkynning er á.
+s_BuildSupport_OffsetX = Hliðrun X
+s_BuildSupport_OffsetX_d = Færa til vinstri (-) eða hægri (+), í HUD-dílum.
+s_BuildSupport_OffsetX_w = Notað þegar Tilkynning er á.
+s_BuildSupport_OffsetY = Hliðrun Y
+s_BuildSupport_OffsetY_d = Færa niður (-) eða upp (+), í HUD-dílum.
+s_BuildSupport_OffsetY_w = Notað þegar Tilkynning er á.
+
 # Crafting
 sec_Crafting = Smíði
 s_Crafting_Enabled = Virkt

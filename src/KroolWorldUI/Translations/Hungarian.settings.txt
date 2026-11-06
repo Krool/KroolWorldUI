@@ -267,6 +267,44 @@ s_BuildMaterials_OffsetX_d = Balra (-) vagy jobbra (+), HUD pixelben.
 s_BuildMaterials_OffsetY = Eltolás Y
 s_BuildMaterials_OffsetY_d = Le (-) vagy fel (+), HUD pixelben.
 
+# Build Support
+sec_BuildSupport = Stabilitás
+s_BuildSupport_Enabled = Bekapcsolva
+s_BuildSupport_Enabled_d = Kalapáccsal a kézben figyelmeztet, ha a lerakandó elem eltörne, és megmutatja, mi esne le, ha eltávolítanál egyet.
+grp_Placing = Lerakás
+s_BuildSupport_BreakWarning = Törésjelzés
+s_BuildSupport_BreakWarning_d = Az az elem, amely az építés pillanatában eltörne, pirosan villog, és megjegyzés jelenik meg az építési menü felett.
+s_BuildSupport_SupportColor = Stabilitásszín
+s_BuildSupport_SupportColor_d = A lerakandó elemet a várható stabilitása szerint színezi, a kalapács színeivel: kék a talajon, majd zöldtől pirosig, ahogy a stabilitás csökken.
+grp_Removing = Bontás
+s_BuildSupport_FallPreview = Omlás előnézet
+s_BuildSupport_FallPreview_d = Célozz a kalapáccsal egy megépített elemre, hogy lásd, mi esne le, ha eltávolítanád (piros), és mi maradna állva kisebb stabilitással (narancs).
+s_BuildSupport_ShowWhen = Mutatás
+s_BuildSupport_ShowWhen_d = Gomb lenyomva: amíg az Előnézet gomb le van nyomva. Mindig: ha egy elemre célzol. Kontrolleren mindig látszik.
+s_BuildSupport_ShowWhen_w = Csak ha be van kapcsolva: Omlás előnézet.
+enum_BuildSupportShowWhen_KeyHeld = Gomb lenyomva
+enum_BuildSupportShowWhen_Always = Mindig
+s_BuildSupport_PreviewKey = Előnézet gomb
+s_BuildSupport_PreviewKey_d = Tartsd lenyomva, hogy lásd, mi esne le.
+s_BuildSupport_PreviewKey_w = Csak ha Mutatás: Gomb lenyomva.
+s_BuildSupport_ShowWeaker = Gyengébbek mutatása
+s_BuildSupport_ShowWeaker_d = Narancsszínnel jelöli azokat az elemeket is, amelyek jóval kisebb stabilitással állva maradnának.
+s_BuildSupport_ShowWeaker_w = Csak ha be van kapcsolva: Omlás előnézet.
+s_BuildSupport_Note = Megjegyzés
+s_BuildSupport_Note_d = Rövid megjegyzés az építési menü felett: Eltörik, vagy hány elem esne le.
+s_BuildSupport_Size = Méret
+s_BuildSupport_Size_d = 1 a normál méret.
+s_BuildSupport_Size_w = Csak ha be van kapcsolva: Megjegyzés.
+s_BuildSupport_Opacity = Átlátszatlanság
+s_BuildSupport_Opacity_d = 1 teljesen fedő; kisebb értéknél átlátszik a játék.
+s_BuildSupport_Opacity_w = Csak ha be van kapcsolva: Megjegyzés.
+s_BuildSupport_OffsetX = Eltolás X
+s_BuildSupport_OffsetX_d = Balra (-) vagy jobbra (+), HUD pixelben.
+s_BuildSupport_OffsetX_w = Csak ha be van kapcsolva: Megjegyzés.
+s_BuildSupport_OffsetY = Eltolás Y
+s_BuildSupport_OffsetY_d = Le (-) vagy fel (+), HUD pixelben.
+s_BuildSupport_OffsetY_w = Csak ha be van kapcsolva: Megjegyzés.
+
 # Crafting
 sec_Crafting = Barkácsolás
 s_Crafting_Enabled = Bekapcsolva

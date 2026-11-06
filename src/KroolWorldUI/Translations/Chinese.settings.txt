@@ -267,6 +267,44 @@ s_BuildMaterials_OffsetX_d = 向左 (-) 或向右 (+) 移动，单位为HUD像�
 s_BuildMaterials_OffsetY = 偏移Y
 s_BuildMaterials_OffsetY_d = 向下 (-) 或向上 (+) 移动，单位为HUD像素。
 
+# Build Support
+sec_BuildSupport = 建造支撑
+s_BuildSupport_Enabled = 启用
+s_BuildSupport_Enabled_d = 拿出工具锤时，若放置的物品会断裂则发出警告，并显示拆除某个物品后哪些会掉落。
+grp_Placing = 放置
+s_BuildSupport_BreakWarning = 断裂警告
+s_BuildSupport_BreakWarning_d = 一建好就会断裂的物品会闪红，并在建造菜单上方显示提示。
+s_BuildSupport_SupportColor = 支撑颜色
+s_BuildSupport_SupportColor_d = 按正在放置的物品将获得的支撑，用工具锤的颜色为其着色：着地为蓝色，随支撑降低由绿变红。
+grp_Removing = 拆除
+s_BuildSupport_FallPreview = 掉落预览
+s_BuildSupport_FallPreview_d = 用工具锤指向已建好的物品，查看拆除它后会掉落的部分（红色）以及支撑变弱但仍能立住的部分（橙色）。
+s_BuildSupport_ShowWhen = 显示条件
+s_BuildSupport_ShowWhen_d = 按住按键：按住“预览键”时。始终：只要指向物品就显示。使用手柄时始终显示。
+s_BuildSupport_ShowWhen_w = “掉落预览”开启时生效。
+enum_BuildSupportShowWhen_KeyHeld = 按住按键
+enum_BuildSupportShowWhen_Always = 始终
+s_BuildSupport_PreviewKey = 预览键
+s_BuildSupport_PreviewKey_d = 按住以查看会掉落什么。
+s_BuildSupport_PreviewKey_w = 显示条件为“按住按键”时生效。
+s_BuildSupport_ShowWeaker = 显示变弱
+s_BuildSupport_ShowWeaker_d = 同时用橙色标出支撑明显降低但仍能立住的物品。
+s_BuildSupport_ShowWeaker_w = “掉落预览”开启时生效。
+s_BuildSupport_Note = 提示
+s_BuildSupport_Note_d = 建造菜单上方的简短提示：“会断裂”，或会掉落多少个物品。
+s_BuildSupport_Size = 大小
+s_BuildSupport_Size_d = 1 为正常大小。
+s_BuildSupport_Size_w = “提示”开启时生效。
+s_BuildSupport_Opacity = 不透明度
+s_BuildSupport_Opacity_d = 1 为完全不透明，越低越透明。
+s_BuildSupport_Opacity_w = “提示”开启时生效。
+s_BuildSupport_OffsetX = 偏移X
+s_BuildSupport_OffsetX_d = 向左 (-) 或向右 (+) 移动，单位为HUD像素。
+s_BuildSupport_OffsetX_w = “提示”开启时生效。
+s_BuildSupport_OffsetY = 偏移Y
+s_BuildSupport_OffsetY_d = 向下 (-) 或向上 (+) 移动，单位为HUD像素。
+s_BuildSupport_OffsetY_w = “提示”开启时生效。
+
 # Crafting
 sec_Crafting = 制作
 s_Crafting_Enabled = 启用

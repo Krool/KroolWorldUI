@@ -267,6 +267,44 @@ s_BuildMaterials_OffsetX_d = Déplace à gauche (-) ou à droite (+), en pixels 
 s_BuildMaterials_OffsetY = Décalage Y
 s_BuildMaterials_OffsetY_d = Déplace vers le bas (-) ou le haut (+), en pixels du HUD.
 
+# Build Support
+sec_BuildSupport = Stabilité
+s_BuildSupport_Enabled = Activé
+s_BuildSupport_Enabled_d = Marteau en main, avertit quand une pièce que vous placez céderait, et montre ce qui tomberait si vous en retiriez une.
+grp_Placing = Placement
+s_BuildSupport_BreakWarning = Alerte rupture
+s_BuildSupport_BreakWarning_d = Une pièce qui céderait dès sa construction clignote en rouge, avec une note au-dessus du menu de construction.
+s_BuildSupport_SupportColor = Couleur stabilité
+s_BuildSupport_SupportColor_d = Colore la pièce que vous placez selon la stabilité qu'elle aura, aux couleurs du marteau : bleu au sol, puis du vert au rouge à mesure que la stabilité baisse.
+grp_Removing = Retrait
+s_BuildSupport_FallPreview = Aperçu chute
+s_BuildSupport_FallPreview_d = Pointez le marteau sur une pièce construite pour voir ce qui tomberait si vous la retiriez (rouge) et ce qui tiendrait avec moins de stabilité (orange).
+s_BuildSupport_ShowWhen = Afficher
+s_BuildSupport_ShowWhen_d = Touche maintenue : tant que vous maintenez Touche aperçu. Toujours : dès que vous pointez une pièce. À la manette, il s'affiche toujours.
+s_BuildSupport_ShowWhen_w = Utilisé quand Aperçu chute est activé.
+enum_BuildSupportShowWhen_KeyHeld = Touche maintenue
+enum_BuildSupportShowWhen_Always = Toujours
+s_BuildSupport_PreviewKey = Touche aperçu
+s_BuildSupport_PreviewKey_d = Maintenir pour voir ce qui tomberait.
+s_BuildSupport_PreviewKey_w = Utilisé quand Afficher vaut Touche maintenue.
+s_BuildSupport_ShowWeaker = Pièces affaiblies
+s_BuildSupport_ShowWeaker_d = Marque aussi en orange les pièces qui tiendraient avec nettement moins de stabilité.
+s_BuildSupport_ShowWeaker_w = Utilisé quand Aperçu chute est activé.
+s_BuildSupport_Note = Note
+s_BuildSupport_Note_d = Une courte note au-dessus du menu de construction : Cédera, ou combien de pièces tomberaient.
+s_BuildSupport_Size = Taille
+s_BuildSupport_Size_d = 1 est la taille normale.
+s_BuildSupport_Size_w = Utilisé quand Note est activé.
+s_BuildSupport_Opacity = Opacité
+s_BuildSupport_Opacity_d = 1 = opaque ; en dessous, le jeu se voit au travers.
+s_BuildSupport_Opacity_w = Utilisé quand Note est activé.
+s_BuildSupport_OffsetX = Décalage X
+s_BuildSupport_OffsetX_d = Déplace à gauche (-) ou à droite (+), en pixels du HUD.
+s_BuildSupport_OffsetX_w = Utilisé quand Note est activé.
+s_BuildSupport_OffsetY = Décalage Y
+s_BuildSupport_OffsetY_d = Déplace vers le bas (-) ou le haut (+), en pixels du HUD.
+s_BuildSupport_OffsetY_w = Utilisé quand Note est activé.
+
 # Crafting
 sec_Crafting = Fabrication
 s_Crafting_Enabled = Activé

@@ -267,6 +267,44 @@ s_BuildMaterials_OffsetX_d = 왼쪽(-) 또는 오른쪽(+)으로 이동(HUD 픽�
 s_BuildMaterials_OffsetY = 오프셋 Y
 s_BuildMaterials_OffsetY_d = 아래(-) 또는 위(+)로 이동(HUD 픽셀).
 
+# Build Support
+sec_BuildSupport = 건설 지지력
+s_BuildSupport_Enabled = 사용
+s_BuildSupport_Enabled_d = 망치를 들고 있으면 설치하는 아이템이 부서질 때 경고하고, 하나를 해체하면 무엇이 떨어질지 표시합니다.
+grp_Placing = 설치
+s_BuildSupport_BreakWarning = 파손 경고
+s_BuildSupport_BreakWarning_d = 짓자마자 부서질 아이템은 빨갛게 깜박이고, 건설 메뉴 위에 알림이 뜹니다.
+s_BuildSupport_SupportColor = 지지력 색상
+s_BuildSupport_SupportColor_d = 설치 중인 아이템을 받게 될 지지력에 따라 망치의 색으로 칠합니다: 땅 위는 파란색, 지지력이 줄수록 초록에서 빨강으로.
+grp_Removing = 해체
+s_BuildSupport_FallPreview = 붕괴 미리보기
+s_BuildSupport_FallPreview_d = 지어진 아이템에 망치를 겨누면 해체할 때 떨어질 부분(빨강)과 지지력이 줄어도 버틸 부분(주황)을 보여 줍니다.
+s_BuildSupport_ShowWhen = 표시 조건
+s_BuildSupport_ShowWhen_d = 키 누르는 동안: '미리보기 키'를 누르고 있는 동안. 항상: 아이템을 겨눌 때마다. 컨트롤러에서는 항상 표시됩니다.
+s_BuildSupport_ShowWhen_w = '붕괴 미리보기' 설정이 켜져 있을 때 사용.
+enum_BuildSupportShowWhen_KeyHeld = 키 누르는 동안
+enum_BuildSupportShowWhen_Always = 항상
+s_BuildSupport_PreviewKey = 미리보기 키
+s_BuildSupport_PreviewKey_d = 누르고 있으면 무엇이 떨어질지 보여 줍니다.
+s_BuildSupport_PreviewKey_w = '표시 조건' 설정이 '키 누르는 동안'일 때 사용.
+s_BuildSupport_ShowWeaker = 약해짐 표시
+s_BuildSupport_ShowWeaker_d = 지지력이 뚜렷이 줄어도 버틸 아이템도 주황색으로 표시합니다.
+s_BuildSupport_ShowWeaker_w = '붕괴 미리보기' 설정이 켜져 있을 때 사용.
+s_BuildSupport_Note = 알림
+s_BuildSupport_Note_d = 건설 메뉴 위의 짧은 알림: '부서짐', 또는 떨어질 아이템 수.
+s_BuildSupport_Size = 크기
+s_BuildSupport_Size_d = 1이 기본 크기.
+s_BuildSupport_Size_w = '알림' 설정이 켜져 있을 때 사용.
+s_BuildSupport_Opacity = 불투명도
+s_BuildSupport_Opacity_d = 1은 불투명, 낮을수록 게임 화면이 비쳐 보입니다.
+s_BuildSupport_Opacity_w = '알림' 설정이 켜져 있을 때 사용.
+s_BuildSupport_OffsetX = 오프셋 X
+s_BuildSupport_OffsetX_d = 왼쪽(-) 또는 오른쪽(+)으로 이동(HUD 픽셀).
+s_BuildSupport_OffsetX_w = '알림' 설정이 켜져 있을 때 사용.
+s_BuildSupport_OffsetY = 오프셋 Y
+s_BuildSupport_OffsetY_d = 아래(-) 또는 위(+)로 이동(HUD 픽셀).
+s_BuildSupport_OffsetY_w = '알림' 설정이 켜져 있을 때 사용.
+
 # Crafting
 sec_Crafting = 제작
 s_Crafting_Enabled = 사용

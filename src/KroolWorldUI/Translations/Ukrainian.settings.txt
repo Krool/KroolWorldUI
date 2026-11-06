@@ -267,6 +267,44 @@ s_BuildMaterials_OffsetX_d = Зсув ліворуч (-) або праворуч
 s_BuildMaterials_OffsetY = Зсув Y
 s_BuildMaterials_OffsetY_d = Зсув униз (-) або вгору (+), у пікселях HUD.
 
+# Build Support
+sec_BuildSupport = Стійкість
+s_BuildSupport_Enabled = Увімкнено
+s_BuildSupport_Enabled_d = Коли в руках молот, попереджає, якщо споруда, яку ви ставите, зламається, і показує, що впаде, якщо прибрати одну зі споруд.
+grp_Placing = Встановлення
+s_BuildSupport_BreakWarning = Сигнал про злам
+s_BuildSupport_BreakWarning_d = Споруда, яка зламається одразу після будівництва, блимає червоним, а над меню будівництва з’являється примітка.
+s_BuildSupport_SupportColor = Колір стійкості
+s_BuildSupport_SupportColor_d = Фарбує споруду, яку ви ставите, за її майбутньою стійкістю в кольори молота: синій на землі, далі від зеленого до червоного, коли стійкість падає.
+grp_Removing = Розбирання
+s_BuildSupport_FallPreview = Перегляд обвалу
+s_BuildSupport_FallPreview_d = Наведіть молот на збудовану споруду, щоб побачити, що впаде, якщо її розібрати (червоним), і що встоїть із меншою стійкістю (оранжевим).
+s_BuildSupport_ShowWhen = Показ
+s_BuildSupport_ShowWhen_d = Клавіша затиснута: поки ви тримаєте «Клавіша перегляду». Завжди: щоразу, коли ви наводите молот на споруду. На контролері показується завжди.
+s_BuildSupport_ShowWhen_w = Діє, якщо ввімкнено «Перегляд обвалу».
+enum_BuildSupportShowWhen_KeyHeld = Клавіша затиснута
+enum_BuildSupportShowWhen_Always = Завжди
+s_BuildSupport_PreviewKey = Клавіша перегляду
+s_BuildSupport_PreviewKey_d = Утримуйте, щоб побачити, що впаде.
+s_BuildSupport_PreviewKey_w = Діє, якщо «Показ»: «Клавіша затиснута».
+s_BuildSupport_ShowWeaker = Ослаблені
+s_BuildSupport_ShowWeaker_d = Також позначати оранжевим споруди, які встоять, але з помітно меншою стійкістю.
+s_BuildSupport_ShowWeaker_w = Діє, якщо ввімкнено «Перегляд обвалу».
+s_BuildSupport_Note = Примітка
+s_BuildSupport_Note_d = Коротка примітка над меню будівництва: «Зламається» або скільки споруд впаде.
+s_BuildSupport_Size = Розмір
+s_BuildSupport_Size_d = 1: звичайний розмір.
+s_BuildSupport_Size_w = Діє, якщо ввімкнено «Примітка».
+s_BuildSupport_Opacity = Непрозорість
+s_BuildSupport_Opacity_d = 1: суцільний колір; менше: крізь нього видно гру.
+s_BuildSupport_Opacity_w = Діє, якщо ввімкнено «Примітка».
+s_BuildSupport_OffsetX = Зсув X
+s_BuildSupport_OffsetX_d = Зсув ліворуч (-) або праворуч (+), у пікселях HUD.
+s_BuildSupport_OffsetX_w = Діє, якщо ввімкнено «Примітка».
+s_BuildSupport_OffsetY = Зсув Y
+s_BuildSupport_OffsetY_d = Зсув униз (-) або вгору (+), у пікселях HUD.
+s_BuildSupport_OffsetY_w = Діє, якщо ввімкнено «Примітка».
+
 # Crafting
 sec_Crafting = Ремісництво
 s_Crafting_Enabled = Увімкнено

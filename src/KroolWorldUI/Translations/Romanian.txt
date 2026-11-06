@@ -23,6 +23,10 @@ seconds_short = $1 s
 
 enough_for = Ajunge pentru $1
 not_enough = Nu ajunge
+support_breaks = Se va rupe: stabilitate prea mică
+support_fall = Ar cădea: $1
+support_weaker = Slăbite: $1
+support_none = Nu ar cădea nimic
 
 craft_all = Toate
 craft_weapons = Arme

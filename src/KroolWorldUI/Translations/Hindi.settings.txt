@@ -267,6 +267,44 @@ s_BuildMaterials_OffsetX_d = HUD पिक्सेल में बाएँ (-
 s_BuildMaterials_OffsetY = ऑफ़सेट Y
 s_BuildMaterials_OffsetY_d = HUD पिक्सेल में नीचे (-) या ऊपर (+) खिसकाएँ।
 
+# Build Support
+sec_BuildSupport = निर्माण सपोर्ट
+s_BuildSupport_Enabled = चालू
+s_BuildSupport_Enabled_d = हथौड़ा हाथ में होने पर, रखा जा रहा पीस टूटने वाला हो तो चेतावनी देता है, और दिखाता है कि कोई पीस हटाने पर क्या गिरेगा।
+grp_Placing = रखना
+s_BuildSupport_BreakWarning = टूटने की चेतावनी
+s_BuildSupport_BreakWarning_d = जो पीस बनाते ही टूट जाएगा, वह लाल झिलमिलाता है, और बिल्ड मेनू के ऊपर एक नोट दिखता है।
+s_BuildSupport_SupportColor = सपोर्ट रंग
+s_BuildSupport_SupportColor_d = रखे जा रहे पीस को उसे मिलने वाले सपोर्ट के हिसाब से हथौड़े के रंगों में रंगता है: ज़मीन पर नीला, फिर सपोर्ट घटने पर हरे से लाल।
+grp_Removing = हटाना
+s_BuildSupport_FallPreview = गिरने का प्रीव्यू
+s_BuildSupport_FallPreview_d = हथौड़े को किसी बने हुए पीस पर पॉइंट करें, यह देखने के लिए कि उसे हटाने पर क्या गिरेगा (लाल) और क्या कम सपोर्ट के साथ खड़ा रहेगा (नारंगी)।
+s_BuildSupport_ShowWhen = दिखाएँ
+s_BuildSupport_ShowWhen_d = कुंजी दबाए रखने पर: जब तक आप प्रीव्यू कुंजी दबाए रखें। हमेशा: जब भी आप किसी पीस पर हथौड़ा पॉइंट करें। कंट्रोलर पर यह हमेशा दिखता है।
+s_BuildSupport_ShowWhen_w = तब लागू जब गिरने का प्रीव्यू चालू हो।
+enum_BuildSupportShowWhen_KeyHeld = कुंजी दबाए रखने पर
+enum_BuildSupportShowWhen_Always = हमेशा
+s_BuildSupport_PreviewKey = प्रीव्यू कुंजी
+s_BuildSupport_PreviewKey_d = क्या गिरेगा, यह देखने के लिए दबाए रखें।
+s_BuildSupport_PreviewKey_w = तब लागू जब दिखाएँ कुंजी दबाए रखने पर हो।
+s_BuildSupport_ShowWeaker = कमज़ोर दिखाएँ
+s_BuildSupport_ShowWeaker_d = उन पीस को भी नारंगी में चिह्नित करें जो साफ़ तौर पर कम सपोर्ट के साथ खड़े रहेंगे।
+s_BuildSupport_ShowWeaker_w = तब लागू जब गिरने का प्रीव्यू चालू हो।
+s_BuildSupport_Note = नोट
+s_BuildSupport_Note_d = बिल्ड मेनू के ऊपर एक छोटा नोट: टूटेगा, या कितने पीस गिरेंगे।
+s_BuildSupport_Size = आकार
+s_BuildSupport_Size_d = 1 सामान्य आकार है।
+s_BuildSupport_Size_w = तब लागू जब नोट चालू हो।
+s_BuildSupport_Opacity = अपारदर्शिता
+s_BuildSupport_Opacity_d = 1 पूरा ठोस है; कम करने पर पीछे गेम दिखता है।
+s_BuildSupport_Opacity_w = तब लागू जब नोट चालू हो।
+s_BuildSupport_OffsetX = ऑफ़सेट X
+s_BuildSupport_OffsetX_d = HUD पिक्सेल में बाएँ (-) या दाएँ (+) खिसकाएँ।
+s_BuildSupport_OffsetX_w = तब लागू जब नोट चालू हो।
+s_BuildSupport_OffsetY = ऑफ़सेट Y
+s_BuildSupport_OffsetY_d = HUD पिक्सेल में नीचे (-) या ऊपर (+) खिसकाएँ।
+s_BuildSupport_OffsetY_w = तब लागू जब नोट चालू हो।
+
 # Crafting
 sec_Crafting = क्राफ़्टिंग
 s_Crafting_Enabled = चालू

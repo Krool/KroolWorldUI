@@ -267,6 +267,44 @@ s_BuildMaterials_OffsetX_d = Flytta åt vänster (-) eller höger (+), i HUD-pix
 s_BuildMaterials_OffsetY = Förskjutning Y
 s_BuildMaterials_OffsetY_d = Flytta nedåt (-) eller uppåt (+), i HUD-pixlar.
 
+# Build Support
+sec_BuildSupport = Stabilitet
+s_BuildSupport_Enabled = Aktiverad
+s_BuildSupport_Enabled_d = Med hammaren framme varnar den när en del du placerar skulle gå sönder, och visar vad som skulle falla om du tog bort en.
+grp_Placing = Vid placering
+s_BuildSupport_BreakWarning = Brottvarning
+s_BuildSupport_BreakWarning_d = En del som skulle gå sönder så fort du bygger den blinkar rött, med en notis ovanför byggmenyn.
+s_BuildSupport_SupportColor = Stabilitetsfärg
+s_BuildSupport_SupportColor_d = Färga delen du placerar efter stabiliteten den får, i hammarens färger: blått på marken, sedan grönt till rött när stabiliteten sjunker.
+grp_Removing = Vid rivning
+s_BuildSupport_FallPreview = Fallvisning
+s_BuildSupport_FallPreview_d = Rikta hammaren mot en byggd del för att se vad som skulle falla om du tog bort den (rött) och vad som skulle stå kvar med mindre stabilitet (orange).
+s_BuildSupport_ShowWhen = Visa
+s_BuildSupport_ShowWhen_d = Hållen tangent: medan du håller Visningstangent. Alltid: när du pekar på en del. Med handkontroll visas den alltid.
+s_BuildSupport_ShowWhen_w = Används när Fallvisning är på.
+enum_BuildSupportShowWhen_KeyHeld = Hållen tangent
+enum_BuildSupportShowWhen_Always = Alltid
+s_BuildSupport_PreviewKey = Visningstangent
+s_BuildSupport_PreviewKey_d = Håll ned för att se vad som skulle falla.
+s_BuildSupport_PreviewKey_w = Används när Visa är Hållen tangent.
+s_BuildSupport_ShowWeaker = Visa svagare
+s_BuildSupport_ShowWeaker_d = Markera även delar som skulle stå kvar med tydligt mindre stabilitet, i orange.
+s_BuildSupport_ShowWeaker_w = Används när Fallvisning är på.
+s_BuildSupport_Note = Notis
+s_BuildSupport_Note_d = En kort notis ovanför byggmenyn: Går sönder, eller hur många delar som skulle falla.
+s_BuildSupport_Size = Storlek
+s_BuildSupport_Size_d = 1 är normal storlek.
+s_BuildSupport_Size_w = Används när Notis är på.
+s_BuildSupport_Opacity = Opacitet
+s_BuildSupport_Opacity_d = 1 är heltäckande; lägre låter spelet synas igenom.
+s_BuildSupport_Opacity_w = Används när Notis är på.
+s_BuildSupport_OffsetX = Förskjutning X
+s_BuildSupport_OffsetX_d = Flytta åt vänster (-) eller höger (+), i HUD-pixlar.
+s_BuildSupport_OffsetX_w = Används när Notis är på.
+s_BuildSupport_OffsetY = Förskjutning Y
+s_BuildSupport_OffsetY_d = Flytta nedåt (-) eller uppåt (+), i HUD-pixlar.
+s_BuildSupport_OffsetY_w = Används när Notis är på.
+
 # Crafting
 sec_Crafting = Tillverkning
 s_Crafting_Enabled = Aktiverad

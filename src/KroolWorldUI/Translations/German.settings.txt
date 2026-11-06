@@ -267,6 +267,44 @@ s_BuildMaterials_OffsetX_d = Nach links (-) oder rechts (+) verschieben, in HUD-
 s_BuildMaterials_OffsetY = Versatz Y
 s_BuildMaterials_OffsetY_d = Nach unten (-) oder oben (+) verschieben, in HUD-Pixeln.
 
+# Build Support
+sec_BuildSupport = Stabilität
+s_BuildSupport_Enabled = Aktiviert
+s_BuildSupport_Enabled_d = Mit gezogenem Hammer warnt es, wenn ein Bauteil, das du platzierst, brechen würde, und zeigt, was einstürzen würde, wenn du eines abreißt.
+grp_Placing = Platzieren
+s_BuildSupport_BreakWarning = Bruchwarnung
+s_BuildSupport_BreakWarning_d = Ein Bauteil, das sofort nach dem Bauen brechen würde, blinkt rot, mit einem Hinweis über dem Baumenü.
+s_BuildSupport_SupportColor = Stabilitätsfarbe
+s_BuildSupport_SupportColor_d = Färbt das Bauteil beim Platzieren nach der Stabilität, die es haben wird, in den Farben des Hammers: blau auf dem Boden, dann grün bis rot, je weiter die Stabilität sinkt.
+grp_Removing = Abreißen
+s_BuildSupport_FallPreview = Einsturzvorschau
+s_BuildSupport_FallPreview_d = Zeig mit dem Hammer auf ein gebautes Bauteil, um zu sehen, was einstürzen würde, wenn du es abreißt (rot), und was mit weniger Stabilität stehen bliebe (orange).
+s_BuildSupport_ShowWhen = Anzeigen
+s_BuildSupport_ShowWhen_d = Taste gehalten: solange du Vorschautaste hältst. Immer: immer, wenn du auf ein Bauteil zeigst. Am Controller wird es immer angezeigt.
+s_BuildSupport_ShowWhen_w = Gilt, wenn Einsturzvorschau an ist.
+enum_BuildSupportShowWhen_KeyHeld = Taste gehalten
+enum_BuildSupportShowWhen_Always = Immer
+s_BuildSupport_PreviewKey = Vorschautaste
+s_BuildSupport_PreviewKey_d = Halten, um zu sehen, was einstürzen würde.
+s_BuildSupport_PreviewKey_w = Gilt, wenn Anzeigen auf Taste gehalten steht.
+s_BuildSupport_ShowWeaker = Schwächere zeigen
+s_BuildSupport_ShowWeaker_d = Markiert auch Bauteile, die mit deutlich weniger Stabilität stehen blieben, in Orange.
+s_BuildSupport_ShowWeaker_w = Gilt, wenn Einsturzvorschau an ist.
+s_BuildSupport_Note = Hinweis
+s_BuildSupport_Note_d = Ein kurzer Hinweis über dem Baumenü: Bricht, oder wie viele Bauteile einstürzen würden.
+s_BuildSupport_Size = Größe
+s_BuildSupport_Size_d = 1 ist die normale Größe.
+s_BuildSupport_Size_w = Gilt, wenn Hinweis an ist.
+s_BuildSupport_Opacity = Deckkraft
+s_BuildSupport_Opacity_d = 1 ist deckend; weniger lässt das Spiel durchscheinen.
+s_BuildSupport_Opacity_w = Gilt, wenn Hinweis an ist.
+s_BuildSupport_OffsetX = Versatz X
+s_BuildSupport_OffsetX_d = Nach links (-) oder rechts (+) verschieben, in HUD-Pixeln.
+s_BuildSupport_OffsetX_w = Gilt, wenn Hinweis an ist.
+s_BuildSupport_OffsetY = Versatz Y
+s_BuildSupport_OffsetY_d = Nach unten (-) oder oben (+) verschieben, in HUD-Pixeln.
+s_BuildSupport_OffsetY_w = Gilt, wenn Hinweis an ist.
+
 # Crafting
 sec_Crafting = Herstellung
 s_Crafting_Enabled = Aktiviert

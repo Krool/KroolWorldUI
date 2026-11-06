@@ -267,6 +267,44 @@ s_BuildMaterials_OffsetX_d = เลื่อนซ้าย (-) หรือข�
 s_BuildMaterials_OffsetY = เลื่อน Y
 s_BuildMaterials_OffsetY_d = เลื่อนลง (-) หรือขึ้น (+) เป็นพิกเซล HUD
 
+# Build Support
+sec_BuildSupport = ความมั่นคงโครงสร้าง
+s_BuildSupport_Enabled = เปิดใช้
+s_BuildSupport_Enabled_d = เมื่อถือค้อน จะเตือนเมื่อชิ้นที่คุณวางจะพัง และแสดงว่าอะไรจะร่วงถ้าคุณรื้อชิ้นหนึ่งออก
+grp_Placing = การวาง
+s_BuildSupport_BreakWarning = เตือนชิ้นพัง
+s_BuildSupport_BreakWarning_d = ชิ้นที่จะพังทันทีที่สร้างจะกะพริบสีแดง พร้อมข้อความแจ้งเหนือเมนูก่อสร้าง
+s_BuildSupport_SupportColor = สีความมั่นคง
+s_BuildSupport_SupportColor_d = ระบายสีชิ้นที่กำลังวางตามความมั่นคงที่จะได้ ด้วยสีของค้อน: สีน้ำเงินบนพื้น แล้วไล่จากเขียวไปแดงเมื่อความมั่นคงลดลง
+grp_Removing = การรื้อ
+s_BuildSupport_FallPreview = ดูสิ่งที่จะร่วง
+s_BuildSupport_FallPreview_d = เล็งค้อนไปที่ชิ้นที่สร้างแล้ว เพื่อดูว่าอะไรจะร่วงถ้ารื้อชิ้นนั้น (แดง) และอะไรจะยังตั้งอยู่ได้แต่ความมั่นคงลดลง (ส้ม)
+s_BuildSupport_ShowWhen = แสดงเมื่อ
+s_BuildSupport_ShowWhen_d = กดปุ่มค้าง: ขณะกด “ปุ่มดูตัวอย่าง” ค้างไว้ ตลอด: ทุกครั้งที่เล็งค้อนไปที่ชิ้น ถ้าใช้คอนโทรลเลอร์ จะแสดงตลอด
+s_BuildSupport_ShowWhen_w = ใช้เมื่อเปิด “ดูสิ่งที่จะร่วง”
+enum_BuildSupportShowWhen_KeyHeld = กดปุ่มค้าง
+enum_BuildSupportShowWhen_Always = ตลอด
+s_BuildSupport_PreviewKey = ปุ่มดูตัวอย่าง
+s_BuildSupport_PreviewKey_d = กดค้างเพื่อดูว่าอะไรจะร่วง
+s_BuildSupport_PreviewKey_w = ใช้เมื่อ “แสดงเมื่อ” เป็น “กดปุ่มค้าง”
+s_BuildSupport_ShowWeaker = แสดงชิ้นที่อ่อนลง
+s_BuildSupport_ShowWeaker_d = ทำเครื่องหมายสีส้มให้ชิ้นที่ยังตั้งอยู่ได้แต่ความมั่นคงลดลงชัดเจนด้วย
+s_BuildSupport_ShowWeaker_w = ใช้เมื่อเปิด “ดูสิ่งที่จะร่วง”
+s_BuildSupport_Note = ข้อความแจ้ง
+s_BuildSupport_Note_d = ข้อความแจ้งสั้น ๆ เหนือเมนูก่อสร้าง: “จะพัง” หรือจำนวนชิ้นที่จะร่วง
+s_BuildSupport_Size = ขนาด
+s_BuildSupport_Size_d = 1 คือขนาดปกติ
+s_BuildSupport_Size_w = ใช้เมื่อเปิด “ข้อความแจ้ง”
+s_BuildSupport_Opacity = ความทึบ
+s_BuildSupport_Opacity_d = 1 คือทึบเต็มที่ ค่าน้อยกว่าจะมองทะลุเห็นเกม
+s_BuildSupport_Opacity_w = ใช้เมื่อเปิด “ข้อความแจ้ง”
+s_BuildSupport_OffsetX = เลื่อน X
+s_BuildSupport_OffsetX_d = เลื่อนซ้าย (-) หรือขวา (+) เป็นพิกเซล HUD
+s_BuildSupport_OffsetX_w = ใช้เมื่อเปิด “ข้อความแจ้ง”
+s_BuildSupport_OffsetY = เลื่อน Y
+s_BuildSupport_OffsetY_d = เลื่อนลง (-) หรือขึ้น (+) เป็นพิกเซล HUD
+s_BuildSupport_OffsetY_w = ใช้เมื่อเปิด “ข้อความแจ้ง”
+
 # Crafting
 sec_Crafting = สร้าง/ทำ
 s_Crafting_Enabled = เปิดใช้

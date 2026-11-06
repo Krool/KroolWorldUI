@@ -23,6 +23,10 @@ seconds_short = $1 s
 
 enough_for = Basta per $1
 not_enough = Non basta
+support_breaks = Cederà: stabilità insufficiente
+support_fall = Cadrebbero: $1
+support_weaker = Indeboliti: $1
+support_none = Non cadrebbe nulla
 
 craft_all = Tutto
 craft_weapons = Armi

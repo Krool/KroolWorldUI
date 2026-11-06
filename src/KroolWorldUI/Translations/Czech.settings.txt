@@ -267,6 +267,44 @@ s_BuildMaterials_OffsetX_d = Doleva (-) nebo doprava (+), v pixelech HUD.
 s_BuildMaterials_OffsetY = Posun Y
 s_BuildMaterials_OffsetY_d = Dolů (-) nebo nahoru (+), v pixelech HUD.
 
+# Build Support
+sec_BuildSupport = Stabilita
+s_BuildSupport_Enabled = Zapnuto
+s_BuildSupport_Enabled_d = S kladivem v ruce varuje, když by se pokládaný díl rozpadl, a ukáže, co by spadlo, kdybys nějaký odstranil.
+grp_Placing = Pokládání
+s_BuildSupport_BreakWarning = Varování o rozpadu
+s_BuildSupport_BreakWarning_d = Díl, který by se rozpadl hned po postavení, bliká červeně a nad menu stavby se objeví poznámka.
+s_BuildSupport_SupportColor = Barva stability
+s_BuildSupport_SupportColor_d = Obarví pokládaný díl podle stability, kterou bude mít, v barvách kladiva: modrá na zemi, pak od zelené po červenou, jak stabilita klesá.
+grp_Removing = Odstraňování
+s_BuildSupport_FallPreview = Náhled zřícení
+s_BuildSupport_FallPreview_d = Namiř kladivo na postavený díl a uvidíš, co by spadlo, kdybys ho odstranil (červeně), a co by vydrželo s menší stabilitou (oranžově).
+s_BuildSupport_ShowWhen = Zobrazit
+s_BuildSupport_ShowWhen_d = Držená klávesa: dokud je stisknutá Klávesa náhledu. Vždy: kdykoli míříš na díl. Na ovladači se zobrazuje vždy.
+s_BuildSupport_ShowWhen_w = Platí, když je zapnuto: Náhled zřícení.
+enum_BuildSupportShowWhen_KeyHeld = Držená klávesa
+enum_BuildSupportShowWhen_Always = Vždy
+s_BuildSupport_PreviewKey = Klávesa náhledu
+s_BuildSupport_PreviewKey_d = Drž a uvidíš, co by spadlo.
+s_BuildSupport_PreviewKey_w = Platí, když Zobrazit: Držená klávesa.
+s_BuildSupport_ShowWeaker = Zobrazit oslabené
+s_BuildSupport_ShowWeaker_d = Označí oranžově i díly, které by vydržely se znatelně menší stabilitou.
+s_BuildSupport_ShowWeaker_w = Platí, když je zapnuto: Náhled zřícení.
+s_BuildSupport_Note = Poznámka
+s_BuildSupport_Note_d = Krátká poznámka nad menu stavby: Rozpadne se, nebo kolik dílů by spadlo.
+s_BuildSupport_Size = Velikost
+s_BuildSupport_Size_d = 1 je běžná velikost.
+s_BuildSupport_Size_w = Platí, když je zapnuto: Poznámka.
+s_BuildSupport_Opacity = Krytí
+s_BuildSupport_Opacity_d = 1 je plné; méně nechá prosvítat hru.
+s_BuildSupport_Opacity_w = Platí, když je zapnuto: Poznámka.
+s_BuildSupport_OffsetX = Posun X
+s_BuildSupport_OffsetX_d = Doleva (-) nebo doprava (+), v pixelech HUD.
+s_BuildSupport_OffsetX_w = Platí, když je zapnuto: Poznámka.
+s_BuildSupport_OffsetY = Posun Y
+s_BuildSupport_OffsetY_d = Dolů (-) nebo nahoru (+), v pixelech HUD.
+s_BuildSupport_OffsetY_w = Platí, když je zapnuto: Poznámka.
+
 # Crafting
 sec_Crafting = Výroba
 s_Crafting_Enabled = Zapnuto

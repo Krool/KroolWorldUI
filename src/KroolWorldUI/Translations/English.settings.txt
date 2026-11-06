@@ -269,6 +269,44 @@ s_BuildMaterials_OffsetX_d = Move left (-) or right (+), in HUD pixels.
 s_BuildMaterials_OffsetY = Offset Y
 s_BuildMaterials_OffsetY_d = Move down (-) or up (+), in HUD pixels.
 
+# Build Support
+sec_BuildSupport = Build Support
+s_BuildSupport_Enabled = Enabled
+s_BuildSupport_Enabled_d = With the hammer out, warns when a piece you place would break, and shows what would fall if you removed one.
+grp_Placing = Placing
+s_BuildSupport_BreakWarning = Break Warning
+s_BuildSupport_BreakWarning_d = A piece that would break as soon as you build it flashes red, with a note above the build menu.
+s_BuildSupport_SupportColor = Support Color
+s_BuildSupport_SupportColor_d = Color the piece you are placing by the support it will have, in the hammer's colors: blue on the ground, then green to red as support drops.
+grp_Removing = Removing
+s_BuildSupport_FallPreview = Fall Preview
+s_BuildSupport_FallPreview_d = Point the hammer at a built piece to see what would fall if you removed it (red) and what would stand with less support (orange).
+s_BuildSupport_ShowWhen = Show When
+s_BuildSupport_ShowWhen_d = Key Held: while you hold Preview Key. Always: whenever you point at a piece. On a controller it always shows.
+s_BuildSupport_ShowWhen_w = Used when Fall Preview is on.
+enum_BuildSupportShowWhen_KeyHeld = Key Held
+enum_BuildSupportShowWhen_Always = Always
+s_BuildSupport_PreviewKey = Preview Key
+s_BuildSupport_PreviewKey_d = Hold to see what would fall.
+s_BuildSupport_PreviewKey_w = Used when Show When is Key Held.
+s_BuildSupport_ShowWeaker = Show Weaker
+s_BuildSupport_ShowWeaker_d = Also mark pieces that would stay up with clearly less support, in orange.
+s_BuildSupport_ShowWeaker_w = Used when Fall Preview is on.
+s_BuildSupport_Note = Note
+s_BuildSupport_Note_d = A short note above the build menu: Will break, or how many pieces would fall.
+s_BuildSupport_Size = Size
+s_BuildSupport_Size_d = 1 is the normal size.
+s_BuildSupport_Size_w = Used when Note is on.
+s_BuildSupport_Opacity = Opacity
+s_BuildSupport_Opacity_d = 1 is solid; lower shows the game through it.
+s_BuildSupport_Opacity_w = Used when Note is on.
+s_BuildSupport_OffsetX = Offset X
+s_BuildSupport_OffsetX_d = Move left (-) or right (+), in HUD pixels.
+s_BuildSupport_OffsetX_w = Used when Note is on.
+s_BuildSupport_OffsetY = Offset Y
+s_BuildSupport_OffsetY_d = Move down (-) or up (+), in HUD pixels.
+s_BuildSupport_OffsetY_w = Used when Note is on.
+
 # Crafting
 sec_Crafting = Crafting
 s_Crafting_Enabled = Enabled

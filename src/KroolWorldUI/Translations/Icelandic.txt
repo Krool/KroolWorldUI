@@ -23,6 +23,10 @@ seconds_short = $1s
 
 enough_for = Nóg fyrir $1
 not_enough = Ekki nóg
+support_breaks = Brotnar: of lítill stöðugleiki
+support_fall = Myndi falla: $1
+support_weaker = Veikari: $1
+support_none = Ekkert myndi falla
 
 craft_all = Allt
 craft_weapons = Vopn

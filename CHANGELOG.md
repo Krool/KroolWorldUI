@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.16.0
+
+- **Build support.** With the hammer out, a piece that would break as soon as you build it (stone on wood, stone held from one side) flashes red, with a note above the build menu. Hold Left Alt and point at a built piece to see what would fall if you removed it (red) and what would stand with clearly less support (orange), with a count. Both follow the game's own support rule. Optional: color the piece you are placing by the support it will have. Settings: show the removal preview always instead of on a key, the key, the note's size, opacity and position.
+
 ## 0.15.1
 
 - **Low ammo warning.** A short toast and tone when a shot leaves your equipped stack of arrows, bolts or bait at 25, and again in red at 10. Both counts are settings.

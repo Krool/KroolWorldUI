@@ -267,6 +267,44 @@ s_BuildMaterials_OffsetX_d = Sposta a sinistra (-) o a destra (+), in pixel HUD.
 s_BuildMaterials_OffsetY = Scostamento Y
 s_BuildMaterials_OffsetY_d = Sposta in basso (-) o in alto (+), in pixel HUD.
 
+# Build Support
+sec_BuildSupport = Stabilità
+s_BuildSupport_Enabled = Attivo
+s_BuildSupport_Enabled_d = Con il martello in mano, avvisa quando un elemento che piazzi cederebbe e mostra cosa cadrebbe se ne rimuovessi uno.
+grp_Placing = Piazzamento
+s_BuildSupport_BreakWarning = Avviso rottura
+s_BuildSupport_BreakWarning_d = Un elemento che cederebbe appena costruito lampeggia in rosso, con una nota sopra il menu di costruzione.
+s_BuildSupport_SupportColor = Colore stabilità
+s_BuildSupport_SupportColor_d = Colora l'elemento che piazzi in base alla stabilità che avrà, con i colori del martello: blu a terra, poi dal verde al rosso man mano che la stabilità cala.
+grp_Removing = Rimozione
+s_BuildSupport_FallPreview = Anteprima crollo
+s_BuildSupport_FallPreview_d = Punta il martello su un elemento costruito per vedere cosa cadrebbe se lo rimuovessi (rosso) e cosa resterebbe in piedi con meno stabilità (arancione).
+s_BuildSupport_ShowWhen = Mostra
+s_BuildSupport_ShowWhen_d = Tasto premuto: mentre tieni premuto Tasto anteprima. Sempre: ogni volta che punti un elemento. Con il controller si vede sempre.
+s_BuildSupport_ShowWhen_w = Usato se Anteprima crollo è attivo.
+enum_BuildSupportShowWhen_KeyHeld = Tasto premuto
+enum_BuildSupportShowWhen_Always = Sempre
+s_BuildSupport_PreviewKey = Tasto anteprima
+s_BuildSupport_PreviewKey_d = Tieni premuto per vedere cosa cadrebbe.
+s_BuildSupport_PreviewKey_w = Usato se Mostra è Tasto premuto.
+s_BuildSupport_ShowWeaker = Mostra indeboliti
+s_BuildSupport_ShowWeaker_d = Segna anche in arancione gli elementi che resterebbero in piedi con nettamente meno stabilità.
+s_BuildSupport_ShowWeaker_w = Usato se Anteprima crollo è attivo.
+s_BuildSupport_Note = Nota
+s_BuildSupport_Note_d = Una breve nota sopra il menu di costruzione: Cederà, o quanti elementi cadrebbero.
+s_BuildSupport_Size = Dimensione
+s_BuildSupport_Size_d = 1 è la dimensione normale.
+s_BuildSupport_Size_w = Usato se Nota è attivo.
+s_BuildSupport_Opacity = Opacità
+s_BuildSupport_Opacity_d = 1 è pieno; più basso lascia vedere il gioco attraverso.
+s_BuildSupport_Opacity_w = Usato se Nota è attivo.
+s_BuildSupport_OffsetX = Scostamento X
+s_BuildSupport_OffsetX_d = Sposta a sinistra (-) o a destra (+), in pixel HUD.
+s_BuildSupport_OffsetX_w = Usato se Nota è attivo.
+s_BuildSupport_OffsetY = Scostamento Y
+s_BuildSupport_OffsetY_d = Sposta in basso (-) o in alto (+), in pixel HUD.
+s_BuildSupport_OffsetY_w = Usato se Nota è attivo.
+
 # Crafting
 sec_Crafting = Lavorazione
 s_Crafting_Enabled = Attivo

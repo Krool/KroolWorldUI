@@ -23,6 +23,10 @@ seconds_short = $1초
 
 enough_for = $1개 가능
 not_enough = 부족
+support_breaks = 부서짐: 지지력 부족
+support_fall = 떨어짐: $1
+support_weaker = 약해짐: $1
+support_none = 떨어지는 것 없음
 
 craft_all = 전체
 craft_weapons = 무기

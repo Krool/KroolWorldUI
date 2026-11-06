@@ -267,6 +267,44 @@ s_BuildMaterials_OffsetX_d = Flyt til venstre (-) eller højre (+), i HUD-pixels
 s_BuildMaterials_OffsetY = Forskydning Y
 s_BuildMaterials_OffsetY_d = Flyt ned (-) eller op (+), i HUD-pixels.
 
+# Build Support
+sec_BuildSupport = Stabilitet
+s_BuildSupport_Enabled = Aktiveret
+s_BuildSupport_Enabled_d = Med hammeren fremme advarer den, når en del, du placerer, ville gå i stykker, og viser, hvad der ville falde, hvis du fjernede en.
+grp_Placing = Ved placering
+s_BuildSupport_BreakWarning = Brudadvarsel
+s_BuildSupport_BreakWarning_d = En del, der ville gå i stykker, så snart du bygger den, blinker rødt med en note over byggemenuen.
+s_BuildSupport_SupportColor = Stabilitetsfarve
+s_BuildSupport_SupportColor_d = Farv delen, du placerer, efter den stabilitet, den får, i hammerens farver: blå på jorden, derefter grøn til rød, efterhånden som stabiliteten falder.
+grp_Removing = Ved fjernelse
+s_BuildSupport_FallPreview = Faldvisning
+s_BuildSupport_FallPreview_d = Peg hammeren på en bygget del for at se, hvad der ville falde, hvis du fjernede den (rød), og hvad der ville blive stående med mindre stabilitet (orange).
+s_BuildSupport_ShowWhen = Vis
+s_BuildSupport_ShowWhen_d = Tast holdt: mens du holder Visningstast. Altid: når du peger på en del. På en controller vises den altid.
+s_BuildSupport_ShowWhen_w = Bruges når Faldvisning er til.
+enum_BuildSupportShowWhen_KeyHeld = Tast holdt
+enum_BuildSupportShowWhen_Always = Altid
+s_BuildSupport_PreviewKey = Visningstast
+s_BuildSupport_PreviewKey_d = Hold for at se, hvad der ville falde.
+s_BuildSupport_PreviewKey_w = Bruges når Vis er Tast holdt.
+s_BuildSupport_ShowWeaker = Vis svagere
+s_BuildSupport_ShowWeaker_d = Marker også dele, der ville blive stående med tydeligt mindre stabilitet, i orange.
+s_BuildSupport_ShowWeaker_w = Bruges når Faldvisning er til.
+s_BuildSupport_Note = Note
+s_BuildSupport_Note_d = En kort note over byggemenuen: Går i stykker, eller hvor mange dele der ville falde.
+s_BuildSupport_Size = Størrelse
+s_BuildSupport_Size_d = 1 er normal størrelse.
+s_BuildSupport_Size_w = Bruges når Note er til.
+s_BuildSupport_Opacity = Opacitet
+s_BuildSupport_Opacity_d = 1 er massiv; lavere lader spillet skinne igennem.
+s_BuildSupport_Opacity_w = Bruges når Note er til.
+s_BuildSupport_OffsetX = Forskydning X
+s_BuildSupport_OffsetX_d = Flyt til venstre (-) eller højre (+), i HUD-pixels.
+s_BuildSupport_OffsetX_w = Bruges når Note er til.
+s_BuildSupport_OffsetY = Forskydning Y
+s_BuildSupport_OffsetY_d = Flyt ned (-) eller op (+), i HUD-pixels.
+s_BuildSupport_OffsetY_w = Bruges når Note er til.
+
 # Crafting
 sec_Crafting = Fremstilling
 s_Crafting_Enabled = Aktiveret

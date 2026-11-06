@@ -267,6 +267,44 @@ s_BuildMaterials_OffsetX_d = HUD pikseli cinsinden sola (-) veya sağa (+) kayd�
 s_BuildMaterials_OffsetY = Kaydırma Y
 s_BuildMaterials_OffsetY_d = HUD pikseli cinsinden aşağı (-) veya yukarı (+) kaydır.
 
+# Build Support
+sec_BuildSupport = Yapı Desteği
+s_BuildSupport_Enabled = Etkin
+s_BuildSupport_Enabled_d = Çekiç elindeyken, yerleştirdiğin bir parça kırılacaksa uyarır ve birini kaldırırsan neyin düşeceğini gösterir.
+grp_Placing = Yerleştirme
+s_BuildSupport_BreakWarning = Kırılma Uyarısı
+s_BuildSupport_BreakWarning_d = Yapar yapmaz kırılacak bir parça kırmızı yanıp söner ve yapı menüsünün üstünde bir not çıkar.
+s_BuildSupport_SupportColor = Destek Rengi
+s_BuildSupport_SupportColor_d = Yerleştirdiğin parçayı alacağı desteğe göre çekicin renkleriyle boyar: zeminde mavi, sonra destek azaldıkça yeşilden kırmızıya.
+grp_Removing = Kaldırma
+s_BuildSupport_FallPreview = Çökme Önizlemesi
+s_BuildSupport_FallPreview_d = Kaldırırsan neyin düşeceğini (kırmızı) ve neyin daha az destekle ayakta kalacağını (turuncu) görmek için çekici yapılmış bir parçaya doğrult.
+s_BuildSupport_ShowWhen = Göster
+s_BuildSupport_ShowWhen_d = Tuş Basılıyken: Önizleme Tuşu basılı tutulurken. Her Zaman: çekici bir parçaya her doğrulttuğunda. Oyun kumandasında her zaman görünür.
+s_BuildSupport_ShowWhen_w = Çökme Önizlemesi açıksa geçerlidir.
+enum_BuildSupportShowWhen_KeyHeld = Tuş Basılıyken
+enum_BuildSupportShowWhen_Always = Her Zaman
+s_BuildSupport_PreviewKey = Önizleme Tuşu
+s_BuildSupport_PreviewKey_d = Neyin düşeceğini görmek için basılı tut.
+s_BuildSupport_PreviewKey_w = Göster Tuş Basılıyken ise geçerlidir.
+s_BuildSupport_ShowWeaker = Zayıfları Göster
+s_BuildSupport_ShowWeaker_d = Belirgin şekilde daha az destekle ayakta kalacak parçaları da turuncuyla işaretler.
+s_BuildSupport_ShowWeaker_w = Çökme Önizlemesi açıksa geçerlidir.
+s_BuildSupport_Note = Not
+s_BuildSupport_Note_d = Yapı menüsünün üstünde kısa bir not: Kırılacak ya da kaç parçanın düşeceği.
+s_BuildSupport_Size = Boyut
+s_BuildSupport_Size_d = 1 normal boyuttur.
+s_BuildSupport_Size_w = Not açıksa geçerlidir.
+s_BuildSupport_Opacity = Opaklık
+s_BuildSupport_Opacity_d = 1 tam opak; daha düşük değerde oyun arkadan görünür.
+s_BuildSupport_Opacity_w = Not açıksa geçerlidir.
+s_BuildSupport_OffsetX = Kaydırma X
+s_BuildSupport_OffsetX_d = HUD pikseli cinsinden sola (-) veya sağa (+) kaydır.
+s_BuildSupport_OffsetX_w = Not açıksa geçerlidir.
+s_BuildSupport_OffsetY = Kaydırma Y
+s_BuildSupport_OffsetY_d = HUD pikseli cinsinden aşağı (-) veya yukarı (+) kaydır.
+s_BuildSupport_OffsetY_w = Not açıksa geçerlidir.
+
 # Crafting
 sec_Crafting = Atölye
 s_Crafting_Enabled = Etkin

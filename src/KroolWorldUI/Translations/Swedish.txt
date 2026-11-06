@@ -23,6 +23,10 @@ seconds_short = $1s
 
 enough_for = Räcker till $1
 not_enough = Inte nog
+support_breaks = Går sönder: för lite stabilitet
+support_fall = Skulle falla: $1
+support_weaker = Svagare: $1
+support_none = Inget skulle falla
 
 craft_all = Alla
 craft_weapons = Vapen

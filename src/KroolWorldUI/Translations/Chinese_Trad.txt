@@ -23,6 +23,10 @@ seconds_short = $1秒
 
 enough_for = 夠建 $1 個
 not_enough = 不足
+support_breaks = 會斷裂：支撐不足
+support_fall = 會掉落：$1
+support_weaker = 變弱：$1
+support_none = 無項目掉落
 
 craft_all = 全部
 craft_weapons = 武器

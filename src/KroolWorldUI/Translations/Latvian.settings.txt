@@ -267,6 +267,44 @@ s_BuildMaterials_OffsetX_d = Pa kreisi (-) vai pa labi (+), HUD pikseļos.
 s_BuildMaterials_OffsetY = Nobīde Y
 s_BuildMaterials_OffsetY_d = Uz leju (-) vai uz augšu (+), HUD pikseļos.
 
+# Build Support
+sec_BuildSupport = Stabilitāte
+s_BuildSupport_Enabled = Ieslēgts
+s_BuildSupport_Enabled_d = Ar āmuru rokā brīdina, ja novietotā detaļa salūztu, un parāda, kas nokristu, ja kādu noņemtu.
+grp_Placing = Novietošana
+s_BuildSupport_BreakWarning = Lūzuma brīdinājums
+s_BuildSupport_BreakWarning_d = Detaļa, kas salūztu uzreiz pēc uzbūvēšanas, mirgo sarkanā krāsā, un virs būvēšanas izvēlnes parādās piezīme.
+s_BuildSupport_SupportColor = Stabilitātes krāsa
+s_BuildSupport_SupportColor_d = Iekrāso novietojamo detaļu pēc tās stabilitātes āmura krāsās: zila uz zemes, tad no zaļas līdz sarkanai, stabilitātei samazinoties.
+grp_Removing = Nojaukšana
+s_BuildSupport_FallPreview = Krišanas priekšskats
+s_BuildSupport_FallPreview_d = Notēmē āmuru uz uzbūvētu detaļu, lai redzētu, kas nokristu, ja to noņemtu (sarkans), un kas paliktu stāvam ar mazāku stabilitāti (oranžs).
+s_BuildSupport_ShowWhen = Rādīt
+s_BuildSupport_ShowWhen_d = Turot taustiņu: kamēr ir nospiests Priekšskata taustiņš. Vienmēr: kad vien tēmē uz detaļu. Ar vadāmierīci rāda vienmēr.
+s_BuildSupport_ShowWhen_w = Darbojas, ja ieslēgts: Krišanas priekšskats.
+enum_BuildSupportShowWhen_KeyHeld = Turot taustiņu
+enum_BuildSupportShowWhen_Always = Vienmēr
+s_BuildSupport_PreviewKey = Priekšskata taustiņš
+s_BuildSupport_PreviewKey_d = Turi, lai redzētu, kas nokristu.
+s_BuildSupport_PreviewKey_w = Darbojas, ja Rādīt: Turot taustiņu.
+s_BuildSupport_ShowWeaker = Rādīt vājākās
+s_BuildSupport_ShowWeaker_d = Oranžā krāsā atzīmē arī detaļas, kas paliktu stāvam ar manāmi mazāku stabilitāti.
+s_BuildSupport_ShowWeaker_w = Darbojas, ja ieslēgts: Krišanas priekšskats.
+s_BuildSupport_Note = Piezīme
+s_BuildSupport_Note_d = Īsa piezīme virs būvēšanas izvēlnes: Salūzīs vai cik detaļu nokristu.
+s_BuildSupport_Size = Izmērs
+s_BuildSupport_Size_d = 1 ir parastais izmērs.
+s_BuildSupport_Size_w = Darbojas, ja ieslēgts: Piezīme.
+s_BuildSupport_Opacity = Necaurredzamība
+s_BuildSupport_Opacity_d = 1 ir pilnīgi necaurredzams; mazāk ļauj redzēt spēli cauri.
+s_BuildSupport_Opacity_w = Darbojas, ja ieslēgts: Piezīme.
+s_BuildSupport_OffsetX = Nobīde X
+s_BuildSupport_OffsetX_d = Pa kreisi (-) vai pa labi (+), HUD pikseļos.
+s_BuildSupport_OffsetX_w = Darbojas, ja ieslēgts: Piezīme.
+s_BuildSupport_OffsetY = Nobīde Y
+s_BuildSupport_OffsetY_d = Uz leju (-) vai uz augšu (+), HUD pikseļos.
+s_BuildSupport_OffsetY_w = Darbojas, ja ieslēgts: Piezīme.
+
 # Crafting
 sec_Crafting = Amatniecība
 s_Crafting_Enabled = Ieslēgts

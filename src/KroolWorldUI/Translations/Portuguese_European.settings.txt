@@ -267,6 +267,44 @@ s_BuildMaterials_OffsetX_d = Move para a esquerda (-) ou para a direita (+), em 
 s_BuildMaterials_OffsetY = Desvio Y
 s_BuildMaterials_OffsetY_d = Move para baixo (-) ou para cima (+), em píxeis do HUD.
 
+# Build Support
+sec_BuildSupport = Estabilidade
+s_BuildSupport_Enabled = Ativado
+s_BuildSupport_Enabled_d = Com o martelo na mão, avisa quando uma peça que colocas partiria e mostra o que cairia se removesses uma.
+grp_Placing = Colocação
+s_BuildSupport_BreakWarning = Aviso de rotura
+s_BuildSupport_BreakWarning_d = Uma peça que partiria logo ao ser construída pisca a vermelho, com uma nota por cima do menu de construção.
+s_BuildSupport_SupportColor = Cor de estabilidade
+s_BuildSupport_SupportColor_d = Colore a peça que estás a colocar pela estabilidade que terá, nas cores do martelo: azul no chão, depois de verde a vermelho à medida que a estabilidade desce.
+grp_Removing = Remoção
+s_BuildSupport_FallPreview = Antevisão de queda
+s_BuildSupport_FallPreview_d = Aponta o martelo para uma peça construída para veres o que cairia se a removesses (vermelho) e o que ficaria de pé com menos estabilidade (laranja).
+s_BuildSupport_ShowWhen = Mostrar
+s_BuildSupport_ShowWhen_d = Tecla premida: enquanto manténs premida Tecla antevisão. Sempre: sempre que apontas para uma peça. No comando, aparece sempre.
+s_BuildSupport_ShowWhen_w = Usado quando Antevisão de queda está ligado.
+enum_BuildSupportShowWhen_KeyHeld = Tecla premida
+enum_BuildSupportShowWhen_Always = Sempre
+s_BuildSupport_PreviewKey = Tecla antevisão
+s_BuildSupport_PreviewKey_d = Mantém premida para ver o que cairia.
+s_BuildSupport_PreviewKey_w = Usado quando Mostrar é Tecla premida.
+s_BuildSupport_ShowWeaker = Mostrar mais fracas
+s_BuildSupport_ShowWeaker_d = Marca também a laranja as peças que ficariam de pé com bastante menos estabilidade.
+s_BuildSupport_ShowWeaker_w = Usado quando Antevisão de queda está ligado.
+s_BuildSupport_Note = Nota
+s_BuildSupport_Note_d = Uma nota curta por cima do menu de construção: Vai partir, ou quantas peças cairiam.
+s_BuildSupport_Size = Tamanho
+s_BuildSupport_Size_d = 1 é o tamanho normal.
+s_BuildSupport_Size_w = Usado quando Nota está ligado.
+s_BuildSupport_Opacity = Opacidade
+s_BuildSupport_Opacity_d = 1 é opaco; menos deixa ver o jogo através.
+s_BuildSupport_Opacity_w = Usado quando Nota está ligado.
+s_BuildSupport_OffsetX = Desvio X
+s_BuildSupport_OffsetX_d = Move para a esquerda (-) ou para a direita (+), em píxeis do HUD.
+s_BuildSupport_OffsetX_w = Usado quando Nota está ligado.
+s_BuildSupport_OffsetY = Desvio Y
+s_BuildSupport_OffsetY_d = Move para baixo (-) ou para cima (+), em píxeis do HUD.
+s_BuildSupport_OffsetY_w = Usado quando Nota está ligado.
+
 # Crafting
 sec_Crafting = Fabricar
 s_Crafting_Enabled = Ativado

@@ -267,6 +267,44 @@ s_BuildMaterials_OffsetX_d = Naar links (-) of rechts (+), in HUD-pixels.
 s_BuildMaterials_OffsetY = Verschuiving Y
 s_BuildMaterials_OffsetY_d = Naar beneden (-) of boven (+), in HUD-pixels.
 
+# Build Support
+sec_BuildSupport = Stabiliteit
+s_BuildSupport_Enabled = Ingeschakeld
+s_BuildSupport_Enabled_d = Met de hamer in de hand waarschuwt het als een onderdeel dat je plaatst zou breken, en toont het wat zou vallen als je er een weghaalt.
+grp_Placing = Plaatsen
+s_BuildSupport_BreakWarning = Breekwaarschuwing
+s_BuildSupport_BreakWarning_d = Een onderdeel dat meteen na het bouwen zou breken knippert rood, met een melding boven het bouwmenu.
+s_BuildSupport_SupportColor = Stabiliteitskleur
+s_BuildSupport_SupportColor_d = Kleurt het onderdeel dat je plaatst naar de stabiliteit die het krijgt, in de kleuren van de hamer: blauw op de grond, dan groen tot rood naarmate de stabiliteit daalt.
+grp_Removing = Weghalen
+s_BuildSupport_FallPreview = Instortvoorbeeld
+s_BuildSupport_FallPreview_d = Richt de hamer op een gebouwd onderdeel om te zien wat zou vallen als je het weghaalt (rood) en wat met minder stabiliteit blijft staan (oranje).
+s_BuildSupport_ShowWhen = Tonen
+s_BuildSupport_ShowWhen_d = Toets ingedrukt: zolang je Voorbeeldtoets ingedrukt houdt. Altijd: zodra je naar een onderdeel wijst. Op een controller altijd zichtbaar.
+s_BuildSupport_ShowWhen_w = Gebruikt als Instortvoorbeeld aan staat.
+enum_BuildSupportShowWhen_KeyHeld = Toets ingedrukt
+enum_BuildSupportShowWhen_Always = Altijd
+s_BuildSupport_PreviewKey = Voorbeeldtoets
+s_BuildSupport_PreviewKey_d = Houd ingedrukt om te zien wat zou vallen.
+s_BuildSupport_PreviewKey_w = Gebruikt als Tonen op Toets ingedrukt staat.
+s_BuildSupport_ShowWeaker = Zwakkere tonen
+s_BuildSupport_ShowWeaker_d = Markeert ook onderdelen die met duidelijk minder stabiliteit blijven staan, in oranje.
+s_BuildSupport_ShowWeaker_w = Gebruikt als Instortvoorbeeld aan staat.
+s_BuildSupport_Note = Melding
+s_BuildSupport_Note_d = Een korte melding boven het bouwmenu: Breekt, of hoeveel onderdelen zouden vallen.
+s_BuildSupport_Size = Grootte
+s_BuildSupport_Size_d = 1 is de normale grootte.
+s_BuildSupport_Size_w = Gebruikt als Melding aan staat.
+s_BuildSupport_Opacity = Dekking
+s_BuildSupport_Opacity_d = 1 is ondoorzichtig; lager laat het spel erdoor zien.
+s_BuildSupport_Opacity_w = Gebruikt als Melding aan staat.
+s_BuildSupport_OffsetX = Verschuiving X
+s_BuildSupport_OffsetX_d = Naar links (-) of rechts (+), in HUD-pixels.
+s_BuildSupport_OffsetX_w = Gebruikt als Melding aan staat.
+s_BuildSupport_OffsetY = Verschuiving Y
+s_BuildSupport_OffsetY_d = Naar beneden (-) of boven (+), in HUD-pixels.
+s_BuildSupport_OffsetY_w = Gebruikt als Melding aan staat.
+
 # Crafting
 sec_Crafting = Productie
 s_Crafting_Enabled = Ingeschakeld

@@ -23,6 +23,10 @@ seconds_short = $1s
 
 enough_for = Nok til $1
 not_enough = Ikke nok
+support_breaks = Går i stykker: for lidt stabilitet
+support_fall = Ville falde: $1
+support_weaker = Svagere: $1
+support_none = Intet ville falde
 
 craft_all = Alle
 craft_weapons = Våben

@@ -267,6 +267,44 @@ s_BuildMaterials_OffsetX_d = Сдвиг влево (-) или вправо (+), 
 s_BuildMaterials_OffsetY = Сдвиг Y
 s_BuildMaterials_OffsetY_d = Сдвиг вниз (-) или вверх (+), в пикселях HUD.
 
+# Build Support
+sec_BuildSupport = Устойчивость
+s_BuildSupport_Enabled = Включено
+s_BuildSupport_Enabled_d = Когда в руках молот, предупреждает, если постройка, которую вы ставите, сломается, и показывает, что упадет, если убрать одну из построек.
+grp_Placing = Установка
+s_BuildSupport_BreakWarning = Сигнал о поломке
+s_BuildSupport_BreakWarning_d = Постройка, которая сломается сразу после установки, мигает красным, а над меню строительства появляется заметка.
+s_BuildSupport_SupportColor = Цвет устойчивости
+s_BuildSupport_SupportColor_d = Окрашивает постройку, которую вы ставите, по ее будущей устойчивости в цвета молота: синий на земле, затем от зеленого к красному по мере падения устойчивости.
+grp_Removing = Разборка
+s_BuildSupport_FallPreview = Предпросмотр обрушения
+s_BuildSupport_FallPreview_d = Наведите молот на готовую постройку, чтобы увидеть, что упадет, если ее разобрать (красным), и что устоит с меньшей устойчивостью (оранжевым).
+s_BuildSupport_ShowWhen = Показ
+s_BuildSupport_ShowWhen_d = Клавиша зажата: пока вы держите «Клавиша предпросмотра». Всегда: всякий раз, когда вы наводите молот на постройку. На контроллере показывается всегда.
+s_BuildSupport_ShowWhen_w = Используется, если включен параметр «Предпросмотр обрушения».
+enum_BuildSupportShowWhen_KeyHeld = Клавиша зажата
+enum_BuildSupportShowWhen_Always = Всегда
+s_BuildSupport_PreviewKey = Клавиша предпросмотра
+s_BuildSupport_PreviewKey_d = Удерживайте, чтобы увидеть, что упадет.
+s_BuildSupport_PreviewKey_w = Используется, если «Показ»: «Клавиша зажата».
+s_BuildSupport_ShowWeaker = Ослабленные
+s_BuildSupport_ShowWeaker_d = Также отмечать оранжевым постройки, которые устоят, но с заметно меньшей устойчивостью.
+s_BuildSupport_ShowWeaker_w = Используется, если включен параметр «Предпросмотр обрушения».
+s_BuildSupport_Note = Заметка
+s_BuildSupport_Note_d = Короткая заметка над меню строительства: «Сломается» или сколько построек упадет.
+s_BuildSupport_Size = Размер
+s_BuildSupport_Size_d = 1: обычный размер.
+s_BuildSupport_Size_w = Используется, если включен параметр «Заметка».
+s_BuildSupport_Opacity = Непрозрачность
+s_BuildSupport_Opacity_d = 1: сплошной цвет; меньше: сквозь него видна игра.
+s_BuildSupport_Opacity_w = Используется, если включен параметр «Заметка».
+s_BuildSupport_OffsetX = Сдвиг X
+s_BuildSupport_OffsetX_d = Сдвиг влево (-) или вправо (+), в пикселях HUD.
+s_BuildSupport_OffsetX_w = Используется, если включен параметр «Заметка».
+s_BuildSupport_OffsetY = Сдвиг Y
+s_BuildSupport_OffsetY_d = Сдвиг вниз (-) или вверх (+), в пикселях HUD.
+s_BuildSupport_OffsetY_w = Используется, если включен параметр «Заметка».
+
 # Crafting
 sec_Crafting = Ремесло
 s_Crafting_Enabled = Включено

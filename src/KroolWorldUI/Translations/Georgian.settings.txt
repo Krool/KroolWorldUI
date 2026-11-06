@@ -267,6 +267,44 @@ s_BuildMaterials_OffsetX_d = გადაწევა მარცხნივ (
 s_BuildMaterials_OffsetY = წანაცვლება Y
 s_BuildMaterials_OffsetY_d = გადაწევა ქვემოთ (-) ან ზემოთ (+), HUD პიქსელებში.
 
+# Build Support
+sec_BuildSupport = მდგრადობა
+s_BuildSupport_Enabled = ჩართული
+s_BuildSupport_Enabled_d = როცა ჩაქუჩი ხელშია, გაფრთხილებს, თუ დასადგმელი ნაწილი გატყდებოდა, და აჩვენებს, რა ჩამოინგრეოდა, ნაწილი რომ მოხსნა.
+grp_Placing = დადგმა
+s_BuildSupport_BreakWarning = გატეხვის გაფრთხილება
+s_BuildSupport_BreakWarning_d = ნაწილი, რომელიც აშენებისთანავე გატყდებოდა, წითლად ციმციმებს და მშენებლობის მენიუს ზემოთ შენიშვნა ჩნდება.
+s_BuildSupport_SupportColor = მდგრადობის ფერი
+s_BuildSupport_SupportColor_d = დასადგმელ ნაწილს აფერადებს იმ მდგრადობის მიხედვით, რაც ექნება, ჩაქუჩის ფერებით: ლურჯი მიწაზე, შემდეგ მწვანიდან წითლამდე, მდგრადობის კლებასთან ერთად.
+grp_Removing = მოშლა
+s_BuildSupport_FallPreview = ჩამონგრევის გადახედვა
+s_BuildSupport_FallPreview_d = ჩაქუჩი აშენებულ ნაწილს დაუმიზნე, რომ ნახო, რა ჩამოინგრეოდა, ის რომ მოშალო (წითელი), და რა დარჩებოდა ფეხზე ნაკლები მდგრადობით (ნარინჯისფერი).
+s_BuildSupport_ShowWhen = ჩვენება
+s_BuildSupport_ShowWhen_d = დაჭერილი ღილაკი: სანამ „გადახედვის ღილაკი“ დაჭერილი გაქვს. ყოველთვის: როცა კი ჩაქუჩს ნაწილს უმიზნებ. კონტროლერზე ყოველთვის ჩანს.
+s_BuildSupport_ShowWhen_w = მოქმედებს, როცა „ჩამონგრევის გადახედვა“ ჩართულია.
+enum_BuildSupportShowWhen_KeyHeld = დაჭერილი ღილაკი
+enum_BuildSupportShowWhen_Always = ყოველთვის
+s_BuildSupport_PreviewKey = გადახედვის ღილაკი
+s_BuildSupport_PreviewKey_d = დააჭირე და გეჭიროს, რომ ნახო, რა ჩამოინგრეოდა.
+s_BuildSupport_PreviewKey_w = მოქმედებს, როცა „ჩვენება“ არის „დაჭერილი ღილაკი“.
+s_BuildSupport_ShowWeaker = სუსტების ჩვენება
+s_BuildSupport_ShowWeaker_d = ნარინჯისფრად აღნიშნავს იმ ნაწილებსაც, რომლებიც ფეხზე დარჩებოდა შესამჩნევად ნაკლები მდგრადობით.
+s_BuildSupport_ShowWeaker_w = მოქმედებს, როცა „ჩამონგრევის გადახედვა“ ჩართულია.
+s_BuildSupport_Note = შენიშვნა
+s_BuildSupport_Note_d = მოკლე შენიშვნა მშენებლობის მენიუს ზემოთ: „გატყდება“ ან რამდენი ნაწილი ჩამოინგრეოდა.
+s_BuildSupport_Size = ზომა
+s_BuildSupport_Size_d = 1 ჩვეულებრივი ზომაა.
+s_BuildSupport_Size_w = მოქმედებს, როცა „შენიშვნა“ ჩართულია.
+s_BuildSupport_Opacity = გაუმჭვირვალობა
+s_BuildSupport_Opacity_d = 1 სრულად გაუმჭვირვალეა; ნაკლებზე თამაში გამოჩანს.
+s_BuildSupport_Opacity_w = მოქმედებს, როცა „შენიშვნა“ ჩართულია.
+s_BuildSupport_OffsetX = წანაცვლება X
+s_BuildSupport_OffsetX_d = გადაწევა მარცხნივ (-) ან მარჯვნივ (+), HUD პიქსელებში.
+s_BuildSupport_OffsetX_w = მოქმედებს, როცა „შენიშვნა“ ჩართულია.
+s_BuildSupport_OffsetY = წანაცვლება Y
+s_BuildSupport_OffsetY_d = გადაწევა ქვემოთ (-) ან ზემოთ (+), HUD პიქსელებში.
+s_BuildSupport_OffsetY_w = მოქმედებს, როცა „შენიშვნა“ ჩართულია.
+
 # Crafting
 sec_Crafting = კრაფტი
 s_Crafting_Enabled = ჩართული

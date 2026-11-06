@@ -267,6 +267,44 @@ s_BuildMaterials_OffsetX_d = Kairėn (-) arba dešinėn (+), HUD pikseliais.
 s_BuildMaterials_OffsetY = Poslinkis Y
 s_BuildMaterials_OffsetY_d = Žemyn (-) arba aukštyn (+), HUD pikseliais.
 
+# Build Support
+sec_BuildSupport = Stabilumas
+s_BuildSupport_Enabled = Įjungta
+s_BuildSupport_Enabled_d = Laikant plaktuką, įspėja, jei statoma detalė lūžtų, ir parodo, kas nukristų, jei pašalintumėte vieną.
+grp_Placing = Statymas
+s_BuildSupport_BreakWarning = Lūžio įspėjimas
+s_BuildSupport_BreakWarning_d = Detalė, kuri lūžtų vos ją pastačius, mirksi raudonai, o virš statybos meniu atsiranda pastaba.
+s_BuildSupport_SupportColor = Stabilumo spalva
+s_BuildSupport_SupportColor_d = Nuspalvina statomą detalę pagal jos būsimą stabilumą plaktuko spalvomis: mėlyna ant žemės, toliau nuo žalios iki raudonos, mažėjant stabilumui.
+grp_Removing = Ardymas
+s_BuildSupport_FallPreview = Griūties peržiūra
+s_BuildSupport_FallPreview_d = Nukreipkite plaktuką į pastatytą detalę, kad pamatytumėte, kas nukristų ją pašalinus (raudonai) ir kas išliktų stovėti su mažesniu stabilumu (oranžiškai).
+s_BuildSupport_ShowWhen = Rodyti
+s_BuildSupport_ShowWhen_d = Laikant klavišą: kol nuspaustas Peržiūros klavišas. Visada: kai tik nukreipiate į detalę. Valdiklyje rodoma visada.
+s_BuildSupport_ShowWhen_w = Galioja, kai įjungta: Griūties peržiūra.
+enum_BuildSupportShowWhen_KeyHeld = Laikant klavišą
+enum_BuildSupportShowWhen_Always = Visada
+s_BuildSupport_PreviewKey = Peržiūros klavišas
+s_BuildSupport_PreviewKey_d = Laikykite, kad pamatytumėte, kas nukristų.
+s_BuildSupport_PreviewKey_w = Galioja, kai Rodyti: Laikant klavišą.
+s_BuildSupport_ShowWeaker = Rodyti silpnesnes
+s_BuildSupport_ShowWeaker_d = Oranžiškai pažymi ir detales, kurios išliktų stovėti su aiškiai mažesniu stabilumu.
+s_BuildSupport_ShowWeaker_w = Galioja, kai įjungta: Griūties peržiūra.
+s_BuildSupport_Note = Pastaba
+s_BuildSupport_Note_d = Trumpa pastaba virš statybos meniu: Lūš arba kiek detalių nukristų.
+s_BuildSupport_Size = Dydis
+s_BuildSupport_Size_d = 1 yra įprastas dydis.
+s_BuildSupport_Size_w = Galioja, kai įjungta: Pastaba.
+s_BuildSupport_Opacity = Neskaidrumas
+s_BuildSupport_Opacity_d = 1 yra visiškai neskaidru; mažiau leidžia matyti žaidimą pro jį.
+s_BuildSupport_Opacity_w = Galioja, kai įjungta: Pastaba.
+s_BuildSupport_OffsetX = Poslinkis X
+s_BuildSupport_OffsetX_d = Kairėn (-) arba dešinėn (+), HUD pikseliais.
+s_BuildSupport_OffsetX_w = Galioja, kai įjungta: Pastaba.
+s_BuildSupport_OffsetY = Poslinkis Y
+s_BuildSupport_OffsetY_d = Žemyn (-) arba aukštyn (+), HUD pikseliais.
+s_BuildSupport_OffsetY_w = Galioja, kai įjungta: Pastaba.
+
 # Crafting
 sec_Crafting = Gaminimas
 s_Crafting_Enabled = Įjungta

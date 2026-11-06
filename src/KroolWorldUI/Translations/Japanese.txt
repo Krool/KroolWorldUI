@@ -23,6 +23,10 @@ seconds_short = $1秒
 
 enough_for = $1個分
 not_enough = 不足
+support_breaks = 壊れます：安定度不足
+support_fall = 崩落：$1
+support_weaker = 弱化：$1
+support_none = 崩落なし
 
 craft_all = すべて
 craft_weapons = 武器

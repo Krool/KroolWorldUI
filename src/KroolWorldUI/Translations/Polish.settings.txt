@@ -267,6 +267,44 @@ s_BuildMaterials_OffsetX_d = W lewo (-) lub w prawo (+), w pikselach HUD.
 s_BuildMaterials_OffsetY = Przesunięcie Y
 s_BuildMaterials_OffsetY_d = W dół (-) lub w górę (+), w pikselach HUD.
 
+# Build Support
+sec_BuildSupport = Stabilność
+s_BuildSupport_Enabled = Włączone
+s_BuildSupport_Enabled_d = Z młotem w ręku ostrzega, gdy stawiany element by się rozpadł, i pokazuje, co by spadło po usunięciu jednego.
+grp_Placing = Stawianie
+s_BuildSupport_BreakWarning = Ostrzeżenie o rozpadzie
+s_BuildSupport_BreakWarning_d = Element, który rozpadłby się zaraz po zbudowaniu, miga na czerwono, a nad menu budowy pojawia się notka.
+s_BuildSupport_SupportColor = Kolor stabilności
+s_BuildSupport_SupportColor_d = Koloruje stawiany element według stabilności, jaką będzie miał, w kolorach młota: niebieski na ziemi, potem od zielonego do czerwonego, gdy stabilność spada.
+grp_Removing = Rozbiórka
+s_BuildSupport_FallPreview = Podgląd zawalenia
+s_BuildSupport_FallPreview_d = Wyceluj młotem w zbudowany element, aby zobaczyć, co by spadło po jego usunięciu (czerwony), a co by ustało przy mniejszej stabilności (pomarańczowy).
+s_BuildSupport_ShowWhen = Pokazuj
+s_BuildSupport_ShowWhen_d = Klawisz wciśnięty: gdy trzymasz Klawisz podglądu. Zawsze: gdy tylko celujesz w element. Na kontrolerze zawsze widoczne.
+s_BuildSupport_ShowWhen_w = Działa, gdy włączone: Podgląd zawalenia.
+enum_BuildSupportShowWhen_KeyHeld = Klawisz wciśnięty
+enum_BuildSupportShowWhen_Always = Zawsze
+s_BuildSupport_PreviewKey = Klawisz podglądu
+s_BuildSupport_PreviewKey_d = Przytrzymaj, aby zobaczyć, co by spadło.
+s_BuildSupport_PreviewKey_w = Działa, gdy Pokazuj: Klawisz wciśnięty.
+s_BuildSupport_ShowWeaker = Pokazuj słabsze
+s_BuildSupport_ShowWeaker_d = Zaznacza też na pomarańczowo elementy, które by ustały przy wyraźnie mniejszej stabilności.
+s_BuildSupport_ShowWeaker_w = Działa, gdy włączone: Podgląd zawalenia.
+s_BuildSupport_Note = Notka
+s_BuildSupport_Note_d = Krótka notka nad menu budowy: Rozpadnie się albo ile elementów by spadło.
+s_BuildSupport_Size = Rozmiar
+s_BuildSupport_Size_d = 1 to normalny rozmiar.
+s_BuildSupport_Size_w = Działa, gdy włączone: Notka.
+s_BuildSupport_Opacity = Krycie
+s_BuildSupport_Opacity_d = 1 to pełne krycie; niżej gra prześwituje.
+s_BuildSupport_Opacity_w = Działa, gdy włączone: Notka.
+s_BuildSupport_OffsetX = Przesunięcie X
+s_BuildSupport_OffsetX_d = W lewo (-) lub w prawo (+), w pikselach HUD.
+s_BuildSupport_OffsetX_w = Działa, gdy włączone: Notka.
+s_BuildSupport_OffsetY = Przesunięcie Y
+s_BuildSupport_OffsetY_d = W dół (-) lub w górę (+), w pikselach HUD.
+s_BuildSupport_OffsetY_w = Działa, gdy włączone: Notka.
+
 # Crafting
 sec_Crafting = Wytwarzanie
 s_Crafting_Enabled = Włączone

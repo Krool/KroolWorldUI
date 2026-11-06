@@ -23,6 +23,10 @@ seconds_short = $1s
 
 enough_for = Genoeg voor $1
 not_enough = Niet genoeg
+support_breaks = Breekt: te weinig stabiliteit
+support_fall = Zou vallen: $1
+support_weaker = Zwakker: $1
+support_none = Niets zou vallen
 
 craft_all = Alles
 craft_weapons = Wapens

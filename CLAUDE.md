@@ -111,7 +111,13 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
 - Day timing (EnvMan): cycle m_dayLengthSec (1200 s) from midnight on ZNet.GetTimeSeconds();
   daylight from 15% to 85% of it, which EnvMan rescales to the sun's 0.25-0.75 (RescaleDayFraction).
   Build materials: in place mode, right of the build HUD's `SelectedInfo` box (found under
-  Hud.m_buildHud by name, placed from its world corners), bottom-aligned with it.
+  Hud.m_buildHud by name, placed from its world corners), bottom-aligned with it. Build support
+  note: centered above that same box.
+- Building support (WearNTear.UpdateSupport) is re-run about once a second per loaded piece by its
+  owner (WearNTearUpdater) and synced in the ZDO; no "who rests on whom" is stored. SupportModel
+  mirrors the rule read-only; keep it in step with the game's code after a game update. Piece tints
+  go through MaterialMan (_Color/_EmissionColor), the same channel as the hammer's hover highlight
+  and the ghost's red "can't place", which the game resets on the ghost every frame.
 - Auto-save timing: Game.UpdateSaving adds unscaled time to `Game.m_saveTimer` and saves at the
   static `Game.m_saveInterval` (1800 s); the server broadcasts `$msg_worldsavewarning 30s` to
   everyone 30 s before. A client's own timer saves only its character, and the server's

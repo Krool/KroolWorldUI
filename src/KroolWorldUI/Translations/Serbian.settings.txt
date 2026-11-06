@@ -267,6 +267,44 @@ s_BuildMaterials_OffsetX_d = Levo (-) ili desno (+), u HUD pikselima.
 s_BuildMaterials_OffsetY = Pomeraj Y
 s_BuildMaterials_OffsetY_d = Dole (-) ili gore (+), u HUD pikselima.
 
+# Build Support
+sec_BuildSupport = Stabilnost
+s_BuildSupport_Enabled = Uključeno
+s_BuildSupport_Enabled_d = Sa čekićem u ruci upozorava kad bi se deo koji postavljaš slomio i pokazuje šta bi palo kad bi uklonio jedan.
+grp_Placing = Postavljanje
+s_BuildSupport_BreakWarning = Upozorenje o lomu
+s_BuildSupport_BreakWarning_d = Deo koji bi se slomio čim ga izgradiš treperi crveno, uz napomenu iznad menija gradnje.
+s_BuildSupport_SupportColor = Boja stabilnosti
+s_BuildSupport_SupportColor_d = Boji deo koji postavljaš prema stabilnosti koju će imati, u bojama čekića: plavo na tlu, zatim od zelene do crvene kako stabilnost opada.
+grp_Removing = Uklanjanje
+s_BuildSupport_FallPreview = Pregled pada
+s_BuildSupport_FallPreview_d = Uperi čekić u izgrađeni deo da vidiš šta bi palo kad bi ga uklonio (crveno) i šta bi ostalo da stoji sa manje stabilnosti (narandžasto).
+s_BuildSupport_ShowWhen = Prikaz
+s_BuildSupport_ShowWhen_d = Držanje tastera: dok držiš „Taster za pregled“. Uvek: kad god čekićem pokažeš na deo. Na kontroleru se uvek prikazuje.
+s_BuildSupport_ShowWhen_w = Važi kad je „Pregled pada“ uključen.
+enum_BuildSupportShowWhen_KeyHeld = Držanje tastera
+enum_BuildSupportShowWhen_Always = Uvek
+s_BuildSupport_PreviewKey = Taster za pregled
+s_BuildSupport_PreviewKey_d = Drži da vidiš šta bi palo.
+s_BuildSupport_PreviewKey_w = Važi kad je „Prikaz“ podešen na „Držanje tastera“.
+s_BuildSupport_ShowWeaker = Prikaži slabije
+s_BuildSupport_ShowWeaker_d = Narandžasto označava i delove koji bi ostali da stoje uz osetno manje stabilnosti.
+s_BuildSupport_ShowWeaker_w = Važi kad je „Pregled pada“ uključen.
+s_BuildSupport_Note = Napomena
+s_BuildSupport_Note_d = Kratka napomena iznad menija gradnje: „Slomiće se“ ili koliko bi delova palo.
+s_BuildSupport_Size = Veličina
+s_BuildSupport_Size_d = 1 je normalna veličina.
+s_BuildSupport_Size_w = Važi kad je „Napomena“ uključena.
+s_BuildSupport_Opacity = Neprozirnost
+s_BuildSupport_Opacity_d = 1 je puno; manje propušta igru ispod.
+s_BuildSupport_Opacity_w = Važi kad je „Napomena“ uključena.
+s_BuildSupport_OffsetX = Pomeraj X
+s_BuildSupport_OffsetX_d = Levo (-) ili desno (+), u HUD pikselima.
+s_BuildSupport_OffsetX_w = Važi kad je „Napomena“ uključena.
+s_BuildSupport_OffsetY = Pomeraj Y
+s_BuildSupport_OffsetY_d = Dole (-) ili gore (+), u HUD pikselima.
+s_BuildSupport_OffsetY_w = Važi kad je „Napomena“ uključena.
+
 # Crafting
 sec_Crafting = Izrada
 s_Crafting_Enabled = Uključeno

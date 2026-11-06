@@ -267,6 +267,44 @@ s_BuildMaterials_OffsetX_d = Лево (-) или десно (+), во HUD пик
 s_BuildMaterials_OffsetY = Поместување Y
 s_BuildMaterials_OffsetY_d = Долу (-) или горе (+), во HUD пиксели.
 
+# Build Support
+sec_BuildSupport = Стабилност
+s_BuildSupport_Enabled = Вклучено
+s_BuildSupport_Enabled_d = Со чекан в рака, предупредува кога дел што го поставуваш би се скршил, и покажува што би паднало ако тргнеш еден.
+grp_Placing = Поставување
+s_BuildSupport_BreakWarning = Сигнал за кршење
+s_BuildSupport_BreakWarning_d = Дел што би се скршил штом го изградиш трепка со црвено, со белешка над менито за градба.
+s_BuildSupport_SupportColor = Боја на стабилност
+s_BuildSupport_SupportColor_d = Го бои делот што го поставуваш според стабилноста што ќе ја има, во боите на чеканот: сино на земја, потоа од зелено до црвено како што стабилноста опаѓа.
+grp_Removing = Тргање
+s_BuildSupport_FallPreview = Преглед на паѓање
+s_BuildSupport_FallPreview_d = Насочи го чеканот кон изграден дел за да видиш што би паднало ако го тргнеш (црвено) и што би останало со помалку стабилност (портокалово).
+s_BuildSupport_ShowWhen = Приказ
+s_BuildSupport_ShowWhen_d = Држен тастер: додека го држиш „Тастер за преглед“. Секогаш: секогаш кога ќе го насочиш чеканот кон дел. Со контролер секогаш се прикажува.
+s_BuildSupport_ShowWhen_w = Важи кога „Преглед на паѓање“ е вклучено.
+enum_BuildSupportShowWhen_KeyHeld = Држен тастер
+enum_BuildSupportShowWhen_Always = Секогаш
+s_BuildSupport_PreviewKey = Тастер за преглед
+s_BuildSupport_PreviewKey_d = Држи за да видиш што би паднало.
+s_BuildSupport_PreviewKey_w = Важи кога „Приказ“ е „Држен тастер“.
+s_BuildSupport_ShowWeaker = Ослабени
+s_BuildSupport_ShowWeaker_d = Ги означува со портокалово и деловите што би останале со осетно помалку стабилност.
+s_BuildSupport_ShowWeaker_w = Важи кога „Преглед на паѓање“ е вклучено.
+s_BuildSupport_Note = Белешка
+s_BuildSupport_Note_d = Кратка белешка над менито за градба: „Ќе се скрши“ или колку делови би паднале.
+s_BuildSupport_Size = Големина
+s_BuildSupport_Size_d = 1 е нормалната големина.
+s_BuildSupport_Size_w = Важи кога „Белешка“ е вклучено.
+s_BuildSupport_Opacity = Непроѕирност
+s_BuildSupport_Opacity_d = 1 е полно; помалку ја пропушта играта.
+s_BuildSupport_Opacity_w = Важи кога „Белешка“ е вклучено.
+s_BuildSupport_OffsetX = Поместување X
+s_BuildSupport_OffsetX_d = Лево (-) или десно (+), во HUD пиксели.
+s_BuildSupport_OffsetX_w = Важи кога „Белешка“ е вклучено.
+s_BuildSupport_OffsetY = Поместување Y
+s_BuildSupport_OffsetY_d = Долу (-) или горе (+), во HUD пиксели.
+s_BuildSupport_OffsetY_w = Важи кога „Белешка“ е вклучено.
+
 # Crafting
 sec_Crafting = Изработка
 s_Crafting_Enabled = Вклучено

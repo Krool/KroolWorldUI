@@ -1,6 +1,6 @@
 ![Krool World UI](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/banner.png)
 
-Quality-of-life HUD additions for Valheim: skill XP, carry weight, build materials, crafting tabs, food timers, a compass, a day/night bar, and a few countdowns the game doesn't show.
+Quality-of-life HUD additions for Valheim: skill XP, carry weight, build materials, building support, crafting tabs, food timers, a compass, a day/night bar, and a few countdowns the game doesn't show.
 
 - No new items, mechanics or balance changes.
 - Every feature can be switched off or adjusted in game with **F7**, or from the pause menu.
@@ -44,6 +44,7 @@ All elements at once, using the F7 window's **Preview on HUD** setup view. In pl
 | Skill XP bars | Skill tiles with XP bars, and a `+0.8% Swords` popup as you earn XP |
 | Carry weight | Weight bar beside your food |
 | Build materials | With the hammer out: what the selected piece costs, what you have, how many you can build |
+| Build support | With the hammer out: a warning when a piece you place would break, and what would fall if you removed one |
 | Crafting tabs | Weapons, armor, tools, ammo, food and materials tabs on every crafting station, and a sort order |
 | Food decay | Shows how much max health, stamina and eitr your food has lost as it wears off |
 | Food reminders | Running out, no food, and optionally "can eat again" (off by default) |
@@ -91,6 +92,17 @@ With the hammer out, a panel beside the build menu's piece box.
 - The panel widens for long material names.
 - Each material's rule is a setting, and you can add others by name (`Copper, Deer Hide`).
 - Counts your inventory only, like the game does when placing.
+
+## Build support
+
+With the hammer out, see what the game's support rule will do before it does it.
+
+- **Placing:** a piece that would break as soon as you build it (stone on wood, stone held from one side only) flashes red, and **Will break: not enough support** shows above the build menu.
+- **Removing:** hold **Left Alt** and point at a built piece. What would fall if you removed it turns red, what would stand with clearly less support turns orange, and the note counts them: **Would fall: 12  Weaker: 3**. It can show whenever you point at a piece instead; on a controller it always does.
+- Optional: color the piece you are placing by the support it will have, in the hammer's own colors.
+- Worked out from the game's own support rule, so it marks what the game will do. After a removal, pieces come down over a few seconds.
+- Off on worlds with the No Building Fall modifier, where nothing falls.
+- Display only: it never changes a piece.
 
 ## Crafting tabs
 
@@ -346,6 +358,23 @@ Generated from the mod's code, so it matches the F7 window.
 | Anchor Y | 0.1 | 0 to 1 | Bottom edge. 0 is the bottom of the screen, 1 the top. Used when Placement is Custom. |
 | Offset X | 0 | -400 to 400 | Move left (-) or right (+), in HUD pixels. |
 | Offset Y | 0 | -400 to 400 | Move down (-) or up (+), in HUD pixels. |
+
+**Build Support**
+
+| Setting | Default | Range or choices | What it does |
+|---|---|---|---|
+| Enabled | On |  | With the hammer out, warns when a piece you place would break, and shows what would fall if you removed one. |
+| Break Warning | On |  | A piece that would break as soon as you build it flashes red, with a note above the build menu. |
+| Support Color | Off |  | Color the piece you are placing by the support it will have, in the hammer's colors: blue on the ground, then green to red as support drops. |
+| Fall Preview | On |  | Point the hammer at a built piece to see what would fall if you removed it (red) and what would stand with less support (orange). |
+| Show When | Key Held | Key Held, Always | Key Held: while you hold Preview Key. Always: whenever you point at a piece. On a controller it always shows. Used when Fall Preview is on. |
+| Preview Key | LeftAlt | Any key | Hold to see what would fall. Used when Show When is Key Held. |
+| Show Weaker | On |  | Also mark pieces that would stay up with clearly less support, in orange. Used when Fall Preview is on. |
+| Note | On |  | A short note above the build menu: Will break, or how many pieces would fall. |
+| Size | 1 | 0.75 to 1.5 | 1 is the normal size. Used when Note is on. |
+| Opacity | 1 | 0.2 to 1 | 1 is solid; lower shows the game through it. Used when Note is on. |
+| Offset X | 0 | -400 to 400 | Move left (-) or right (+), in HUD pixels. Used when Note is on. |
+| Offset Y | 0 | -400 to 400 | Move down (-) or up (+), in HUD pixels. Used when Note is on. |
 
 **Crafting**
 

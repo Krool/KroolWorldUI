@@ -33,6 +33,12 @@ seconds_short = $1s
 enough_for = Enough for $1
 not_enough = Not enough
 
+# Build support, in a small note above the build menu. $1 is a number of pieces ("12", or "500+").
+support_breaks = Will break: not enough support
+support_fall = Would fall: $1
+support_weaker = Weaker: $1
+support_none = Nothing would fall
+
 # Crafting tabs: hover names of the category tabs above the recipe list. One or two words.
 craft_all = All
 craft_weapons = Weapons

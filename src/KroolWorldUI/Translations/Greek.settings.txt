@@ -267,6 +267,44 @@ s_BuildMaterials_OffsetX_d = Μετακίνηση αριστερά (-) ή δεξ
 s_BuildMaterials_OffsetY = Μετατόπιση Y
 s_BuildMaterials_OffsetY_d = Μετακίνηση κάτω (-) ή πάνω (+), σε pixel του HUD.
 
+# Build Support
+sec_BuildSupport = Σταθερότητα
+s_BuildSupport_Enabled = Ενεργό
+s_BuildSupport_Enabled_d = Με το σφυρί στο χέρι, προειδοποιεί όταν ένα κομμάτι που τοποθετείς θα έσπαγε, και δείχνει τι θα έπεφτε αν αφαιρούσες ένα.
+grp_Placing = Τοποθέτηση
+s_BuildSupport_BreakWarning = Προειδοποίηση θραύσης
+s_BuildSupport_BreakWarning_d = Ένα κομμάτι που θα έσπαγε μόλις το χτίσεις αναβοσβήνει κόκκινο, με μια σημείωση πάνω από το μενού κατασκευής.
+s_BuildSupport_SupportColor = Χρώμα σταθερότητας
+s_BuildSupport_SupportColor_d = Χρωματίζει το κομμάτι που τοποθετείς ανάλογα με τη σταθερότητα που θα έχει, στα χρώματα του σφυριού: μπλε στο έδαφος, μετά από πράσινο σε κόκκινο όσο πέφτει η σταθερότητα.
+grp_Removing = Αφαίρεση
+s_BuildSupport_FallPreview = Προεπισκόπηση πτώσης
+s_BuildSupport_FallPreview_d = Στόχευσε με το σφυρί ένα χτισμένο κομμάτι για να δεις τι θα έπεφτε αν το αφαιρούσες (κόκκινο) και τι θα έμενε όρθιο με λιγότερη σταθερότητα (πορτοκαλί).
+s_BuildSupport_ShowWhen = Προβολή
+s_BuildSupport_ShowWhen_d = Κρατημένο πλήκτρο: όσο κρατάς το Πλήκτρο προεπισκόπησης. Πάντα: όποτε στοχεύεις ένα κομμάτι. Με χειριστήριο εμφανίζεται πάντα.
+s_BuildSupport_ShowWhen_w = Ισχύει όταν η Προεπισκόπηση πτώσης είναι ενεργή.
+enum_BuildSupportShowWhen_KeyHeld = Κρατημένο πλήκτρο
+enum_BuildSupportShowWhen_Always = Πάντα
+s_BuildSupport_PreviewKey = Πλήκτρο προεπισκόπησης
+s_BuildSupport_PreviewKey_d = Κράτα το για να δεις τι θα έπεφτε.
+s_BuildSupport_PreviewKey_w = Ισχύει όταν η Προβολή είναι Κρατημένο πλήκτρο.
+s_BuildSupport_ShowWeaker = Εμφάνιση ασθενέστερων
+s_BuildSupport_ShowWeaker_d = Σημειώνει επίσης με πορτοκαλί τα κομμάτια που θα έμεναν όρθια με αισθητά λιγότερη σταθερότητα.
+s_BuildSupport_ShowWeaker_w = Ισχύει όταν η Προεπισκόπηση πτώσης είναι ενεργή.
+s_BuildSupport_Note = Σημείωση
+s_BuildSupport_Note_d = Μια σύντομη σημείωση πάνω από το μενού κατασκευής: Θα σπάσει ή πόσα κομμάτια θα έπεφταν.
+s_BuildSupport_Size = Μέγεθος
+s_BuildSupport_Size_d = Το 1 είναι το κανονικό μέγεθος.
+s_BuildSupport_Size_w = Ισχύει όταν η Σημείωση είναι ενεργή.
+s_BuildSupport_Opacity = Αδιαφάνεια
+s_BuildSupport_Opacity_d = Το 1 είναι συμπαγές· χαμηλότερη τιμή αφήνει να φαίνεται το παιχνίδι από πίσω.
+s_BuildSupport_Opacity_w = Ισχύει όταν η Σημείωση είναι ενεργή.
+s_BuildSupport_OffsetX = Μετατόπιση X
+s_BuildSupport_OffsetX_d = Μετακίνηση αριστερά (-) ή δεξιά (+), σε pixel του HUD.
+s_BuildSupport_OffsetX_w = Ισχύει όταν η Σημείωση είναι ενεργή.
+s_BuildSupport_OffsetY = Μετατόπιση Y
+s_BuildSupport_OffsetY_d = Μετακίνηση κάτω (-) ή πάνω (+), σε pixel του HUD.
+s_BuildSupport_OffsetY_w = Ισχύει όταν η Σημείωση είναι ενεργή.
+
 # Crafting
 sec_Crafting = Κατασκευή
 s_Crafting_Enabled = Ενεργό

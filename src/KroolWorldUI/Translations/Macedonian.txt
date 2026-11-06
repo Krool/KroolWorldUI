@@ -23,6 +23,10 @@ seconds_short = $1 с
 
 enough_for = Доволно за $1
 not_enough = Недоволно
+support_breaks = Ќе се скрши: слаба стабилност
+support_fall = Би паднало: $1
+support_weaker = Ослабени: $1
+support_none = Ништо не би паднало
 
 craft_all = Сите
 craft_weapons = Оружја

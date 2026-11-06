@@ -55,6 +55,12 @@ Friends nearby always show. Friends far away show only if they have **Visible on
 **The compass shows no pins, and I got no bench pin.**
 On a world with the No Map modifier (or with your map turned off), the compass shows only your heading and friends in sight, and Bench Pins adds nothing: the world takes the map away on purpose. The day/night bar moves to the top right corner.
 
+**The fall preview missed a piece that fell, or marked one that stayed up.**
+It uses the game's own support rule, but support values for pieces another player owns reach you up to a second late, and on very large builds it looks at the 500 nearest affected pieces (the count then ends in +). Point at the piece again after a moment. It shows nothing on worlds with No Building Fall.
+
+**Holding Left Alt does something else for me.**
+Pick another key in **Build Support > Preview Key**, or set **Show When** to Always.
+
 **Auto repair did not fix one of my items.**
 It follows the same rules as the repair button: a workbench fixes what a workbench can, a forge fixes metal, and some items need a higher station level. Open the right station and it repairs on the spot.
 
