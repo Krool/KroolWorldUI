@@ -365,7 +365,7 @@ Generated from the mod's code, so it matches the F7 window.
 
 | Setting | Default | Range or choices | What it does |
 |---|---|---|---|
-| Enabled | On |  | With the hammer out, warns when a piece you place would break, and shows what would fall if you removed one. |
+| Enabled | Off |  | With the hammer out, warns when a piece you place would break, and shows what would fall if you removed one. |
 | Break Warning | On |  | A piece that would break as soon as you build it flashes red, with a note above the build menu. |
 | Support Color | Off |  | Color the piece you are placing by the support it will have, in the hammer's colors: blue on the ground, then green to red as support drops. |
 | Fall Preview | On |  | Point the hammer at a built piece to see what would fall if you removed it (red) and what would stand with less support (orange). |
