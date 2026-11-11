@@ -35,7 +35,8 @@ namespace KroolWorldUI.Features
 
         internal static void BindConfig(ConfigFile config)
         {
-            Enabled = config.Bind(Section, "Enabled", true,
+            // Off by default while it is being tested (owner, 2026-11-11): players opt in.
+            Enabled = config.Bind(Section, "Enabled", false,
                 "With the hammer out, warns when a piece you place would break, and shows what would fall if you removed one.");
 
             const string placing = "Placing";

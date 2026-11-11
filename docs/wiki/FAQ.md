@@ -55,6 +55,9 @@ Friends nearby always show. Friends far away show only if they have **Visible on
 **The compass shows no pins, and I got no bench pin.**
 On a world with the No Map modifier (or with your map turned off), the compass shows only your heading and friends in sight, and Bench Pins adds nothing: the world takes the map away on purpose. The day/night bar moves to the top right corner.
 
+**I do not see the build support warnings.**
+Build Support is off by default while it is being tested. Turn it on in F7 under **Build Support**.
+
 **The fall preview missed a piece that fell, or marked one that stayed up.**
 It uses the game's own support rule, but support values for pieces another player owns reach you up to a second late, and on very large builds it looks at the 500 nearest affected pieces (the count then ends in +). Point at the piece again after a moment. It shows nothing on worlds with No Building Fall.
 
