@@ -3,6 +3,7 @@
 ## 0.16.0
 
 - **Build support.** With the hammer out, a piece that would break as soon as you build it (stone on wood, stone held from one side) flashes red, with a note above the build menu. Hold Left Alt and point at a built piece to see what would fall if you removed it (red) and what would stand with clearly less support (orange), with a count. Both follow the game's own support rule. Optional: color the piece you are placing by the support it will have. Settings: show the removal preview always instead of on a key, the key, the note's size, opacity and position.
+- Compass: stays in place when a boss health bar appears instead of moving down. It still moves under a raid banner.
 
 ## 0.15.1
 

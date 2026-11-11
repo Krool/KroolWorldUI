@@ -449,7 +449,7 @@ namespace KroolWorldUI.Features
             Layout(MarkerRow, width);
             _rect.localScale = new Vector3(size, size, 1f);
 
-            // Glide down under a boss bar or raid banner instead of jumping.
+            // Glide down under a raid banner instead of jumping.
             float topTarget = TopOffset(size);
             if (!_offsetSet)
             {
@@ -916,8 +916,8 @@ namespace KroolWorldUI.Features
         }
 
         /// <summary>
-        /// Top offset in the HUD: below the top edge, and below a boss health bar or raid banner
-        /// when one is up, since both sit at the top center.
+        /// Top offset in the HUD: below the top edge, and below the raid banner when it is up.
+        /// A boss health bar does not move it (owner, 2026-11-10: the two do not collide).
         /// </summary>
         private float TopOffset(float size)
         {
@@ -929,14 +929,6 @@ namespace KroolWorldUI.Features
             var hud = Hud.instance;
             if (hud != null && hud.m_eventBar != null && hud.m_eventBar.activeInHierarchy)
                 lowest = Mathf.Min(lowest, ScreenBottom(hud.m_eventBar.transform as RectTransform));
-            var enemy = EnemyHud.instance;
-            if (enemy != null && enemy.m_hudRoot != null && enemy.m_baseHudBoss != null && enemy.ShowingBossHud())
-            {
-                string boss = enemy.m_baseHudBoss.name;
-                foreach (Transform child in enemy.m_hudRoot.transform)
-                    if (child.gameObject.activeInHierarchy && child.name.StartsWith(boss))
-                        lowest = Mathf.Min(lowest, ScreenBottom(child as RectTransform));
-            }
             if (lowest == float.MaxValue)
                 return y;
             var canvas = _rect.GetComponentInParent<Canvas>();

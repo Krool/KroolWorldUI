@@ -155,7 +155,7 @@ A strip at the top center for calling out directions: "trolls at 210".
 - Look at a marker to see its name and distance. Or show distance under every marker.
 - Overlapping markers merge with a count, and at most 12 show at once.
 - Up and down arrows on markers 10 m or more above or below you.
-- Moves down under a boss bar or raid banner.
+- Moves down under a raid banner.
 
 ## Buff icons
 
