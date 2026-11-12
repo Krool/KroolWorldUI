@@ -25,9 +25,10 @@ namespace KroolWorldUI
 
         /// <summary>
         /// Bumped when a migration is added below. Version 1 is 0.14.0: Compass Offset Y changed
-        /// direction (+ is up everywhere now).
+        /// direction (+ is up everywhere now). Version 2 is 0.16.1: Build Support went from off by
+        /// default (0.16.0, while it was tested) to on.
         /// </summary>
-        private const int CurrentConfigVersion = 1;
+        private const int CurrentConfigVersion = 2;
 
         internal static void BindConfig(ConfigFile config)
         {
@@ -69,6 +70,12 @@ namespace KroolWorldUI
                 if (float.TryParse(_rawCompassOffsetY, System.Globalization.NumberStyles.Float,
                         System.Globalization.CultureInfo.InvariantCulture, out float old) && old > 0f)
                     Features.Compass.OffsetY.Value = -old;
+            }
+            if (from < 2)
+            {
+                // 0.16.0 shipped Build Support off by default and saved that "false" in every config.
+                // It is on by default now, so turn it on once; turning it off afterwards sticks.
+                Features.BuildSupport.Enabled.Value = true;
             }
             ConfigVersion.Value = CurrentConfigVersion;
         }

@@ -44,7 +44,7 @@ All elements at once, using the F7 window's **Preview on HUD** setup view. In pl
 | Skill XP bars | Skill tiles with XP bars, and a `+0.8% Swords` popup as you earn XP |
 | Carry weight | Weight bar beside your food |
 | Build materials | With the hammer out: what the selected piece costs, what you have, how many you can build |
-| Build support | Off by default, in testing. With the hammer out: a warning when a piece you place would break, and what would fall if you removed one |
+| Build support | With the hammer out: a warning when a piece you place would break, and what would fall if you removed one |
 | Crafting tabs | Weapons, armor, tools, ammo, food and materials tabs on every crafting station, and a sort order |
 | Food decay | Shows how much max health, stamina and eitr your food has lost as it wears off |
 | Food reminders | Running out, no food, and optionally "can eat again" (off by default) |
@@ -96,8 +96,6 @@ With the hammer out, a panel beside the build menu's piece box.
 ## Build support
 
 With the hammer out, see what the game's support rule will do before it does it.
-
-**Off by default** while it is being tested. Turn it on in F7 under **Build Support**.
 
 - **Placing:** a piece that would break as soon as you build it (stone on wood, stone held from one side only) flashes red, and **Will break: not enough support** shows above the build menu.
 - **Removing:** hold **Left Alt** and point at a built piece. What would fall if you removed it turns red, what would stand with clearly less support turns orange, and the note counts them: **Would fall: 12  Weaker: 3**. It can show whenever you point at a piece instead; on a controller it always does.
@@ -365,7 +363,7 @@ Generated from the mod's code, so it matches the F7 window.
 
 | Setting | Default | Range or choices | What it does |
 |---|---|---|---|
-| Enabled | Off |  | With the hammer out, warns when a piece you place would break, and shows what would fall if you removed one. |
+| Enabled | On |  | With the hammer out, warns when a piece you place would break, and shows what would fall if you removed one. |
 | Break Warning | On |  | A piece that would break as soon as you build it flashes red, with a note above the build menu. |
 | Support Color | Off |  | Color the piece you are placing by the support it will have, in the hammer's colors: blue on the ground, then green to red as support drops. |
 | Fall Preview | On |  | Point the hammer at a built piece to see what would fall if you removed it (red) and what would stand with less support (orange). |
