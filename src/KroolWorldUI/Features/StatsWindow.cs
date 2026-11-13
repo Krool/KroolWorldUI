@@ -331,7 +331,9 @@ namespace KroolWorldUI.Features
             p._content.pivot = new Vector2(0.5f, 1f);
             p._content.anchoredPosition = Vector2.zero;
             p._scroll.horizontal = false;
-            p._scroll.scrollSensitivity = 40f;
+            // The wheel is ours: a set distance per notch, eased (see WheelScroll).
+            p._scroll.scrollSensitivity = 0f;
+            p._scroll.gameObject.AddComponent<WheelScroll>().Rect = p._scroll;
 
             p._area = area;
             p.Layout();
@@ -554,6 +556,9 @@ namespace KroolWorldUI.Features
                         SetHeight(Bosses(art));
                         break;
                 }
+#if DEV_BUILD
+                ReportCut();
+#endif
             }
             catch (Exception e)
             {
@@ -710,7 +715,7 @@ namespace KroolWorldUI.Features
                     var note = StatsUi.Text(art, page, section.Note, 4f, y, w - 8f, 20f, 14f, StatsUi.Faint, TextAlignmentOptions.TopLeft);
                     note.textWrappingMode = TextWrappingModes.Normal;
                     float nh = Mathf.Ceil(note.GetPreferredValues(section.Note, w - 8f, 0f).y) + 4f;
-                    note.rectTransform.sizeDelta = new Vector2(w - 8f, nh);
+                    note.rectTransform.sizeDelta = new Vector2(w - 8f, nh + note.fontSize * 2f); // room below, as for row notes
                     y += nh + 2f;
                 }
                 y = ColumnHeads(art, page, section.ValueHead, section.ChipsHead, y);
@@ -750,8 +755,9 @@ namespace KroolWorldUI.Features
                 var note = StatsUi.Text(art, holder, row.Note, ChipX, 0f, chipsW, ChipLine, 14f, StatsUi.Muted, TextAlignmentOptions.TopLeft);
                 note.textWrappingMode = TextWrappingModes.Normal;
                 float nh = Mathf.Ceil(note.GetPreferredValues(row.Note, chipsW, 0f).y);
-                note.rectTransform.sizeDelta = new Vector2(chipsW, nh);
-                StatsUi.Place(note.rectTransform, ChipX, top0 + 6f, chipsW, nh);
+                // The box runs a line past the text (it hangs from the top, so nothing moves): an exact
+                // fit can drop the last line to "…".
+                StatsUi.Place(note.rectTransform, ChipX, top0 + 6f, chipsW, nh + note.fontSize * 2f);
                 cy = Mathf.Max(0f, nh + 12f - RowH);
             }
             foreach (var chip in row.Chips)
@@ -773,6 +779,9 @@ namespace KroolWorldUI.Features
                     StatsUi.Tip(art, img.gameObject, "", chip.Tip);
                 }
                 StatsUi.Place(text.rectTransform, ChipX + cx + iconW + (iconW > 0f ? 3f : 0f), top, tw + 8f, ChipLine);
+                StatsUi.Room(text);
+                // The box is the text's own width; a live value that grows must not turn into "…".
+                text.overflowMode = TextOverflowModes.Overflow;
                 StatsUi.Tip(art, text.gameObject, "", chip.Tip);
                 if (chip.Live)
                     _live.Add(text);
@@ -836,6 +845,24 @@ namespace KroolWorldUI.Features
             t.enableAutoSizing = true;
         }
 
+#if DEV_BUILD
+        /// <summary>Dev builds: log any text on the page that TextMeshPro cut short, so a squeezed box shows up.</summary>
+        private void ReportCut()
+        {
+            int n = 0;
+            foreach (var t in _content.GetComponentsInChildren<TMP_Text>())
+            {
+                t.ForceMeshUpdate();
+                if (!t.isTextTruncated)
+                    continue;
+                var size = t.rectTransform.rect.size;
+                Plugin.Log.LogWarning($"Stats window ({_tab}): cut text \"{t.text}\", {t.fontSize:0.#}px in {size.x:0}x{size.y:0}");
+                if (++n >= 8)
+                    break;
+            }
+        }
+#endif
+
         private float Deaths(StatsUi.Art art)
         {
             var page = Page();
@@ -879,6 +906,75 @@ namespace KroolWorldUI.Features
             StatsUi.Text(art, page, text, 0f, 40f, page.sizeDelta.x, 30f, 18f, StatsUi.Muted, TextAlignmentOptions.Center);
             return 100f;
         }
+    }
+
+    /// <summary>
+    /// The mouse wheel on the stats page: <see cref="Step"/> per notch, eased in. The stock ScrollRect
+    /// moves by the input module's scroll delta times a sensitivity, and how big that delta is per
+    /// notch is the game's own setting, which left the page crawling. Notches come from the module's
+    /// own conversion, so this does not depend on that setting.
+    /// </summary>
+    internal sealed class WheelScroll : MonoBehaviour, IScrollHandler
+    {
+        private const float Step = 120f; // canvas units per notch: about four rows
+
+        internal ScrollRect Rect;
+        private bool _moving;
+        private float _target;
+        private float _last; // where this last put the page; anything else moving it (scrollbar, stick, a new tab) takes over
+#if DEV_BUILD
+        private int _logged;
+#endif
+
+        public void OnScroll(PointerEventData e)
+        {
+            if (Rect == null || Rect.content == null)
+                return;
+            var module = EventSystem.current != null ? EventSystem.current.currentInputModule : null;
+            float notches = module != null ? module.ConvertPointerEventScrollDeltaToTicks(e.scrollDelta).y : e.scrollDelta.y;
+#if DEV_BUILD
+            if (_logged++ < 3)
+                Plugin.Log.LogInfo($"Stats window: wheel delta {e.scrollDelta.y} = {notches} notches ({module?.GetType().Name})");
+#endif
+            if (Mathf.Abs(notches) < 0.0001f)
+                return;
+            float now = Rect.content.anchoredPosition.y;
+            _target = Mathf.Clamp((_moving ? _target : now) - notches * Step, 0f, Range());
+            _last = now;
+            _moving = true;
+        }
+
+        /// <summary>How far the page can move: its height past the visible part.</summary>
+        private float Range()
+        {
+            var view = Rect.viewport != null ? Rect.viewport : (RectTransform)Rect.transform;
+            return Mathf.Max(0f, Rect.content.rect.height - view.rect.height);
+        }
+
+        private void Update()
+        {
+            if (!_moving || Rect == null || Rect.content == null)
+                return;
+            var c = Rect.content;
+            var p = c.anchoredPosition;
+            if (Mathf.Abs(p.y - _last) > 0.5f)
+            {
+                _moving = false; // something else moved the page
+                return;
+            }
+            float goal = Mathf.Clamp(_target, 0f, Range());
+            p.y = Mathf.Lerp(p.y, goal, 1f - Mathf.Exp(-18f * Time.unscaledDeltaTime));
+            if (Mathf.Abs(p.y - goal) < 0.5f)
+            {
+                p.y = goal;
+                _moving = false;
+            }
+            c.anchoredPosition = p;
+            _last = p.y;
+            Rect.velocity = Vector2.zero;
+        }
+
+        private void OnDisable() => _moving = false;
     }
 
     /// <summary>

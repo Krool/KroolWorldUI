@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.17.3
+
+- **Stats window:** fix: the sources next to each total (what gear, food, potions and Rested add) and the column headers showed only "…". Text boxes now always have room for a full line.
+- **Stats window:** the mouse wheel scrolls much faster: about four rows per notch, eased.
+
 ## 0.17.2
 
 - **Stats window:** the Deaths and Bosses tabs get column headers too (Hits, Damage, Share, Damage types). The window resizes to the screen each time it opens, so changing the resolution or the game's GUI scale mid-session no longer leaves it the wrong size. Long names and values in some languages shrink to fit instead of being cut off.

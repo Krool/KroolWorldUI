@@ -117,6 +117,11 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
   with it), mark in its top-right corner. Quick Stack Store Sort Trash builds its trash can by
   Instantiate-ing the whole `Armor` box on the first InventoryGui.Show, children included, so
   anything parented there gets copied: ArmorBadge.Awake hides and destroys any copy of itself.
+  TMP boxes cloned from the game's text need far more height than the font size: 15 px text in a
+  26 px box rendered as a lone "…" (Ellipsis mode, line does not fit). StatsUi.Text grows every box
+  to 2x size + 4 via StatsUi.Room; call Room again after re-Placing a text. The stats page wheel is
+  WheelScroll (ScrollRect.scrollSensitivity is 0), notches via the input module's
+  ConvertPointerEventScrollDeltaToTicks (dev builds log the first three wheel events, and any cut text).
   Death recap popup: last sibling of Hud.m_loadingScreen's
   parent (`HUD`), so it draws above the death fade to black. Boss recap popup: hudroot at (0.82, 0.55).
 - Damage (Character.RPC_Damage) runs only on the target's ZDO owner: the local player for your own

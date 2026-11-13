@@ -149,7 +149,28 @@ namespace KroolWorldUI.Features
             t.text = text;
             t.overflowMode = TextOverflowModes.Ellipsis;
             t.fontStyle = title ? t.fontStyle : FontStyles.Normal;
+            Room(t);
             return t;
+        }
+
+        /// <summary>
+        /// The game's fonts need much more height per line than their size: 15 px text in a 26 px box
+        /// came out as a lone "…", which is what TextMeshPro draws when a line does not fit. Grows the
+        /// box to twice the font size plus a little, keeping the edge its alignment hangs on (top,
+        /// bottom, or the middle), so the text stays where it was laid out. Call again after re-placing
+        /// the box.
+        /// </summary>
+        internal static void Room(TMP_Text t)
+        {
+            var rt = t.rectTransform;
+            float size = t.enableAutoSizing ? Mathf.Max(t.fontSize, t.fontSizeMax) : t.fontSize;
+            float extra = size * 2f + 4f - rt.sizeDelta.y;
+            if (extra <= 0f)
+                return;
+            int v = (int)t.alignment & 0xFF00;
+            float up = v == 0x100 ? 0f : v == 0x400 ? extra : extra / 2f; // top: grow down; bottom: grow up; else both
+            rt.sizeDelta += new Vector2(0f, extra);
+            rt.anchoredPosition += new Vector2(0f, up - extra * (1f - rt.pivot.y));
         }
 
         internal static Image Image(Transform parent, Sprite sprite, float x, float y, float w, float h, Color color)
