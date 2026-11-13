@@ -492,6 +492,60 @@ s_LowAmmo_AnchorX_d = Środek okienka. 0 to lewa krawędź ekranu, 1 prawa.
 s_LowAmmo_AnchorY = Kotwica Y
 s_LowAmmo_AnchorY_d = Środek okienka. 0 to dół ekranu, 1 góra.
 
+# Stats Window
+sec_StatsWindow = Okno statystyk
+s_StatsWindow_Enabled = Włączone
+s_StatsWindow_Enabled_d = Okno statystyk w ekwipunku: życie, kondycja, regeneracja, szybkość, udźwig, pancerz i odporności, z tym, co dodaje każdy przedmiot, jedzenie, mikstura i zaklęcie Epic Loot. Także podsumowania twoich śmierci i walk z bossami.
+s_StatsWindow_Key = Klawisz
+s_StatsWindow_Key_d = Otwiera i zamyka okno, z otwartym ekwipunkiem lub bez.
+s_StatsWindow_Key_w = Działa, gdy włączone: Okno statystyk.
+s_StatsWindow_ControllerButton = Przycisk kontrolera
+s_StatsWindow_ControllerButton_d = Przycisk kontrolera, który otwiera i zamyka okno, gdy ekwipunek jest otwarty.
+s_StatsWindow_ControllerButton_w = Działa, gdy włączone: Okno statystyk.
+s_StatsWindow_ArmorButton = Przycisk pancerza
+s_StatsWindow_ArmorButton_d = Kliknij wartość pancerza w ekwipunku, aby otworzyć okno. Mały znak pokazuje, że można ją kliknąć.
+s_StatsWindow_ArmorButton_w = Działa, gdy włączone: Okno statystyk.
+
+# Death Recap
+sec_DeathRecap = Podsumowanie śmierci
+s_DeathRecap_Enabled = Włączone
+s_DeathRecap_Enabled_d = Zapisuje podsumowanie tego, co cię zabiło: każde źródło obrażeń w walce, śmiertelny cios i typy obrażeń. Widoczne w oknie statystyk w zakładce Śmierci.
+s_DeathRecap_Popup = Wyskakujące okno
+s_DeathRecap_Popup_d = Pokazuje podsumowanie na ekranie śmierci.
+s_DeathRecap_Popup_w = Działa, gdy włączone: Podsumowanie śmierci.
+s_DeathRecap_AfterRespawn = Po odrodzeniu
+s_DeathRecap_AfterRespawn_d = Ile sekund podsumowanie zostaje po odrodzeniu.
+s_DeathRecap_AfterRespawn_w = Działa, gdy włączone: Wyskakujące okno.
+s_DeathRecap_Size = Rozmiar
+s_DeathRecap_Size_d = 1 to normalny rozmiar.
+s_DeathRecap_Size_w = Działa, gdy włączone: Wyskakujące okno.
+s_DeathRecap_Opacity = Krycie
+s_DeathRecap_Opacity_d = 1 to pełne krycie; niżej gra prześwituje.
+s_DeathRecap_Opacity_w = Działa, gdy włączone: Wyskakujące okno.
+
+# Boss Recap
+sec_BossRecap = Podsumowanie bossa
+s_BossRecap_Enabled = Włączone
+s_BossRecap_Enabled_d = Po walce z bossem: ile obrażeń zadał każdy gracz i czym: broń, strzały, zaklęcia Epic Loot, ogień i trucizna w czasie. Znajomi z tym modem automatycznie udostępniają swoje liczby. Pełne zestawienie jest w oknie statystyk w zakładce Bossowie.
+s_BossRecap_Popup = Wyskakujące okno
+s_BossRecap_Popup_d = Krótkie podsumowanie na ekranie, gdy boss zginie.
+s_BossRecap_Popup_w = Działa, gdy włączone: Podsumowanie bossa.
+s_BossRecap_PopupSeconds = Czas wyświetlania
+s_BossRecap_PopupSeconds_d = Jak długo podsumowanie zostaje na ekranie.
+s_BossRecap_PopupSeconds_w = Działa, gdy włączone: Wyskakujące okno.
+s_BossRecap_Size = Rozmiar
+s_BossRecap_Size_d = 1 to normalny rozmiar.
+s_BossRecap_Size_w = Działa, gdy włączone: Wyskakujące okno.
+s_BossRecap_Opacity = Krycie
+s_BossRecap_Opacity_d = 1 to pełne krycie; niżej gra prześwituje.
+s_BossRecap_Opacity_w = Działa, gdy włączone: Wyskakujące okno.
+s_BossRecap_AnchorX = Kotwica X
+s_BossRecap_AnchorX_d = Środek podsumowania. 0 to lewa krawędź ekranu, 1 prawa.
+s_BossRecap_AnchorX_w = Działa, gdy włączone: Wyskakujące okno.
+s_BossRecap_AnchorY = Kotwica Y
+s_BossRecap_AnchorY_d = Środek podsumowania. 0 to dół ekranu, 1 góra.
+s_BossRecap_AnchorY_w = Działa, gdy włączone: Wyskakujące okno.
+
 # Bench Pins
 sec_BenchPins = Pinezki stołów
 s_BenchPins_Enabled = Włączone

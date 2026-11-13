@@ -492,6 +492,60 @@ s_LowAmmo_AnchorX_d = 상자의 중앙. 0은 화면 왼쪽, 1은 오른쪽.
 s_LowAmmo_AnchorY = 기준점 Y
 s_LowAmmo_AnchorY_d = 상자의 중앙. 0은 화면 아래, 1은 위.
 
+# Stats Window
+sec_StatsWindow = 능력치 창
+s_StatsWindow_Enabled = 사용
+s_StatsWindow_Enabled_d = 인벤토리에 능력치 창을 표시합니다: 체력, 스태미나, 회복, 속도, 운반 무게, 방어력과 저항, 그리고 각 아이템, 음식, 물약, Epic Loot 마법 부여가 더하는 수치. 사망 요약과 보스 요약도 볼 수 있습니다.
+s_StatsWindow_Key = 키
+s_StatsWindow_Key_d = 인벤토리가 열려 있든 아니든 창을 열고 닫습니다.
+s_StatsWindow_Key_w = '능력치 창' 설정이 켜져 있을 때 사용.
+s_StatsWindow_ControllerButton = 컨트롤러 버튼
+s_StatsWindow_ControllerButton_d = 인벤토리가 열려 있을 때 창을 열고 닫는 컨트롤러 버튼.
+s_StatsWindow_ControllerButton_w = '능력치 창' 설정이 켜져 있을 때 사용.
+s_StatsWindow_ArmorButton = 방어력 버튼
+s_StatsWindow_ArmorButton_d = 인벤토리의 방어력 수치를 클릭하면 창이 열립니다. 클릭할 수 있다는 작은 표시가 나타납니다.
+s_StatsWindow_ArmorButton_w = '능력치 창' 설정이 켜져 있을 때 사용.
+
+# Death Recap
+sec_DeathRecap = 사망 요약
+s_DeathRecap_Enabled = 사용
+s_DeathRecap_Enabled_d = 무엇에 죽었는지 요약을 남깁니다: 전투 중 모든 피해원, 결정타, 피해 유형. 능력치 창의 '사망' 탭에 표시됩니다.
+s_DeathRecap_Popup = 팝업
+s_DeathRecap_Popup_d = 사망 화면에 요약을 표시합니다.
+s_DeathRecap_Popup_w = '사망 요약' 설정이 켜져 있을 때 사용.
+s_DeathRecap_AfterRespawn = 리스폰 후(초)
+s_DeathRecap_AfterRespawn_d = 리스폰 후 요약이 화면에 남아 있는 시간(초).
+s_DeathRecap_AfterRespawn_w = '팝업' 설정이 켜져 있을 때 사용.
+s_DeathRecap_Size = 크기
+s_DeathRecap_Size_d = 1이 기본 크기.
+s_DeathRecap_Size_w = '팝업' 설정이 켜져 있을 때 사용.
+s_DeathRecap_Opacity = 불투명도
+s_DeathRecap_Opacity_d = 1은 불투명, 낮을수록 게임 화면이 비쳐 보입니다.
+s_DeathRecap_Opacity_w = '팝업' 설정이 켜져 있을 때 사용.
+
+# Boss Recap
+sec_BossRecap = 보스 요약
+s_BossRecap_Enabled = 사용
+s_BossRecap_Enabled_d = 보스전이 끝나면 각 플레이어가 무엇으로 얼마나 피해를 줬는지 보여 줍니다: 무기, 화살, Epic Loot 마법 부여, 시간에 따른 불과 독 피해. 이 모드를 쓰는 친구는 수치를 자동으로 공유합니다. 자세한 내역은 능력치 창의 '보스' 탭에 있습니다.
+s_BossRecap_Popup = 팝업
+s_BossRecap_Popup_d = 보스가 죽으면 화면에 짧은 요약을 표시합니다.
+s_BossRecap_Popup_w = '보스 요약' 설정이 켜져 있을 때 사용.
+s_BossRecap_PopupSeconds = 팝업 시간(초)
+s_BossRecap_PopupSeconds_d = 요약이 표시되는 시간.
+s_BossRecap_PopupSeconds_w = '팝업' 설정이 켜져 있을 때 사용.
+s_BossRecap_Size = 크기
+s_BossRecap_Size_d = 1이 기본 크기.
+s_BossRecap_Size_w = '팝업' 설정이 켜져 있을 때 사용.
+s_BossRecap_Opacity = 불투명도
+s_BossRecap_Opacity_d = 1은 불투명, 낮을수록 게임 화면이 비쳐 보입니다.
+s_BossRecap_Opacity_w = '팝업' 설정이 켜져 있을 때 사용.
+s_BossRecap_AnchorX = 기준점 X
+s_BossRecap_AnchorX_d = 요약의 중앙. 0은 화면 왼쪽, 1은 오른쪽.
+s_BossRecap_AnchorX_w = '팝업' 설정이 켜져 있을 때 사용.
+s_BossRecap_AnchorY = 기준점 Y
+s_BossRecap_AnchorY_d = 요약의 중앙. 0은 화면 아래, 1은 위.
+s_BossRecap_AnchorY_w = '팝업' 설정이 켜져 있을 때 사용.
+
 # Bench Pins
 sec_BenchPins = 작업대 핀
 s_BenchPins_Enabled = 사용

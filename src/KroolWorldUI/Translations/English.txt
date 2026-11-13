@@ -74,6 +74,71 @@ ammo_left = $1 left
 # Auto repair. $1 is a number of items (2 or more).
 repaired_items = Repaired $1 items
 
+# Stats window. Tabs, headings and labels; stat names, items and numbers come from the game.
+stats_tab_stats = Stats
+stats_tab_deaths = Deaths
+stats_tab_bosses = Bosses
+# Hover text on the armor box in the inventory. $1 is a key ("K").
+stats_open = Stats
+stats_open_key = Stats ($1)
+stats_vitals = Health and stamina
+stats_movement = Movement and carrying
+stats_resist = Resistances
+stats_resist_note = Only the strongest resistance to each damage type counts; the others are crossed out. Epic Loot resistances add up and apply on top.
+stats_effects = Effects
+# Hover names for the small pictures beside each stat.
+stats_base = Base
+stats_set_bonus = Set bonus
+stats_other_mods = Other mods
+stats_gear = Gear
+stats_world_setting = World setting
+stats_multiplies = Multiplies the total
+stats_no_effect = No effect: a stronger one counts.
+stats_regen_tip = Bonuses add together; penalties multiply the total.
+# A row of hit sizes and what is left of each after armor. $1 is the hit, $2 what you take.
+stats_hits = Damage per hit
+stats_hits_tip = What hits of each size leave after your armor, before blocking.
+stats_hit_tip = A hit of $1 takes $2.
+# Resistance hover text. $1 is a percentage ("42%"); in stats_capped $1 is the total, $2 the cap.
+stats_you_take = You take $1 of this damage.
+stats_capped = Epic Loot adds up to $1, capped at $2.
+stats_no_deaths = No deaths yet this session.
+stats_no_bosses = No bosses killed yet this session.
+stats_deaths_off = Death Recap is off in the settings.
+stats_bosses_off = Boss Recap is off in the settings.
+
+# Death recap. $1 is a name or a number, $2 a time ("14s").
+death_killed_by = Killed by $1
+death_blow = Killing blow $1
+death_over = $1 over
+death_total = $1 damage in $2
+death_stopped = Armor, blocking and resistances stopped $1.
+death_hits = $1 hits
+death_blocked = $1 blocked
+death_ticks = $1 burning or poison ticks
+# What hurt you when nothing did: short names.
+cause_drowning = Drowning
+cause_lava = Lava
+cause_tree = Falling tree
+cause_self = Blood magic
+cause_world = The world
+
+# Boss recap. $1 is a time, a number or a key.
+boss_defeated_in = Defeated in $1
+boss_health = $1 health
+boss_estimated = Counted by this player's own game, before the boss's resistances.
+boss_partial = Part of the fight was not recorded: the boss ran in a game without this mod.
+boss_hint = $1: full breakdown
+dps = $1/s
+# Epic Loot enchantments that deal their own damage, when Epic Loot has no name for them.
+src_explosivearrows = Explosive shot
+src_chainlightning = Chain lightning
+src_firebrand = Fire nova
+# When a recap happened.
+ago_now = Just now
+ago_min = $1 min ago
+ago_hour = $1 h ago
+
 # Settings window.
 win_search = Search settings
 win_expand_all = Expand all

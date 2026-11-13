@@ -492,6 +492,60 @@ s_LowAmmo_AnchorX_d = Centrul casetei. 0 e marginea stângă a ecranului, 1 cea 
 s_LowAmmo_AnchorY = Ancoră Y
 s_LowAmmo_AnchorY_d = Centrul casetei. 0 e partea de jos a ecranului, 1 cea de sus.
 
+# Stats Window
+sec_StatsWindow = Fereastră statistici
+s_StatsWindow_Enabled = Activat
+s_StatsWindow_Enabled_d = O fereastră de statistici în inventar: viață, energie, regenerare, viteză, capacitate de cărat, armură și rezistențe, cu ce adaugă fiecare obiect, mâncare, poțiune și vrajă Epic Loot. Plus rezumatele morților tale și ale luptelor cu șefi.
+s_StatsWindow_Key = Tastă
+s_StatsWindow_Key_d = Deschide și închide fereastra, cu sau fără inventarul deschis.
+s_StatsWindow_Key_w = Folosit când Fereastră statistici este pornit.
+s_StatsWindow_ControllerButton = Buton controller
+s_StatsWindow_ControllerButton_d = Butonul de controller care deschide și închide fereastra cât timp inventarul e deschis.
+s_StatsWindow_ControllerButton_w = Folosit când Fereastră statistici este pornit.
+s_StatsWindow_ArmorButton = Buton armură
+s_StatsWindow_ArmorButton_d = Dă clic pe valoarea armurii din inventar ca să deschizi fereastra. Un mic semn arată că se poate da clic.
+s_StatsWindow_ArmorButton_w = Folosit când Fereastră statistici este pornit.
+
+# Death Recap
+sec_DeathRecap = Rezumat moarte
+s_DeathRecap_Enabled = Activat
+s_DeathRecap_Enabled_d = Păstrează un rezumat a ceea ce te-a ucis: fiecare sursă de daune din luptă, lovitura fatală și tipurile de daune. Apare în fereastra de statistici, la Morți.
+s_DeathRecap_Popup = Pop-up
+s_DeathRecap_Popup_d = Arată rezumatul pe ecranul de moarte.
+s_DeathRecap_Popup_w = Folosit când Rezumat moarte este pornit.
+s_DeathRecap_AfterRespawn = După reapariție
+s_DeathRecap_AfterRespawn_d = Secunde cât rămâne rezumatul pe ecran după ce reapari.
+s_DeathRecap_AfterRespawn_w = Folosit când Pop-up este pornit.
+s_DeathRecap_Size = Mărime
+s_DeathRecap_Size_d = 1 e mărimea normală.
+s_DeathRecap_Size_w = Folosit când Pop-up este pornit.
+s_DeathRecap_Opacity = Opacitate
+s_DeathRecap_Opacity_d = 1 e opac; mai puțin lasă jocul să se vadă prin el.
+s_DeathRecap_Opacity_w = Folosit când Pop-up este pornit.
+
+# Boss Recap
+sec_BossRecap = Rezumat șef
+s_BossRecap_Enabled = Activat
+s_BossRecap_Enabled_d = După o luptă cu un șef, câte daune a făcut fiecare jucător și cu ce: arme, săgeți, vrăji Epic Loot, foc și otravă în timp. Prietenii cu acest mod își împart cifrele automat. Detalierea completă e în fereastra de statistici, la Șefi.
+s_BossRecap_Popup = Pop-up
+s_BossRecap_Popup_d = Un rezumat scurt pe ecran când moare șeful.
+s_BossRecap_Popup_w = Folosit când Rezumat șef este pornit.
+s_BossRecap_PopupSeconds = Durată (s)
+s_BossRecap_PopupSeconds_d = Cât timp rămâne rezumatul.
+s_BossRecap_PopupSeconds_w = Folosit când Pop-up este pornit.
+s_BossRecap_Size = Mărime
+s_BossRecap_Size_d = 1 e mărimea normală.
+s_BossRecap_Size_w = Folosit când Pop-up este pornit.
+s_BossRecap_Opacity = Opacitate
+s_BossRecap_Opacity_d = 1 e opac; mai puțin lasă jocul să se vadă prin el.
+s_BossRecap_Opacity_w = Folosit când Pop-up este pornit.
+s_BossRecap_AnchorX = Ancoră X
+s_BossRecap_AnchorX_d = Centrul rezumatului. 0 e marginea stângă a ecranului, 1 cea dreaptă.
+s_BossRecap_AnchorX_w = Folosit când Pop-up este pornit.
+s_BossRecap_AnchorY = Ancoră Y
+s_BossRecap_AnchorY_d = Centrul rezumatului. 0 e partea de jos a ecranului, 1 cea de sus.
+s_BossRecap_AnchorY_w = Folosit când Pop-up este pornit.
+
 # Bench Pins
 sec_BenchPins = Marcaje stații
 s_BenchPins_Enabled = Activat

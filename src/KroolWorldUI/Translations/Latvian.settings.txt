@@ -492,6 +492,60 @@ s_LowAmmo_AnchorX_d = Lodziņa centrs. 0 ir ekrāna kreisā mala, 1 labā.
 s_LowAmmo_AnchorY = Enkurs Y
 s_LowAmmo_AnchorY_d = Lodziņa centrs. 0 ir ekrāna apakša, 1 augša.
 
+# Stats Window
+sec_StatsWindow = Statistikas logs
+s_StatsWindow_Enabled = Ieslēgts
+s_StatsWindow_Enabled_d = Statistikas logs inventārā: dzīvība, izturība, atjaunošanās, ātrums, nestspēja, bruņas un pretestības, kopā ar to, ko pievieno katrs priekšmets, ēdiens, dzira un Epic Loot burvestība. Arī tavi nāves kopsavilkumi un bosu kopsavilkumi.
+s_StatsWindow_Key = Taustiņš
+s_StatsWindow_Key_d = Atver un aizver logu, ar vai bez atvērta inventāra.
+s_StatsWindow_Key_w = Darbojas, ja ieslēgts: Statistikas logs.
+s_StatsWindow_ControllerButton = Vadāmierīces poga
+s_StatsWindow_ControllerButton_d = Vadāmierīces poga, kas atver un aizver logu, kamēr inventārs ir atvērts.
+s_StatsWindow_ControllerButton_w = Darbojas, ja ieslēgts: Statistikas logs.
+s_StatsWindow_ArmorButton = Bruņu poga
+s_StatsWindow_ArmorButton_d = Noklikšķini uz bruņu vērtības inventārā, lai atvērtu logu. Maza zīme rāda, ka uz tās var klikšķināt.
+s_StatsWindow_ArmorButton_w = Darbojas, ja ieslēgts: Statistikas logs.
+
+# Death Recap
+sec_DeathRecap = Nāves kopsavilkums
+s_DeathRecap_Enabled = Ieslēgts
+s_DeathRecap_Enabled_d = Saglabā kopsavilkumu par to, kas tevi nogalināja: katru bojājumu avotu cīņā, nāvējošo sitienu un bojājumu veidus. Redzams statistikas logā sadaļā Nāves.
+s_DeathRecap_Popup = Uznirstošais logs
+s_DeathRecap_Popup_d = Rāda kopsavilkumu nāves ekrānā.
+s_DeathRecap_Popup_w = Darbojas, ja ieslēgts: Nāves kopsavilkums.
+s_DeathRecap_AfterRespawn = Pēc atdzimšanas
+s_DeathRecap_AfterRespawn_d = Cik sekundes kopsavilkums paliek redzams pēc atdzimšanas.
+s_DeathRecap_AfterRespawn_w = Darbojas, ja ieslēgts: Uznirstošais logs.
+s_DeathRecap_Size = Izmērs
+s_DeathRecap_Size_d = 1 ir parastais izmērs.
+s_DeathRecap_Size_w = Darbojas, ja ieslēgts: Uznirstošais logs.
+s_DeathRecap_Opacity = Necaurredzamība
+s_DeathRecap_Opacity_d = 1 ir pilnīgi necaurredzams; mazāk ļauj redzēt spēli cauri.
+s_DeathRecap_Opacity_w = Darbojas, ja ieslēgts: Uznirstošais logs.
+
+# Boss Recap
+sec_BossRecap = Bosu kopsavilkums
+s_BossRecap_Enabled = Ieslēgts
+s_BossRecap_Enabled_d = Pēc cīņas ar bosu: cik daudz bojājumu nodarīja katrs spēlētājs un ar ko: ieroči, bultas, Epic Loot burvestības, uguns un inde laika gaitā. Draugi ar šo modu automātiski dalās ar saviem skaitļiem. Pilns sadalījums ir statistikas logā sadaļā Bosi.
+s_BossRecap_Popup = Uznirstošais logs
+s_BossRecap_Popup_d = Īss kopsavilkums uz ekrāna, kad boss mirst.
+s_BossRecap_Popup_w = Darbojas, ja ieslēgts: Bosu kopsavilkums.
+s_BossRecap_PopupSeconds = Rādīšanas laiks
+s_BossRecap_PopupSeconds_d = Cik ilgi kopsavilkums paliek redzams.
+s_BossRecap_PopupSeconds_w = Darbojas, ja ieslēgts: Uznirstošais logs.
+s_BossRecap_Size = Izmērs
+s_BossRecap_Size_d = 1 ir parastais izmērs.
+s_BossRecap_Size_w = Darbojas, ja ieslēgts: Uznirstošais logs.
+s_BossRecap_Opacity = Necaurredzamība
+s_BossRecap_Opacity_d = 1 ir pilnīgi necaurredzams; mazāk ļauj redzēt spēli cauri.
+s_BossRecap_Opacity_w = Darbojas, ja ieslēgts: Uznirstošais logs.
+s_BossRecap_AnchorX = Enkurs X
+s_BossRecap_AnchorX_d = Kopsavilkuma centrs. 0 ir ekrāna kreisā mala, 1 labā.
+s_BossRecap_AnchorX_w = Darbojas, ja ieslēgts: Uznirstošais logs.
+s_BossRecap_AnchorY = Enkurs Y
+s_BossRecap_AnchorY_d = Kopsavilkuma centrs. 0 ir ekrāna apakša, 1 augša.
+s_BossRecap_AnchorY_w = Darbojas, ja ieslēgts: Uznirstošais logs.
+
 # Bench Pins
 sec_BenchPins = Galdu atzīmes
 s_BenchPins_Enabled = Ieslēgts

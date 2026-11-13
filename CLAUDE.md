@@ -11,7 +11,9 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
   saved pin to the local player's own map via `Minimap.AddPin` when they build a workbench, and removes
   it (or moves it to a bench nearby) when they hammer-remove that bench (owner, 2026-10-20). A second (2026-10-19):
   Auto Repair repairs worn items when a crafting station opens, through InventoryGui's own CanRepair,
-  matching RepairOneItem. Any other write needs the owner's explicit OK.
+  matching RepairOneItem. Any other write needs the owner's explicit OK. Network: Boss Recap sends
+  two routed RPCs per boss kill (`KroolWorldUI_BossDown` from the boss's owner, `KroolWorldUI_BossPart`
+  from every mod user) to Everybody; vanilla peers drop unknown routed RPCs silently. No other traffic.
 - **Patches must not throw into game code.** Wrap UI work called from Harmony postfixes in
   try/catch and log.
 - **Test in the `KroolDev` r2modman profile**, never `BCCBoys` (the owner's play profile, which
@@ -108,6 +110,26 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
   that is up. It stays put for a boss bar (owner, 2026-11-10: they do not collide).
   Buff icons (BuffIcons): re-placed after Hud.UpdateStatusEffects every frame at Size scale, wrapping before the compass.
   Day/night bar: child of Minimap.m_smallRoot (its own canvas), in the 40 px above the minimap.
+  Stats window: a clone of InventoryGui.m_skillsDialog (SkillsFrame, its scroll list, Closebuttons),
+  sibling of the Skills dialog under the inventory's `root`; tabs cloned from m_tabCraft. Its root is
+  added to every inventory UIGamePad's m_blockingElements, as the game's dialogs are. Armor button:
+  an invisible raycast Image over the inventory's `Armor` box (ExtraSlots moves that box; ours moves
+  with it), mark in its top-right corner. Death recap popup: last sibling of Hud.m_loadingScreen's
+  parent (`HUD`), so it draws above the death fade to black. Boss recap popup: hudroot at (0.82, 0.55).
+- Damage (Character.RPC_Damage) runs only on the target's ZDO owner: the local player for your own
+  hits taken, usually the first player near a boss for the boss. ApplyDamage is the one place health
+  drops. Fire, spirit and poison are zeroed before ApplyDamage and go into SE_Burning (adds up) /
+  SE_Poison (a bigger dose replaces, smaller ignored), whose ticks call ApplyDamage with no attacker;
+  DamageLog keeps per-target pools of who put what in. Which weapon or arrow a hit came from is known
+  only on the attacker's machine (Attack/Projectile/Aoe context), never in HitData. ZRoutedRpc to
+  Everybody runs the local handler first, synchronously, so anything sent from inside it reaches
+  peers before the outer message: BossFights accepts parts before the announcement.
+- Epic Loot (0.15, read by reflection in EpicLootBridge, never referenced): its speed, max
+  health/stamina/eitr, regen, carry weight, per-item armor and stamina-cost bonuses are postfixes on
+  the game's own getters, so calling those includes them. Its resistances are not: an additive %,
+  capped per type (`MaxResistance`), taken off in an RPC_Damage prefix before the game's modifier and
+  armor. Effect values are whole percents (15 = 15%). Its area hits (explosive shot `EL_ExplosiveArrow`,
+  `ChainLightning`, Firebrand `skeleton_firenova_aoe`) are Aoe objects owned by the shooter.
 - Day timing (EnvMan): cycle m_dayLengthSec (1200 s) from midnight on ZNet.GetTimeSeconds();
   daylight from 15% to 85% of it, which EnvMan rescales to the sun's 0.25-0.75 (RescaleDayFraction).
   Build materials: in place mode, right of the build HUD's `SelectedInfo` box (found under

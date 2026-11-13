@@ -1,6 +1,6 @@
 ![Krool World UI](https://raw.githubusercontent.com/Krool/KroolWorldUI/main/docs/banner.png)
 
-Quality-of-life HUD additions for Valheim: skill XP, carry weight, build materials, building support, crafting tabs, food timers, a compass, a day/night bar, and a few countdowns the game doesn't show.
+Quality-of-life HUD additions for Valheim: a stats window with your resistances and what adds to each stat, death and boss fight recaps, skill XP, carry weight, build materials, building support, crafting tabs, food timers, a compass, a day/night bar, and a few countdowns the game doesn't show.
 
 - No new items, mechanics or balance changes.
 - Every feature can be switched off or adjusted in game with **F7**, or from the pause menu.
@@ -54,6 +54,9 @@ All elements at once, using the F7 window's **Preview on HUD** setup view. In pl
 | Rested countdown | Seconds until Rested while you rest |
 | Save countdown | 5-second warning before the auto-save lag spike |
 | Low ammo | A warning when a shot leaves you with 25, then 10 arrows or bolts |
+| Stats window | **K**, or click your armor in the inventory: health, stamina, regen, speed, carry weight, armor and resistances, and what each item, food, potion and Epic Loot enchantment adds |
+| Death recap | What killed you: every source of damage in the fight, by type, and the killing blow |
+| Boss recap | Each player's share of a boss's damage, by weapon, arrow, enchantment and damage type |
 | Auto repair | Opening a crafting station repairs everything it can |
 | Bench pins | A map pin with a Norse name when you build a workbench |
 
@@ -196,6 +199,32 @@ A short toast when a shot leaves you low, just above the ammo's slot if your HUD
 - Arrows, bolts and fishing bait. Counts the equipped stack only, not spares in your bag.
 - Fires only from shooting, so picking up or moving ammo never sets it off.
 - Both counts are settings (0 turns one off), as are the tone, how long it stays and where it sits.
+
+## Stats window
+
+Press **K**, or click the armor value in your inventory (a small mark in its corner shows it can be clicked). On a controller, press the right stick while the inventory is open. It opens in the game's own frame, with three tabs: Stats, Deaths and Bosses.
+
+Stats shows each number the game uses, worked out the way the game works it out, with a small picture for everything that adds to it. Point at a picture for its name.
+
+- Max health, stamina and eitr: the base, each food, enchantments.
+- Health, stamina and eitr regen: each potion, mead, Rested, Wet or Cold. Bonuses add together; penalties such as Wet multiply the total.
+- Movement and run speed, carry weight, and each stamina cost something changes (run, jump, attack, block, dodge, swim, sneak).
+- Armor per piece, and what hits of 25, 50, 100 and 200 leave after it.
+- Resistance to each damage type. Only the strongest resistance to a type counts, so a second fire resistance does nothing; the ones that don't count are crossed out. Epic Loot resistances add up and apply on top, up to Epic Loot's cap.
+- Your active effects with their time left and what they do, and with Epic Loot, every enchantment you have on, totaled.
+
+Totals come from the game itself, so bonuses from other mods are included. Anything no item or effect explains shows as "Other mods".
+
+## Death recap
+
+When you die, the death screen shows what hurt you in that fight: each creature (with its stars), fire, poison, a fall or drowning, how much each did by damage type, and the killing blow. It stays readable while the screen fades, and the last five are kept in the stats window under Deaths.
+
+## Boss recap
+
+When a boss dies, a summary shows each player's share of the damage, a bar by damage type and the weapons they used. The stats window's Bosses tab has the full breakdown: every weapon, arrow, Epic Loot enchantment (explosive shot, chain lightning) and fire or poison over time, with hits and damage per second.
+
+- Numbers are what the boss actually lost, after its resistances.
+- Friends with this mod send each other their numbers once when the boss dies; that is how it knows which weapon each hit came from. Players without the mod still show, grouped by weapon skill.
 
 ## Bench pins
 
@@ -480,6 +509,37 @@ Generated from the mod's code, so it matches the F7 window.
 | Opacity | 1 | 0.2 to 1 | 1 is solid; lower shows the game through it. |
 | Anchor X | 0.5 | 0 to 1 | Center of the box. 0 is the left of the screen, 1 the right. |
 | Anchor Y | 0.2 | 0 to 1 | Center of the box. 0 is the bottom of the screen, 1 the top. |
+
+**Stats Window**
+
+| Setting | Default | Range or choices | What it does |
+|---|---|---|---|
+| Enabled | On |  | A stats window in the inventory: health, stamina, regen, speed, carry weight, armor and resistances, with what each item, food, potion and Epic Loot enchantment adds. Also your death recaps and boss recaps. |
+| Key | K | Any key | Opens and closes the window, with or without the inventory open. Used when Stats Window is on. |
+| Controller Button | Right Stick Click | None, Left Stick Click, Right Stick Click, Back | Controller button that opens and closes the window while the inventory is open. Used when Stats Window is on. |
+| Armor Button | On |  | Click the armor value in the inventory to open the window. A small mark shows it can be clicked. Used when Stats Window is on. |
+
+**Death Recap**
+
+| Setting | Default | Range or choices | What it does |
+|---|---|---|---|
+| Enabled | On |  | Keep a recap of what killed you: every source of damage in the fight, the killing blow and the damage types. Shown in the stats window under Deaths. |
+| Popup | On |  | Show the recap on the death screen. Used when Death Recap is on. |
+| After Respawn | 6 | 0 to 30 | Seconds the recap stays up after you respawn. Used when Popup is on. |
+| Size | 1 | 0.75 to 1.5 | 1 is the normal size. Used when Popup is on. |
+| Opacity | 0.95 | 0.3 to 1 | 1 is solid; lower shows the game through it. Used when Popup is on. |
+
+**Boss Recap**
+
+| Setting | Default | Range or choices | What it does |
+|---|---|---|---|
+| Enabled | On |  | After a boss fight, how much damage each player did and with what: weapons, arrows, Epic Loot enchantments, fire and poison over time. Friends with this mod share their numbers automatically. The full breakdown is in the stats window under Bosses. |
+| Popup | On |  | A short summary on screen when the boss dies. Used when Boss Recap is on. |
+| Popup Seconds | 15 | 5 to 60 | How long the summary stays. Used when Popup is on. |
+| Size | 1 | 0.75 to 1.5 | 1 is the normal size. Used when Popup is on. |
+| Opacity | 0.95 | 0.3 to 1 | 1 is solid; lower shows the game through it. Used when Popup is on. |
+| Anchor X | 0.82 | 0 to 1 | Center of the summary. 0 is the left of the screen, 1 the right. Used when Popup is on. |
+| Anchor Y | 0.55 | 0 to 1 | Center of the summary. 0 is the bottom of the screen, 1 the top. Used when Popup is on. |
 
 **Bench Pins**
 

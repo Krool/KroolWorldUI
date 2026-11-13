@@ -492,6 +492,60 @@ s_LowAmmo_AnchorX_d = Kutunun merkezi. 0 ekranın solu, 1 sağı.
 s_LowAmmo_AnchorY = Çapa Y
 s_LowAmmo_AnchorY_d = Kutunun merkezi. 0 ekranın altı, 1 üstü.
 
+# Stats Window
+sec_StatsWindow = İstatistik Penceresi
+s_StatsWindow_Enabled = Etkin
+s_StatsWindow_Enabled_d = Envanterde bir istatistik penceresi: sağlık, enerji, yenilenme, hız, taşıma ağırlığı, zırh ve dirençler; her eşyanın, yiyeceğin, iksirin ve Epic Loot büyüsünün ne kattığıyla birlikte. Ayrıca ölüm ve baş düşman özetlerin.
+s_StatsWindow_Key = Tuş
+s_StatsWindow_Key_d = Envanter açık olsun ya da olmasın, pencereyi açar ve kapatır.
+s_StatsWindow_Key_w = İstatistik Penceresi açıksa geçerlidir.
+s_StatsWindow_ControllerButton = Kumanda Düğmesi
+s_StatsWindow_ControllerButton_d = Envanter açıkken pencereyi açıp kapatan kumanda düğmesi.
+s_StatsWindow_ControllerButton_w = İstatistik Penceresi açıksa geçerlidir.
+s_StatsWindow_ArmorButton = Zırh Düğmesi
+s_StatsWindow_ArmorButton_d = Pencereyi açmak için envanterdeki zırh değerine tıkla. Küçük bir işaret tıklanabildiğini gösterir.
+s_StatsWindow_ArmorButton_w = İstatistik Penceresi açıksa geçerlidir.
+
+# Death Recap
+sec_DeathRecap = Ölüm Özeti
+s_DeathRecap_Enabled = Etkin
+s_DeathRecap_Enabled_d = Seni neyin öldürdüğünün özetini tutar: dövüşteki her hasar kaynağı, öldürücü darbe ve hasar türleri. İstatistik penceresinde Ölümler altında gösterilir.
+s_DeathRecap_Popup = Açılır Pencere
+s_DeathRecap_Popup_d = Özeti ölüm ekranında göster.
+s_DeathRecap_Popup_w = Ölüm Özeti açıksa geçerlidir.
+s_DeathRecap_AfterRespawn = Yeniden Doğunca
+s_DeathRecap_AfterRespawn_d = Yeniden doğduktan sonra özetin ekranda kaldığı saniye.
+s_DeathRecap_AfterRespawn_w = Açılır Pencere açıksa geçerlidir.
+s_DeathRecap_Size = Boyut
+s_DeathRecap_Size_d = 1 normal boyuttur.
+s_DeathRecap_Size_w = Açılır Pencere açıksa geçerlidir.
+s_DeathRecap_Opacity = Opaklık
+s_DeathRecap_Opacity_d = 1 tam opak; daha düşük değerde oyun arkadan görünür.
+s_DeathRecap_Opacity_w = Açılır Pencere açıksa geçerlidir.
+
+# Boss Recap
+sec_BossRecap = Baş Düşman Özeti
+s_BossRecap_Enabled = Etkin
+s_BossRecap_Enabled_d = Bir baş düşman dövüşünden sonra her oyuncunun ne kadar hasar verdiğini ve neyle verdiğini gösterir: silahlar, oklar, Epic Loot büyüleri, zamanla ateş ve zehir. Bu mod yüklü arkadaşlar sayılarını otomatik paylaşır. Tam döküm, istatistik penceresinde Baş Düşmanlar altında.
+s_BossRecap_Popup = Açılır Pencere
+s_BossRecap_Popup_d = Baş düşman ölünce ekranda kısa bir özet.
+s_BossRecap_Popup_w = Baş Düşman Özeti açıksa geçerlidir.
+s_BossRecap_PopupSeconds = Gösterim (sn)
+s_BossRecap_PopupSeconds_d = Özetin ekranda ne kadar kaldığı.
+s_BossRecap_PopupSeconds_w = Açılır Pencere açıksa geçerlidir.
+s_BossRecap_Size = Boyut
+s_BossRecap_Size_d = 1 normal boyuttur.
+s_BossRecap_Size_w = Açılır Pencere açıksa geçerlidir.
+s_BossRecap_Opacity = Opaklık
+s_BossRecap_Opacity_d = 1 tam opak; daha düşük değerde oyun arkadan görünür.
+s_BossRecap_Opacity_w = Açılır Pencere açıksa geçerlidir.
+s_BossRecap_AnchorX = Çapa X
+s_BossRecap_AnchorX_d = Özetin merkezi. 0 ekranın solu, 1 sağı.
+s_BossRecap_AnchorX_w = Açılır Pencere açıksa geçerlidir.
+s_BossRecap_AnchorY = Çapa Y
+s_BossRecap_AnchorY_d = Özetin merkezi. 0 ekranın altı, 1 üstü.
+s_BossRecap_AnchorY_w = Açılır Pencere açıksa geçerlidir.
+
 # Bench Pins
 sec_BenchPins = Tezgâh İşaretleri
 s_BenchPins_Enabled = Etkin

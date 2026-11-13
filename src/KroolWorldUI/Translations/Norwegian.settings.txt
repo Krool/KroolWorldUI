@@ -492,6 +492,60 @@ s_LowAmmo_AnchorX_d = Midten av boksen. 0 er venstre kant av skjermen, 1 høyre.
 s_LowAmmo_AnchorY = Anker Y
 s_LowAmmo_AnchorY_d = Midten av boksen. 0 er bunnen av skjermen, 1 toppen.
 
+# Stats Window
+sec_StatsWindow = Statistikkvindu
+s_StatsWindow_Enabled = Aktivert
+s_StatsWindow_Enabled_d = Et statistikkvindu i inventaret: helse, utholdenhet, regenerering, fart, bærevekt, rustning og motstand, med hva hver gjenstand, mat, drikk og Epic Loot-fortryllelse gir. Også dødsoppsummeringer og bossoppsummeringer.
+s_StatsWindow_Key = Tast
+s_StatsWindow_Key_d = Åpner og lukker vinduet, med eller uten inventaret åpent.
+s_StatsWindow_Key_w = Brukes når Statistikkvindu er på.
+s_StatsWindow_ControllerButton = Kontrollerknapp
+s_StatsWindow_ControllerButton_d = Kontrollerknapp som åpner og lukker vinduet mens inventaret er åpent.
+s_StatsWindow_ControllerButton_w = Brukes når Statistikkvindu er på.
+s_StatsWindow_ArmorButton = Rustningsknapp
+s_StatsWindow_ArmorButton_d = Klikk på rustningsverdien i inventaret for å åpne vinduet. Et lite merke viser at den kan klikkes.
+s_StatsWindow_ArmorButton_w = Brukes når Statistikkvindu er på.
+
+# Death Recap
+sec_DeathRecap = Dødsoppsummering
+s_DeathRecap_Enabled = Aktivert
+s_DeathRecap_Enabled_d = Ta vare på en oppsummering av hva som drepte deg: hver skadekilde i kampen, dødsslaget og skadetypene. Vises i statistikkvinduet under Dødsfall.
+s_DeathRecap_Popup = Popup
+s_DeathRecap_Popup_d = Vis oppsummeringen på dødsskjermen.
+s_DeathRecap_Popup_w = Brukes når Dødsoppsummering er på.
+s_DeathRecap_AfterRespawn = Etter gjenoppstandelse
+s_DeathRecap_AfterRespawn_d = Sekunder oppsummeringen blir stående etter at du gjenoppstår.
+s_DeathRecap_AfterRespawn_w = Brukes når Popup er på.
+s_DeathRecap_Size = Størrelse
+s_DeathRecap_Size_d = 1 er normal størrelse.
+s_DeathRecap_Size_w = Brukes når Popup er på.
+s_DeathRecap_Opacity = Opasitet
+s_DeathRecap_Opacity_d = 1 er heldekkende; lavere lar spillet synes gjennom.
+s_DeathRecap_Opacity_w = Brukes når Popup er på.
+
+# Boss Recap
+sec_BossRecap = Bossoppsummering
+s_BossRecap_Enabled = Aktivert
+s_BossRecap_Enabled_d = Etter en bosskamp, hvor mye skade hver spiller gjorde og med hva: våpen, piler, Epic Loot-fortryllelser, ild og gift over tid. Venner med denne modden deler tallene sine automatisk. Hele oversikten finnes i statistikkvinduet under Bosser.
+s_BossRecap_Popup = Popup
+s_BossRecap_Popup_d = En kort oppsummering på skjermen når bossen dør.
+s_BossRecap_Popup_w = Brukes når Bossoppsummering er på.
+s_BossRecap_PopupSeconds = Visningstid
+s_BossRecap_PopupSeconds_d = Hvor lenge oppsummeringen blir stående.
+s_BossRecap_PopupSeconds_w = Brukes når Popup er på.
+s_BossRecap_Size = Størrelse
+s_BossRecap_Size_d = 1 er normal størrelse.
+s_BossRecap_Size_w = Brukes når Popup er på.
+s_BossRecap_Opacity = Opasitet
+s_BossRecap_Opacity_d = 1 er heldekkende; lavere lar spillet synes gjennom.
+s_BossRecap_Opacity_w = Brukes når Popup er på.
+s_BossRecap_AnchorX = Anker X
+s_BossRecap_AnchorX_d = Midten av oppsummeringen. 0 er venstre kant av skjermen, 1 høyre.
+s_BossRecap_AnchorX_w = Brukes når Popup er på.
+s_BossRecap_AnchorY = Anker Y
+s_BossRecap_AnchorY_d = Midten av oppsummeringen. 0 er bunnen av skjermen, 1 toppen.
+s_BossRecap_AnchorY_w = Brukes når Popup er på.
+
 # Bench Pins
 sec_BenchPins = Benknåler
 s_BenchPins_Enabled = Aktivert

@@ -492,6 +492,60 @@ s_LowAmmo_AnchorX_d = Κέντρο του πλαισίου. 0 είναι η αρ
 s_LowAmmo_AnchorY = Άγκυρα Y
 s_LowAmmo_AnchorY_d = Κέντρο του πλαισίου. 0 είναι το κάτω μέρος της οθόνης, 1 το πάνω.
 
+# Stats Window
+sec_StatsWindow = Παράθυρο στατιστικών
+s_StatsWindow_Enabled = Ενεργό
+s_StatsWindow_Enabled_d = Ένα παράθυρο στατιστικών στο απόθεμα: υγεία, αντοχή, ανάκτηση, ταχύτητα, βάρος μεταφοράς, πανοπλία και αντιστάσεις, με το τι προσθέτει κάθε αντικείμενο, τροφή, φίλτρο και μαγεία του Epic Loot. Επίσης οι ανασκοπήσεις θανάτων και boss.
+s_StatsWindow_Key = Πλήκτρο
+s_StatsWindow_Key_d = Ανοίγει και κλείνει το παράθυρο, με ή χωρίς ανοιχτό απόθεμα.
+s_StatsWindow_Key_w = Ισχύει όταν το παράθυρο στατιστικών είναι ενεργό.
+s_StatsWindow_ControllerButton = Κουμπί χειριστηρίου
+s_StatsWindow_ControllerButton_d = Κουμπί χειριστηρίου που ανοίγει και κλείνει το παράθυρο όσο είναι ανοιχτό το απόθεμα.
+s_StatsWindow_ControllerButton_w = Ισχύει όταν το παράθυρο στατιστικών είναι ενεργό.
+s_StatsWindow_ArmorButton = Κουμπί πανοπλίας
+s_StatsWindow_ArmorButton_d = Κάνε κλικ στην τιμή πανοπλίας στο απόθεμα για να ανοίξει το παράθυρο. Ένα μικρό σημάδι δείχνει ότι μπορείς να κάνεις κλικ εκεί.
+s_StatsWindow_ArmorButton_w = Ισχύει όταν το παράθυρο στατιστικών είναι ενεργό.
+
+# Death Recap
+sec_DeathRecap = Ανασκόπηση θανάτου
+s_DeathRecap_Enabled = Ενεργό
+s_DeathRecap_Enabled_d = Κρατά μια ανασκόπηση του τι σε σκότωσε: κάθε πηγή ζημιάς στη μάχη, το θανατηφόρο χτύπημα και τους τύπους ζημιάς. Φαίνεται στο παράθυρο στατιστικών, στην καρτέλα Θάνατοι.
+s_DeathRecap_Popup = Αναδυόμενο
+s_DeathRecap_Popup_d = Δείχνει την ανασκόπηση στην οθόνη θανάτου.
+s_DeathRecap_Popup_w = Ισχύει όταν η ανασκόπηση θανάτου είναι ενεργή.
+s_DeathRecap_AfterRespawn = Μετά την αναγέννηση
+s_DeathRecap_AfterRespawn_d = Δευτερόλεπτα που μένει η ανασκόπηση αφού αναγεννηθείς.
+s_DeathRecap_AfterRespawn_w = Ισχύει όταν το Αναδυόμενο είναι ενεργό.
+s_DeathRecap_Size = Μέγεθος
+s_DeathRecap_Size_d = Το 1 είναι το κανονικό μέγεθος.
+s_DeathRecap_Size_w = Ισχύει όταν το Αναδυόμενο είναι ενεργό.
+s_DeathRecap_Opacity = Αδιαφάνεια
+s_DeathRecap_Opacity_d = Το 1 είναι συμπαγές· χαμηλότερη τιμή αφήνει να φαίνεται το παιχνίδι από πίσω.
+s_DeathRecap_Opacity_w = Ισχύει όταν το Αναδυόμενο είναι ενεργό.
+
+# Boss Recap
+sec_BossRecap = Ανασκόπηση boss
+s_BossRecap_Enabled = Ενεργό
+s_BossRecap_Enabled_d = Μετά από μάχη με boss, δείχνει πόση ζημιά έκανε κάθε παίκτης και με τι: όπλα, βέλη, μαγείες του Epic Loot, φωτιά και δηλητήριο με τον χρόνο. Οι φίλοι με αυτό το mod μοιράζονται αυτόματα τα νούμερά τους. Η πλήρης ανάλυση είναι στο παράθυρο στατιστικών, στην καρτέλα Bosses.
+s_BossRecap_Popup = Αναδυόμενο
+s_BossRecap_Popup_d = Μια σύντομη σύνοψη στην οθόνη όταν πεθαίνει το boss.
+s_BossRecap_Popup_w = Ισχύει όταν η ανασκόπηση boss είναι ενεργή.
+s_BossRecap_PopupSeconds = Διάρκεια (δ)
+s_BossRecap_PopupSeconds_d = Πόση ώρα μένει η σύνοψη.
+s_BossRecap_PopupSeconds_w = Ισχύει όταν το Αναδυόμενο είναι ενεργό.
+s_BossRecap_Size = Μέγεθος
+s_BossRecap_Size_d = Το 1 είναι το κανονικό μέγεθος.
+s_BossRecap_Size_w = Ισχύει όταν το Αναδυόμενο είναι ενεργό.
+s_BossRecap_Opacity = Αδιαφάνεια
+s_BossRecap_Opacity_d = Το 1 είναι συμπαγές· χαμηλότερη τιμή αφήνει να φαίνεται το παιχνίδι από πίσω.
+s_BossRecap_Opacity_w = Ισχύει όταν το Αναδυόμενο είναι ενεργό.
+s_BossRecap_AnchorX = Άγκυρα X
+s_BossRecap_AnchorX_d = Κέντρο της σύνοψης. 0 είναι η αριστερή άκρη της οθόνης, 1 η δεξιά.
+s_BossRecap_AnchorX_w = Ισχύει όταν το Αναδυόμενο είναι ενεργό.
+s_BossRecap_AnchorY = Άγκυρα Y
+s_BossRecap_AnchorY_d = Κέντρο της σύνοψης. 0 είναι το κάτω μέρος της οθόνης, 1 το πάνω.
+s_BossRecap_AnchorY_w = Ισχύει όταν το Αναδυόμενο είναι ενεργό.
+
 # Bench Pins
 sec_BenchPins = Καρφίτσες πάγκων
 s_BenchPins_Enabled = Ενεργό

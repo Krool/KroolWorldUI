@@ -492,6 +492,60 @@ s_LowAmmo_AnchorX_d = Centro del riquadro. 0 è il bordo sinistro dello schermo,
 s_LowAmmo_AnchorY = Ancoraggio Y
 s_LowAmmo_AnchorY_d = Centro del riquadro. 0 è il fondo dello schermo, 1 la cima.
 
+# Stats Window
+sec_StatsWindow = Finestra statistiche
+s_StatsWindow_Enabled = Attivo
+s_StatsWindow_Enabled_d = Una finestra di statistiche nell'inventario: salute, resistenza, rigenerazione, velocità, peso trasportabile, armatura e resistenze ai danni, con quanto aggiunge ogni oggetto, cibo, pozione e incantamento di Epic Loot. Anche i riepiloghi delle tue morti e dei boss.
+s_StatsWindow_Key = Tasto
+s_StatsWindow_Key_d = Apre e chiude la finestra, con o senza l'inventario aperto.
+s_StatsWindow_Key_w = Usato se Finestra statistiche è attivo.
+s_StatsWindow_ControllerButton = Pulsante controller
+s_StatsWindow_ControllerButton_d = Pulsante del controller che apre e chiude la finestra mentre l'inventario è aperto.
+s_StatsWindow_ControllerButton_w = Usato se Finestra statistiche è attivo.
+s_StatsWindow_ArmorButton = Pulsante armatura
+s_StatsWindow_ArmorButton_d = Clicca il valore dell'armatura nell'inventario per aprire la finestra. Un piccolo segno indica che è cliccabile.
+s_StatsWindow_ArmorButton_w = Usato se Finestra statistiche è attivo.
+
+# Death Recap
+sec_DeathRecap = Riepilogo morte
+s_DeathRecap_Enabled = Attivo
+s_DeathRecap_Enabled_d = Tiene un riepilogo di ciò che ti ha ucciso: ogni fonte di danno nello scontro, il colpo fatale e i tipi di danno. Visibile nella finestra statistiche sotto Morti.
+s_DeathRecap_Popup = Popup
+s_DeathRecap_Popup_d = Mostra il riepilogo nella schermata di morte.
+s_DeathRecap_Popup_w = Usato se Riepilogo morte è attivo.
+s_DeathRecap_AfterRespawn = Dopo rinascita (s)
+s_DeathRecap_AfterRespawn_d = Secondi in cui il riepilogo resta visibile dopo la rinascita.
+s_DeathRecap_AfterRespawn_w = Usato se Popup è attivo.
+s_DeathRecap_Size = Dimensione
+s_DeathRecap_Size_d = 1 è la dimensione normale.
+s_DeathRecap_Size_w = Usato se Popup è attivo.
+s_DeathRecap_Opacity = Opacità
+s_DeathRecap_Opacity_d = 1 è pieno; più basso lascia vedere il gioco attraverso.
+s_DeathRecap_Opacity_w = Usato se Popup è attivo.
+
+# Boss Recap
+sec_BossRecap = Riepilogo boss
+s_BossRecap_Enabled = Attivo
+s_BossRecap_Enabled_d = Dopo uno scontro con un boss, quanti danni ha fatto ogni giocatore e con cosa: armi, frecce, incantamenti di Epic Loot, fuoco e veleno nel tempo. Gli amici con questa mod condividono i loro numeri in automatico. Il dettaglio completo è nella finestra statistiche sotto Boss.
+s_BossRecap_Popup = Popup
+s_BossRecap_Popup_d = Un breve riepilogo a schermo quando il boss muore.
+s_BossRecap_Popup_w = Usato se Riepilogo boss è attivo.
+s_BossRecap_PopupSeconds = Durata popup (s)
+s_BossRecap_PopupSeconds_d = Quanto resta visibile il riepilogo.
+s_BossRecap_PopupSeconds_w = Usato se Popup è attivo.
+s_BossRecap_Size = Dimensione
+s_BossRecap_Size_d = 1 è la dimensione normale.
+s_BossRecap_Size_w = Usato se Popup è attivo.
+s_BossRecap_Opacity = Opacità
+s_BossRecap_Opacity_d = 1 è pieno; più basso lascia vedere il gioco attraverso.
+s_BossRecap_Opacity_w = Usato se Popup è attivo.
+s_BossRecap_AnchorX = Ancoraggio X
+s_BossRecap_AnchorX_d = Centro del riepilogo. 0 è il bordo sinistro dello schermo, 1 il destro.
+s_BossRecap_AnchorX_w = Usato se Popup è attivo.
+s_BossRecap_AnchorY = Ancoraggio Y
+s_BossRecap_AnchorY_d = Centro del riepilogo. 0 è il fondo dello schermo, 1 la cima.
+s_BossRecap_AnchorY_w = Usato se Popup è attivo.
+
 # Bench Pins
 sec_BenchPins = Punti dei banchi
 s_BenchPins_Enabled = Attivo

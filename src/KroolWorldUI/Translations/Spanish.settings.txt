@@ -492,6 +492,60 @@ s_LowAmmo_AnchorX_d = Centro del recuadro. 0 es el borde izquierdo de la pantall
 s_LowAmmo_AnchorY = Ancla Y
 s_LowAmmo_AnchorY_d = Centro del recuadro. 0 es la parte inferior de la pantalla, 1 la superior.
 
+# Stats Window
+sec_StatsWindow = Ventana de estadísticas
+s_StatsWindow_Enabled = Activado
+s_StatsWindow_Enabled_d = Una ventana de estadísticas en el inventario: salud, vigor, regeneración, velocidad, carga máxima, armadura y resistencias, con lo que aporta cada objeto, comida, poción y encantamiento de Epic Loot. También tus resúmenes de muertes y de jefes.
+s_StatsWindow_Key = Tecla
+s_StatsWindow_Key_d = Abre y cierra la ventana, con o sin el inventario abierto.
+s_StatsWindow_Key_w = Se usa si Ventana de estadísticas está activado.
+s_StatsWindow_ControllerButton = Botón del mando
+s_StatsWindow_ControllerButton_d = Botón del mando que abre y cierra la ventana mientras el inventario está abierto.
+s_StatsWindow_ControllerButton_w = Se usa si Ventana de estadísticas está activado.
+s_StatsWindow_ArmorButton = Botón de armadura
+s_StatsWindow_ArmorButton_d = Haz clic en el valor de armadura del inventario para abrir la ventana. Una pequeña marca indica que se puede pulsar.
+s_StatsWindow_ArmorButton_w = Se usa si Ventana de estadísticas está activado.
+
+# Death Recap
+sec_DeathRecap = Resumen de muerte
+s_DeathRecap_Enabled = Activado
+s_DeathRecap_Enabled_d = Guarda un resumen de lo que te mató: cada fuente de daño en el combate, el golpe final y los tipos de daño. Se ve en la ventana de estadísticas, en Muertes.
+s_DeathRecap_Popup = Ventana emergente
+s_DeathRecap_Popup_d = Muestra el resumen en la pantalla de muerte.
+s_DeathRecap_Popup_w = Se usa si Resumen de muerte está activado.
+s_DeathRecap_AfterRespawn = Tras reaparecer
+s_DeathRecap_AfterRespawn_d = Segundos que el resumen sigue en pantalla después de reaparecer.
+s_DeathRecap_AfterRespawn_w = Se usa si Ventana emergente está activado.
+s_DeathRecap_Size = Tamaño
+s_DeathRecap_Size_d = 1 es el tamaño normal.
+s_DeathRecap_Size_w = Se usa si Ventana emergente está activado.
+s_DeathRecap_Opacity = Opacidad
+s_DeathRecap_Opacity_d = 1 es opaco; menos deja ver el juego a través.
+s_DeathRecap_Opacity_w = Se usa si Ventana emergente está activado.
+
+# Boss Recap
+sec_BossRecap = Resumen de jefe
+s_BossRecap_Enabled = Activado
+s_BossRecap_Enabled_d = Tras un combate contra un jefe, cuánto daño hizo cada jugador y con qué: armas, flechas, encantamientos de Epic Loot, fuego y veneno con el tiempo. Los amigos con este mod comparten sus cifras automáticamente. El desglose completo está en la ventana de estadísticas, en Jefes.
+s_BossRecap_Popup = Ventana emergente
+s_BossRecap_Popup_d = Un resumen corto en pantalla cuando muere el jefe.
+s_BossRecap_Popup_w = Se usa si Resumen de jefe está activado.
+s_BossRecap_PopupSeconds = Duración (s)
+s_BossRecap_PopupSeconds_d = Cuánto tiempo sigue el resumen en pantalla.
+s_BossRecap_PopupSeconds_w = Se usa si Ventana emergente está activado.
+s_BossRecap_Size = Tamaño
+s_BossRecap_Size_d = 1 es el tamaño normal.
+s_BossRecap_Size_w = Se usa si Ventana emergente está activado.
+s_BossRecap_Opacity = Opacidad
+s_BossRecap_Opacity_d = 1 es opaco; menos deja ver el juego a través.
+s_BossRecap_Opacity_w = Se usa si Ventana emergente está activado.
+s_BossRecap_AnchorX = Ancla X
+s_BossRecap_AnchorX_d = Centro del resumen. 0 es el borde izquierdo de la pantalla, 1 el derecho.
+s_BossRecap_AnchorX_w = Se usa si Ventana emergente está activado.
+s_BossRecap_AnchorY = Ancla Y
+s_BossRecap_AnchorY_d = Centro del resumen. 0 es la parte inferior de la pantalla, 1 la superior.
+s_BossRecap_AnchorY_w = Se usa si Ventana emergente está activado.
+
 # Bench Pins
 sec_BenchPins = Marcas de banco
 s_BenchPins_Enabled = Activado

@@ -492,6 +492,60 @@ s_LowAmmo_AnchorX_d = Средина на полето. 0 е левиот раб
 s_LowAmmo_AnchorY = Сидро Y
 s_LowAmmo_AnchorY_d = Средина на полето. 0 е дното на екранот, 1 врвот.
 
+# Stats Window
+sec_StatsWindow = Прозорец за статистика
+s_StatsWindow_Enabled = Вклучено
+s_StatsWindow_Enabled_d = Прозорец за статистика во инвентарот: здравје, енергија, обнова, брзина, носивост, оклоп и отпорности, со тоа што го додава секој предмет, храна, напиток и Epic Loot маѓепсување. И твоите прегледи на смрт и на босови.
+s_StatsWindow_Key = Тастер
+s_StatsWindow_Key_d = Го отвора и затвора прозорецот, со или без отворен инвентар.
+s_StatsWindow_Key_w = Важи кога „Прозорец за статистика“ е вклучено.
+s_StatsWindow_ControllerButton = Копче на контролер
+s_StatsWindow_ControllerButton_d = Копче на контролерот што го отвора и затвора прозорецот додека инвентарот е отворен.
+s_StatsWindow_ControllerButton_w = Важи кога „Прозорец за статистика“ е вклучено.
+s_StatsWindow_ArmorButton = Копче за оклоп
+s_StatsWindow_ArmorButton_d = Кликни на вредноста на оклопот во инвентарот за да го отвориш прозорецот. Мала ознака покажува дека може да се кликне.
+s_StatsWindow_ArmorButton_w = Важи кога „Прозорец за статистика“ е вклучено.
+
+# Death Recap
+sec_DeathRecap = Преглед на смрт
+s_DeathRecap_Enabled = Вклучено
+s_DeathRecap_Enabled_d = Чува преглед на тоа што те уби: секој извор на штета во борбата, смртоносниот удар и типовите штета. Се прикажува во прозорецот за статистика под Смрти.
+s_DeathRecap_Popup = Скокачки прозорец
+s_DeathRecap_Popup_d = Го прикажува прегледот на екранот за смрт.
+s_DeathRecap_Popup_w = Важи кога „Преглед на смрт“ е вклучено.
+s_DeathRecap_AfterRespawn = По повторно раѓање
+s_DeathRecap_AfterRespawn_d = Секунди што прегледот останува откако ќе се родиш повторно.
+s_DeathRecap_AfterRespawn_w = Важи кога „Скокачки прозорец“ е вклучено.
+s_DeathRecap_Size = Големина
+s_DeathRecap_Size_d = 1 е нормалната големина.
+s_DeathRecap_Size_w = Важи кога „Скокачки прозорец“ е вклучено.
+s_DeathRecap_Opacity = Непроѕирност
+s_DeathRecap_Opacity_d = 1 е полно; помалку ја пропушта играта.
+s_DeathRecap_Opacity_w = Важи кога „Скокачки прозорец“ е вклучено.
+
+# Boss Recap
+sec_BossRecap = Преглед на бос
+s_BossRecap_Enabled = Вклучено
+s_BossRecap_Enabled_d = По борба со бос, колку штета направил секој играч и со што: оружја, стрели, Epic Loot маѓепсувања, оган и отров со текот на времето. Пријателите со овој мод автоматски ги споделуваат своите бројки. Целосната анализа е во прозорецот за статистика под Босови.
+s_BossRecap_Popup = Скокачки прозорец
+s_BossRecap_Popup_d = Краток преглед на екранот кога босот ќе умре.
+s_BossRecap_Popup_w = Важи кога „Преглед на бос“ е вклучено.
+s_BossRecap_PopupSeconds = Секунди приказ
+s_BossRecap_PopupSeconds_d = Колку долго останува прегледот.
+s_BossRecap_PopupSeconds_w = Важи кога „Скокачки прозорец“ е вклучено.
+s_BossRecap_Size = Големина
+s_BossRecap_Size_d = 1 е нормалната големина.
+s_BossRecap_Size_w = Важи кога „Скокачки прозорец“ е вклучено.
+s_BossRecap_Opacity = Непроѕирност
+s_BossRecap_Opacity_d = 1 е полно; помалку ја пропушта играта.
+s_BossRecap_Opacity_w = Важи кога „Скокачки прозорец“ е вклучено.
+s_BossRecap_AnchorX = Сидро X
+s_BossRecap_AnchorX_d = Средина на прегледот. 0 е левиот раб на екранот, 1 десниот.
+s_BossRecap_AnchorX_w = Важи кога „Скокачки прозорец“ е вклучено.
+s_BossRecap_AnchorY = Сидро Y
+s_BossRecap_AnchorY_d = Средина на прегледот. 0 е дното на екранот, 1 врвот.
+s_BossRecap_AnchorY_w = Важи кога „Скокачки прозорец“ е вклучено.
+
 # Bench Pins
 sec_BenchPins = Ознаки за маси
 s_BenchPins_Enabled = Вклучено

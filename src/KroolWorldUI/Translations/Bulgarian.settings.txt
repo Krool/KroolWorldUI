@@ -492,6 +492,60 @@ s_LowAmmo_AnchorX_d = Център на кутията. 0 е левият кра
 s_LowAmmo_AnchorY = Котва Y
 s_LowAmmo_AnchorY_d = Център на кутията. 0 е долният край на екрана, 1 горният.
 
+# Stats Window
+sec_StatsWindow = Прозорец с показатели
+s_StatsWindow_Enabled = Включено
+s_StatsWindow_Enabled_d = Прозорец с показатели в инвентара: здраве, издръжливост, възстановяване, скорост, тегло за носене, броня и устойчивости, както и какво добавя всеки предмет, храна, отвара и омагьосване от Epic Loot. Също и обобщенията за смъртите и босовете ти.
+s_StatsWindow_Key = Клавиш
+s_StatsWindow_Key_d = Отваря и затваря прозореца, със или без отворен инвентар.
+s_StatsWindow_Key_w = Важи при включен „Прозорец с показатели“.
+s_StatsWindow_ControllerButton = Бутон на контролера
+s_StatsWindow_ControllerButton_d = Бутон на контролера, който отваря и затваря прозореца, докато инвентарът е отворен.
+s_StatsWindow_ControllerButton_w = Важи при включен „Прозорец с показатели“.
+s_StatsWindow_ArmorButton = Бутон за броня
+s_StatsWindow_ArmorButton_d = Щракни върху стойността на бронята в инвентара, за да отвориш прозореца. Малък знак показва, че може да се щракне.
+s_StatsWindow_ArmorButton_w = Важи при включен „Прозорец с показатели“.
+
+# Death Recap
+sec_DeathRecap = Обобщение на смъртта
+s_DeathRecap_Enabled = Включено
+s_DeathRecap_Enabled_d = Пази обобщение на това, което те уби: всеки източник на щети в битката, смъртоносния удар и видовете щети. Показва се в прозореца с показатели под Смърти.
+s_DeathRecap_Popup = Изскачащ прозорец
+s_DeathRecap_Popup_d = Показва обобщението на екрана при смърт.
+s_DeathRecap_Popup_w = Важи при включено „Обобщение на смъртта“.
+s_DeathRecap_AfterRespawn = След съживяване
+s_DeathRecap_AfterRespawn_d = Секунди, през които обобщението остава, след като се появиш отново.
+s_DeathRecap_AfterRespawn_w = Важи при включена настройка „Изскачащ прозорец“.
+s_DeathRecap_Size = Размер
+s_DeathRecap_Size_d = 1 е нормалният размер.
+s_DeathRecap_Size_w = Важи при включена настройка „Изскачащ прозорец“.
+s_DeathRecap_Opacity = Непрозрачност
+s_DeathRecap_Opacity_d = 1 е плътно; по-малко пропуска играта отдолу.
+s_DeathRecap_Opacity_w = Важи при включена настройка „Изскачащ прозорец“.
+
+# Boss Recap
+sec_BossRecap = Обобщение за боса
+s_BossRecap_Enabled = Включено
+s_BossRecap_Enabled_d = След битка с бос показва колко щети е нанесъл всеки играч и с какво: оръжия, стрели, омагьосвания от Epic Loot, огън и отрова с времето. Приятели с този мод споделят числата си автоматично. Пълната разбивка е в прозореца с показатели под Босове.
+s_BossRecap_Popup = Изскачащ прозорец
+s_BossRecap_Popup_d = Кратко резюме на екрана, когато босът умре.
+s_BossRecap_Popup_w = Важи при включено „Обобщение за боса“.
+s_BossRecap_PopupSeconds = Секунди показване
+s_BossRecap_PopupSeconds_d = Колко дълго остава резюмето.
+s_BossRecap_PopupSeconds_w = Важи при включена настройка „Изскачащ прозорец“.
+s_BossRecap_Size = Размер
+s_BossRecap_Size_d = 1 е нормалният размер.
+s_BossRecap_Size_w = Важи при включена настройка „Изскачащ прозорец“.
+s_BossRecap_Opacity = Непрозрачност
+s_BossRecap_Opacity_d = 1 е плътно; по-малко пропуска играта отдолу.
+s_BossRecap_Opacity_w = Важи при включена настройка „Изскачащ прозорец“.
+s_BossRecap_AnchorX = Котва X
+s_BossRecap_AnchorX_d = Център на резюмето. 0 е левият край на екрана, 1 десният.
+s_BossRecap_AnchorX_w = Важи при включена настройка „Изскачащ прозорец“.
+s_BossRecap_AnchorY = Котва Y
+s_BossRecap_AnchorY_d = Център на резюмето. 0 е долният край на екрана, 1 горният.
+s_BossRecap_AnchorY_w = Важи при включена настройка „Изскачащ прозорец“.
+
 # Bench Pins
 sec_BenchPins = Точки за маси
 s_BenchPins_Enabled = Включено

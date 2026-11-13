@@ -492,6 +492,60 @@ s_LowAmmo_AnchorX_d = 框的中心。0 为屏幕左侧，1 为右侧。
 s_LowAmmo_AnchorY = 锚点Y
 s_LowAmmo_AnchorY_d = 框的中心。0 为屏幕底部，1 为顶部。
 
+# Stats Window
+sec_StatsWindow = 属性窗口
+s_StatsWindow_Enabled = 启用
+s_StatsWindow_Enabled_d = 物品栏中的属性窗口：生命值、耐力、恢复、速度、负重、护甲和抗性，并显示每件物品、食物、药剂和 Epic Loot 附魔各加了多少。还有你的死亡回顾和 Boss 回顾。
+s_StatsWindow_Key = 按键
+s_StatsWindow_Key_d = 打开和关闭窗口，无论物品栏是否打开。
+s_StatsWindow_Key_w = 属性窗口开启时生效。
+s_StatsWindow_ControllerButton = 手柄按钮
+s_StatsWindow_ControllerButton_d = 物品栏打开时，用于打开和关闭窗口的手柄按钮。
+s_StatsWindow_ControllerButton_w = 属性窗口开启时生效。
+s_StatsWindow_ArmorButton = 护甲按钮
+s_StatsWindow_ArmorButton_d = 点击物品栏中的护甲值即可打开窗口。一个小标记表示它可以点击。
+s_StatsWindow_ArmorButton_w = 属性窗口开启时生效。
+
+# Death Recap
+sec_DeathRecap = 死亡回顾
+s_DeathRecap_Enabled = 启用
+s_DeathRecap_Enabled_d = 记录是什么杀死了你：战斗中的每个伤害来源、致命一击和伤害类型。显示在属性窗口的“死亡”下。
+s_DeathRecap_Popup = 弹窗
+s_DeathRecap_Popup_d = 在死亡画面显示回顾。
+s_DeathRecap_Popup_w = 死亡回顾开启时生效。
+s_DeathRecap_AfterRespawn = 重生后
+s_DeathRecap_AfterRespawn_d = 重生后回顾保留的秒数。
+s_DeathRecap_AfterRespawn_w = “弹窗”开启时生效。
+s_DeathRecap_Size = 大小
+s_DeathRecap_Size_d = 1 为正常大小。
+s_DeathRecap_Size_w = “弹窗”开启时生效。
+s_DeathRecap_Opacity = 不透明度
+s_DeathRecap_Opacity_d = 1 为完全不透明，越低越透明。
+s_DeathRecap_Opacity_w = “弹窗”开启时生效。
+
+# Boss Recap
+sec_BossRecap = Boss 回顾
+s_BossRecap_Enabled = 启用
+s_BossRecap_Enabled_d = Boss 战后，显示每位玩家造成了多少伤害、用的是什么：武器、箭矢、Epic Loot 附魔、持续的火焰和毒素伤害。装有此模组的好友会自动分享数据。完整明细在属性窗口的“Boss”下。
+s_BossRecap_Popup = 弹窗
+s_BossRecap_Popup_d = Boss 死亡时在屏幕上显示简短摘要。
+s_BossRecap_Popup_w = Boss 回顾开启时生效。
+s_BossRecap_PopupSeconds = 弹窗秒数
+s_BossRecap_PopupSeconds_d = 摘要停留多久。
+s_BossRecap_PopupSeconds_w = “弹窗”开启时生效。
+s_BossRecap_Size = 大小
+s_BossRecap_Size_d = 1 为正常大小。
+s_BossRecap_Size_w = “弹窗”开启时生效。
+s_BossRecap_Opacity = 不透明度
+s_BossRecap_Opacity_d = 1 为完全不透明，越低越透明。
+s_BossRecap_Opacity_w = “弹窗”开启时生效。
+s_BossRecap_AnchorX = 锚点X
+s_BossRecap_AnchorX_d = 摘要的中心。0 为屏幕左侧，1 为右侧。
+s_BossRecap_AnchorX_w = “弹窗”开启时生效。
+s_BossRecap_AnchorY = 锚点Y
+s_BossRecap_AnchorY_d = 摘要的中心。0 为屏幕底部，1 为顶部。
+s_BossRecap_AnchorY_w = “弹窗”开启时生效。
+
 # Bench Pins
 sec_BenchPins = 工作台标记
 s_BenchPins_Enabled = 启用

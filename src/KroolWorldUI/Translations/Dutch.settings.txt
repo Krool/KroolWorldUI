@@ -492,6 +492,60 @@ s_LowAmmo_AnchorX_d = Midden van het vak. 0 is de linkerkant van het scherm, 1 d
 s_LowAmmo_AnchorY = Anker Y
 s_LowAmmo_AnchorY_d = Midden van het vak. 0 is de onderkant van het scherm, 1 de bovenkant.
 
+# Stats Window
+sec_StatsWindow = Statsvenster
+s_StatsWindow_Enabled = Ingeschakeld
+s_StatsWindow_Enabled_d = Een statsvenster in de inventaris: gezondheid, conditie, herstel, snelheid, draagcapaciteit, harnas en weerstanden, met wat elk voorwerp, voedsel, drankje en Epic Loot-betovering bijdraagt. Ook je doods- en baasoverzichten.
+s_StatsWindow_Key = Toets
+s_StatsWindow_Key_d = Opent en sluit het venster, met of zonder open inventaris.
+s_StatsWindow_Key_w = Gebruikt als het statsvenster aan staat.
+s_StatsWindow_ControllerButton = Controllerknop
+s_StatsWindow_ControllerButton_d = Controllerknop die het venster opent en sluit terwijl de inventaris open is.
+s_StatsWindow_ControllerButton_w = Gebruikt als het statsvenster aan staat.
+s_StatsWindow_ArmorButton = Harnasknop
+s_StatsWindow_ArmorButton_d = Klik op de harnaswaarde in de inventaris om het venster te openen. Een klein teken laat zien dat je erop kunt klikken.
+s_StatsWindow_ArmorButton_w = Gebruikt als het statsvenster aan staat.
+
+# Death Recap
+sec_DeathRecap = Doodsoverzicht
+s_DeathRecap_Enabled = Ingeschakeld
+s_DeathRecap_Enabled_d = Houdt bij waardoor je stierf: elke schadebron in het gevecht, de fatale klap en de schadetypes. Te zien in het statsvenster onder Doden.
+s_DeathRecap_Popup = Pop-up
+s_DeathRecap_Popup_d = Toont het overzicht op het doodsscherm.
+s_DeathRecap_Popup_w = Gebruikt als het doodsoverzicht aan staat.
+s_DeathRecap_AfterRespawn = Na respawn
+s_DeathRecap_AfterRespawn_d = Seconden dat het overzicht blijft staan nadat je respawnt.
+s_DeathRecap_AfterRespawn_w = Gebruikt als Pop-up aan staat.
+s_DeathRecap_Size = Grootte
+s_DeathRecap_Size_d = 1 is de normale grootte.
+s_DeathRecap_Size_w = Gebruikt als Pop-up aan staat.
+s_DeathRecap_Opacity = Dekking
+s_DeathRecap_Opacity_d = 1 is ondoorzichtig; lager laat het spel erdoor zien.
+s_DeathRecap_Opacity_w = Gebruikt als Pop-up aan staat.
+
+# Boss Recap
+sec_BossRecap = Baasoverzicht
+s_BossRecap_Enabled = Ingeschakeld
+s_BossRecap_Enabled_d = Na een baasgevecht zie je hoeveel schade elke speler deed en waarmee: wapens, pijlen, Epic Loot-betoveringen, vuur en gif over tijd. Vrienden met deze mod delen hun cijfers automatisch. Het volledige overzicht staat in het statsvenster onder Bazen.
+s_BossRecap_Popup = Pop-up
+s_BossRecap_Popup_d = Een korte samenvatting op het scherm als de baas sterft.
+s_BossRecap_Popup_w = Gebruikt als het baasoverzicht aan staat.
+s_BossRecap_PopupSeconds = Pop-upduur
+s_BossRecap_PopupSeconds_d = Hoe lang de samenvatting blijft staan.
+s_BossRecap_PopupSeconds_w = Gebruikt als Pop-up aan staat.
+s_BossRecap_Size = Grootte
+s_BossRecap_Size_d = 1 is de normale grootte.
+s_BossRecap_Size_w = Gebruikt als Pop-up aan staat.
+s_BossRecap_Opacity = Dekking
+s_BossRecap_Opacity_d = 1 is ondoorzichtig; lager laat het spel erdoor zien.
+s_BossRecap_Opacity_w = Gebruikt als Pop-up aan staat.
+s_BossRecap_AnchorX = Anker X
+s_BossRecap_AnchorX_d = Midden van de samenvatting. 0 is de linkerkant van het scherm, 1 de rechterkant.
+s_BossRecap_AnchorX_w = Gebruikt als Pop-up aan staat.
+s_BossRecap_AnchorY = Anker Y
+s_BossRecap_AnchorY_d = Midden van de samenvatting. 0 is de onderkant van het scherm, 1 de bovenkant.
+s_BossRecap_AnchorY_w = Gebruikt als Pop-up aan staat.
+
 # Bench Pins
 sec_BenchPins = Werkbankmarkeringen
 s_BenchPins_Enabled = Ingeschakeld

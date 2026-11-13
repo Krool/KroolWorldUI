@@ -172,6 +172,8 @@ namespace KroolWorldUI
                 SaveCountdownHud.Preview(true);
                 RestedCountdownHud.Preview(true);
                 AmmoWarningHud.Preview(true);
+                DeathRecapHud.Preview(DeathRecap.Enabled.Value && DeathRecap.Popup.Value);
+                BossRecapHud.Preview(BossRecap.Enabled.Value && BossRecap.Popup.Value);
             }
             else if (_previewWas)
             {
@@ -179,6 +181,8 @@ namespace KroolWorldUI
                 SaveCountdownHud.Preview(false);
                 RestedCountdownHud.Preview(false);
                 AmmoWarningHud.Preview(false);
+                DeathRecapHud.Preview(false);
+                BossRecapHud.Preview(false);
             }
             _previewWas = active;
         }

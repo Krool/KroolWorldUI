@@ -492,6 +492,60 @@ s_LowAmmo_AnchorX_d = Sredina okvira. 0 je leva ivica ekrana, 1 desna.
 s_LowAmmo_AnchorY = Sidro Y
 s_LowAmmo_AnchorY_d = Sredina okvira. 0 je dno ekrana, 1 vrh.
 
+# Stats Window
+sec_StatsWindow = Prozor statistike
+s_StatsWindow_Enabled = Uključeno
+s_StatsWindow_Enabled_d = Prozor statistike u inventaru: zdravlje, izdržljivost, regeneracija, brzina, nosivost, oklop i otpornosti, sa onim što dodaje svaki predmet, hrana, napitak i Epic Loot čarolija. Takođe tvoji pregledi smrti i bosova.
+s_StatsWindow_Key = Taster
+s_StatsWindow_Key_d = Otvara i zatvara prozor, sa otvorenim inventarom ili bez njega.
+s_StatsWindow_Key_w = Važi kad je „Prozor statistike“ uključen.
+s_StatsWindow_ControllerButton = Dugme kontrolera
+s_StatsWindow_ControllerButton_d = Dugme na kontroleru koje otvara i zatvara prozor dok je inventar otvoren.
+s_StatsWindow_ControllerButton_w = Važi kad je „Prozor statistike“ uključen.
+s_StatsWindow_ArmorButton = Dugme oklopa
+s_StatsWindow_ArmorButton_d = Klikni na vrednost oklopa u inventaru da otvoriš prozor. Mala oznaka pokazuje da može da se klikne.
+s_StatsWindow_ArmorButton_w = Važi kad je „Prozor statistike“ uključen.
+
+# Death Recap
+sec_DeathRecap = Pregled smrti
+s_DeathRecap_Enabled = Uključeno
+s_DeathRecap_Enabled_d = Čuva pregled onoga što te je ubilo: svaki izvor štete u borbi, smrtonosni udarac i vrste štete. Prikazuje se u prozoru statistike, pod Smrti.
+s_DeathRecap_Popup = Iskačući prozor
+s_DeathRecap_Popup_d = Prikazuje pregled na ekranu smrti.
+s_DeathRecap_Popup_w = Važi kad je „Pregled smrti“ uključen.
+s_DeathRecap_AfterRespawn = Posle oživljavanja
+s_DeathRecap_AfterRespawn_d = Koliko sekundi pregled ostaje na ekranu posle ponovnog oživljavanja.
+s_DeathRecap_AfterRespawn_w = Važi kad je „Iskačući prozor“ uključen.
+s_DeathRecap_Size = Veličina
+s_DeathRecap_Size_d = 1 je normalna veličina.
+s_DeathRecap_Size_w = Važi kad je „Iskačući prozor“ uključen.
+s_DeathRecap_Opacity = Neprozirnost
+s_DeathRecap_Opacity_d = 1 je puno; manje propušta igru ispod.
+s_DeathRecap_Opacity_w = Važi kad je „Iskačući prozor“ uključen.
+
+# Boss Recap
+sec_BossRecap = Pregled bosa
+s_BossRecap_Enabled = Uključeno
+s_BossRecap_Enabled_d = Posle borbe sa bosom, koliko štete je svaki igrač naneo i čime: oružje, strele, Epic Loot čarolije, vatra i otrov tokom vremena. Prijatelji sa ovim modom automatski dele svoje brojke. Ceo pregled je u prozoru statistike, pod Bosovi.
+s_BossRecap_Popup = Iskačući prozor
+s_BossRecap_Popup_d = Kratak pregled na ekranu kad bos umre.
+s_BossRecap_Popup_w = Važi kad je „Pregled bosa“ uključen.
+s_BossRecap_PopupSeconds = Sekunde prikaza
+s_BossRecap_PopupSeconds_d = Koliko dugo pregled ostaje.
+s_BossRecap_PopupSeconds_w = Važi kad je „Iskačući prozor“ uključen.
+s_BossRecap_Size = Veličina
+s_BossRecap_Size_d = 1 je normalna veličina.
+s_BossRecap_Size_w = Važi kad je „Iskačući prozor“ uključen.
+s_BossRecap_Opacity = Neprozirnost
+s_BossRecap_Opacity_d = 1 je puno; manje propušta igru ispod.
+s_BossRecap_Opacity_w = Važi kad je „Iskačući prozor“ uključen.
+s_BossRecap_AnchorX = Sidro X
+s_BossRecap_AnchorX_d = Sredina pregleda. 0 je leva ivica ekrana, 1 desna.
+s_BossRecap_AnchorX_w = Važi kad je „Iskačući prozor“ uključen.
+s_BossRecap_AnchorY = Sidro Y
+s_BossRecap_AnchorY_d = Sredina pregleda. 0 je dno ekrana, 1 vrh.
+s_BossRecap_AnchorY_w = Važi kad je „Iskačući prozor“ uključen.
+
 # Bench Pins
 sec_BenchPins = Oznake stolova
 s_BenchPins_Enabled = Uključeno

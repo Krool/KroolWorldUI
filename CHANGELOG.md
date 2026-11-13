@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.17.0
+
+- **Stats window (new).** Press **K**, click the armor value in your inventory, or press the right stick there on a controller. Shows max health, stamina and eitr, regen, movement and run speed, carry weight, stamina costs, armor and resistances, each with pictures of what adds to it: gear, food, potions, Rested, Epic Loot enchantments. Resistances show which one counts and which do nothing, because only the strongest of each type applies. Also lists your active effects and your Epic Loot enchantments.
+- **Death recap (new).** On the death screen: every source of damage in the fight that killed you, by damage type, with the killing blow. Kept in the stats window under Deaths.
+- **Boss recap (new).** When a boss dies: each player's share of the damage, and in the stats window the breakdown by weapon, arrow, enchantment and fire or poison over time. Friends with the mod share their numbers automatically.
+
 ## 0.16.1
 
 - **Build support is on by default now.** Updating turns it on once; to switch it off, use F7 under Build Support.

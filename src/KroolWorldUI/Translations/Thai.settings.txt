@@ -492,6 +492,60 @@ s_LowAmmo_AnchorX_d = กึ่งกลางกล่อง 0 คือขอ�
 s_LowAmmo_AnchorY = จุดยึด Y
 s_LowAmmo_AnchorY_d = กึ่งกลางกล่อง 0 คือขอบล่างของจอ 1 คือขอบบน
 
+# Stats Window
+sec_StatsWindow = หน้าต่างค่าสถานะ
+s_StatsWindow_Enabled = เปิดใช้
+s_StatsWindow_Enabled_d = หน้าต่างค่าสถานะในช่องเก็บของ: พลังชีวิต พละกำลัง การฟื้นฟู ความเร็ว น้ำหนักที่แบกได้ เกราะ และการต้านทาน พร้อมบอกว่าไอเทม อาหาร ยา และเอนแชนต์ Epic Loot แต่ละอย่างเพิ่มเท่าไร รวมถึงสรุปการตายและสรุปการสู้บอสของคุณ
+s_StatsWindow_Key = ปุ่ม
+s_StatsWindow_Key_d = เปิดและปิดหน้าต่าง จะเปิดช่องเก็บของอยู่หรือไม่ก็ได้
+s_StatsWindow_Key_w = ใช้เมื่อเปิด “หน้าต่างค่าสถานะ”
+s_StatsWindow_ControllerButton = ปุ่มจอย
+s_StatsWindow_ControllerButton_d = ปุ่มคอนโทรลเลอร์ที่เปิดและปิดหน้าต่างขณะเปิดช่องเก็บของ
+s_StatsWindow_ControllerButton_w = ใช้เมื่อเปิด “หน้าต่างค่าสถานะ”
+s_StatsWindow_ArmorButton = ปุ่มเกราะ
+s_StatsWindow_ArmorButton_d = คลิกค่าเกราะในช่องเก็บของเพื่อเปิดหน้าต่าง มีเครื่องหมายเล็กๆ บอกว่าคลิกได้
+s_StatsWindow_ArmorButton_w = ใช้เมื่อเปิด “หน้าต่างค่าสถานะ”
+
+# Death Recap
+sec_DeathRecap = สรุปการตาย
+s_DeathRecap_Enabled = เปิดใช้
+s_DeathRecap_Enabled_d = เก็บสรุปว่าอะไรฆ่าคุณ: แหล่งความเสียหายทุกอย่างในการต่อสู้ การโจมตีปิดฉาก และประเภทความเสียหาย แสดงในหน้าต่างค่าสถานะ ใต้แท็บ การตาย
+s_DeathRecap_Popup = ป๊อปอัป
+s_DeathRecap_Popup_d = แสดงสรุปบนหน้าจอตอนตาย
+s_DeathRecap_Popup_w = ใช้เมื่อเปิด “สรุปการตาย”
+s_DeathRecap_AfterRespawn = หลังเกิดใหม่
+s_DeathRecap_AfterRespawn_d = จำนวนวินาทีที่สรุปค้างอยู่หลังคุณเกิดใหม่
+s_DeathRecap_AfterRespawn_w = ใช้เมื่อเปิด “ป๊อปอัป”
+s_DeathRecap_Size = ขนาด
+s_DeathRecap_Size_d = 1 คือขนาดปกติ
+s_DeathRecap_Size_w = ใช้เมื่อเปิด “ป๊อปอัป”
+s_DeathRecap_Opacity = ความทึบ
+s_DeathRecap_Opacity_d = 1 คือทึบเต็มที่ ค่าน้อยกว่าจะมองทะลุเห็นเกม
+s_DeathRecap_Opacity_w = ใช้เมื่อเปิด “ป๊อปอัป”
+
+# Boss Recap
+sec_BossRecap = สรุปการสู้บอส
+s_BossRecap_Enabled = เปิดใช้
+s_BossRecap_Enabled_d = หลังสู้บอส แสดงว่าผู้เล่นแต่ละคนทำความเสียหายไปเท่าไรและด้วยอะไร: อาวุธ ลูกธนู เอนแชนต์ Epic Loot ไฟและพิษต่อเนื่อง เพื่อนที่มีม็อดนี้จะแชร์ตัวเลขให้อัตโนมัติ รายละเอียดทั้งหมดอยู่ในหน้าต่างค่าสถานะ ใต้แท็บ บอส
+s_BossRecap_Popup = ป๊อปอัป
+s_BossRecap_Popup_d = สรุปสั้นๆ บนจอเมื่อบอสตาย
+s_BossRecap_Popup_w = ใช้เมื่อเปิด “สรุปการสู้บอส”
+s_BossRecap_PopupSeconds = เวลาแสดง (วิ)
+s_BossRecap_PopupSeconds_d = สรุปค้างอยู่บนจอนานเท่าไร
+s_BossRecap_PopupSeconds_w = ใช้เมื่อเปิด “ป๊อปอัป”
+s_BossRecap_Size = ขนาด
+s_BossRecap_Size_d = 1 คือขนาดปกติ
+s_BossRecap_Size_w = ใช้เมื่อเปิด “ป๊อปอัป”
+s_BossRecap_Opacity = ความทึบ
+s_BossRecap_Opacity_d = 1 คือทึบเต็มที่ ค่าน้อยกว่าจะมองทะลุเห็นเกม
+s_BossRecap_Opacity_w = ใช้เมื่อเปิด “ป๊อปอัป”
+s_BossRecap_AnchorX = จุดยึด X
+s_BossRecap_AnchorX_d = กึ่งกลางของสรุป 0 คือขอบซ้ายของจอ 1 คือขอบขวา
+s_BossRecap_AnchorX_w = ใช้เมื่อเปิด “ป๊อปอัป”
+s_BossRecap_AnchorY = จุดยึด Y
+s_BossRecap_AnchorY_d = กึ่งกลางของสรุป 0 คือขอบล่างของจอ 1 คือขอบบน
+s_BossRecap_AnchorY_w = ใช้เมื่อเปิด “ป๊อปอัป”
+
 # Bench Pins
 sec_BenchPins = หมุดโต๊ะงาน
 s_BenchPins_Enabled = เปิดใช้

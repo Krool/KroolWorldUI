@@ -492,6 +492,60 @@ s_LowAmmo_AnchorX_d = 框的中心。0 為畫面左側，1 為右側。
 s_LowAmmo_AnchorY = 錨點Y
 s_LowAmmo_AnchorY_d = 框的中心。0 為畫面底部，1 為頂部。
 
+# Stats Window
+sec_StatsWindow = 屬性視窗
+s_StatsWindow_Enabled = 啟用
+s_StatsWindow_Enabled_d = 物品欄中的屬性視窗：生命值、體力、恢復、速度、負重、護甲和抗性，並顯示每件物品、食物、藥水和 Epic Loot 附魔各加了多少。還有你的死亡回顧和首領回顧。
+s_StatsWindow_Key = 按鍵
+s_StatsWindow_Key_d = 開啟和關閉視窗，無論物品欄是否開啟。
+s_StatsWindow_Key_w = 屬性視窗開啟時生效。
+s_StatsWindow_ControllerButton = 控制器按鈕
+s_StatsWindow_ControllerButton_d = 物品欄開啟時，用來開啟和關閉視窗的控制器按鈕。
+s_StatsWindow_ControllerButton_w = 屬性視窗開啟時生效。
+s_StatsWindow_ArmorButton = 護甲按鈕
+s_StatsWindow_ArmorButton_d = 點擊物品欄中的護甲值即可開啟視窗。一個小標記表示它可以點擊。
+s_StatsWindow_ArmorButton_w = 屬性視窗開啟時生效。
+
+# Death Recap
+sec_DeathRecap = 死亡回顧
+s_DeathRecap_Enabled = 啟用
+s_DeathRecap_Enabled_d = 記錄是什麼殺死了你：戰鬥中的每個傷害來源、致命一擊和傷害類型。顯示在屬性視窗的「死亡」下。
+s_DeathRecap_Popup = 彈出視窗
+s_DeathRecap_Popup_d = 在死亡畫面顯示回顧。
+s_DeathRecap_Popup_w = 死亡回顧開啟時生效。
+s_DeathRecap_AfterRespawn = 重生後
+s_DeathRecap_AfterRespawn_d = 重生後回顧保留的秒數。
+s_DeathRecap_AfterRespawn_w = 「彈出視窗」開啟時生效。
+s_DeathRecap_Size = 大小
+s_DeathRecap_Size_d = 1 為正常大小。
+s_DeathRecap_Size_w = 「彈出視窗」開啟時生效。
+s_DeathRecap_Opacity = 不透明度
+s_DeathRecap_Opacity_d = 1 為完全不透明，越低越透明。
+s_DeathRecap_Opacity_w = 「彈出視窗」開啟時生效。
+
+# Boss Recap
+sec_BossRecap = 首領回顧
+s_BossRecap_Enabled = 啟用
+s_BossRecap_Enabled_d = 首領戰後，顯示每位玩家造成了多少傷害、用的是什麼：武器、箭矢、Epic Loot 附魔、持續的火焰和劇毒傷害。裝有此模組的好友會自動分享數據。完整明細在屬性視窗的「首領」下。
+s_BossRecap_Popup = 彈出視窗
+s_BossRecap_Popup_d = 首領死亡時在畫面上顯示簡短摘要。
+s_BossRecap_Popup_w = 首領回顧開啟時生效。
+s_BossRecap_PopupSeconds = 彈出秒數
+s_BossRecap_PopupSeconds_d = 摘要停留多久。
+s_BossRecap_PopupSeconds_w = 「彈出視窗」開啟時生效。
+s_BossRecap_Size = 大小
+s_BossRecap_Size_d = 1 為正常大小。
+s_BossRecap_Size_w = 「彈出視窗」開啟時生效。
+s_BossRecap_Opacity = 不透明度
+s_BossRecap_Opacity_d = 1 為完全不透明，越低越透明。
+s_BossRecap_Opacity_w = 「彈出視窗」開啟時生效。
+s_BossRecap_AnchorX = 錨點X
+s_BossRecap_AnchorX_d = 摘要的中心。0 為畫面左側，1 為右側。
+s_BossRecap_AnchorX_w = 「彈出視窗」開啟時生效。
+s_BossRecap_AnchorY = 錨點Y
+s_BossRecap_AnchorY_d = 摘要的中心。0 為畫面底部，1 為頂部。
+s_BossRecap_AnchorY_w = 「彈出視窗」開啟時生效。
+
 # Bench Pins
 sec_BenchPins = 工作台釘選
 s_BenchPins_Enabled = 啟用

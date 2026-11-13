@@ -492,6 +492,60 @@ s_LowAmmo_AnchorX_d = Miðja kassans. 0 er vinstri brún skjásins, 1 sú hægri
 s_LowAmmo_AnchorY = Akkeri Y
 s_LowAmmo_AnchorY_d = Miðja kassans. 0 er botn skjásins, 1 toppurinn.
 
+# Stats Window
+sec_StatsWindow = Tölfræðigluggi
+s_StatsWindow_Enabled = Virkt
+s_StatsWindow_Enabled_d = Tölfræðigluggi í eignaskránni: líf, þol, endurheimt, hraði, burðargeta, brynvörn og viðnám, ásamt því sem hver hlutur, matur, drykkur og Epic Loot-galdur bætir við. Líka dauðayfirlit og foringjayfirlit þín.
+s_StatsWindow_Key = Lykill
+s_StatsWindow_Key_d = Opnar og lokar glugganum, hvort sem eignaskráin er opin eða ekki.
+s_StatsWindow_Key_w = Notað þegar Tölfræðigluggi er á.
+s_StatsWindow_ControllerButton = Fjarstýringarhnappur
+s_StatsWindow_ControllerButton_d = Hnappur á fjarstýringu sem opnar og lokar glugganum á meðan eignaskráin er opin.
+s_StatsWindow_ControllerButton_w = Notað þegar Tölfræðigluggi er á.
+s_StatsWindow_ArmorButton = Brynvarnarhnappur
+s_StatsWindow_ArmorButton_d = Smelltu á brynvarnargildið í eignaskránni til að opna gluggann. Lítið merki sýnir að hægt er að smella á það.
+s_StatsWindow_ArmorButton_w = Notað þegar Tölfræðigluggi er á.
+
+# Death Recap
+sec_DeathRecap = Dauðayfirlit
+s_DeathRecap_Enabled = Virkt
+s_DeathRecap_Enabled_d = Heldur yfirliti yfir það sem drap þig: hverja skaðauppsprettu í bardaganum, banahöggið og skaðategundirnar. Sýnt í tölfræðiglugganum undir Dauðsföll.
+s_DeathRecap_Popup = Sprettigluggi
+s_DeathRecap_Popup_d = Sýnir yfirlitið á dauðaskjánum.
+s_DeathRecap_Popup_w = Notað þegar Dauðayfirlit er á.
+s_DeathRecap_AfterRespawn = Eftir endurlífgun
+s_DeathRecap_AfterRespawn_d = Sekúndur sem yfirlitið helst uppi eftir að þú lifnar við.
+s_DeathRecap_AfterRespawn_w = Notað þegar Sprettigluggi er á.
+s_DeathRecap_Size = Stærð
+s_DeathRecap_Size_d = 1 er venjuleg stærð.
+s_DeathRecap_Size_w = Notað þegar Sprettigluggi er á.
+s_DeathRecap_Opacity = Ógegnsæi
+s_DeathRecap_Opacity_d = 1 er heilt; lægra hleypir leiknum í gegn.
+s_DeathRecap_Opacity_w = Notað þegar Sprettigluggi er á.
+
+# Boss Recap
+sec_BossRecap = Foringjayfirlit
+s_BossRecap_Enabled = Virkt
+s_BossRecap_Enabled_d = Eftir foringjabardaga, hversu mikinn skaða hver spilari gerði og með hverju: vopnum, örvum, Epic Loot-göldrum, eldi og eitri yfir tíma. Vinir með þessa viðbót deila tölunum sínum sjálfkrafa. Öll sundurliðunin er í tölfræðiglugganum undir Foringjar.
+s_BossRecap_Popup = Sprettigluggi
+s_BossRecap_Popup_d = Stutt yfirlit á skjánum þegar foringinn deyr.
+s_BossRecap_Popup_w = Notað þegar Foringjayfirlit er á.
+s_BossRecap_PopupSeconds = Sýningartími
+s_BossRecap_PopupSeconds_d = Hversu lengi yfirlitið helst.
+s_BossRecap_PopupSeconds_w = Notað þegar Sprettigluggi er á.
+s_BossRecap_Size = Stærð
+s_BossRecap_Size_d = 1 er venjuleg stærð.
+s_BossRecap_Size_w = Notað þegar Sprettigluggi er á.
+s_BossRecap_Opacity = Ógegnsæi
+s_BossRecap_Opacity_d = 1 er heilt; lægra hleypir leiknum í gegn.
+s_BossRecap_Opacity_w = Notað þegar Sprettigluggi er á.
+s_BossRecap_AnchorX = Akkeri X
+s_BossRecap_AnchorX_d = Miðja yfirlitsins. 0 er vinstri brún skjásins, 1 sú hægri.
+s_BossRecap_AnchorX_w = Notað þegar Sprettigluggi er á.
+s_BossRecap_AnchorY = Akkeri Y
+s_BossRecap_AnchorY_d = Miðja yfirlitsins. 0 er botn skjásins, 1 toppurinn.
+s_BossRecap_AnchorY_w = Notað þegar Sprettigluggi er á.
+
 # Bench Pins
 sec_BenchPins = Stöðvapinnar
 s_BenchPins_Enabled = Virkt

@@ -492,6 +492,60 @@ s_LowAmmo_AnchorX_d = ყუთის ცენტრი. 0 ეკრანი�
 s_LowAmmo_AnchorY = ანკერი Y
 s_LowAmmo_AnchorY_d = ყუთის ცენტრი. 0 ეკრანის ქვედა კიდეა, 1 ზედა.
 
+# Stats Window
+sec_StatsWindow = სტატისტიკის ფანჯარა
+s_StatsWindow_Enabled = ჩართული
+s_StatsWindow_Enabled_d = სტატისტიკის ფანჯარა ინვენტარში: სიცოცხლე, გამძლეობა, რეგენერაცია, სიჩქარე, ტარების წონა, აბჯარი და მედეგობა, და რას ამატებს თითოეული ნივთი, საჭმელი, ელექსირი და Epic Loot-ის მოჯადოება. ასევე შენი სიკვდილისა და ბოსების მიმოხილვები.
+s_StatsWindow_Key = ღილაკი
+s_StatsWindow_Key_d = ხსნის და ხურავს ფანჯარას, ინვენტარი ღიაა თუ არა.
+s_StatsWindow_Key_w = მოქმედებს, როცა სტატისტიკის ფანჯარა ჩართულია.
+s_StatsWindow_ControllerButton = კონტროლერის ღილაკი
+s_StatsWindow_ControllerButton_d = კონტროლერის ღილაკი, რომელიც ხსნის და ხურავს ფანჯარას, როცა ინვენტარი ღიაა.
+s_StatsWindow_ControllerButton_w = მოქმედებს, როცა სტატისტიკის ფანჯარა ჩართულია.
+s_StatsWindow_ArmorButton = აბჯრის ღილაკი
+s_StatsWindow_ArmorButton_d = დააწკაპუნე აბჯრის მნიშვნელობაზე ინვენტარში და ფანჯარა გაიხსნება. პატარა ნიშანი აჩვენებს, რომ მასზე დაწკაპუნება შეიძლება.
+s_StatsWindow_ArmorButton_w = მოქმედებს, როცა სტატისტიკის ფანჯარა ჩართულია.
+
+# Death Recap
+sec_DeathRecap = სიკვდილის მიმოხილვა
+s_DeathRecap_Enabled = ჩართული
+s_DeathRecap_Enabled_d = ინახავს მიმოხილვას, თუ რამ მოგკლა: ზიანის ყველა წყარო ბრძოლაში, სასიკვდილო დარტყმა და ზიანის ტიპები. ჩანს სტატისტიკის ფანჯარაში, ჩანართზე „სიკვდილები“.
+s_DeathRecap_Popup = ამომხტარი ფანჯარა
+s_DeathRecap_Popup_d = აჩვენებს მიმოხილვას სიკვდილის ეკრანზე.
+s_DeathRecap_Popup_w = მოქმედებს, როცა სიკვდილის მიმოხილვა ჩართულია.
+s_DeathRecap_AfterRespawn = გაჩენის შემდეგ
+s_DeathRecap_AfterRespawn_d = რამდენი წამი რჩება მიმოხილვა ხელახლა გაჩენის შემდეგ.
+s_DeathRecap_AfterRespawn_w = მოქმედებს, როცა „ამომხტარი ფანჯარა“ ჩართულია.
+s_DeathRecap_Size = ზომა
+s_DeathRecap_Size_d = 1 ჩვეულებრივი ზომაა.
+s_DeathRecap_Size_w = მოქმედებს, როცა „ამომხტარი ფანჯარა“ ჩართულია.
+s_DeathRecap_Opacity = გაუმჭვირვალობა
+s_DeathRecap_Opacity_d = 1 სრულად გაუმჭვირვალეა; ნაკლებზე თამაში გამოჩანს.
+s_DeathRecap_Opacity_w = მოქმედებს, როცა „ამომხტარი ფანჯარა“ ჩართულია.
+
+# Boss Recap
+sec_BossRecap = ბოსის მიმოხილვა
+s_BossRecap_Enabled = ჩართული
+s_BossRecap_Enabled_d = ბოსთან ბრძოლის შემდეგ აჩვენებს, რამდენი ზიანი მიაყენა თითოეულმა მოთამაშემ და რით: იარაღი, ისრები, Epic Loot-ის მოჯადოებები, ცეცხლი და საწამლავი დროთა განმავლობაში. ამ მოდის მქონე მეგობრები თავიანთ რიცხვებს ავტომატურად აზიარებენ. სრული დეტალები სტატისტიკის ფანჯარაშია, ჩანართზე „ბოსები“.
+s_BossRecap_Popup = ამომხტარი ფანჯარა
+s_BossRecap_Popup_d = მოკლე შეჯამება ეკრანზე, როცა ბოსი კვდება.
+s_BossRecap_Popup_w = მოქმედებს, როცა ბოსის მიმოხილვა ჩართულია.
+s_BossRecap_PopupSeconds = ჩვენება (წმ)
+s_BossRecap_PopupSeconds_d = რამდენ ხანს რჩება შეჯამება.
+s_BossRecap_PopupSeconds_w = მოქმედებს, როცა „ამომხტარი ფანჯარა“ ჩართულია.
+s_BossRecap_Size = ზომა
+s_BossRecap_Size_d = 1 ჩვეულებრივი ზომაა.
+s_BossRecap_Size_w = მოქმედებს, როცა „ამომხტარი ფანჯარა“ ჩართულია.
+s_BossRecap_Opacity = გაუმჭვირვალობა
+s_BossRecap_Opacity_d = 1 სრულად გაუმჭვირვალეა; ნაკლებზე თამაში გამოჩანს.
+s_BossRecap_Opacity_w = მოქმედებს, როცა „ამომხტარი ფანჯარა“ ჩართულია.
+s_BossRecap_AnchorX = ანკერი X
+s_BossRecap_AnchorX_d = შეჯამების ცენტრი. 0 ეკრანის მარცხენა კიდეა, 1 მარჯვენა.
+s_BossRecap_AnchorX_w = მოქმედებს, როცა „ამომხტარი ფანჯარა“ ჩართულია.
+s_BossRecap_AnchorY = ანკერი Y
+s_BossRecap_AnchorY_d = შეჯამების ცენტრი. 0 ეკრანის ქვედა კიდეა, 1 ზედა.
+s_BossRecap_AnchorY_w = მოქმედებს, როცა „ამომხტარი ფანჯარა“ ჩართულია.
+
 # Bench Pins
 sec_BenchPins = მაგიდის პინები
 s_BenchPins_Enabled = ჩართული

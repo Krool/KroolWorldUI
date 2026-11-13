@@ -492,6 +492,60 @@ s_LowAmmo_AnchorX_d = Laatikon keskikohta. 0 on ruudun vasen reuna, 1 oikea.
 s_LowAmmo_AnchorY = Ankkuri Y
 s_LowAmmo_AnchorY_d = Laatikon keskikohta. 0 on ruudun alareuna, 1 yläreuna.
 
+# Stats Window
+sec_StatsWindow = Tilastoikkuna
+s_StatsWindow_Enabled = Käytössä
+s_StatsWindow_Enabled_d = Tilastoikkuna repussa: elämä, energia, palautuminen, nopeus, kantokyky, panssari ja sietokyvyt sekä se, mitä kukin esine, ruoka, juoma ja Epic Loot -lumous lisää. Myös kuolema- ja pomokoosteesi.
+s_StatsWindow_Key = Näppäin
+s_StatsWindow_Key_d = Avaa ja sulkee ikkunan, oli reppu auki tai ei.
+s_StatsWindow_Key_w = Vaikuttaa, kun tilastoikkuna on päällä.
+s_StatsWindow_ControllerButton = Ohjaimen painike
+s_StatsWindow_ControllerButton_d = Ohjaimen painike, joka avaa ja sulkee ikkunan, kun reppu on auki.
+s_StatsWindow_ControllerButton_w = Vaikuttaa, kun tilastoikkuna on päällä.
+s_StatsWindow_ArmorButton = Panssaripainike
+s_StatsWindow_ArmorButton_d = Napsauta panssariarvoa repussa, niin ikkuna aukeaa. Pieni merkki näyttää, että sitä voi napsauttaa.
+s_StatsWindow_ArmorButton_w = Vaikuttaa, kun tilastoikkuna on päällä.
+
+# Death Recap
+sec_DeathRecap = Kuolemakooste
+s_DeathRecap_Enabled = Käytössä
+s_DeathRecap_Enabled_d = Pidä koostetta siitä, mikä tappoi sinut: jokainen vahingon lähde taistelussa, kuolettava isku ja vahinkotyypit. Näkyy tilastoikkunassa kohdassa Kuolemat.
+s_DeathRecap_Popup = Ponnahdusikkuna
+s_DeathRecap_Popup_d = Näytä kooste kuolemaruudulla.
+s_DeathRecap_Popup_w = Vaikuttaa, kun kuolemakooste on päällä.
+s_DeathRecap_AfterRespawn = Syntymisen jälkeen
+s_DeathRecap_AfterRespawn_d = Sekunnit, jotka kooste pysyy näkyvissä uudelleensyntymisen jälkeen.
+s_DeathRecap_AfterRespawn_w = Vaikuttaa, kun Ponnahdusikkuna on päällä.
+s_DeathRecap_Size = Koko
+s_DeathRecap_Size_d = 1 on normaali koko.
+s_DeathRecap_Size_w = Vaikuttaa, kun Ponnahdusikkuna on päällä.
+s_DeathRecap_Opacity = Peittävyys
+s_DeathRecap_Opacity_d = 1 on täysin peittävä; pienempi näyttää pelin läpi.
+s_DeathRecap_Opacity_w = Vaikuttaa, kun Ponnahdusikkuna on päällä.
+
+# Boss Recap
+sec_BossRecap = Pomokooste
+s_BossRecap_Enabled = Käytössä
+s_BossRecap_Enabled_d = Pomotaistelun jälkeen näet, paljonko vahinkoa kukin pelaaja teki ja millä: aseet, nuolet, Epic Loot -lumoukset sekä tuli ja myrkky ajan mittaan. Tätä modia käyttävät ystävät jakavat lukunsa automaattisesti. Koko erittely on tilastoikkunassa kohdassa Pomot.
+s_BossRecap_Popup = Ponnahdusikkuna
+s_BossRecap_Popup_d = Lyhyt yhteenveto ruudulla, kun pomo kuolee.
+s_BossRecap_Popup_w = Vaikuttaa, kun pomokooste on päällä.
+s_BossRecap_PopupSeconds = Näyttöaika (s)
+s_BossRecap_PopupSeconds_d = Kuinka kauan yhteenveto pysyy näkyvissä.
+s_BossRecap_PopupSeconds_w = Vaikuttaa, kun Ponnahdusikkuna on päällä.
+s_BossRecap_Size = Koko
+s_BossRecap_Size_d = 1 on normaali koko.
+s_BossRecap_Size_w = Vaikuttaa, kun Ponnahdusikkuna on päällä.
+s_BossRecap_Opacity = Peittävyys
+s_BossRecap_Opacity_d = 1 on täysin peittävä; pienempi näyttää pelin läpi.
+s_BossRecap_Opacity_w = Vaikuttaa, kun Ponnahdusikkuna on päällä.
+s_BossRecap_AnchorX = Ankkuri X
+s_BossRecap_AnchorX_d = Yhteenvedon keskikohta. 0 on ruudun vasen reuna, 1 oikea.
+s_BossRecap_AnchorX_w = Vaikuttaa, kun Ponnahdusikkuna on päällä.
+s_BossRecap_AnchorY = Ankkuri Y
+s_BossRecap_AnchorY_d = Yhteenvedon keskikohta. 0 on ruudun alareuna, 1 yläreuna.
+s_BossRecap_AnchorY_w = Vaikuttaa, kun Ponnahdusikkuna on päällä.
+
 # Bench Pins
 sec_BenchPins = Työpöytämerkit
 s_BenchPins_Enabled = Käytössä

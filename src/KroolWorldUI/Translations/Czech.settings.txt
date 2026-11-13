@@ -492,6 +492,60 @@ s_LowAmmo_AnchorX_d = Střed okna. 0 je levý okraj obrazovky, 1 pravý.
 s_LowAmmo_AnchorY = Kotva Y
 s_LowAmmo_AnchorY_d = Střed okna. 0 je spodek obrazovky, 1 vršek.
 
+# Stats Window
+sec_StatsWindow = Okno statistik
+s_StatsWindow_Enabled = Zapnuto
+s_StatsWindow_Enabled_d = Okno statistik v inventáři: zdraví, výdrž, regenerace, rychlost, nosnost, zbroj a odolnosti, včetně toho, co přidává každý předmět, jídlo, lektvar a očarování z Epic Loot. Také tvé přehledy smrtí a bossů.
+s_StatsWindow_Key = Klávesa
+s_StatsWindow_Key_d = Otevře a zavře okno, s otevřeným inventářem i bez něj.
+s_StatsWindow_Key_w = Platí, když je zapnuté okno statistik.
+s_StatsWindow_ControllerButton = Tlačítko ovladače
+s_StatsWindow_ControllerButton_d = Tlačítko ovladače, které otevře a zavře okno, když je otevřený inventář.
+s_StatsWindow_ControllerButton_w = Platí, když je zapnuté okno statistik.
+s_StatsWindow_ArmorButton = Tlačítko zbroje
+s_StatsWindow_ArmorButton_d = Kliknutím na hodnotu zbroje v inventáři otevřeš okno. Malá značka ukazuje, že na ni jde kliknout.
+s_StatsWindow_ArmorButton_w = Platí, když je zapnuté okno statistik.
+
+# Death Recap
+sec_DeathRecap = Přehled smrti
+s_DeathRecap_Enabled = Zapnuto
+s_DeathRecap_Enabled_d = Uchová přehled toho, co tě zabilo: každý zdroj poškození v boji, smrtící úder a typy poškození. Najdeš ho v okně statistik pod Smrti.
+s_DeathRecap_Popup = Vyskakovací okno
+s_DeathRecap_Popup_d = Ukáže přehled na obrazovce smrti.
+s_DeathRecap_Popup_w = Platí, když je zapnutý přehled smrti.
+s_DeathRecap_AfterRespawn = Po oživení
+s_DeathRecap_AfterRespawn_d = Kolik sekund přehled zůstane po oživení.
+s_DeathRecap_AfterRespawn_w = Platí, když je zapnuto: Vyskakovací okno.
+s_DeathRecap_Size = Velikost
+s_DeathRecap_Size_d = 1 je běžná velikost.
+s_DeathRecap_Size_w = Platí, když je zapnuto: Vyskakovací okno.
+s_DeathRecap_Opacity = Krytí
+s_DeathRecap_Opacity_d = 1 je plné; méně nechá prosvítat hru.
+s_DeathRecap_Opacity_w = Platí, když je zapnuto: Vyskakovací okno.
+
+# Boss Recap
+sec_BossRecap = Přehled bossů
+s_BossRecap_Enabled = Zapnuto
+s_BossRecap_Enabled_d = Po souboji s bossem ukáže, kolik poškození udělal každý hráč a čím: zbraně, šípy, očarování z Epic Loot, oheň a jed v čase. Přátelé s tímto modem sdílejí svá čísla automaticky. Úplný rozpis je v okně statistik pod Bossové.
+s_BossRecap_Popup = Vyskakovací okno
+s_BossRecap_Popup_d = Krátké shrnutí na obrazovce, když boss zemře.
+s_BossRecap_Popup_w = Platí, když je zapnutý přehled bossů.
+s_BossRecap_PopupSeconds = Doba zobrazení
+s_BossRecap_PopupSeconds_d = Jak dlouho shrnutí zůstane.
+s_BossRecap_PopupSeconds_w = Platí, když je zapnuto: Vyskakovací okno.
+s_BossRecap_Size = Velikost
+s_BossRecap_Size_d = 1 je běžná velikost.
+s_BossRecap_Size_w = Platí, když je zapnuto: Vyskakovací okno.
+s_BossRecap_Opacity = Krytí
+s_BossRecap_Opacity_d = 1 je plné; méně nechá prosvítat hru.
+s_BossRecap_Opacity_w = Platí, když je zapnuto: Vyskakovací okno.
+s_BossRecap_AnchorX = Kotva X
+s_BossRecap_AnchorX_d = Střed shrnutí. 0 je levý okraj obrazovky, 1 pravý.
+s_BossRecap_AnchorX_w = Platí, když je zapnuto: Vyskakovací okno.
+s_BossRecap_AnchorY = Kotva Y
+s_BossRecap_AnchorY_d = Střed shrnutí. 0 je spodek obrazovky, 1 vršek.
+s_BossRecap_AnchorY_w = Platí, když je zapnuto: Vyskakovací okno.
+
 # Bench Pins
 sec_BenchPins = Značky stolů
 s_BenchPins_Enabled = Zapnuto

@@ -492,6 +492,60 @@ s_LowAmmo_AnchorX_d = A doboz közepe. 0 a képernyő bal széle, 1 a jobb.
 s_LowAmmo_AnchorY = Horgony Y
 s_LowAmmo_AnchorY_d = A doboz közepe. 0 a képernyő alja, 1 a teteje.
 
+# Stats Window
+sec_StatsWindow = Statisztika ablak
+s_StatsWindow_Enabled = Bekapcsolva
+s_StatsWindow_Enabled_d = Statisztika ablak a leltárban: életerő, kitartás, regeneráció, sebesség, teherbírás, páncél és ellenállások, és hogy mennyit ad hozzá minden tárgy, étel, főzet és Epic Loot-varázslat. A halál- és főellenfél-összegzéseid is.
+s_StatsWindow_Key = Gomb
+s_StatsWindow_Key_d = Megnyitja és bezárja az ablakot, nyitott leltárral vagy anélkül.
+s_StatsWindow_Key_w = Csak ha be van kapcsolva: Statisztika ablak.
+s_StatsWindow_ControllerButton = Kontroller gomb
+s_StatsWindow_ControllerButton_d = A kontroller gombja, amely megnyitja és bezárja az ablakot, amíg a leltár nyitva van.
+s_StatsWindow_ControllerButton_w = Csak ha be van kapcsolva: Statisztika ablak.
+s_StatsWindow_ArmorButton = Páncél gomb
+s_StatsWindow_ArmorButton_d = Kattints a páncél értékére a leltárban az ablak megnyitásához. Egy kis jel mutatja, hogy kattintható.
+s_StatsWindow_ArmorButton_w = Csak ha be van kapcsolva: Statisztika ablak.
+
+# Death Recap
+sec_DeathRecap = Halál-összegzés
+s_DeathRecap_Enabled = Bekapcsolva
+s_DeathRecap_Enabled_d = Összegzést tart arról, mi ölt meg: a harc minden sebzésforrását, a halálos csapást és a sebzéstípusokat. A statisztika ablak Halálok lapján látható.
+s_DeathRecap_Popup = Felugró ablak
+s_DeathRecap_Popup_d = Az összegzés megjelenítése a halál képernyőn.
+s_DeathRecap_Popup_w = Csak ha be van kapcsolva: Halál-összegzés.
+s_DeathRecap_AfterRespawn = Újraéledés után
+s_DeathRecap_AfterRespawn_d = Hány másodpercig marad az összegzés az újraéledés után.
+s_DeathRecap_AfterRespawn_w = Csak ha be van kapcsolva: Felugró ablak.
+s_DeathRecap_Size = Méret
+s_DeathRecap_Size_d = 1 a normál méret.
+s_DeathRecap_Size_w = Csak ha be van kapcsolva: Felugró ablak.
+s_DeathRecap_Opacity = Átlátszatlanság
+s_DeathRecap_Opacity_d = 1 teljesen fedő; kisebb értéknél átlátszik a játék.
+s_DeathRecap_Opacity_w = Csak ha be van kapcsolva: Felugró ablak.
+
+# Boss Recap
+sec_BossRecap = Főellenfél-összegzés
+s_BossRecap_Enabled = Bekapcsolva
+s_BossRecap_Enabled_d = Egy főellenfél elleni harc után: mennyit sebzett minden játékos, és mivel: fegyverek, nyilak, Epic Loot-varázslatok, tűz és méreg idővel. A modot használó barátok automatikusan megosztják a számaikat. A teljes részletezés a statisztika ablak Főellenfelek lapján van.
+s_BossRecap_Popup = Felugró ablak
+s_BossRecap_Popup_d = Rövid összegzés a képernyőn, amikor a főellenfél meghal.
+s_BossRecap_Popup_w = Csak ha be van kapcsolva: Főellenfél-összegzés.
+s_BossRecap_PopupSeconds = Kijelzési idő
+s_BossRecap_PopupSeconds_d = Meddig marad az összegzés.
+s_BossRecap_PopupSeconds_w = Csak ha be van kapcsolva: Felugró ablak.
+s_BossRecap_Size = Méret
+s_BossRecap_Size_d = 1 a normál méret.
+s_BossRecap_Size_w = Csak ha be van kapcsolva: Felugró ablak.
+s_BossRecap_Opacity = Átlátszatlanság
+s_BossRecap_Opacity_d = 1 teljesen fedő; kisebb értéknél átlátszik a játék.
+s_BossRecap_Opacity_w = Csak ha be van kapcsolva: Felugró ablak.
+s_BossRecap_AnchorX = Horgony X
+s_BossRecap_AnchorX_d = Az összegzés közepe. 0 a képernyő bal széle, 1 a jobb.
+s_BossRecap_AnchorX_w = Csak ha be van kapcsolva: Felugró ablak.
+s_BossRecap_AnchorY = Horgony Y
+s_BossRecap_AnchorY_d = Az összegzés közepe. 0 a képernyő alja, 1 a teteje.
+s_BossRecap_AnchorY_w = Csak ha be van kapcsolva: Felugró ablak.
+
 # Bench Pins
 sec_BenchPins = Asztaljelölések
 s_BenchPins_Enabled = Bekapcsolva

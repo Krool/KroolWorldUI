@@ -13,7 +13,7 @@ namespace KroolWorldUI
     {
         public const string Guid = "krool.kroolworldui";
         public const string Name = "Krool World UI";
-        public const string Version = "0.16.1";
+        public const string Version = "0.17.0";
 #if DEV_BUILD
         public const string Flavor = " dev"; // scripts\deploy-dev.ps1 build; shown in the F7 title
 #else
@@ -60,6 +60,9 @@ namespace KroolWorldUI
             RestedCountdown.BindConfig(config);
             SaveCountdown.BindConfig(config);
             AmmoWarning.BindConfig(config);
+            StatsWindow.BindConfig(config);
+            DeathRecap.BindConfig(config);
+            BossRecap.BindConfig(config);
             BenchPins.BindConfig(config);
             AutoRepair.BindConfig(config);
             General.Migrate();

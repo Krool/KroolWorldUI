@@ -492,6 +492,60 @@ s_LowAmmo_AnchorX_d = बॉक्स का केंद्र। 0 स्क�
 s_LowAmmo_AnchorY = एंकर Y
 s_LowAmmo_AnchorY_d = बॉक्स का केंद्र। 0 स्क्रीन का निचला किनारा है, 1 ऊपरी।
 
+# Stats Window
+sec_StatsWindow = स्टैट्स विंडो
+s_StatsWindow_Enabled = चालू
+s_StatsWindow_Enabled_d = इन्वेंटरी में एक स्टैट्स विंडो: हेल्थ, स्टैमिना, रीजेनरेशन, गति, उठाने की क्षमता, कवच और प्रतिरोध, साथ में यह कि हर आइटम, भोजन, पोशन और Epic Loot एनचैंटमेंट क्या जोड़ता है। साथ ही आपकी मौत के सारांश और बॉस सारांश।
+s_StatsWindow_Key = कुंजी
+s_StatsWindow_Key_d = विंडो खोलती और बंद करती है, इन्वेंटरी खुली हो या नहीं।
+s_StatsWindow_Key_w = तब लागू जब स्टैट्स विंडो चालू हो।
+s_StatsWindow_ControllerButton = कंट्रोलर बटन
+s_StatsWindow_ControllerButton_d = कंट्रोलर बटन जो इन्वेंटरी खुली होने पर विंडो खोलता और बंद करता है।
+s_StatsWindow_ControllerButton_w = तब लागू जब स्टैट्स विंडो चालू हो।
+s_StatsWindow_ArmorButton = कवच बटन
+s_StatsWindow_ArmorButton_d = विंडो खोलने के लिए इन्वेंटरी में कवच के मान पर क्लिक करें। एक छोटा निशान दिखाता है कि उस पर क्लिक किया जा सकता है।
+s_StatsWindow_ArmorButton_w = तब लागू जब स्टैट्स विंडो चालू हो।
+
+# Death Recap
+sec_DeathRecap = मौत का सारांश
+s_DeathRecap_Enabled = चालू
+s_DeathRecap_Enabled_d = आपको किसने मारा, इसका सारांश रखें: लड़ाई में डैमेज का हर स्रोत, आख़िरी वार और डैमेज के प्रकार। स्टैट्स विंडो में मौतें के नीचे दिखता है।
+s_DeathRecap_Popup = पॉपअप
+s_DeathRecap_Popup_d = मौत की स्क्रीन पर सारांश दिखाएँ।
+s_DeathRecap_Popup_w = तब लागू जब मौत का सारांश चालू हो।
+s_DeathRecap_AfterRespawn = दोबारा जन्म के बाद
+s_DeathRecap_AfterRespawn_d = दोबारा जन्म लेने के बाद सारांश कितने सेकंड दिखता रहता है।
+s_DeathRecap_AfterRespawn_w = तब लागू जब पॉपअप चालू हो।
+s_DeathRecap_Size = आकार
+s_DeathRecap_Size_d = 1 सामान्य आकार है।
+s_DeathRecap_Size_w = तब लागू जब पॉपअप चालू हो।
+s_DeathRecap_Opacity = अपारदर्शिता
+s_DeathRecap_Opacity_d = 1 पूरा ठोस है; कम करने पर पीछे गेम दिखता है।
+s_DeathRecap_Opacity_w = तब लागू जब पॉपअप चालू हो।
+
+# Boss Recap
+sec_BossRecap = बॉस सारांश
+s_BossRecap_Enabled = चालू
+s_BossRecap_Enabled_d = बॉस की लड़ाई के बाद, हर खिलाड़ी ने कितना डैमेज किया और किससे: हथियार, तीर, Epic Loot एनचैंटमेंट, समय के साथ आग और ज़हर। इस मॉड वाले दोस्त अपने आँकड़े अपने-आप शेयर करते हैं। पूरा ब्योरा स्टैट्स विंडो में बॉस के नीचे है।
+s_BossRecap_Popup = पॉपअप
+s_BossRecap_Popup_d = बॉस के मरने पर स्क्रीन पर एक छोटा सारांश।
+s_BossRecap_Popup_w = तब लागू जब बॉस सारांश चालू हो।
+s_BossRecap_PopupSeconds = पॉपअप समय (से)
+s_BossRecap_PopupSeconds_d = सारांश कितनी देर रहता है।
+s_BossRecap_PopupSeconds_w = तब लागू जब पॉपअप चालू हो।
+s_BossRecap_Size = आकार
+s_BossRecap_Size_d = 1 सामान्य आकार है।
+s_BossRecap_Size_w = तब लागू जब पॉपअप चालू हो।
+s_BossRecap_Opacity = अपारदर्शिता
+s_BossRecap_Opacity_d = 1 पूरा ठोस है; कम करने पर पीछे गेम दिखता है।
+s_BossRecap_Opacity_w = तब लागू जब पॉपअप चालू हो।
+s_BossRecap_AnchorX = एंकर X
+s_BossRecap_AnchorX_d = सारांश का केंद्र। 0 स्क्रीन का बायाँ किनारा है, 1 दायाँ।
+s_BossRecap_AnchorX_w = तब लागू जब पॉपअप चालू हो।
+s_BossRecap_AnchorY = एंकर Y
+s_BossRecap_AnchorY_d = सारांश का केंद्र। 0 स्क्रीन का निचला किनारा है, 1 ऊपरी।
+s_BossRecap_AnchorY_w = तब लागू जब पॉपअप चालू हो।
+
 # Bench Pins
 sec_BenchPins = बेंच पिन
 s_BenchPins_Enabled = चालू

@@ -492,6 +492,60 @@ s_LowAmmo_AnchorX_d = Центр вікна. 0: лівий край екрана
 s_LowAmmo_AnchorY = Якір Y
 s_LowAmmo_AnchorY_d = Центр вікна. 0: низ екрана, 1: верх.
 
+# Stats Window
+sec_StatsWindow = Вікно характеристик
+s_StatsWindow_Enabled = Увімкнено
+s_StatsWindow_Enabled_d = Вікно характеристик на екрані речей: здоров’я, витривалість, відновлення, швидкість, вага для перенесення, захист і опір, з тим, що дає кожен предмет, їжа, зілля та зачарування Epic Loot. А також підсумки смертей і боїв з босами.
+s_StatsWindow_Key = Клавіша
+s_StatsWindow_Key_d = Відкриває й закриває вікно, з відкритим екраном речей чи без нього.
+s_StatsWindow_Key_w = Діє, якщо ввімкнено «Вікно характеристик».
+s_StatsWindow_ControllerButton = Кнопка контролера
+s_StatsWindow_ControllerButton_d = Кнопка контролера, яка відкриває й закриває вікно, поки відкрито екран речей.
+s_StatsWindow_ControllerButton_w = Діє, якщо ввімкнено «Вікно характеристик».
+s_StatsWindow_ArmorButton = Кнопка захисту
+s_StatsWindow_ArmorButton_d = Клацніть значення захисту на екрані речей, щоб відкрити вікно. Невелика позначка показує, що на нього можна клацнути.
+s_StatsWindow_ArmorButton_w = Діє, якщо ввімкнено «Вікно характеристик».
+
+# Death Recap
+sec_DeathRecap = Підсумок смерті
+s_DeathRecap_Enabled = Увімкнено
+s_DeathRecap_Enabled_d = Зберігати підсумок того, що вас убило: кожне джерело шкоди в бою, смертельний удар і типи шкоди. Показується у вікні характеристик на вкладці «Смерті».
+s_DeathRecap_Popup = Спливне вікно
+s_DeathRecap_Popup_d = Показувати підсумок на екрані смерті.
+s_DeathRecap_Popup_w = Діє, якщо ввімкнено «Підсумок смерті».
+s_DeathRecap_AfterRespawn = Після відродження
+s_DeathRecap_AfterRespawn_d = Скільки секунд підсумок лишається на екрані після відродження.
+s_DeathRecap_AfterRespawn_w = Діє, якщо ввімкнено «Спливне вікно».
+s_DeathRecap_Size = Розмір
+s_DeathRecap_Size_d = 1: звичайний розмір.
+s_DeathRecap_Size_w = Діє, якщо ввімкнено «Спливне вікно».
+s_DeathRecap_Opacity = Непрозорість
+s_DeathRecap_Opacity_d = 1: суцільний колір; менше: крізь нього видно гру.
+s_DeathRecap_Opacity_w = Діє, якщо ввімкнено «Спливне вікно».
+
+# Boss Recap
+sec_BossRecap = Підсумок боса
+s_BossRecap_Enabled = Увімкнено
+s_BossRecap_Enabled_d = Після бою з босом показує, скільки шкоди завдав кожен гравець і чим: зброя, стріли, зачарування Epic Loot, вогонь і отрута з часом. Друзі з цим модом діляться своїми числами автоматично. Повна розбивка у вікні характеристик на вкладці «Боси».
+s_BossRecap_Popup = Спливне вікно
+s_BossRecap_Popup_d = Короткий підсумок на екрані, коли бос гине.
+s_BossRecap_Popup_w = Діє, якщо ввімкнено «Підсумок боса».
+s_BossRecap_PopupSeconds = Секунди показу
+s_BossRecap_PopupSeconds_d = Скільки секунд підсумок лишається на екрані.
+s_BossRecap_PopupSeconds_w = Діє, якщо ввімкнено «Спливне вікно».
+s_BossRecap_Size = Розмір
+s_BossRecap_Size_d = 1: звичайний розмір.
+s_BossRecap_Size_w = Діє, якщо ввімкнено «Спливне вікно».
+s_BossRecap_Opacity = Непрозорість
+s_BossRecap_Opacity_d = 1: суцільний колір; менше: крізь нього видно гру.
+s_BossRecap_Opacity_w = Діє, якщо ввімкнено «Спливне вікно».
+s_BossRecap_AnchorX = Якір X
+s_BossRecap_AnchorX_d = Центр підсумку. 0: лівий край екрана, 1: правий.
+s_BossRecap_AnchorX_w = Діє, якщо ввімкнено «Спливне вікно».
+s_BossRecap_AnchorY = Якір Y
+s_BossRecap_AnchorY_d = Центр підсумку. 0: низ екрана, 1: верх.
+s_BossRecap_AnchorY_w = Діє, якщо ввімкнено «Спливне вікно».
+
 # Bench Pins
 sec_BenchPins = Позначки верстаків
 s_BenchPins_Enabled = Увімкнено

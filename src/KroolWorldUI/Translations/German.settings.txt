@@ -492,6 +492,60 @@ s_LowAmmo_AnchorX_d = Mitte des Felds. 0 ist der linke Bildschirmrand, 1 der rec
 s_LowAmmo_AnchorY = Anker Y
 s_LowAmmo_AnchorY_d = Mitte des Felds. 0 ist der untere Bildschirmrand, 1 der obere.
 
+# Stats Window
+sec_StatsWindow = Wertefenster
+s_StatsWindow_Enabled = Aktiviert
+s_StatsWindow_Enabled_d = Ein Wertefenster im Inventar: Gesundheit, Ausdauer, Regeneration, Tempo, Traglast, Rüstung und Resistenzen, jeweils mit dem, was jeder Gegenstand, jedes Essen, jeder Trank und jede Verzauberung von Epic Loot beiträgt. Dazu deine Todes- und Bossberichte.
+s_StatsWindow_Key = Taste
+s_StatsWindow_Key_d = Öffnet und schließt das Fenster, mit oder ohne offenes Inventar.
+s_StatsWindow_Key_w = Gilt, wenn das Wertefenster an ist.
+s_StatsWindow_ControllerButton = Controller-Knopf
+s_StatsWindow_ControllerButton_d = Controller-Knopf, der das Fenster bei offenem Inventar öffnet und schließt.
+s_StatsWindow_ControllerButton_w = Gilt, wenn das Wertefenster an ist.
+s_StatsWindow_ArmorButton = Rüstungsknopf
+s_StatsWindow_ArmorButton_d = Ein Klick auf den Rüstungswert im Inventar öffnet das Fenster. Eine kleine Markierung zeigt, dass er klickbar ist.
+s_StatsWindow_ArmorButton_w = Gilt, wenn das Wertefenster an ist.
+
+# Death Recap
+sec_DeathRecap = Todesbericht
+s_DeathRecap_Enabled = Aktiviert
+s_DeathRecap_Enabled_d = Hält fest, was dich getötet hat: jede Schadensquelle im Kampf, den Todesstoß und die Schadensarten. Zu sehen im Wertefenster unter Tode.
+s_DeathRecap_Popup = Einblendung
+s_DeathRecap_Popup_d = Zeigt den Bericht auf dem Todesbildschirm.
+s_DeathRecap_Popup_w = Gilt, wenn der Todesbericht an ist.
+s_DeathRecap_AfterRespawn = Nach Wiederbeleben
+s_DeathRecap_AfterRespawn_d = Sekunden, die der Bericht nach dem Wiederbeleben sichtbar bleibt.
+s_DeathRecap_AfterRespawn_w = Gilt, wenn Einblendung an ist.
+s_DeathRecap_Size = Größe
+s_DeathRecap_Size_d = 1 ist die normale Größe.
+s_DeathRecap_Size_w = Gilt, wenn Einblendung an ist.
+s_DeathRecap_Opacity = Deckkraft
+s_DeathRecap_Opacity_d = 1 ist deckend; weniger lässt das Spiel durchscheinen.
+s_DeathRecap_Opacity_w = Gilt, wenn Einblendung an ist.
+
+# Boss Recap
+sec_BossRecap = Bossbericht
+s_BossRecap_Enabled = Aktiviert
+s_BossRecap_Enabled_d = Zeigt nach einem Bosskampf, wie viel Schaden jeder Spieler gemacht hat und womit: Waffen, Pfeile, Verzauberungen von Epic Loot, Feuer und Gift über Zeit. Freunde mit dieser Mod teilen ihre Zahlen automatisch. Die volle Aufschlüsselung steht im Wertefenster unter Bosse.
+s_BossRecap_Popup = Einblendung
+s_BossRecap_Popup_d = Eine kurze Übersicht auf dem Bildschirm, wenn der Boss stirbt.
+s_BossRecap_Popup_w = Gilt, wenn der Bossbericht an ist.
+s_BossRecap_PopupSeconds = Einblenddauer
+s_BossRecap_PopupSeconds_d = Wie lange die Übersicht bleibt.
+s_BossRecap_PopupSeconds_w = Gilt, wenn Einblendung an ist.
+s_BossRecap_Size = Größe
+s_BossRecap_Size_d = 1 ist die normale Größe.
+s_BossRecap_Size_w = Gilt, wenn Einblendung an ist.
+s_BossRecap_Opacity = Deckkraft
+s_BossRecap_Opacity_d = 1 ist deckend; weniger lässt das Spiel durchscheinen.
+s_BossRecap_Opacity_w = Gilt, wenn Einblendung an ist.
+s_BossRecap_AnchorX = Anker X
+s_BossRecap_AnchorX_d = Mitte der Übersicht. 0 ist der linke Bildschirmrand, 1 der rechte.
+s_BossRecap_AnchorX_w = Gilt, wenn Einblendung an ist.
+s_BossRecap_AnchorY = Anker Y
+s_BossRecap_AnchorY_d = Mitte der Übersicht. 0 ist der untere Bildschirmrand, 1 der obere.
+s_BossRecap_AnchorY_w = Gilt, wenn Einblendung an ist.
+
 # Bench Pins
 sec_BenchPins = Werkbank-Markierungen
 s_BenchPins_Enabled = Aktiviert

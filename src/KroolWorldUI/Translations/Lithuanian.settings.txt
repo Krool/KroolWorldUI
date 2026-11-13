@@ -492,6 +492,60 @@ s_LowAmmo_AnchorX_d = Langelio centras. 0 yra kairysis ekrano kraštas, 1 dešin
 s_LowAmmo_AnchorY = Inkaras Y
 s_LowAmmo_AnchorY_d = Langelio centras. 0 yra ekrano apačia, 1 viršus.
 
+# Stats Window
+sec_StatsWindow = Statistikos langas
+s_StatsWindow_Enabled = Įjungta
+s_StatsWindow_Enabled_d = Statistikos langas inventoriuje: gyvybė, ištvermė, regeneracija, greitis, nešiojimo svoris, šarvai ir atsparumai, kartu su tuo, ką prideda kiekvienas daiktas, maistas, eliksyras ir Epic Loot kerai. Taip pat jūsų mirčių ir bosų suvestinės.
+s_StatsWindow_Key = Klavišas
+s_StatsWindow_Key_d = Atidaro ir uždaro langą, nesvarbu, ar inventorius atidarytas.
+s_StatsWindow_Key_w = Galioja, kai įjungta: Statistikos langas.
+s_StatsWindow_ControllerButton = Valdiklio mygtukas
+s_StatsWindow_ControllerButton_d = Valdiklio mygtukas, kuris atidaro ir uždaro langą, kai inventorius atidarytas.
+s_StatsWindow_ControllerButton_w = Galioja, kai įjungta: Statistikos langas.
+s_StatsWindow_ArmorButton = Šarvų mygtukas
+s_StatsWindow_ArmorButton_d = Spustelėkite šarvų vertę inventoriuje, kad atidarytumėte langą. Maža žymė rodo, kad ją galima spustelėti.
+s_StatsWindow_ArmorButton_w = Galioja, kai įjungta: Statistikos langas.
+
+# Death Recap
+sec_DeathRecap = Mirties suvestinė
+s_DeathRecap_Enabled = Įjungta
+s_DeathRecap_Enabled_d = Išsaugo suvestinę apie tai, kas jus nužudė: kiekvieną žalos šaltinį kovoje, mirtiną smūgį ir žalos tipus. Rodoma statistikos lange, skiltyje Mirtys.
+s_DeathRecap_Popup = Iššokantis langas
+s_DeathRecap_Popup_d = Rodo suvestinę mirties ekrane.
+s_DeathRecap_Popup_w = Galioja, kai įjungta: Mirties suvestinė.
+s_DeathRecap_AfterRespawn = Po prisikėlimo
+s_DeathRecap_AfterRespawn_d = Kiek sekundžių suvestinė lieka matoma po prisikėlimo.
+s_DeathRecap_AfterRespawn_w = Galioja, kai įjungta: Iššokantis langas.
+s_DeathRecap_Size = Dydis
+s_DeathRecap_Size_d = 1 yra įprastas dydis.
+s_DeathRecap_Size_w = Galioja, kai įjungta: Iššokantis langas.
+s_DeathRecap_Opacity = Neskaidrumas
+s_DeathRecap_Opacity_d = 1 yra visiškai neskaidru; mažiau leidžia matyti žaidimą pro jį.
+s_DeathRecap_Opacity_w = Galioja, kai įjungta: Iššokantis langas.
+
+# Boss Recap
+sec_BossRecap = Bosų suvestinė
+s_BossRecap_Enabled = Įjungta
+s_BossRecap_Enabled_d = Po kovos su bosu: kiek žalos padarė kiekvienas žaidėjas ir kuo: ginklais, strėlėmis, Epic Loot kerais, ugnimi ir nuodais laikui bėgant. Draugai su šiuo modu automatiškai dalijasi savo skaičiais. Visas išskaidymas yra statistikos lange, skiltyje Bosai.
+s_BossRecap_Popup = Iššokantis langas
+s_BossRecap_Popup_d = Trumpa suvestinė ekrane, kai bosas žūva.
+s_BossRecap_Popup_w = Galioja, kai įjungta: Bosų suvestinė.
+s_BossRecap_PopupSeconds = Rodymo trukmė
+s_BossRecap_PopupSeconds_d = Kiek laiko suvestinė lieka ekrane.
+s_BossRecap_PopupSeconds_w = Galioja, kai įjungta: Iššokantis langas.
+s_BossRecap_Size = Dydis
+s_BossRecap_Size_d = 1 yra įprastas dydis.
+s_BossRecap_Size_w = Galioja, kai įjungta: Iššokantis langas.
+s_BossRecap_Opacity = Neskaidrumas
+s_BossRecap_Opacity_d = 1 yra visiškai neskaidru; mažiau leidžia matyti žaidimą pro jį.
+s_BossRecap_Opacity_w = Galioja, kai įjungta: Iššokantis langas.
+s_BossRecap_AnchorX = Inkaras X
+s_BossRecap_AnchorX_d = Suvestinės centras. 0 yra kairysis ekrano kraštas, 1 dešinysis.
+s_BossRecap_AnchorX_w = Galioja, kai įjungta: Iššokantis langas.
+s_BossRecap_AnchorY = Inkaras Y
+s_BossRecap_AnchorY_d = Suvestinės centras. 0 yra ekrano apačia, 1 viršus.
+s_BossRecap_AnchorY_w = Galioja, kai įjungta: Iššokantis langas.
+
 # Bench Pins
 sec_BenchPins = Stalų žymekliai
 s_BenchPins_Enabled = Įjungta

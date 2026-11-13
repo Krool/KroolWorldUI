@@ -42,12 +42,21 @@ No. It takes no part in server version checks (it does not use Jotunn's or Serve
 **My dedicated server host's mod browser does not list it.**
 That is expected: it is a client-side mod, and server hosts usually list server-side mods only. Add it to your own r2modman profile instead.
 
+**Does the boss recap send anything over the network?**
+One small message per boss kill, from each player with the mod, holding their damage numbers for that boss. Players and servers without the mod ignore it.
+
 ## Updating
 
 **r2modman does not show the new version yet.**
 Thunderstore rebuilds the mod list r2modman downloads on a schedule, so a new version can take up to an hour or so to appear there, even though the mod page already shows it. Use **Settings > Refresh online mod list** in r2modman, and try again a little later if it is not there yet.
 
 ## Features
+
+**How do I open the stats window?**
+Press **K**, or click the armor value in your inventory. On a controller, open the inventory and press the right stick. Both can be changed under **Stats Window** in F7, if K is taken by another mod.
+
+**The boss recap says part of the fight was not recorded, or a friend's weapons show as a skill name.**
+Only the game that runs a boss (usually the player who reached it first) sees every hit it takes after its resistances. If that player does not have the mod, those hits are missing. A friend without the mod shows by weapon skill (Bows, Clubs) instead of by weapon, since only their own game knows which weapon they swung.
 
 **The compass does not show a friend.**
 Friends nearby always show. Friends far away show only if they have **Visible on map** turned on, the same as on the game's map.

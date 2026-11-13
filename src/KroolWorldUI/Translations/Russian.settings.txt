@@ -492,6 +492,60 @@ s_LowAmmo_AnchorX_d = Центр окна. 0: левый край экрана, 
 s_LowAmmo_AnchorY = Якорь Y
 s_LowAmmo_AnchorY_d = Центр окна. 0: низ экрана, 1: верх.
 
+# Stats Window
+sec_StatsWindow = Окно характеристик
+s_StatsWindow_Enabled = Включено
+s_StatsWindow_Enabled_d = Окно характеристик в инвентаре: здоровье, выносливость, восстановление, скорость, переносимый вес, броня и сопротивления, с тем, что дает каждый предмет, еда, зелье и зачарование Epic Loot. А также сводки о смертях и боях с боссами.
+s_StatsWindow_Key = Клавиша
+s_StatsWindow_Key_d = Открывает и закрывает окно, с открытым инвентарем или без него.
+s_StatsWindow_Key_w = Используется, если включено «Окно характеристик».
+s_StatsWindow_ControllerButton = Кнопка контроллера
+s_StatsWindow_ControllerButton_d = Кнопка контроллера, которая открывает и закрывает окно, пока открыт инвентарь.
+s_StatsWindow_ControllerButton_w = Используется, если включено «Окно характеристик».
+s_StatsWindow_ArmorButton = Кнопка брони
+s_StatsWindow_ArmorButton_d = Нажмите на значение брони в инвентаре, чтобы открыть окно. Небольшая метка показывает, что на него можно нажать.
+s_StatsWindow_ArmorButton_w = Используется, если включено «Окно характеристик».
+
+# Death Recap
+sec_DeathRecap = Сводка о смерти
+s_DeathRecap_Enabled = Включено
+s_DeathRecap_Enabled_d = Сохранять сводку о том, что вас убило: все источники урона в бою, смертельный удар и типы урона. Показывается в окне характеристик на вкладке «Смерти».
+s_DeathRecap_Popup = Всплывающее окно
+s_DeathRecap_Popup_d = Показывать сводку на экране смерти.
+s_DeathRecap_Popup_w = Используется, если включена «Сводка о смерти».
+s_DeathRecap_AfterRespawn = После возрождения
+s_DeathRecap_AfterRespawn_d = Сколько секунд сводка остается на экране после возрождения.
+s_DeathRecap_AfterRespawn_w = Используется, если включен параметр «Всплывающее окно».
+s_DeathRecap_Size = Размер
+s_DeathRecap_Size_d = 1: обычный размер.
+s_DeathRecap_Size_w = Используется, если включен параметр «Всплывающее окно».
+s_DeathRecap_Opacity = Непрозрачность
+s_DeathRecap_Opacity_d = 1: сплошной цвет; меньше: сквозь него видна игра.
+s_DeathRecap_Opacity_w = Используется, если включен параметр «Всплывающее окно».
+
+# Boss Recap
+sec_BossRecap = Сводка по боссу
+s_BossRecap_Enabled = Включено
+s_BossRecap_Enabled_d = После боя с боссом показывает, сколько урона нанес каждый игрок и чем: оружие, стрелы, зачарования Epic Loot, огонь и яд со временем. Друзья с этим модом делятся своими числами автоматически. Полная разбивка в окне характеристик на вкладке «Боссы».
+s_BossRecap_Popup = Всплывающее окно
+s_BossRecap_Popup_d = Краткая сводка на экране, когда босс погибает.
+s_BossRecap_Popup_w = Используется, если включена «Сводка по боссу».
+s_BossRecap_PopupSeconds = Секунды показа
+s_BossRecap_PopupSeconds_d = Сколько секунд сводка остается на экране.
+s_BossRecap_PopupSeconds_w = Используется, если включен параметр «Всплывающее окно».
+s_BossRecap_Size = Размер
+s_BossRecap_Size_d = 1: обычный размер.
+s_BossRecap_Size_w = Используется, если включен параметр «Всплывающее окно».
+s_BossRecap_Opacity = Непрозрачность
+s_BossRecap_Opacity_d = 1: сплошной цвет; меньше: сквозь него видна игра.
+s_BossRecap_Opacity_w = Используется, если включен параметр «Всплывающее окно».
+s_BossRecap_AnchorX = Якорь X
+s_BossRecap_AnchorX_d = Центр сводки. 0: левый край экрана, 1: правый.
+s_BossRecap_AnchorX_w = Используется, если включен параметр «Всплывающее окно».
+s_BossRecap_AnchorY = Якорь Y
+s_BossRecap_AnchorY_d = Центр сводки. 0: низ экрана, 1: верх.
+s_BossRecap_AnchorY_w = Используется, если включен параметр «Всплывающее окно».
+
 # Bench Pins
 sec_BenchPins = Метки верстаков
 s_BenchPins_Enabled = Включено

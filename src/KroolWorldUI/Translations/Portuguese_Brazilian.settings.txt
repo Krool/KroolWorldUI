@@ -492,6 +492,60 @@ s_LowAmmo_AnchorX_d = Centro da caixa. 0 é a esquerda da tela, 1 a direita.
 s_LowAmmo_AnchorY = Âncora Y
 s_LowAmmo_AnchorY_d = Centro da caixa. 0 é a parte de baixo da tela, 1 o topo.
 
+# Stats Window
+sec_StatsWindow = Janela de atributos
+s_StatsWindow_Enabled = Ativado
+s_StatsWindow_Enabled_d = Uma janela de atributos no inventário: vida, vigor, regeneração, velocidade, capacidade de carga, armadura e resistências, com o que cada item, comida, poção e encantamento do Epic Loot adiciona. Também seus resumos de morte e de chefe.
+s_StatsWindow_Key = Tecla
+s_StatsWindow_Key_d = Abre e fecha a janela, com ou sem o inventário aberto.
+s_StatsWindow_Key_w = Usado quando Janela de atributos está ligado.
+s_StatsWindow_ControllerButton = Botão do controle
+s_StatsWindow_ControllerButton_d = Botão do controle que abre e fecha a janela enquanto o inventário está aberto.
+s_StatsWindow_ControllerButton_w = Usado quando Janela de atributos está ligado.
+s_StatsWindow_ArmorButton = Botão de armadura
+s_StatsWindow_ArmorButton_d = Clique no valor de armadura no inventário para abrir a janela. Uma pequena marca mostra que dá para clicar.
+s_StatsWindow_ArmorButton_w = Usado quando Janela de atributos está ligado.
+
+# Death Recap
+sec_DeathRecap = Resumo de morte
+s_DeathRecap_Enabled = Ativado
+s_DeathRecap_Enabled_d = Guarda um resumo do que matou você: cada fonte de dano na luta, o golpe fatal e os tipos de dano. Aparece na janela de atributos, em Mortes.
+s_DeathRecap_Popup = Pop-up
+s_DeathRecap_Popup_d = Mostra o resumo na tela de morte.
+s_DeathRecap_Popup_w = Usado quando Resumo de morte está ligado.
+s_DeathRecap_AfterRespawn = Após renascer
+s_DeathRecap_AfterRespawn_d = Segundos que o resumo fica na tela depois que você renasce.
+s_DeathRecap_AfterRespawn_w = Usado quando Pop-up está ligado.
+s_DeathRecap_Size = Tamanho
+s_DeathRecap_Size_d = 1 é o tamanho normal.
+s_DeathRecap_Size_w = Usado quando Pop-up está ligado.
+s_DeathRecap_Opacity = Opacidade
+s_DeathRecap_Opacity_d = 1 é opaco; menos deixa ver o jogo através.
+s_DeathRecap_Opacity_w = Usado quando Pop-up está ligado.
+
+# Boss Recap
+sec_BossRecap = Resumo de chefe
+s_BossRecap_Enabled = Ativado
+s_BossRecap_Enabled_d = Depois de uma luta contra um chefe, quanto dano cada jogador causou e com o quê: armas, flechas, encantamentos do Epic Loot, fogo e veneno ao longo do tempo. Amigos com este mod compartilham os números automaticamente. O detalhamento completo fica na janela de atributos, em Chefes.
+s_BossRecap_Popup = Pop-up
+s_BossRecap_Popup_d = Um resumo curto na tela quando o chefe morre.
+s_BossRecap_Popup_w = Usado quando Resumo de chefe está ligado.
+s_BossRecap_PopupSeconds = Duração (s)
+s_BossRecap_PopupSeconds_d = Quanto tempo o resumo fica na tela.
+s_BossRecap_PopupSeconds_w = Usado quando Pop-up está ligado.
+s_BossRecap_Size = Tamanho
+s_BossRecap_Size_d = 1 é o tamanho normal.
+s_BossRecap_Size_w = Usado quando Pop-up está ligado.
+s_BossRecap_Opacity = Opacidade
+s_BossRecap_Opacity_d = 1 é opaco; menos deixa ver o jogo através.
+s_BossRecap_Opacity_w = Usado quando Pop-up está ligado.
+s_BossRecap_AnchorX = Âncora X
+s_BossRecap_AnchorX_d = Centro do resumo. 0 é a esquerda da tela, 1 a direita.
+s_BossRecap_AnchorX_w = Usado quando Pop-up está ligado.
+s_BossRecap_AnchorY = Âncora Y
+s_BossRecap_AnchorY_d = Centro do resumo. 0 é a parte de baixo da tela, 1 o topo.
+s_BossRecap_AnchorY_w = Usado quando Pop-up está ligado.
+
 # Bench Pins
 sec_BenchPins = Marcadores de bancada
 s_BenchPins_Enabled = Ativado

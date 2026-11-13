@@ -494,6 +494,60 @@ s_LowAmmo_AnchorX_d = Center of the box. 0 is the left of the screen, 1 the righ
 s_LowAmmo_AnchorY = Anchor Y
 s_LowAmmo_AnchorY_d = Center of the box. 0 is the bottom of the screen, 1 the top.
 
+# Stats Window
+sec_StatsWindow = Stats Window
+s_StatsWindow_Enabled = Enabled
+s_StatsWindow_Enabled_d = A stats window in the inventory: health, stamina, regen, speed, carry weight, armor and resistances, with what each item, food, potion and Epic Loot enchantment adds. Also your death recaps and boss recaps.
+s_StatsWindow_Key = Key
+s_StatsWindow_Key_d = Opens and closes the window, with or without the inventory open.
+s_StatsWindow_Key_w = Used when Stats Window is on.
+s_StatsWindow_ControllerButton = Controller Button
+s_StatsWindow_ControllerButton_d = Controller button that opens and closes the window while the inventory is open.
+s_StatsWindow_ControllerButton_w = Used when Stats Window is on.
+s_StatsWindow_ArmorButton = Armor Button
+s_StatsWindow_ArmorButton_d = Click the armor value in the inventory to open the window. A small mark shows it can be clicked.
+s_StatsWindow_ArmorButton_w = Used when Stats Window is on.
+
+# Death Recap
+sec_DeathRecap = Death Recap
+s_DeathRecap_Enabled = Enabled
+s_DeathRecap_Enabled_d = Keep a recap of what killed you: every source of damage in the fight, the killing blow and the damage types. Shown in the stats window under Deaths.
+s_DeathRecap_Popup = Popup
+s_DeathRecap_Popup_d = Show the recap on the death screen.
+s_DeathRecap_Popup_w = Used when Death Recap is on.
+s_DeathRecap_AfterRespawn = After Respawn
+s_DeathRecap_AfterRespawn_d = Seconds the recap stays up after you respawn.
+s_DeathRecap_AfterRespawn_w = Used when Popup is on.
+s_DeathRecap_Size = Size
+s_DeathRecap_Size_d = 1 is the normal size.
+s_DeathRecap_Size_w = Used when Popup is on.
+s_DeathRecap_Opacity = Opacity
+s_DeathRecap_Opacity_d = 1 is solid; lower shows the game through it.
+s_DeathRecap_Opacity_w = Used when Popup is on.
+
+# Boss Recap
+sec_BossRecap = Boss Recap
+s_BossRecap_Enabled = Enabled
+s_BossRecap_Enabled_d = After a boss fight, how much damage each player did and with what: weapons, arrows, Epic Loot enchantments, fire and poison over time. Friends with this mod share their numbers automatically. The full breakdown is in the stats window under Bosses.
+s_BossRecap_Popup = Popup
+s_BossRecap_Popup_d = A short summary on screen when the boss dies.
+s_BossRecap_Popup_w = Used when Boss Recap is on.
+s_BossRecap_PopupSeconds = Popup Seconds
+s_BossRecap_PopupSeconds_d = How long the summary stays.
+s_BossRecap_PopupSeconds_w = Used when Popup is on.
+s_BossRecap_Size = Size
+s_BossRecap_Size_d = 1 is the normal size.
+s_BossRecap_Size_w = Used when Popup is on.
+s_BossRecap_Opacity = Opacity
+s_BossRecap_Opacity_d = 1 is solid; lower shows the game through it.
+s_BossRecap_Opacity_w = Used when Popup is on.
+s_BossRecap_AnchorX = Anchor X
+s_BossRecap_AnchorX_d = Center of the summary. 0 is the left of the screen, 1 the right.
+s_BossRecap_AnchorX_w = Used when Popup is on.
+s_BossRecap_AnchorY = Anchor Y
+s_BossRecap_AnchorY_d = Center of the summary. 0 is the bottom of the screen, 1 the top.
+s_BossRecap_AnchorY_w = Used when Popup is on.
+
 # Bench Pins
 sec_BenchPins = Bench Pins
 s_BenchPins_Enabled = Enabled

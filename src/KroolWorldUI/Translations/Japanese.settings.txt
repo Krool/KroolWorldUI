@@ -492,6 +492,60 @@ s_LowAmmo_AnchorX_d = 枠の中心。0が画面の左端、1が右端。
 s_LowAmmo_AnchorY = アンカーY
 s_LowAmmo_AnchorY_d = 枠の中心。0が画面の下端、1が上端。
 
+# Stats Window
+sec_StatsWindow = ステータスウィンドウ
+s_StatsWindow_Enabled = 有効
+s_StatsWindow_Enabled_d = インベントリにステータスウィンドウを追加します：体力、スタミナ、回復、速度、所持重量、アーマー、耐性と、各アイテム・食料・ポーション・Epic Lootのエンチャントがどれだけ加えているか。死亡レポートとボス戦レポートも表示します。
+s_StatsWindow_Key = キー
+s_StatsWindow_Key_d = インベントリを開いていてもいなくても、ウィンドウを開閉します。
+s_StatsWindow_Key_w = 「ステータスウィンドウ」がオンのとき有効。
+s_StatsWindow_ControllerButton = コントローラーボタン
+s_StatsWindow_ControllerButton_d = インベントリを開いているときにウィンドウを開閉するコントローラーのボタン。
+s_StatsWindow_ControllerButton_w = 「ステータスウィンドウ」がオンのとき有効。
+s_StatsWindow_ArmorButton = アーマーボタン
+s_StatsWindow_ArmorButton_d = インベントリのアーマー値をクリックしてウィンドウを開きます。クリックできることを小さな印で示します。
+s_StatsWindow_ArmorButton_w = 「ステータスウィンドウ」がオンのとき有効。
+
+# Death Recap
+sec_DeathRecap = 死亡レポート
+s_DeathRecap_Enabled = 有効
+s_DeathRecap_Enabled_d = 何に倒されたかを記録します：戦闘中のすべてのダメージ源、とどめの一撃、ダメージの種類。ステータスウィンドウの「死亡」に表示されます。
+s_DeathRecap_Popup = ポップアップ
+s_DeathRecap_Popup_d = 死亡画面にレポートを表示します。
+s_DeathRecap_Popup_w = 「死亡レポート」がオンのとき有効。
+s_DeathRecap_AfterRespawn = リスポーン後
+s_DeathRecap_AfterRespawn_d = リスポーン後にレポートを表示し続ける秒数。
+s_DeathRecap_AfterRespawn_w = 「ポップアップ」がオンのとき有効。
+s_DeathRecap_Size = サイズ
+s_DeathRecap_Size_d = 1が通常サイズ。
+s_DeathRecap_Size_w = 「ポップアップ」がオンのとき有効。
+s_DeathRecap_Opacity = 不透明度
+s_DeathRecap_Opacity_d = 1で不透明。下げるほど透けて見えます。
+s_DeathRecap_Opacity_w = 「ポップアップ」がオンのとき有効。
+
+# Boss Recap
+sec_BossRecap = ボス戦レポート
+s_BossRecap_Enabled = 有効
+s_BossRecap_Enabled_d = ボス戦の後、各プレイヤーが何でどれだけダメージを与えたかを表示します：武器、矢、Epic Lootのエンチャント、時間経過の火と毒。このMODを入れたフレンドは数値を自動で共有します。詳しい内訳はステータスウィンドウの「ボス」にあります。
+s_BossRecap_Popup = ポップアップ
+s_BossRecap_Popup_d = ボスが倒れたときに画面に短いまとめを表示します。
+s_BossRecap_Popup_w = 「ボス戦レポート」がオンのとき有効。
+s_BossRecap_PopupSeconds = 表示秒数
+s_BossRecap_PopupSeconds_d = まとめが表示される時間。
+s_BossRecap_PopupSeconds_w = 「ポップアップ」がオンのとき有効。
+s_BossRecap_Size = サイズ
+s_BossRecap_Size_d = 1が通常サイズ。
+s_BossRecap_Size_w = 「ポップアップ」がオンのとき有効。
+s_BossRecap_Opacity = 不透明度
+s_BossRecap_Opacity_d = 1で不透明。下げるほど透けて見えます。
+s_BossRecap_Opacity_w = 「ポップアップ」がオンのとき有効。
+s_BossRecap_AnchorX = アンカーX
+s_BossRecap_AnchorX_d = まとめの中心。0が画面の左端、1が右端。
+s_BossRecap_AnchorX_w = 「ポップアップ」がオンのとき有効。
+s_BossRecap_AnchorY = アンカーY
+s_BossRecap_AnchorY_d = まとめの中心。0が画面の下端、1が上端。
+s_BossRecap_AnchorY_w = 「ポップアップ」がオンのとき有効。
+
 # Bench Pins
 sec_BenchPins = 作業台ピン
 s_BenchPins_Enabled = 有効
