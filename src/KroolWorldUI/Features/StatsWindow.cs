@@ -239,7 +239,7 @@ namespace KroolWorldUI.Features
     {
         internal static StatsPanel Current;
 
-        private const float FrameWidth = 690f;
+        private const float FrameWidth = 860f;
 
         private InventoryGui _gui;
         private CanvasGroup _group;
@@ -357,7 +357,8 @@ namespace KroolWorldUI.Features
         {
             var canvas = _frame.GetComponentInParent<Canvas>();
             float canvasH = canvas != null ? ((RectTransform)canvas.rootCanvas.transform).rect.height : 1080f;
-            float h = Mathf.Clamp(canvasH - 70f, 520f, 900f);
+            // Clear of the key hints along the bottom edge.
+            float h = Mathf.Clamp(canvasH - 120f, 520f, 1040f);
             _frame.sizeDelta = new Vector2(FrameWidth, h);
             if (_title != null)
             {
@@ -620,12 +621,16 @@ namespace KroolWorldUI.Features
 
         // ------------------------------------------------------------------ pages
 
-        private const float RowH = 32f;
-        private const float IconSize = 26f;
-        private const float LabelX = 38f;
-        private const float ValueX = 214f;
-        private const float ValueW = 84f;
-        private const float ChipX = 314f;
+        private const float RowH = 30f;
+        private const float IconSize = 24f;
+        private const float LabelX = 36f;
+        private const float ValueX = 236f;   // the total's box
+        private const float ValueW = 92f;
+        private const float ChipX = 342f;    // the sources
+        private const float ChipLine = 26f;
+        private const float ChipIcon = 22f;
+        private const float HeadH = 18f;     // a column header line
+        private const float GridColW = 72f;  // the hit size table's columns
 
         /// <summary>What the page shows, without the values that change by themselves.</summary>
         private static string Signature(List<StatSection> sheet)
@@ -641,6 +646,9 @@ namespace KroolWorldUI.Features
                     sb.Append(r.Label).Append(r.LiveValue ? "~" : r.Value).Append(r.Note);
                     foreach (var c in r.Chips)
                         sb.Append(c.Live ? "~" : c.Text).Append(c.Icon != null ? c.Icon.GetInstanceID() : 0);
+                    if (r.Grid != null)
+                        foreach (var g in r.Grid)
+                            sb.Append(g.Head).Append(g.Value);
                     sb.Append(';');
                 }
             }
@@ -685,12 +693,26 @@ namespace KroolWorldUI.Features
                     note.rectTransform.sizeDelta = new Vector2(w - 8f, nh);
                     y += nh + 2f;
                 }
+                y = ColumnHeads(art, page, section.ValueHead, section.ChipsHead, y);
                 int i = 0;
                 foreach (var row in section.Rows)
                     y = StatRowView(art, page, row, y, w, i++ % 2 == 0);
-                y += 14f;
+                y += 10f;
             }
             return y;
+        }
+
+        /// <summary>A line of small column names over the total and the sources. Returns the new y.</summary>
+        private float ColumnHeads(StatsUi.Art art, RectTransform page, string valueHead, string chipsHead, float y)
+        {
+            if (string.IsNullOrEmpty(valueHead) && string.IsNullOrEmpty(chipsHead))
+                return y;
+            if (!string.IsNullOrEmpty(valueHead))
+                // Right-aligned over the total; long words run left over the empty label column.
+                StatsUi.Text(art, page, valueHead, LabelX, y, ValueX + ValueW - 8f - LabelX, HeadH, 13f, StatsUi.Muted, TextAlignmentOptions.BottomRight);
+            if (!string.IsNullOrEmpty(chipsHead))
+                StatsUi.Text(art, page, chipsHead, ChipX, y, _width - ChipX, HeadH, 13f, StatsUi.Muted, TextAlignmentOptions.BottomLeft);
+            return y + HeadH + 3f;
         }
 
         private float StatRowView(StatsUi.Art art, RectTransform page, StatRow row, float y, float w, bool shade)
@@ -698,41 +720,60 @@ namespace KroolWorldUI.Features
             // Chips first, to know how tall the row is.
             var holder = StatsUi.Rect("row", page);
             float chipsW = w - ChipX - 4f;
-            float cx = 0f, cy = 0f, line = 28f;
+            float cx = 0f, cy = 0f;
+            // A row with a small table gets a line of column names above its values.
+            bool grid = row.Grid != null && row.Grid.Count > 0;
+            float top0 = grid ? HeadH + 2f : 0f;
+            float pad = top0 + (RowH - ChipLine) / 2f;
             if (!string.IsNullOrEmpty(row.Note))
             {
-                var note = StatsUi.Text(art, holder, row.Note, ChipX, 0f, chipsW, line, 14f, StatsUi.Muted, TextAlignmentOptions.TopLeft);
+                var note = StatsUi.Text(art, holder, row.Note, ChipX, 0f, chipsW, ChipLine, 14f, StatsUi.Muted, TextAlignmentOptions.TopLeft);
                 note.textWrappingMode = TextWrappingModes.Normal;
                 float nh = Mathf.Ceil(note.GetPreferredValues(row.Note, chipsW, 0f).y);
                 note.rectTransform.sizeDelta = new Vector2(chipsW, nh);
-                StatsUi.Place(note.rectTransform, ChipX, 7f, chipsW, nh);
-                cy = Mathf.Max(0f, nh + 14f - RowH);
+                StatsUi.Place(note.rectTransform, ChipX, top0 + 6f, chipsW, nh);
+                cy = Mathf.Max(0f, nh + 12f - RowH);
             }
             foreach (var chip in row.Chips)
             {
-                float iconW = chip.Icon != null ? 24f : 0f;
-                var text = StatsUi.Text(art, holder, chip.Text ?? "", 0f, 0f, 120f, line, 15f, chip.Color);
+                float iconW = chip.Icon != null ? ChipIcon : 0f;
+                var text = StatsUi.Text(art, holder, chip.Text ?? "", 0f, 0f, 120f, ChipLine, 15f, chip.Color);
                 float tw = string.IsNullOrEmpty(chip.Text) ? 0f : Mathf.Ceil(text.GetPreferredValues(chip.Text).x) + 2f;
                 float cw = iconW + (iconW > 0f && tw > 0f ? 3f : 0f) + tw;
                 if (cx > 0f && cx + cw > chipsW)
                 {
                     cx = 0f;
-                    cy += line;
+                    cy += ChipLine;
                 }
-                float top = 2f + cy;
+                float top = pad + cy;
                 if (chip.Icon != null)
                 {
-                    var img = StatsUi.Image(holder, chip.Icon, ChipX + cx, top + 2f, 24f, 24f,
+                    var img = StatsUi.Image(holder, chip.Icon, ChipX + cx, top + (ChipLine - ChipIcon) / 2f, ChipIcon, ChipIcon,
                         chip.Dim ? new Color(1f, 1f, 1f, 0.35f) : Color.white);
                     StatsUi.Tip(art, img.gameObject, "", chip.Tip);
                 }
-                StatsUi.Place(text.rectTransform, ChipX + cx + iconW + (iconW > 0f ? 3f : 0f), top, tw + 8f, line);
+                StatsUi.Place(text.rectTransform, ChipX + cx + iconW + (iconW > 0f ? 3f : 0f), top, tw + 8f, ChipLine);
                 StatsUi.Tip(art, text.gameObject, "", chip.Tip);
                 if (chip.Live)
                     _live.Add(text);
                 cx += cw + 12f;
             }
-            float h = RowH + cy;
+
+            // The small table (the hit sizes): column names on the header line, values under them.
+            if (grid)
+            {
+                StatsUi.Text(art, holder, row.GridHead ?? "", LabelX, 2f, ValueX - LabelX - 6f, HeadH, 14f, StatsUi.Muted, TextAlignmentOptions.BottomLeft);
+                for (int i = 0; i < row.Grid.Count; i++)
+                {
+                    var cell = row.Grid[i];
+                    float x = ChipX + i * GridColW;
+                    StatsUi.Text(art, holder, cell.Head, x, 2f, GridColW - 18f, HeadH, 14f, StatsUi.Muted, TextAlignmentOptions.BottomRight);
+                    var v = StatsUi.Text(art, holder, cell.Value, x, top0, GridColW - 18f, RowH, 17f, StatsUi.White, TextAlignmentOptions.MidlineRight);
+                    StatsUi.Tip(art, v.gameObject, "", cell.Tip);
+                }
+            }
+
+            float h = top0 + RowH + cy;
             StatsUi.Place(holder, 0f, y, w, h);
             if (shade)
             {
@@ -741,14 +782,20 @@ namespace KroolWorldUI.Features
             }
 
             if (row.Icon != null)
-                StatsUi.Image(holder, row.Icon, 4f, (RowH - IconSize) / 2f, IconSize, IconSize, Color.white);
-            var label = StatsUi.Text(art, holder, row.Label, LabelX, 0f, ValueX - LabelX - 6f, RowH, 17f, StatsUi.Parchment);
+                StatsUi.Image(holder, row.Icon, 4f, top0 + (RowH - IconSize) / 2f, IconSize, IconSize, Color.white);
+            var label = StatsUi.Text(art, holder, row.Label, LabelX, top0, ValueX - LabelX - 6f, RowH, 17f, StatsUi.Parchment);
             if (!string.IsNullOrEmpty(row.Tip))
                 StatsUi.Tip(art, label.gameObject, row.Label, row.Tip);
             if (!string.IsNullOrEmpty(row.Value))
             {
-                var value = StatsUi.Text(art, holder, row.Value, ValueX, 0f, ValueW, RowH, 18f, row.ValueColor,
+                // The total sits in its own dark box, bold and a size up, so it reads apart from the parts.
+                var box = HudKit.NewImage("total", holder, new Color(0f, 0f, 0f, 0.38f));
+                StatsUi.TopLeft(box.rectTransform);
+                StatsUi.Place(box.rectTransform, ValueX, top0 + 3f, ValueW, RowH - 6f);
+                box.raycastTarget = false;
+                var value = StatsUi.Text(art, holder, row.Value, ValueX, top0, ValueW - 8f, RowH, 19f, row.ValueColor,
                     TextAlignmentOptions.MidlineRight);
+                value.fontStyle = FontStyles.Bold;
                 if (!string.IsNullOrEmpty(row.Tip))
                     StatsUi.Tip(art, value.gameObject, row.Label, row.Tip);
                 if (row.LiveValue)
@@ -867,6 +914,18 @@ namespace KroolWorldUI.Features
             _instance = null;
         }
 
+        // Another mod copied the armor box with this button inside it: Quick Stack Store Sort Trash
+        // builds its trash can that way. The copy must not show the mark or catch clicks.
+        private void Awake()
+        {
+            if (_instance != null && _instance != this)
+            {
+                foreach (var g in GetComponentsInChildren<Graphic>(true))
+                    g.enabled = false;
+                Destroy(gameObject);
+            }
+        }
+
         private void OnDestroy()
         {
             if (_instance == this)
@@ -875,6 +934,8 @@ namespace KroolWorldUI.Features
 
         private void Update()
         {
+            if (_instance != this || _pad == null)
+                return;
             bool pad = ZInput.IsGamepadActive();
             string label = pad ? StatsWindow.PadLabel(StatsWindow.ControllerButton.Value) : null;
             _pad.text = label ?? "";

@@ -28,12 +28,16 @@ namespace KroolWorldUI.Features
         public string Note;     // a muted line of text in place of the chips
         public bool LiveValue;  // the value changes by itself (a timer, food wearing off)
         public readonly List<StatChip> Chips = new List<StatChip>();
+        public string GridHead; // a small table in place of the chips: this names its header line
+        public List<(string Head, string Value, string Tip)> Grid;
     }
 
     internal sealed class StatSection
     {
         public string Title;
         public string Note;
+        public string ValueHead;  // column names over the totals and over the sources
+        public string ChipsHead;
         public readonly List<StatRow> Rows = new List<StatRow>();
     }
 
@@ -67,6 +71,11 @@ namespace KroolWorldUI.Features
                 Armor(p, effects),
                 Resistances(p, effects, el),
             };
+            foreach (var s in list)
+            {
+                s.ValueHead ??= L10n.T("stats_col_total");
+                s.ChipsHead ??= L10n.T("stats_col_sources");
+            }
             var fx = Effects(effects);
             if (fx.Rows.Count > 0)
                 list.Add(fx);
@@ -483,16 +492,16 @@ namespace KroolWorldUI.Features
             s.Rows.Add(row);
 
             // What armor does to hits of a few sizes (the game's formula: past half your armor, a hit loses
-            // your armor in full; smaller hits shrink faster).
-            var hits = new StatRow { Icon = null, Label = L10n.T("stats_hits"), Tip = L10n.T("stats_hits_tip") };
+            // your armor in full; smaller hits shrink faster). A small table: hit sizes over what is left.
+            var hits = new StatRow
+            {
+                Icon = null, Label = L10n.T("stats_hit_after"), Tip = L10n.T("stats_hits_tip"),
+                GridHead = L10n.T("stats_hit_size"), Grid = new List<(string, string, string)>(),
+            };
             foreach (float hit in new[] { 25f, 50f, 100f, 200f })
             {
                 float taken = HitData.DamageTypes.ApplyArmor(hit, armor);
-                hits.Chips.Add(new StatChip
-                {
-                    Text = $"<color={StatsUi.Hex(StatsUi.Faint)}>{StatsUi.Int(hit)}</color> {StatsUi.Int(taken)}",
-                    Tip = L10n.T("stats_hit_tip", StatsUi.Int(hit), StatsUi.Int(taken)),
-                });
+                hits.Grid.Add((StatsUi.Int(hit), StatsUi.Int(taken), L10n.T("stats_hit_tip", StatsUi.Int(hit), StatsUi.Int(taken))));
             }
             s.Rows.Add(hits);
             return s;
@@ -556,7 +565,10 @@ namespace KroolWorldUI.Features
         /// </summary>
         private static StatSection Resistances(Player p, List<StatusEffect> effects, List<EpicLootBridge.Effect> el)
         {
-            var s = new StatSection { Title = L10n.T("stats_resist"), Note = L10n.T("stats_resist_note") };
+            var s = new StatSection
+            {
+                Title = L10n.T("stats_resist"), Note = L10n.T("stats_resist_note"), ValueHead = L10n.T("stats_col_taken"),
+            };
 
             // Walk the game's order and remember which source set each type last.
             var sources = new List<ModSource>();
@@ -650,6 +662,8 @@ namespace KroolWorldUI.Features
                 row.Note = Summary(se);
                 s.Rows.Add(row);
             }
+            if (s.Rows.Any(r => !string.IsNullOrEmpty(r.Value)))
+                s.ValueHead = L10n.T("stats_col_time");
             return s;
         }
 
@@ -669,7 +683,7 @@ namespace KroolWorldUI.Features
 
         private static StatSection Enchantments(List<EpicLootBridge.Effect> el)
         {
-            var s = new StatSection { Title = "Epic Loot" };
+            var s = new StatSection { Title = "Epic Loot", ChipsHead = L10n.T("stats_col_sources") };
             foreach (var group in el.GroupBy(e => e.Type))
             {
                 float sum = group.Sum(e => e.Value);

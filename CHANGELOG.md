@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.17.1
+
+- **Stats window:** bigger, with tighter rows so more fits on screen. Each section has column headers (Total, Sources, Damage taken, Time left), and every total sits in its own dark box in bold. Damage per hit is now a small table: hit sizes on top, what is left after armor under them.
+- Fix: with Quick Stack Store Sort Trash, the trash can no longer shows the stats mark (it copies the armor box, and copied our button with it).
+
 ## 0.17.0
 
 - **Stats window (new).** Press **K**, click the armor value in your inventory, or press the right stick there on a controller. Shows max health, stamina and eitr, regen, movement and run speed, carry weight, stamina costs, armor and resistances, each with pictures of what adds to it: gear, food, potions, Rested, Epic Loot enchantments. Resistances show which one counts and which do nothing, because only the strongest of each type applies. Also lists your active effects and your Epic Loot enchantments.

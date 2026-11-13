@@ -114,7 +114,10 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
   sibling of the Skills dialog under the inventory's `root`; tabs cloned from m_tabCraft. Its root is
   added to every inventory UIGamePad's m_blockingElements, as the game's dialogs are. Armor button:
   an invisible raycast Image over the inventory's `Armor` box (ExtraSlots moves that box; ours moves
-  with it), mark in its top-right corner. Death recap popup: last sibling of Hud.m_loadingScreen's
+  with it), mark in its top-right corner. Quick Stack Store Sort Trash builds its trash can by
+  Instantiate-ing the whole `Armor` box on the first InventoryGui.Show, children included, so
+  anything parented there gets copied: ArmorBadge.Awake hides and destroys any copy of itself.
+  Death recap popup: last sibling of Hud.m_loadingScreen's
   parent (`HUD`), so it draws above the death fade to black. Boss recap popup: hudroot at (0.82, 0.55).
 - Damage (Character.RPC_Damage) runs only on the target's ZDO owner: the local player for your own
   hits taken, usually the first player near a boss for the boss. ApplyDamage is the one place health

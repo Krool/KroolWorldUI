@@ -96,7 +96,12 @@ stats_multiplies = Multiplies the total
 stats_no_effect = No effect: a stronger one counts.
 stats_regen_tip = Bonuses add together; penalties multiply the total.
 # A row of hit sizes and what is left of each after armor. $1 is the hit, $2 what you take.
-stats_hits = Damage per hit
+stats_col_total = Total
+stats_col_sources = Sources
+stats_col_taken = Damage taken
+stats_col_time = Time left
+stats_hit_size = Hit
+stats_hit_after = After armor
 stats_hits_tip = What hits of each size leave after your armor, before blocking.
 stats_hit_tip = A hit of $1 takes $2.
 # Resistance hover text. $1 is a percentage ("42%"); in stats_capped $1 is the total, $2 the cap.
