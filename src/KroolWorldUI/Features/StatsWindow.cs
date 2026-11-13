@@ -244,6 +244,8 @@ namespace KroolWorldUI.Features
         private InventoryGui _gui;
         private CanvasGroup _group;
         private RectTransform _frame;
+        private RectTransform _area;
+        private Vector2 _laidOutFor;
         private TMP_Text _title;
         private ScrollRect _scroll;
         private RectTransform _content;
@@ -331,7 +333,8 @@ namespace KroolWorldUI.Features
             p._scroll.horizontal = false;
             p._scroll.scrollSensitivity = 40f;
 
-            p.Layout(area);
+            p._area = area;
+            p.Layout();
             p.BuildTabs(art);
 
             // The inventory's controller buttons must not fire while this window is up, as with the game's own dialogs.
@@ -353,24 +356,40 @@ namespace KroolWorldUI.Features
                     DestroyImmediate(c);
         }
 
-        private void Layout(RectTransform area)
+        /// <summary>The GUI canvas size, found even while this window is inactive.</summary>
+        private Vector2 CanvasSize()
         {
-            var canvas = _frame.GetComponentInParent<Canvas>();
-            float canvasH = canvas != null ? ((RectTransform)canvas.rootCanvas.transform).rect.height : 1080f;
-            // Clear of the key hints along the bottom edge.
-            float h = Mathf.Clamp(canvasH - 120f, 520f, 1040f);
-            _frame.sizeDelta = new Vector2(FrameWidth, h);
+            var canvases = _frame.GetComponentsInParent<Canvas>(true);
+            var root = canvases.Length > 0 ? canvases[canvases.Length - 1].rootCanvas : null;
+            var size = root != null ? ((RectTransform)root.transform).rect.size : Vector2.zero;
+            return size.x > 100f && size.y > 100f ? size : new Vector2(1920f, 1080f);
+        }
+
+        /// <summary>
+        /// Sizes the window to the screen: as big as FrameWidth by 1040, clear of the key hints along
+        /// the bottom edge, never past the screen. Re-run on every open, since the resolution or the
+        /// game's GUI scale can change mid-session; Show then rebuilds the page at the new width.
+        /// </summary>
+        private void Layout()
+        {
+            var canvas = CanvasSize();
+            if (canvas == _laidOutFor)
+                return;
+            _laidOutFor = canvas;
+            float w = Mathf.Min(FrameWidth, canvas.x - 40f);
+            float h = Mathf.Min(Mathf.Clamp(canvas.y - 120f, 520f, 1040f), canvas.y - 20f);
+            _frame.sizeDelta = new Vector2(w, h);
             if (_title != null)
             {
                 var rt = _title.rectTransform;
-                rt.sizeDelta = new Vector2(FrameWidth - 120f, rt.sizeDelta.y);
+                rt.sizeDelta = new Vector2(w - 120f, rt.sizeDelta.y);
             }
             // Under the title and tabs, above the close button.
-            area.anchorMin = area.anchorMax = new Vector2(0.5f, 1f);
-            area.pivot = new Vector2(0.5f, 1f);
-            area.anchoredPosition = new Vector2(-4f, -104f);
-            area.sizeDelta = new Vector2(FrameWidth - 52f, h - 104f - 84f);
-            _width = area.sizeDelta.x - 26f;
+            _area.anchorMin = _area.anchorMax = new Vector2(0.5f, 1f);
+            _area.pivot = new Vector2(0.5f, 1f);
+            _area.anchoredPosition = new Vector2(-4f, -104f);
+            _area.sizeDelta = new Vector2(w - 52f, h - 104f - 84f);
+            _width = _area.sizeDelta.x - 26f;
         }
 
         private static readonly string[] TabKeys = { "stats_tab_stats", "stats_tab_deaths", "stats_tab_bosses" };
@@ -452,6 +471,7 @@ namespace KroolWorldUI.Features
                 _group.alpha = 0f;
             }
             transform.SetAsLastSibling();
+            Layout();
             Show(tab);
             // Give the controller to the info panel, as the game's Skills dialog does.
             try
@@ -763,12 +783,13 @@ namespace KroolWorldUI.Features
             if (grid)
             {
                 StatsUi.Text(art, holder, row.GridHead ?? "", LabelX, 2f, ValueX - LabelX - 6f, HeadH, 14f, StatsUi.Muted, TextAlignmentOptions.BottomLeft);
+                float colW = Mathf.Min(GridColW, chipsW / row.Grid.Count);
                 for (int i = 0; i < row.Grid.Count; i++)
                 {
                     var cell = row.Grid[i];
-                    float x = ChipX + i * GridColW;
-                    StatsUi.Text(art, holder, cell.Head, x, 2f, GridColW - 18f, HeadH, 14f, StatsUi.Muted, TextAlignmentOptions.BottomRight);
-                    var v = StatsUi.Text(art, holder, cell.Value, x, top0, GridColW - 18f, RowH, 17f, StatsUi.White, TextAlignmentOptions.MidlineRight);
+                    float x = ChipX + i * colW;
+                    StatsUi.Text(art, holder, cell.Head, x, 2f, colW - 18f, HeadH, 14f, StatsUi.Muted, TextAlignmentOptions.BottomRight);
+                    var v = StatsUi.Text(art, holder, cell.Value, x, top0, colW - 18f, RowH, 17f, StatsUi.White, TextAlignmentOptions.MidlineRight);
                     StatsUi.Tip(art, v.gameObject, "", cell.Tip);
                 }
             }
@@ -784,6 +805,7 @@ namespace KroolWorldUI.Features
             if (row.Icon != null)
                 StatsUi.Image(holder, row.Icon, 4f, top0 + (RowH - IconSize) / 2f, IconSize, IconSize, Color.white);
             var label = StatsUi.Text(art, holder, row.Label, LabelX, top0, ValueX - LabelX - 6f, RowH, 17f, StatsUi.Parchment);
+            Shrink(label, 13f); // long names in some languages
             if (!string.IsNullOrEmpty(row.Tip))
                 StatsUi.Tip(art, label.gameObject, row.Label, row.Tip);
             if (!string.IsNullOrEmpty(row.Value))
@@ -796,12 +818,22 @@ namespace KroolWorldUI.Features
                 var value = StatsUi.Text(art, holder, row.Value, ValueX, top0, ValueW - 8f, RowH, 19f, row.ValueColor,
                     TextAlignmentOptions.MidlineRight);
                 value.fontStyle = FontStyles.Bold;
+                value.characterSpacing = 3f; // bold strokes are wider; the digits are monospaced
+                Shrink(value, 13f);          // "Immune" and the like in longer languages
                 if (!string.IsNullOrEmpty(row.Tip))
                     StatsUi.Tip(art, value.gameObject, row.Label, row.Tip);
                 if (row.LiveValue)
                     _live.Add(value);
             }
             return y + h;
+        }
+
+        /// <summary>Text that does not fit gets smaller, down to <paramref name="min"/>, before it is cut.</summary>
+        private static void Shrink(TMP_Text t, float min)
+        {
+            t.fontSizeMax = t.fontSize;
+            t.fontSizeMin = Mathf.Min(min, t.fontSize);
+            t.enableAutoSizing = true;
         }
 
         private float Deaths(StatsUi.Art art)

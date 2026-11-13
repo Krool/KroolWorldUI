@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.17.2
+
+- **Stats window:** the Deaths and Bosses tabs get column headers too (Hits, Damage, Share, Damage types). The window resizes to the screen each time it opens, so changing the resolution or the game's GUI scale mid-session no longer leaves it the wrong size. Long names and values in some languages shrink to fit instead of being cut off.
+
 ## 0.17.1
 
 - **Stats window:** bigger, with tighter rows so more fits on screen. Each section has column headers (Total, Sources, Damage taken, Time left), and every total sits in its own dark box in bold. Damage per hit is now a small table: hit sizes on top, what is left after armor under them.

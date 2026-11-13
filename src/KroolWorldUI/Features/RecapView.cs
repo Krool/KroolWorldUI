@@ -40,6 +40,11 @@ namespace KroolWorldUI.Features
             foreach (var r in d.Rows)
                 for (int t = 0; t < Dmg.Count; t++)
                     all[t] += r.Types[t];
+            if (!compact)
+                y = Heads(art, root, y,
+                    (L10n.T("stats_col_hits"), countX - 30f, 70f, true),
+                    (L10n.T("stats_col_damage"), amountX - 6f, 70f, true),
+                    (L10n.T("stats_col_types"), barX, barW, false));
             int i = 0;
             foreach (var r in d.Rows)
             {
@@ -115,6 +120,12 @@ namespace KroolWorldUI.Features
                 for (int t = 0; t < Dmg.Count; t++)
                     all[t] += f.Types[t];
 
+            // The count column stays unnamed: a player's row shows damage per second there, a weapon's row its hits.
+            if (!compact)
+                y = Heads(art, root, y,
+                    (L10n.T("stats_col_damage"), amountX - 6f, 76f, true),
+                    (L10n.T("stats_col_share"), pctX - 4f, 50f, true),
+                    (L10n.T("stats_col_types"), barX, barW, false));
             int shown = 0;
             foreach (var f in b.Fighters)
             {
@@ -242,6 +253,21 @@ namespace KroolWorldUI.Features
             StatsUi.Text(art, root, title, x, y - 2f, w - x, 30f, 25f, StatsUi.Gold, TextAlignmentOptions.MidlineLeft, true);
             StatsUi.Text(art, root, sub, x, y + 26f, w - x, 22f, 15f, StatsUi.Muted);
             return y + 58f;
+        }
+
+        /// <summary>Small column names over the full recap's numbers, right-aligned over right-aligned columns. Returns the new y.</summary>
+        private static float Heads(StatsUi.Art art, RectTransform root, float y,
+            params (string text, float x, float w, bool right)[] columns)
+        {
+            foreach (var (text, x, w, right) in columns)
+            {
+                var t = StatsUi.Text(art, root, text, x, y, w, 18f, 13f, StatsUi.Muted,
+                    right ? TextAlignmentOptions.BottomRight : TextAlignmentOptions.BottomLeft);
+                t.fontSizeMin = 10f;
+                t.fontSizeMax = 13f;
+                t.enableAutoSizing = true;
+            }
+            return y + 21f;
         }
 
         private const int MaxCompactRows = 6;
