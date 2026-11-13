@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.17.4
+
+- **Stats window without Epic Loot:** the Resistances note leaves out the sentence about Epic Loot, and the log no longer gets a Harmony warning about missing Epic Loot types.
+- **Stats window:** a column header shows only when something in that section fills its column.
+
 ## 0.17.3
 
 - **Stats window:** fix: the sources next to each total (what gear, food, potions and Rested add) and the column headers showed only "…". Text boxes now always have room for a full line.

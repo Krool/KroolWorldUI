@@ -567,7 +567,9 @@ namespace KroolWorldUI.Features
         {
             var s = new StatSection
             {
-                Title = L10n.T("stats_resist"), Note = L10n.T("stats_resist_note"), ValueHead = L10n.T("stats_col_taken"),
+                Title = L10n.T("stats_resist"), ValueHead = L10n.T("stats_col_taken"),
+                // The second sentence is about Epic Loot's resistances: only said when it is installed.
+                Note = L10n.T(EpicLootBridge.Present ? "stats_resist_note_el" : "stats_resist_note"),
             };
 
             // Walk the game's order and remember which source set each type last.

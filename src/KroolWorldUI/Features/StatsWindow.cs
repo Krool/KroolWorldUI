@@ -718,7 +718,11 @@ namespace KroolWorldUI.Features
                     note.rectTransform.sizeDelta = new Vector2(w - 8f, nh + note.fontSize * 2f); // room below, as for row notes
                     y += nh + 2f;
                 }
-                y = ColumnHeads(art, page, section.ValueHead, section.ChipsHead, y);
+                // A header only over a column something in the section fills (no gear with resistances,
+                // say, leaves the sources empty).
+                bool values = section.Rows.Any(r => !string.IsNullOrEmpty(r.Value));
+                bool chips = section.Rows.Any(r => r.Chips.Count > 0);
+                y = ColumnHeads(art, page, values ? section.ValueHead : null, chips ? section.ChipsHead : null, y);
                 int i = 0;
                 foreach (var row in section.Rows)
                     y = StatRowView(art, page, row, y, w, i++ % 2 == 0);

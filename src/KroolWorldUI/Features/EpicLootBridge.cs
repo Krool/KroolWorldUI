@@ -35,22 +35,35 @@ namespace KroolWorldUI.Features
             _tried = true;
             try
             {
-                var ext = AccessTools.TypeByName("EpicLoot.PlayerExtensions");
+                // Epic Loot's assembly, found by one of its types. Not AccessTools.TypeByName: without
+                // Epic Loot that scans every loaded type and logs a Harmony warning on each player's game.
+                Type ext = null;
+                foreach (var a in AppDomain.CurrentDomain.GetAssemblies())
+                {
+                    if (a.IsDynamic)
+                        continue;
+                    try { ext = a.GetType("EpicLoot.PlayerExtensions", false); }
+                    catch { continue; }
+                    if (ext != null)
+                        break;
+                }
                 if (ext == null)
                     return;
+                var asm = ext.Assembly;
+                Type T(string name) => asm.GetType(name, false);
                 _total = AccessTools.Method(ext, "GetTotalActiveMagicEffectValue");
                 _magicEquipment = AccessTools.Method(ext, "GetMagicEquipment");
                 _setEffects = AccessTools.Method(ext, "GetAllActiveSetMagicEffects");
-                _getMagicItem = AccessTools.Method(AccessTools.TypeByName("EpicLoot.ItemDataExtensions"), "GetMagicItem");
-                var magicItem = AccessTools.TypeByName("EpicLoot.MagicItem");
+                _getMagicItem = AccessTools.Method(T("EpicLoot.ItemDataExtensions"), "GetMagicItem");
+                var magicItem = T("EpicLoot.MagicItem");
                 _effects = AccessTools.Field(magicItem, "Effects");
-                var effect = AccessTools.TypeByName("EpicLoot.MagicItemEffect");
+                var effect = T("EpicLoot.MagicItemEffect");
                 _effectValue = AccessTools.Field(effect, "EffectValue");
                 _effectType = (MemberInfo)AccessTools.Property(effect, "EffectType") ?? AccessTools.Field(effect, "EffectType");
-                var defType = AccessTools.TypeByName("EpicLoot.MagicItemEffectDefinition");
+                var defType = T("EpicLoot.MagicItemEffectDefinition");
                 _effectText = defType != null ? AccessTools.Method(magicItem, "GetEffectText", new[] { defType, typeof(float) }) : null;
-                _defGet = AccessTools.Method(AccessTools.TypeByName("EpicLoot.MagicItemEffectDefinitions"), "Get");
-                _resist = AccessTools.Method(AccessTools.TypeByName("EpicLoot.MagicItemEffects.ModifyResistance"), "GetResistanceFraction");
+                _defGet = AccessTools.Method(T("EpicLoot.MagicItemEffectDefinitions"), "Get");
+                _resist = AccessTools.Method(T("EpicLoot.MagicItemEffects.ModifyResistance"), "GetResistanceFraction");
                 if (_total == null || _total.GetParameters().Length < 3)
                     _total = null;
                 Plugin.Log.LogInfo(_total != null ? "Epic Loot found: its enchantments show in the stats window." : "Epic Loot found, but not a version the stats window can read.");

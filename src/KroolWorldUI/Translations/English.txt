@@ -84,7 +84,8 @@ stats_open_key = Stats ($1)
 stats_vitals = Health and stamina
 stats_movement = Movement and carrying
 stats_resist = Resistances
-stats_resist_note = Only the strongest resistance to each damage type counts; the others are crossed out. Epic Loot resistances add up and apply on top.
+stats_resist_note = Only the strongest resistance to each damage type counts; the others are crossed out.
+stats_resist_note_el = Only the strongest resistance to each damage type counts; the others are crossed out. Epic Loot resistances add up and apply on top.
 stats_effects = Effects
 # Hover names for the small pictures beside each stat.
 stats_base = Base
