@@ -141,7 +141,10 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
   Routed RPCs register from `Game.Start` (where the game registers RPC_RegisterKill, and where
   MultiUserChest and ServerSync register theirs), plus a per-router check from the HUD tick; 0.17.4
   used a ZRoutedRpc constructor postfix and two friends' Bonemass kill showed nothing on either game
-  (cause unconfirmed, no log). "Boss recap: listening for boss deaths." in the log confirms it.
+  (cause unconfirmed, no log). That postfix was probably not the cause: it matches `ZRoutedRpc(bool)`
+  and loaded with no patch error in KroolDev. Nobody has yet seen a live recap work, solo or
+  multiplayer; a solo `spawn Eikthyr` kill in KroolDev is the first test to run.
+  "Boss recap: listening for boss deaths." in the log confirms registration.
 - Epic Loot (0.15, read by reflection in EpicLootBridge, never referenced): its speed, max
   health/stamina/eitr, regen, carry weight, per-item armor and stamina-cost bonuses are postfixes on
   the game's own getters, so calling those includes them. Its resistances are not: an additive %,
