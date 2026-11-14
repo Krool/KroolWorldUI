@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.17.6
+
+- **Boss recap:** fix: a boss kill could show nothing on any player's game, even with everyone on 0.17.4. The recap's network messages are now set up when the world starts, the way the game sets up its own, and the log says "Boss recap: listening for boss deaths." when they are. A dedicated server still needs nothing installed.
+
 ## 0.17.5
 
 - **Boss recap:** fix: when a friend without this mod (or with an older version) was running the boss, its death could go unnoticed and the Bosses tab stayed empty. The recap now starts from the game's own kill count, which reaches everyone who hit the boss, and the backup check no longer misreads a dead boss's health as full.

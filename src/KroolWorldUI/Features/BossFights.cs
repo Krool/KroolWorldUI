@@ -177,21 +177,35 @@ namespace KroolWorldUI.Features
 
         // ------------------------------------------------------------------ network
 
-        [HarmonyPatch(typeof(ZRoutedRpc), MethodType.Constructor, typeof(bool))]
+        private static ZRoutedRpc _listening;
+
+        /// <summary>
+        /// Registers the two messages on the game's message router, once per router (a new one comes
+        /// with each world joined). From Game.Start, where the game registers its own kill message
+        /// and other mods register theirs, and from the HUD tick in case Game.Start was missed.
+        /// </summary>
+        private static void Listen()
+        {
+            var rpc = ZRoutedRpc.instance;
+            if (rpc == null || ReferenceEquals(rpc, _listening))
+                return;
+            _listening = rpc;
+            try
+            {
+                rpc.Register<ZPackage>(RpcDown, OnDown);
+                rpc.Register<ZPackage>(RpcPart, OnPart);
+                Plugin.Log.LogInfo("Boss recap: listening for boss deaths.");
+            }
+            catch (Exception e)
+            {
+                Plugin.Log.LogError($"Boss recap (network): {e}");
+            }
+        }
+
+        [HarmonyPatch(typeof(Game), "Start")]
         private static class Register
         {
-            private static void Postfix(ZRoutedRpc __instance)
-            {
-                try
-                {
-                    __instance.Register<ZPackage>(RpcDown, OnDown);
-                    __instance.Register<ZPackage>(RpcPart, OnPart);
-                }
-                catch (Exception e)
-                {
-                    Plugin.Log.LogError($"Boss recap (network): {e}");
-                }
-            }
+            private static void Postfix() => Listen();
         }
 
         /// <summary>The boss died in this game: tell every game, this one included.</summary>
@@ -245,6 +259,7 @@ namespace KroolWorldUI.Features
 
         private static void Announce(ZDOID id, Fight f, Vector3 position)
         {
+            Listen(); // this game's own handler takes the announcement first
             var pkg = new ZPackage();
             pkg.Write(Format);
             pkg.Write(id);
@@ -446,6 +461,7 @@ namespace KroolWorldUI.Features
         /// <summary>Called every frame (from the HUD): turns collected fights into recaps once their parts are in.</summary>
         internal static void Update()
         {
+            Listen();
             Watch();
             if (_pending.Count == 0)
                 return;
