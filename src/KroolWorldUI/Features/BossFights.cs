@@ -48,7 +48,8 @@ namespace KroolWorldUI.Features
     /// Only the game that runs a boss (its owner, usually the first player near it) sees every
     /// hit it takes, after its resistances. Only the player who hits knows which weapon or arrow
     /// it was. So each game keeps both halves: the hits a boss took while it ran the boss, and
-    /// the local player's own hits by weapon. When a boss dies, its owner announces it; every
+    /// the local player's own hits by weapon. When a boss dies, its owner announces it (or, when
+    /// the owner lacks this mod, the game of any player who hit it does); every
     /// game with this mod then sends both halves to everyone, and each game combines them: each
     /// player's damage of each type is split across their weapons by what each weapon dealt of
     /// that type. Players without the mod still show, by weapon skill.
@@ -137,6 +138,7 @@ namespace KroolWorldUI.Features
             }
             f.Last = Now;
             f.Boss = boss;
+            f.GoneAt = -1f; // back in view: judge it afresh when it next vanishes
             return f;
         }
 
@@ -195,7 +197,50 @@ namespace KroolWorldUI.Features
         /// <summary>The boss died in this game: tell every game, this one included.</summary>
         internal static void Died(Character boss)
         {
-            Announce(boss.GetZDOID(), FightFor(boss), boss.transform.position);
+            var f = FightFor(boss);
+            Plugin.Log.LogInfo($"Boss recap: {f.Prefab} died in this game; asking every game for its part.");
+            Announce(boss.GetZDOID(), f, boss.transform.position);
+        }
+
+        /// <summary>
+        /// When a boss dies, the game that runs it tells every player who hit it (the game's own
+        /// kill count, Game.RPC_RegisterKill), whether or not that game has this mod. Its own
+        /// announcement, when it has the mod, is sent before that over the same route, so arrives
+        /// first; a fight still open here when the kill comes in was not announced, so start it here.
+        /// </summary>
+        [HarmonyPatch(typeof(Game), nameof(Game.RPC_RegisterKill))]
+        private static class KillCounted
+        {
+            private static void Postfix(string enemyName)
+            {
+                try
+                {
+                    if (BossRecap.Enabled.Value && _fights.Count > 0)
+                        Killed(enemyName);
+                }
+                catch (Exception e)
+                {
+                    Plugin.Log.LogError($"Boss recap (kill): {e}");
+                }
+            }
+        }
+
+        private static void Killed(string name)
+        {
+            ZDOID id = ZDOID.None;
+            Fight f = null;
+            foreach (var kv in _fights)
+            {
+                if (kv.Value.Name == name && (f == null || kv.Value.Last > f.Last))
+                {
+                    id = kv.Key;
+                    f = kv.Value;
+                }
+            }
+            if (f == null || (_pending.TryGetValue(id, out var p) && p.Announced))
+                return;
+            Plugin.Log.LogInfo($"Boss recap: the game counted a kill of {f.Prefab} that no game announced; announcing it from here.");
+            Announce(id, f, f.Boss != null ? f.Boss.transform.position : f.LastPosition);
         }
 
         private static void Announce(ZDOID id, Fight f, Vector3 position)
@@ -216,10 +261,11 @@ namespace KroolWorldUI.Features
         private const float WaitSeconds = 1.5f;
 
         /// <summary>
-        /// The game that runs a boss announces its death. If that game lacks this mod, nobody
-        /// would; so a game that does not run the boss watches it, and when it vanishes at low
-        /// health with the local player close by (a boss is only unloaded when nobody is near),
-        /// it waits a moment for a real announcement and then makes one itself.
+        /// The game that runs a boss announces its death. If that game lacks this mod, the game's
+        /// own kill count starts the recap (see KillCounted). Behind that, a game that does not
+        /// run the boss watches it, and when it vanishes at low health with the local player close
+        /// by (a boss is only unloaded when nobody is near), it waits a moment for an announcement
+        /// and then makes one itself.
         /// </summary>
         private static void Watch()
         {
@@ -229,6 +275,10 @@ namespace KroolWorldUI.Features
             foreach (var kv in _fights.ToList())
             {
                 var f = kv.Value;
+                // The game drops a dead or unloaded boss's network data first and the object itself
+                // at the end of the frame; in between, its health reads as full. Gone already.
+                if (f.Boss != null && f.Boss.GetZDOID().IsNone())
+                    f.Boss = null;
                 if (f.Boss != null)
                 {
                     if (!f.Boss.IsOwner())
@@ -250,6 +300,7 @@ namespace KroolWorldUI.Features
                 f.GoneAt = float.MaxValue;
                 if (_pending.TryGetValue(kv.Key, out var p) && p.Announced)
                     continue;
+                Plugin.Log.LogInfo($"Boss recap: {f.Prefab} vanished nearby at low health and no game announced it; announcing it from here.");
                 Announce(kv.Key, f, f.LastPosition);
             }
         }
@@ -282,6 +333,7 @@ namespace KroolWorldUI.Features
                 p.MaxHealth = pkg.ReadSingle();
                 p.End = pkg.ReadDouble();
                 p.Position = pkg.ReadVector3();
+                Plugin.Log.LogInfo($"Boss recap: {p.Prefab} is down; this game {(_fights.ContainsKey(id) ? "sends its part" : "saw none of the fight")}.");
                 SendPart(id);
             }
             catch (Exception e)
@@ -404,7 +456,11 @@ namespace KroolWorldUI.Features
                 if (p.Shown == null && p.Announced && now >= p.Due)
                     Publish(kv.Key, p);
                 if (now > p.Until)
+                {
+                    if (p.Shown == null && p.Announced)
+                        Plugin.Log.LogInfo($"Boss recap: {p.Prefab}: no game recorded any damage to it ({p.Parts.Count} parts); nothing to show.");
                     _pending.Remove(kv.Key);
+                }
             }
         }
 
@@ -418,10 +474,13 @@ namespace KroolWorldUI.Features
                 History.Remove(p.Shown);
             else if (!Involved(p, recap))
             {
+                Plugin.Log.LogInfo($"Boss recap: {p.Prefab}: you neither hit it nor were near; not shown.");
                 p.Shown = recap; // remember, but nothing to show here
                 p.Until = 0f;
                 return;
             }
+            if (!wasShown)
+                Plugin.Log.LogInfo($"Boss recap: {p.Prefab}: {recap.Fighters.Count} fighters, from {p.Parts.Count} games' parts.");
             p.Shown = recap;
             History.Insert(0, recap);
             if (History.Count > 10)

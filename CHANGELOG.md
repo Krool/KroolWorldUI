@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.17.5
+
+- **Boss recap:** fix: when a friend without this mod (or with an older version) was running the boss, its death could go unnoticed and the Bosses tab stayed empty. The recap now starts from the game's own kill count, which reaches everyone who hit the boss, and the backup check no longer misreads a dead boss's health as full.
+- **Boss recap:** each boss death leaves a few lines in the BepInEx log saying which game announced it and how many games sent their numbers.
+
 ## 0.17.4
 
 - **Stats window without Epic Loot:** the Resistances note leaves out the sentence about Epic Loot, and the log no longer gets a Harmony warning about missing Epic Loot types.

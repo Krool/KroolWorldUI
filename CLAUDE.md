@@ -132,6 +132,12 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
   only on the attacker's machine (Attack/Projectile/Aoe context), never in HitData. ZRoutedRpc to
   Everybody runs the local handler first, synchronously, so anything sent from inside it reaches
   peers before the outer message: BossFights accepts parts before the announcement.
+- A boss's owner may lack the mod (friends update on their own schedule). Character.OnDeath on the
+  owner calls vanilla `Game.RPC_RegisterKill` for every player who hit it (ZDO `s_attackers`), after
+  our OnDeath prefix has sent BossDown, so BossFights starts a fight still open at that point
+  (0.17.5). When a remote object goes, ZNetScene calls ResetZDO and only then Object.Destroy (end of
+  frame); in between, `GetHealth()` returns max health, so check `GetZDOID().IsNone()` first.
+  Each boss death logs a few `Boss recap:` Info lines (all builds); read them after a failed recap.
 - Epic Loot (0.15, read by reflection in EpicLootBridge, never referenced): its speed, max
   health/stamina/eitr, regen, carry weight, per-item armor and stamina-cost bonuses are postfixes on
   the game's own getters, so calling those includes them. Its resistances are not: an additive %,
