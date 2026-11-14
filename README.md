@@ -223,8 +223,8 @@ When you die, the death screen shows what hurt you in that fight: each creature 
 
 When a boss dies, a summary shows each player's share of the damage, a bar by damage type and the weapons they used. The stats window's Bosses tab has the full breakdown: every weapon, arrow, Epic Loot enchantment (explosive shot, chain lightning) and fire or poison over time, with hits and damage per second.
 
-- Numbers are what the boss actually lost, after its resistances.
-- Friends with this mod send each other their numbers once when the boss dies; that is how it knows which weapon each hit came from. Players without the mod still show, grouped by weapon skill.
+- Numbers are what the boss actually lost, after its resistances. Only the game of the player running the boss sees that (usually whoever got there first); if that player lacks the mod, each player with it gets their own count before the boss's resistances instead, marked with a ~.
+- Friends with this mod send each other their numbers once when the boss dies; that is how it knows which weapon each hit came from. Players without the mod still show, grouped by weapon skill, when the player running the boss has the mod.
 
 ## Bench pins
 
