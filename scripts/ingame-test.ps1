@@ -50,6 +50,11 @@ function Remove-TestFiles([bool]$savesToo) {
     foreach ($t in $targets) {
         Get-ChildItem $t -File -ErrorAction SilentlyContinue | Remove-Item -Force -Confirm:$false
     }
+    # The game keeps a world as a folder of that name (chunks, map cache), not only loose files.
+    $worldDir = Join-Path $saves "worlds_local\kwuitest"
+    if ($savesToo -and (Test-Path $worldDir -PathType Container)) {
+        Remove-Item $worldDir -Recurse -Force -Confirm:$false
+    }
 }
 Remove-TestFiles $false   # a recap file from an earlier run would change what this one expects
 
