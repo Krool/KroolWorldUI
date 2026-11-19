@@ -13,7 +13,7 @@ namespace KroolWorldUI
     {
         public const string Guid = "krool.kroolworldui";
         public const string Name = "Krool World UI";
-        public const string Version = "0.17.6";
+        public const string Version = "0.18.0";
 #if DEV_BUILD
         public const string Flavor = " dev"; // scripts\deploy-dev.ps1 build; shown in the F7 title
 #else
