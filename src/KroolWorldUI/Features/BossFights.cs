@@ -129,12 +129,16 @@ namespace KroolWorldUI.Features
             var id = boss.GetZDOID();
             if (!_fights.TryGetValue(id, out var f))
             {
+                // Old fights go first, then the new one is added: pruning after adding dropped the new
+                // fight itself, whose Last was still 0 (every recap empty in any world past its
+                // first 20 minutes, 0.17.0 to 0.18.0).
+                Prune();
+                double now = Now;
                 _fights[id] = f = new Fight
                 {
                     Name = boss.m_name, Prefab = Utils.GetPrefabName(boss.gameObject),
-                    MaxHealth = boss.GetMaxHealth(), Start = Now,
+                    MaxHealth = boss.GetMaxHealth(), Start = now, Last = now,
                 };
-                Prune();
             }
             f.Last = Now;
             f.Boss = boss;

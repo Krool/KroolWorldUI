@@ -147,12 +147,21 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
   frame); in between, `GetHealth()` returns max health, so check `GetZDOID().IsNone()` first.
   Each boss death logs a few `Boss recap:` Info lines (all builds); read them after a failed recap.
   Routed RPCs register from `Game.Start` (where the game registers RPC_RegisterKill, and where
-  MultiUserChest and ServerSync register theirs), plus a per-router check from the HUD tick; 0.17.4
-  used a ZRoutedRpc constructor postfix and two friends' Bonemass kill showed nothing on either game
-  (cause unconfirmed, no log). That postfix was probably not the cause: it matches `ZRoutedRpc(bool)`
-  and loaded with no patch error in KroolDev. Nobody has yet seen a live recap work, solo or
-  multiplayer; a solo `spawn Eikthyr` kill in KroolDev is the first test to run.
+  MultiUserChest and ServerSync register theirs), plus a per-router check from the HUD tick.
   "Boss recap: listening for boss deaths." in the log confirms registration.
+  Why every recap was empty from 0.17.0 to 0.18.0 (friends' Bonemass and Queen kills): `FightFor`
+  pruned stale fights right after adding the new one, whose `Last` was still 0, so the new fight was
+  dropped on every hit in any world older than 20 minutes. The 0.17.5 and 0.17.6 "fixes" (kill-count
+  fallback, Game.Start registration) were guesses made without a run; neither was the cause. Found
+  in one run of the in-game test (0.18.1).
+- **In-game test: `scripts\ingame-test.ps1`** (after `deploy-dev.ps1`). Installs `tools\InGameTest` in
+  KroolDev for one launch, starts Valheim windowed with no one at the keyboard (throwaway local
+  character and world `kwuitest`), spawns and kills Eikthyr through `Character.Damage`, kills the
+  player, logs out and in, checks the Bosses and Deaths lists each time, quits, prints the
+  `[KWUITEST]` lines and exits 1 on a FAIL. About three minutes; needs Steam running, Valheim closed,
+  and the owner's OK to take the screen. Run it before releasing anything that touches damage
+  recording, recaps or their saved history: reading the code missed this bug for three releases.
+  Solo only: it does not cover a boss run by another player's game.
 - Epic Loot (0.15, read by reflection in EpicLootBridge, never referenced): its speed, max
   health/stamina/eitr, regen, carry weight, per-item armor and stamina-cost bonuses are postfixes on
   the game's own getters, so calling those includes them. Its resistances are not: an additive %,

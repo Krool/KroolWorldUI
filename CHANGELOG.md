@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.18.1
+
+- **Boss recap:** fix: the Bosses tab stayed empty and no summary appeared after a boss kill, in any world more than 20 minutes old. The mod was dropping its record of the fight after every hit, so there was nothing to show when the boss died. Present since the recap was added in 0.17.0.
+
 ## 0.18.0
 
 - **Deaths and Bosses tabs keep their history.** The stats window's lists no longer empty when you quit: each character's last ten deaths and last ten boss kills are saved and come back next session. Recaps older than a day show their date.
