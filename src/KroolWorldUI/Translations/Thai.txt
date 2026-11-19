@@ -80,8 +80,8 @@ stats_hits_tip = การโจมตีแต่ละขนาดเหลื
 stats_hit_tip = โดนตี $1 จะเสีย $2
 stats_you_take = คุณรับความเสียหายนี้ $1
 stats_capped = Epic Loot รวมได้ $1 แต่จำกัดที่ $2
-stats_no_deaths = ยังไม่มีการตายในเซสชันนี้
-stats_no_bosses = ยังไม่ได้ฆ่าบอสในเซสชันนี้
+stats_no_deaths = ยังไม่มีบันทึกการตาย
+stats_no_bosses = ยังไม่มีบันทึกการฆ่าบอส
 stats_deaths_off = “สรุปการตาย” ปิดอยู่ในการตั้งค่า
 stats_bosses_off = “สรุปการสู้บอส” ปิดอยู่ในการตั้งค่า
 

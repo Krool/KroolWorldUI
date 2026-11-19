@@ -89,8 +89,8 @@ stats_hits_tip = Vad träffar av varje storlek lämnar efter ditt skydd, före b
 stats_hit_tip = En träff på $1 tar $2.
 stats_you_take = Du tar $1 av den här skadan.
 stats_capped = Epic Loot ger totalt $1, men högst $2.
-stats_no_deaths = Inga dödsfall än den här sessionen.
-stats_no_bosses = Inga bossar dödade än den här sessionen.
+stats_no_deaths = Inga dödsfall registrerade än.
+stats_no_bosses = Inga dödade bossar registrerade än.
 stats_deaths_off = Dödsöversikt är av i inställningarna.
 stats_bosses_off = Bossöversikt är av i inställningarna.
 

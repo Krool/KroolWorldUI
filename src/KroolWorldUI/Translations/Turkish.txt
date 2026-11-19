@@ -80,8 +80,8 @@ stats_hits_tip = Her büyüklükteki darbeden zırhından sonra, bloklamadan ön
 stats_hit_tip = $1 hasarlık darbe $2 götürür.
 stats_you_take = Bu hasardan $1 alırsın.
 stats_capped = Epic Loot toplamı $1, sınır $2.
-stats_no_deaths = Bu oturumda henüz ölüm yok.
-stats_no_bosses = Bu oturumda henüz baş düşman öldürülmedi.
+stats_no_deaths = Henüz ölüm kaydı yok.
+stats_no_bosses = Henüz öldürülen baş düşman kaydı yok.
 stats_deaths_off = Ölüm Özeti ayarlarda kapalı.
 stats_bosses_off = Baş Düşman Özeti ayarlarda kapalı.
 

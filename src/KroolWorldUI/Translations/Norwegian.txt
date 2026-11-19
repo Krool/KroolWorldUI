@@ -89,8 +89,8 @@ stats_hits_tip = Hva slag av hver størrelse etterlater etter rustningen din, f�
 stats_hit_tip = Et slag på $1 gir $2.
 stats_you_take = Du tar $1 av denne skaden.
 stats_capped = Epic Loot gir til sammen $1, begrenset til $2.
-stats_no_deaths = Ingen dødsfall ennå denne økten.
-stats_no_bosses = Ingen bosser drept ennå denne økten.
+stats_no_deaths = Ingen dødsfall registrert ennå.
+stats_no_bosses = Ingen drepte bosser registrert ennå.
 stats_deaths_off = Dødsoppsummering er av i innstillingene.
 stats_bosses_off = Bossoppsummering er av i innstillingene.
 

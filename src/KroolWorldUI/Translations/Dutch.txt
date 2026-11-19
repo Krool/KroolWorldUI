@@ -89,8 +89,8 @@ stats_hits_tip = Wat er van klappen van elke grootte overblijft na je harnas, v√
 stats_hit_tip = Een klap van $1 kost je $2.
 stats_you_take = Je krijgt $1 van deze schade.
 stats_capped = Epic Loot telt op tot $1, begrensd op $2.
-stats_no_deaths = Deze sessie nog niet gestorven.
-stats_no_bosses = Deze sessie nog geen bazen verslagen.
+stats_no_deaths = Nog geen sterfgevallen vastgelegd.
+stats_no_bosses = Nog geen verslagen bazen vastgelegd.
 stats_deaths_off = Doodsoverzicht staat uit in de instellingen.
 stats_bosses_off = Baasoverzicht staat uit in de instellingen.
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.18.0
+
+- **Deaths and Bosses tabs keep their history.** The stats window's lists no longer empty when you quit: each character's last ten deaths and last ten boss kills are saved and come back next session. Recaps older than a day show their date.
+- The saved history is one small file per character in `BepInEx/config/KroolWorldUI` in your profile. Delete a file to clear that character's lists.
+
 ## 0.17.6
 
 - **Boss recap:** fix: a boss kill could show nothing on any player's game, even with everyone on 0.17.4. The recap's network messages are now set up when the world starts, the way the game sets up its own, and the log says "Boss recap: listening for boss deaths." when they are. A dedicated server still needs nothing installed.

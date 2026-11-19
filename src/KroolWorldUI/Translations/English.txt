@@ -112,8 +112,8 @@ stats_hit_tip = A hit of $1 takes $2.
 # Resistance hover text. $1 is a percentage ("42%"); in stats_capped $1 is the total, $2 the cap.
 stats_you_take = You take $1 of this damage.
 stats_capped = Epic Loot adds up to $1, capped at $2.
-stats_no_deaths = No deaths yet this session.
-stats_no_bosses = No bosses killed yet this session.
+stats_no_deaths = No deaths recorded yet.
+stats_no_bosses = No boss kills recorded yet.
 stats_deaths_off = Death Recap is off in the settings.
 stats_bosses_off = Boss Recap is off in the settings.
 

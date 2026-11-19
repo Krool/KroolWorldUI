@@ -89,8 +89,8 @@ stats_hits_tip = Šta od udaraca svake jačine ostane posle tvog oklopa, pre blo
 stats_hit_tip = Udarac od $1 skida $2.
 stats_you_take = Primaš $1 ove štete.
 stats_capped = Epic Loot daje ukupno $1, najviše $2.
-stats_no_deaths = Još nema smrti u ovoj sesiji.
-stats_no_bosses = Još nijedan bos nije ubijen u ovoj sesiji.
+stats_no_deaths = Još nema zabeleženih smrti.
+stats_no_bosses = Još nema zabeleženih ubijenih bosova.
 stats_deaths_off = „Pregled smrti“ je isključen u podešavanjima.
 stats_bosses_off = „Pregled bosa“ je isključen u podešavanjima.
 

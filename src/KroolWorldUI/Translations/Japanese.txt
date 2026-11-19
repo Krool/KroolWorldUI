@@ -89,8 +89,8 @@ stats_hits_tip = 各大きさの攻撃が、アーマーで軽減された後（
 stats_hit_tip = $1の攻撃で$2のダメージ。
 stats_you_take = このダメージの$1を受けます。
 stats_capped = Epic Lootの合計は$1、上限は$2。
-stats_no_deaths = このセッションではまだ死亡していません。
-stats_no_bosses = このセッションではまだボスを倒していません。
+stats_no_deaths = まだ死亡の記録はありません。
+stats_no_bosses = まだボス撃破の記録はありません。
 stats_deaths_off = 設定で「死亡レポート」がオフになっています。
 stats_bosses_off = 設定で「ボス戦レポート」がオフになっています。
 

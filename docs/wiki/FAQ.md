@@ -55,6 +55,9 @@ Thunderstore rebuilds the mod list r2modman downloads on a schedule, so a new ve
 **How do I open the stats window?**
 Press **K**, or click the armor value in your inventory. On a controller, open the inventory and press the right stick. Both can be changed under **Stats Window** in F7, if K is taken by another mod.
 
+**Do the Deaths and Bosses tabs keep their lists when I quit?**
+Yes. Each character's last ten deaths and last ten boss kills are saved in `BepInEx/config/KroolWorldUI` in your r2modman profile and come back next session. To clear a character's lists, delete its file there while the game is closed. Another r2modman profile starts with empty lists.
+
 **The boss recap says part of the fight was not recorded, or a friend's weapons show as a skill name.**
 Only the game that runs a boss (usually the player who reached it first) sees every hit it takes after its resistances. If that player does not have the mod, those hits are missing. A friend without the mod shows by weapon skill (Bows, Clubs) instead of by weapon, since only their own game knows which weapon they swung.
 

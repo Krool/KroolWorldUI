@@ -89,8 +89,8 @@ stats_hits_tip = Was von Treffern jeder Größe nach deiner Rüstung übrig blei
 stats_hit_tip = Ein Treffer von $1 kostet dich $2.
 stats_you_take = Du erleidest $1 dieses Schadens.
 stats_capped = Epic Loot ergibt zusammen $1, begrenzt auf $2.
-stats_no_deaths = In dieser Sitzung noch keine Tode.
-stats_no_bosses = In dieser Sitzung noch keine Bosse besiegt.
+stats_no_deaths = Noch keine Tode aufgezeichnet.
+stats_no_bosses = Noch keine besiegten Bosse aufgezeichnet.
 stats_deaths_off = Der Todesbericht ist in den Einstellungen aus.
 stats_bosses_off = Der Bossbericht ist in den Einstellungen aus.
 

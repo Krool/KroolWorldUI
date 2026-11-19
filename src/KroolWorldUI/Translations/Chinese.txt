@@ -89,8 +89,8 @@ stats_hits_tip = 各种大小的攻击经过你的护甲后还剩多少，未计
 stats_hit_tip = $1 点的攻击让你受到 $2 点伤害。
 stats_you_take = 你承受此类伤害的 $1。
 stats_capped = Epic Loot 合计 $1，上限为 $2。
-stats_no_deaths = 本次游戏尚无死亡。
-stats_no_bosses = 本次游戏尚未击杀 Boss。
+stats_no_deaths = 尚无死亡记录。
+stats_no_bosses = 尚无 Boss 击杀记录。
 stats_deaths_off = 死亡回顾已在设置中关闭。
 stats_bosses_off = Boss 回顾已在设置中关闭。
 

@@ -51,7 +51,7 @@ namespace KroolWorldUI.Features
         private const float Gap = 15f;
         private const float MaxSeconds = 90f;
 
-        /// <summary>Recent deaths this session, newest first.</summary>
+        /// <summary>This character's recent deaths, newest first. Kept between sessions by RecapStore.</summary>
         internal static readonly List<DeathRecapData> History = new List<DeathRecapData>();
 
         internal static void BindConfig(ConfigFile config)
@@ -121,9 +121,11 @@ namespace KroolWorldUI.Features
             float directTaken = fight.Where(e => !e.Dot).Sum(e => e.Amount);
             data.Stopped = Mathf.Max(0f, data.Rows.Sum(r => r.Raw) - directTaken);
 
+            RecapStore.Sync(); // the saved list first, or loading it later would drop this death
             History.Insert(0, data);
-            if (History.Count > 5)
-                History.RemoveRange(5, History.Count - 5);
+            if (History.Count > RecapStore.MaxDeaths)
+                History.RemoveRange(RecapStore.MaxDeaths, History.Count - RecapStore.MaxDeaths);
+            RecapStore.Save();
             if (Popup.Value)
                 DeathRecapHud.Show(data);
         }

@@ -80,8 +80,8 @@ stats_hits_tip = Čo zostane z úderov každej sily po tvojej zbroji, pred bloko
 stats_hit_tip = Úder za $1 ti vezme $2.
 stats_you_take = Dostaneš $1 tohto poškodenia.
 stats_capped = Epic Loot dáva spolu $1, najviac $2.
-stats_no_deaths = V tejto relácii zatiaľ žiadne smrti.
-stats_no_bosses = V tejto relácii zatiaľ žiadny zabitý boss.
+stats_no_deaths = Zatiaľ žiadne zaznamenané smrti.
+stats_no_bosses = Zatiaľ žiadny zaznamenaný zabitý boss.
 stats_deaths_off = Prehľad smrti je v nastaveniach vypnutý.
 stats_bosses_off = Prehľad bossa je v nastaveniach vypnutý.
 

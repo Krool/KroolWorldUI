@@ -89,8 +89,8 @@ stats_hits_tip = Quanto resta dei colpi di ogni entità dopo la tua armatura, pr
 stats_hit_tip = Un colpo da $1 ne toglie $2.
 stats_you_take = Subisci il $1 di questo danno.
 stats_capped = Epic Loot arriva a $1, limitato a $2.
-stats_no_deaths = Nessuna morte in questa sessione.
-stats_no_bosses = Nessun boss ucciso in questa sessione.
+stats_no_deaths = Nessuna morte registrata finora.
+stats_no_bosses = Nessun boss ucciso registrato finora.
 stats_deaths_off = Riepilogo morte è disattivato nelle impostazioni.
 stats_bosses_off = Riepilogo boss è disattivato nelle impostazioni.
 

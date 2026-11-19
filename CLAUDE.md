@@ -14,6 +14,14 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
   matching RepairOneItem. Any other write needs the owner's explicit OK. Network: Boss Recap sends
   two routed RPCs per boss kill (`KroolWorldUI_BossDown` from the boss's owner, `KroolWorldUI_BossPart`
   from every mod user) to Everybody; vanilla peers drop unknown routed RPCs silently. No other traffic.
+  Disk: besides the config, RecapStore writes the mod's own `BepInEx/config/KroolWorldUI/recaps_<name>_<playerID>.dat`
+  (the Deaths and Bosses lists, per character: profile file name plus PlayerProfile.GetPlayerID; owner asked for
+  saved history 2026-11-18), reloaded on every world entry. Each recap is length-prefixed: add new fields at the
+  END of a recap and old versions still read it; bump `RecapStore.Format` only for a change old versions cannot
+  skip (a version that meets another format leaves the file alone and keeps recaps for the session only).
+  Not testable in game by an agent: the store's Open/Save/Read/Write are plain file code, so check them from a
+  console project that references the built DLL (name its assembly `SettingsDoc` for InternalsVisibleTo; the
+  game has a global `Console` class, so write `System.Console`).
 - **Patches must not throw into game code.** Wrap UI work called from Harmony postfixes in
   try/catch and log.
 - **Test in the `KroolDev` r2modman profile**, never `BCCBoys` (the owner's play profile, which

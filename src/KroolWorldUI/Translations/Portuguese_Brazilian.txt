@@ -89,8 +89,8 @@ stats_hits_tip = O que sobra de golpes de cada tamanho depois da sua armadura, a
 stats_hit_tip = Um golpe de $1 tira $2.
 stats_you_take = Você recebe $1 deste dano.
 stats_capped = O Epic Loot soma $1, limitado a $2.
-stats_no_deaths = Nenhuma morte nesta sessão ainda.
-stats_no_bosses = Nenhum chefe derrotado nesta sessão ainda.
+stats_no_deaths = Nenhuma morte registrada ainda.
+stats_no_bosses = Nenhum chefe derrotado registrado ainda.
 stats_deaths_off = Resumo de morte está desligado nas configurações.
 stats_bosses_off = Resumo de chefe está desligado nas configurações.
 

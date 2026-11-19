@@ -113,7 +113,7 @@ namespace KroolWorldUI.Features
         private static readonly Dictionary<ZDOID, Fight> _fights = new Dictionary<ZDOID, Fight>();
         private static readonly Dictionary<ZDOID, Pending> _pending = new Dictionary<ZDOID, Pending>();
 
-        /// <summary>The most recent boss recaps, newest first.</summary>
+        /// <summary>This character's most recent boss recaps, newest first. Kept between sessions by RecapStore.</summary>
         internal static readonly List<BossRecapData> History = new List<BossRecapData>();
 
         internal static void Clear()
@@ -485,6 +485,7 @@ namespace KroolWorldUI.Features
             var recap = Build(p);
             if (recap == null)
                 return;
+            RecapStore.Sync(); // the saved list first, or loading it later would drop this kill
             bool wasShown = p.Shown != null;
             if (wasShown)
                 History.Remove(p.Shown);
@@ -499,8 +500,9 @@ namespace KroolWorldUI.Features
                 Plugin.Log.LogInfo($"Boss recap: {p.Prefab}: {recap.Fighters.Count} fighters, from {p.Parts.Count} games' parts.");
             p.Shown = recap;
             History.Insert(0, recap);
-            if (History.Count > 10)
-                History.RemoveRange(10, History.Count - 10);
+            if (History.Count > RecapStore.MaxBosses)
+                History.RemoveRange(RecapStore.MaxBosses, History.Count - RecapStore.MaxBosses);
+            RecapStore.Save();
             BossRecap.Show(recap, wasShown);
         }
 

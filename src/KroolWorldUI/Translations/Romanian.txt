@@ -89,8 +89,8 @@ stats_hits_tip = Ce rămâne din lovituri de fiecare mărime după armura ta, î
 stats_hit_tip = O lovitură de $1 îți ia $2.
 stats_you_take = Primești $1 din aceste daune.
 stats_capped = Epic Loot adună $1, limitat la $2.
-stats_no_deaths = Încă nicio moarte în această sesiune.
-stats_no_bosses = Încă niciun șef ucis în această sesiune.
+stats_no_deaths = Încă nicio moarte înregistrată.
+stats_no_bosses = Încă niciun șef ucis înregistrat.
 stats_deaths_off = Rezumat moarte e oprit în setări.
 stats_bosses_off = Rezumat șef e oprit în setări.
 

@@ -300,7 +300,7 @@ namespace KroolWorldUI.Features
             return string.Join("  ·  ", list);
         }
 
-        /// <summary>"Just now", "12 min ago", "2 h ago".</summary>
+        /// <summary>"Just now", "12 min ago", "2 h ago"; from a day on, the date (recaps are kept between sessions).</summary>
         internal static string Ago(DateTime when)
         {
             var span = DateTime.Now - when;
@@ -308,7 +308,9 @@ namespace KroolWorldUI.Features
                 return L10n.T("ago_now");
             if (span.TotalHours < 1)
                 return L10n.T("ago_min", ((int)span.TotalMinutes).ToString());
-            return L10n.T("ago_hour", ((int)span.TotalHours).ToString());
+            if (span.TotalHours < 24)
+                return L10n.T("ago_hour", ((int)span.TotalHours).ToString());
+            return when.ToString("yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
         }
     }
 }
