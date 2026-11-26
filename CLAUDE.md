@@ -116,6 +116,11 @@ Client-side, display-only HUD features, each behind its own `Enabled` config tog
   countdown: centered at (0.5, 0.72), below the food toast. Rested countdown: a child of Hud.m_statusEffectListRoot placed above the Resting icon's name label (owner: not center-screen, timer only, above the buff not beside it).
   Compass: top center of Hud.m_rootObject (8 px down, about 74 px tall), pushed below Hud.m_eventBar when
   that is up. It stays put for a boss bar (owner, 2026-11-10: they do not collide).
+  Issue #1 ("the compass randomly stops showing up", 2026-10-29, against 0.15.1): cause NOT found.
+  0.18.2 only makes it recover: `HudKit.FailFlag(3f, 3)` rebuilds it 3 s after an error. Checked and
+  ruled out: `Player.GetPlayerName`/`IsDead` on a player being removed (both guard a null ZDO),
+  `L10n.T`, the hide key (unset by default). The retry rule is checked from a console project
+  (`FailFlag.Check`/`Mark` take the clock); the rebuild itself has not been run in game.
   Buff icons (BuffIcons): re-placed after Hud.UpdateStatusEffects every frame at Size scale, wrapping before the compass.
   Day/night bar: child of Minimap.m_smallRoot (its own canvas), in the 40 px above the minimap.
   Stats window: a clone of InventoryGui.m_skillsDialog (SkillsFrame, its scroll list, Closebuttons),

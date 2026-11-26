@@ -67,6 +67,9 @@ Friends nearby always show. Friends far away show only if they have **Visible on
 **The compass shows no pins, and I got no bench pin.**
 On a world with the No Map modifier (or with your map turned off), the compass shows only your heading and friends in sight, and Bench Pins adds nothing: the world takes the map away on purpose. The day/night bar moves to the top right corner.
 
+**The compass disappeared.**
+It hides with the map open, in menus, and with the game's HUD off (Ctrl+F3). If it goes at another time, it hit an error: since 0.18.2 it comes back within a few seconds, and the error is in your log file (see Reporting a problem).
+
 **The fall preview missed a piece that fell, or marked one that stayed up.**
 It uses the game's own support rule, but support values for pieces another player owns reach you up to a second late, and on very large builds it looks at the 500 nearest affected pieces (the count then ends in +). Point at the piece again after a moment. It shows nothing on worlds with No Building Fall.
 

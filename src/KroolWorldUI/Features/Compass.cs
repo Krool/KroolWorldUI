@@ -145,7 +145,9 @@ namespace KroolWorldUI.Features
         };
 
         private static CompassHud _instance;
-        private static readonly HudKit.FailFlag _failed = new HudKit.FailFlag();
+        // Rebuilt 3 seconds after an error, up to 3 times in a row (issue #1: one error used to
+        // turn the compass off until the next login).
+        private static readonly HudKit.FailFlag _failed = new HudKit.FailFlag(3f, 3);
         private static Sprite _triangle, _ring;
         private static Texture2D _band;
         private static AccessTools.FieldRef<Minimap, List<Minimap.PinData>> _pins;
@@ -231,9 +233,23 @@ namespace KroolWorldUI.Features
             }
             catch (System.Exception e)
             {
-                _failed.Set();
-                Plugin.Log.LogError($"Compass disabled for this session: {e}");
+                Failed(e);
+                // Create sets _instance before it is done: drop the half-built one, or the
+                // next try would find it and never build another.
+                var half = _instance;
+                _instance = null;
+                if (half != null)
+                    Destroy(half.gameObject);
             }
+        }
+
+        /// <summary>Logs the error and says whether the compass comes back.</summary>
+        private static void Failed(System.Exception e)
+        {
+            _failed.Set();
+            Plugin.Log.LogError(_failed.WillRetry
+                ? $"Compass error, rebuilding it in a few seconds: {e}"
+                : $"Compass disabled for this session after repeated errors: {e}");
         }
 
         private static void Create(Hud hud)
@@ -415,6 +431,13 @@ namespace KroolWorldUI.Features
 
         private void Update()
         {
+            // A copy made by another mod's Instantiate of the HUD has none of our fields set: it
+            // goes, without an error that would turn the real compass off.
+            if (_instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
             if (_failed.IsSet)
                 return;
             try
@@ -423,8 +446,9 @@ namespace KroolWorldUI.Features
             }
             catch (System.Exception e)
             {
-                _failed.Set();
-                Plugin.Log.LogError($"Compass disabled for this session after an error: {e}");
+                Failed(e);
+                // Ensure builds a new one when the flag clears.
+                _instance = null;
                 Destroy(gameObject);
             }
         }

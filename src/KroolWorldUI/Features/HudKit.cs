@@ -45,25 +45,58 @@ namespace KroolWorldUI.Features
         /// after each logout), so a feature that failed once gets a fresh try next session instead
         /// of staying off until the game restarts.
         /// </summary>
+        /// <remarks>
+        /// With <c>retryAfter</c> and <c>retries</c> the flag clears itself after that many seconds,
+        /// so one passing error costs a few seconds, not the session (the compass, issue #1). An
+        /// error that keeps coming back still ends it: more than <c>retries</c> failures, each
+        /// within <see cref="Quiet"/> seconds of the one before, and the flag stays set.
+        /// </remarks>
         internal sealed class FailFlag
         {
+            /// <summary>Seconds without a failure after which earlier failures no longer count.</summary>
+            internal const float Quiet = 60f;
+
+            private readonly float _retryAfter;
+            private readonly int _retries;
             private bool _set;
             private object _hud; // object, not Hud: SettingsDoc loads these types outside the game
+            private int _count;
+            private float _last;
 
-            public bool IsSet
+            public FailFlag(float retryAfter = 0f, int retries = 0)
             {
-                get
-                {
-                    if (_set && !ReferenceEquals(_hud, Hud.instance))
-                        _set = false;
-                    return _set;
-                }
+                _retryAfter = retryAfter;
+                _retries = retries;
             }
 
-            public void Set()
+            public bool IsSet => Check(Time.unscaledTime, Hud.instance);
+
+            public void Set() => Mark(Time.unscaledTime, Hud.instance);
+
+            /// <summary>True when the last failure will be tried again (say so in the log).</summary>
+            public bool WillRetry => _set && _count <= _retries;
+
+            // The clock and the HUD are passed in so the rule can be checked outside the game.
+            internal bool Check(float now, object hud)
             {
+                if (_set && !ReferenceEquals(_hud, hud))
+                {
+                    _set = false;
+                    _count = 0;
+                }
+                if (_set && _count <= _retries && now - _last >= _retryAfter)
+                    _set = false;
+                return _set;
+            }
+
+            internal void Mark(float now, object hud)
+            {
+                if (!ReferenceEquals(_hud, hud) || now - _last > Quiet)
+                    _count = 0;
                 _set = true;
-                _hud = Hud.instance;
+                _hud = hud;
+                _count++;
+                _last = now;
             }
         }
 
