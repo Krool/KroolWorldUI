@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.18.2
+
+- **Compass:** it comes back by itself after an error. Before, one error turned it off until you logged out and in again, which looked like the compass vanishing at random. Now it is rebuilt a few seconds later, and the error is written to `BepInEx/LogOutput.log`. If the same error repeats four times in a row it stays off for the session.
+
 ## 0.18.1
 
 - **Boss recap:** fix: the Bosses tab stayed empty and no summary appeared after a boss kill, in any world more than 20 minutes old. The mod was dropping its record of the fight after every hit, so there was nothing to show when the boss died. Present since the recap was added in 0.17.0.
